@@ -13,9 +13,24 @@
 				"type": "string",
 				"required": true
 			},
+			"type":{
+				"type": "string",
+				"enum": [ "local", "remote" ],
+				"required": true
+			},
 			"sharedfolderref": {
 				"type": "string",
-				"format": "uuidv4",
+				"oneOf": [{
+					"type": "string",
+					"format": "uuidv4"
+				},{
+					"type": "string",
+					"maxLength": 0
+				}],
+				"required": true
+			},
+			"uri": {
+				"type": "string",
 				"required": true
 			},
 			"passphrase": {

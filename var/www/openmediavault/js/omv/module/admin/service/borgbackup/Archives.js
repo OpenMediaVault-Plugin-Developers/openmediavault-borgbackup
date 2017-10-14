@@ -34,6 +34,8 @@ Ext.define('OMV.module.admin.service.borgbackup.Archive', {
         'OMV.workspace.window.plugin.ConfigObject'
     ],
 
+    width: 500,
+
     rpcService: 'BorgBackup',
     rpcGetMethod: 'getArchive',
     rpcSetMethod: 'setArchive',
@@ -92,6 +94,7 @@ Ext.define('OMV.module.admin.service.borgbackup.Archive', {
                 [ 'zlib', _('zlib - less fast, higher compression') ],
                 [ 'lzma', _('lzma - even slower, even higher compression') ]
             ],
+            allowBlank: false,
             editable: false,
             triggerAction: 'all',
             value: 'none'
@@ -122,12 +125,20 @@ Ext.define('OMV.module.admin.service.borgbackup.Archive', {
             xtype: 'textfield',
             name: 'include',
             fieldLabel: _('Includes'),
-            allowBlank: false
+            allowBlank: false,
+            plugins: [{
+                ptype: 'fieldinfo',
+                text: _('Put comma between each directory')
+            }]
         },{
             xtype: 'textfield',
             name: 'exclude',
             fieldLabel: _('Excludes'),
-            allowBlank: false
+            allowBlank: true,
+            plugins: [{
+                ptype: 'fieldinfo',
+                text: _('Put comma between each directory')
+            }]
         }];
     }
 });

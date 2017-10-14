@@ -15,9 +15,25 @@
 		"name": {
 			"type": "string"
 		},
+		"type":{
+			"type": "string",
+			"enum": [ "local", "remote" ],
+			"default": "local"
+		},
 		"sharedfolderref": {
 			"type": "string",
-			"format": "uuidv4"
+			"oneOf": [{
+				"type": "string",
+				"format": "uuidv4"
+			},{
+				"type": "string",
+				"maxLength": 0
+			}],
+			"default": ""
+		},
+		"uri": {
+			"type": "string",
+			"default": ""
 		},
 		"passphrase": {
 			"type": "string"

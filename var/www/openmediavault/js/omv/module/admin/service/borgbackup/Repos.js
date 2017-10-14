@@ -42,18 +42,67 @@ Ext.define('OMV.module.admin.service.borgbackup.Repo', {
         ptype: 'configobject'
     }],
 
+    getFormConfig: function() {
+        return {
+            plugins: [{
+                ptype: 'linkedfields',
+                correlations: [{
+                    name: 'sharedfolderref',
+                    conditions: [
+                        { name: 'type', value: 'local' }
+                    ],
+                    properties: [
+                        'show',
+                        '!allowBlank'
+                    ]
+                },{
+                    name: 'uri',
+                    conditions: [
+                        { name: 'type', value: 'remote' }
+                    ],
+                    properties: [
+                        'show',
+                        '!allowBlank'
+                    ]
+                }]
+            }]
+        };
+    },
+
     getFormItems: function () {
-		var me = this;
+        var me = this;
         return [{
             xtype: 'textfield',
             name: 'name',
             fieldLabel: _('Name'),
             allowBlank: false
         },{
+            xtype: 'combo',
+            name: 'type',
+            fieldLabel: _('Type'),
+            queryMode: 'local',
+            store: [
+                [ 'local', _('Local') ],
+                [ 'remote', _('Remote') ]
+            ],
+            allowBlank: false,
+            editable: false,
+            triggerAction: 'all',
+            value: 'local'
+        },{
             xtype: 'sharedfoldercombo',
             name: 'sharedfolderref',
-            fieldLabel: _('Shared Folder'),
-            readOnly: (me.uuid !== OMV.UUID_UNDEFINED)
+            fieldLabel: _('Shared Folder')
+        },{
+            xtype: 'textfield',
+            name: 'uri',
+            fieldLabel: _('Remote Path'),
+            allowBlank: true,
+            hidden: true,
+            plugins: [{
+                ptype: 'fieldinfo',
+                text: _('Must have ssh keys setup.  Remote path should be in the form:  user@hostname:path')
+            }]
         },{
             xtype: 'passwordfield',
             name: 'passphrase',
@@ -97,6 +146,12 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         dataIndex: 'sharedfoldername',
         stateId: 'sharedfoldername'
     },{
+        xtype: 'textcolumn',
+        text: _('Remote Path'),
+        sortable: true,
+        dataIndex: 'uri',
+        stateId: 'uri'
+    },{
         xtype: 'booleaniconcolumn',
         header: _('Encryption'),
         sortable: true,
@@ -119,6 +174,7 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
                         { name: 'uuid', type: 'string' },
                         { name: 'name', type: 'string' },
                         { name: 'sharedfoldername', type: 'string' },
+                        { name: 'uri', type: 'string' },
                         { name: 'encryption', type: 'boolean' }
                     ]
                 }),

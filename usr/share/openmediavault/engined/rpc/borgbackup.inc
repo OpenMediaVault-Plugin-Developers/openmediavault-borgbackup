@@ -19,12 +19,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once("openmediavault/functions.inc");
-
 class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
 {
-    private $getProgram = "/usr/bin/borg";
-    private $getLogFile = "/var/log/borgbackup.log";
+    private $getProgram = '/usr/bin/borg';
+    private $getLogFile = '/var/log/borgbackup.log';
 
     public function getName()
     {
@@ -34,7 +32,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
     public function initialize()
     {
         $this->registerMethod('enumerateRepoCandidates');
-		$this->registerMethod('getRepoList');
+        $this->registerMethod('getRepoList');
         $this->registerMethod('getRepo');
         $this->registerMethod('setRepo');
         $this->registerMethod('deleteRepo');
@@ -43,38 +41,39 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('getArchive');
         $this->registerMethod('setArchive');
         $this->registerMethod('deleteArchive');
-
-        $this->registerMethod('executeCommand');
     }
 
-	public function enumerateRepoCandidates($params, $context)
+    public function enumerateRepoCandidates($params, $context)
     {
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Get configuration data.
         $db = \OMV\Config\Database::getInstance();
-        return $db->getAssoc("conf.service.borgbackup.repo");
+        return $db->getAssoc('conf.service.borgbackup.repo');
     }
 
     public function getRepoList($params, $context)
     {
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Validate the parameters of the RPC service method.
-        $this->validateMethodParams($params, "rpc.common.getlist");
+        $this->validateMethodParams($params, 'rpc.common.getlist');
         // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
-        $objects = $db->get("conf.service.borgbackup.repo");
+        $objects = $db->get('conf.service.borgbackup.repo');
         // Add additional share informations.
         $objectsAssoc = [];
         foreach ($objects as $objectk => &$objectv) {
             // Add the new property 'sharedfoldername'.
-            $objectv->add("sharedfoldername", "string", gettext("n/a"));
-            // Get the shared folder configuration object.
-            $sfObject = $db->get("conf.system.sharedfolder",
-                $objectv->get("sharedfolderref"));
-            // Update the 'sharedfoldername' property.
-            $objectv->set("sharedfoldername", $sfObject->get("name"));
+            $objectv->add('sharedfoldername', 'string', gettext("n/a"));
+            if ($objectv->get('type') == 'local') {
+                // Get the shared folder configuration object.
+                $sfObject = $db->get('conf.system.sharedfolder',
+                    $objectv->get('sharedfolderref'));
+                // Update the 'sharedfoldername' property.
+                $objectv->set('sharedfoldername', $sfObject->get('name'));
+                $objectv->set('uri', gettext("n/a"));
+            }
             $objectsAssoc[] = $objectv->getAssoc();
         }
         // Filter the result.
@@ -85,32 +84,36 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
     public function getRepo($params, $context)
     {
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Validate the parameters of the RPC service method.
-        $this->validateMethodParams($params, "rpc.common.objectuuid");
+        $this->validateMethodParams($params, 'rpc.common.objectuuid');
         // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
-        return $db->getAssoc("conf.service.borgbackup.repo", $params['uuid']);
+        return $db->getAssoc('conf.service.borgbackup.repo', $params['uuid']);
     }
 
     public function setRepo($params, $context)
     {
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Validate the parameters of the RPC service method.
-        $this->validateMethodParams($params, "rpc.borgbackup.setrepo");
+        $this->validateMethodParams($params, 'rpc.borgbackup.setrepo');
         // Prepare the configuration object.
-        $object = new \OMV\Config\ConfigObject("conf.service.borgbackup.repo");
+        $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.repo');
         // Remove spaces from name
-        $params['name'] = str_replace(" ", "_", $params['name']);
+        $params['name'] = str_replace(' ', '_', $params['name']);
         $object->setAssoc($params);
         // Set the configuration object.
         $isNew = $object->isNew();
         $db = \OMV\Config\Database::getInstance();
         if (TRUE === $isNew) {
-            // Check uniqueness - Shared folder
-            $db->assertIsUnique($object, "name");
-            $db->assertIsUnique($object, "sharedfolderref");
+            // Check uniqueness - name, Shared folder or uri
+            $db->assertIsUnique($object, 'name');
+            if ($params['type'] == 'local') {
+                $db->assertIsUnique($object, 'sharedfolderref');
+            } else {
+                $db->assertIsUnique($object, 'uri');
+            }
         }
         $db->set($object);
         // Return the configuration object.
@@ -120,12 +123,12 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
     public function deleteRepo($params, $context)
     {
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Validate the parameters of the RPC service method.
-        $this->validateMethodParams($params, "rpc.common.objectuuid");
+        $this->validateMethodParams($params, 'rpc.common.objectuuid');
         // Delete the configuration object.
         $db = \OMV\Config\Database::getInstance();
-        $object = $db->get("conf.service.borgbackup.repo", $params['uuid']);
+        $object = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         $db->delete($object);
         // Return the deleted configuration object.
         return $object->getAssoc();
@@ -134,12 +137,12 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
     public function getArchiveList($params, $context)
     {
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Validate the parameters of the RPC service method.
-        $this->validateMethodParams($params, "rpc.common.getlist");
+        $this->validateMethodParams($params, 'rpc.common.getlist');
         // Get configuration data.
         $db = \OMV\Config\Database::getInstance();
-        $objects = $db->getAssoc("conf.service.borgbackup.archive");
+        $objects = $db->getAssoc('conf.service.borgbackup.archive');
         // Filter the result.
         return $this->applyFilter($objects, $params['start'], $params['limit'],
             $params['sortfield'], $params['sortdir']);
@@ -148,31 +151,35 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
     public function getArchive($params, $context)
     {
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Validate the parameters of the RPC service method.
-        $this->validateMethodParams($params, "rpc.common.objectuuid");
+        $this->validateMethodParams($params, 'rpc.common.objectuuid');
         // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
-        return $db->getAssoc("conf.service.borgbackup.archive", $params['uuid']);
+        return $db->getAssoc('conf.service.borgbackup.archive', $params['uuid']);
     }
 
     public function setArchive($params, $context)
     {
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Validate the parameters of the RPC service method.
-        $this->validateMethodParams($params, "rpc.borgbackup.setarchive");
+        $this->validateMethodParams($params, 'rpc.borgbackup.setarchive');
         // Prepare the configuration object.
-        $object = new \OMV\Config\ConfigObject("conf.service.borgbackup.archive");
+        $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.archive');
         // Remove spaces from name
-        $params['name'] = str_replace(" ", "_", $params['name']);
+        $params['name'] = str_replace(' ', '_', $params['name']);
+        // Clear uri if type is local
+        if ($params['type'] == 'local') {
+            $params['uri'] = '';
+        }
         $object->setAssoc($params);
         // Set the configuration object.
         $isNew = $object->isNew();
         $db = \OMV\Config\Database::getInstance();
         if (TRUE === $isNew) {
             // Check uniqueness - Shared folder
-            $db->assertIsUnique($object, "name");
+            $db->assertIsUnique($object, 'name');
         }
         $db->set($object);
         // Return the configuration object.
@@ -182,88 +189,14 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
     public function deleteArchive($params, $context)
     {
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Validate the parameters of the RPC service method.
-        $this->validateMethodParams($params, "rpc.common.objectuuid");
+        $this->validateMethodParams($params, 'rpc.common.objectuuid');
         // Delete the configuration object.
         $db = \OMV\Config\Database::getInstance();
-        $object = $db->get("conf.service.borgbackup.archive", $params['uuid']);
+        $object = $db->get('conf.service.borgbackup.archive', $params['uuid']);
         $db->delete($object);
         // Return the deleted configuration object.
         return $object->getAssoc();
-    }
-
-    public function executeCommand($params, $context)
-    {
-        // Validate the RPC caller context.
-        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
-        // Validate the parameters of the RPC service method.
-        $this->validateMethodParams($params, "rpc.borgbackup.executecommand");
-        // Get the configuration object.
-        $db = \OMV\Config\Database::getInstance();
-        $object = $db->get("conf.service.borgbackup");
-
-        // Create a background process.
-        $bgStatusFilename = $this->createBgProcStatus();
-        $pid = $this->fork();
-
-        if ($pid > 0) { // Parent process.
-            $this->initializeBgProcStatus($bgStatusFilename, $pid);
-            return $bgStatusFilename;
-        }
-        $log = sprintf("[%s] omv-borgbackup-gui: INFO: %s - Manually started\r\n",
-            date("Y-m-d H:i:s"), strtoupper($params['command'])
-        );
-        file_put_contents($this->getLogFile, $log, FILE_APPEND);
-
-        // Child process.
-        try {
-            $bgOutputFilename = $this->createBgProcOutput();
-            $this->updateBgProcStatus($bgStatusFilename, "outputfilename", $bgOutputFilename);
-
-            switch ($params['command']) {
-                case "scrub":
-                    $cmd = sprintf("export LANG=C; %s %s -p %s 2>&1", $this->getProgram,
-                        $params['command'], $object->get('percentscrub')
-                    );
-                    break;
-                case "silent":
-                    // Fix known silent errors - borgbackup -e fix && borgbackup scrub -p0
-                    $cmd = sprintf("export LANG=C; %s -e fix && %s scrub -p0 2>&1",
-                        $this->getProgram, $this->getProgram
-                    );
-                    break;
-                case "undelete":
-                    // undelete files - borgbackup fix -m [-f %FILENAME%]
-                    if (empty($params['file'])) {
-                        $cmd = sprintf("export LANG=C; %s fix -m 2>&1",
-                            $this->getProgram
-                        );
-                    } else {
-                        $cmd = sprintf("export LANG=C; %s fix -m -f %s 2>&1",
-                            $this->getProgram, $params['file']
-                        );
-                    }
-                    break;
-                default:
-                    $cmd = sprintf("export LANG=C; %s %s 2>&1",
-                        $this->getProgram, $params['command']
-                    );
-            }
-            $this->exec($cmd, $output, $bgOutputFilename);
-            $this->finalizeBgProcStatus($bgStatusFilename, $output);
-            $log = sprintf("[%s] omv-borgbackup-gui: INFO: %s - Finished\r\n",
-                date("Y-m-d H:i:s"), strtoupper($params['command'])
-            );
-            file_put_contents($this->getLogFile, $log, FILE_APPEND);
-            exit(0);
-        } catch(\Exception $e) {
-            $this->finalizeBgProcStatus($bgStatusFilename, "", $e);
-            $log = sprintf("[%s] omv-borgbackup-gui: ERROR: %s - Error!\r\n",
-                date("Y-m-d H:i:s"), strtoupper($params['command'])
-            );
-            file_put_contents($this->getLogFile, $log, FILE_APPEND);
-            exit(1);
-        }
     }
 }
