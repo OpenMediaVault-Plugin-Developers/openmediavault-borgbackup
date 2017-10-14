@@ -72,7 +72,7 @@ Ext.define('OMV.module.admin.service.borgbackup.Archive', {
                     type: 'rpc',
                     rpcData: {
                         service: 'BorgBackup',
-                        method: 'getRepoList'
+                        method: 'enumerateRepoCandidates'
                     },
                     appendSortParams : false
                 },
@@ -133,59 +133,47 @@ Ext.define('OMV.module.admin.service.borgbackup.Archive', {
 });
 
 Ext.define('OMV.module.admin.service.borgbackup.Archives', {
-    extend   : 'OMV.workspace.grid.Panel',
-    requires : [
+    extend: 'OMV.workspace.grid.Panel',
+    requires: [
         'OMV.Rpc',
         'OMV.data.Store',
         'OMV.data.Model',
         'OMV.data.proxy.Rpc',
         'OMV.util.Format'
     ],
-    uses     : [
+    uses: [
         'OMV.module.admin.service.borgbackup.Archive'
     ],
 
-    hidePagingToolbar : false,
-    stateful          : true,
-    stateId           : 'a982a76d-6804-4632-b31b-8b48c0ea6dde',
-    columns           : [{
-        xtype     : 'textcolumn',
-        text      : _('Archive'),
-        sortable  : true,
-        dataIndex : 'rule1',
-        stateId   : 'rule1'
-    },{
-        xtype     : 'textcolumn',
-        text      : _('Archive Type'),
-        sortable  : true,
-        dataIndex : 'rtype',
-        stateId   : 'rtype',
-        renderer  : function (value) {
-            if (value == 1)
-                return _('Inclusion');
-            else
-                return _('Exclusion');
-        }
+    hideEditButton: true,
+    hidePagingToolbar: false,
+    stateful: true,
+    stateId: 'bdef0cfa-b0ed-11e7-ba14-1b4b82806d9d',
+    columns: [{
+        xtype: 'textcolumn',
+        text: _('Name'),
+        sortable: true,
+        dataIndex: 'name',
+        stateId: 'name'
     }],
 
-    initComponent : function() {
+    initComponent: function() {
         var me = this;
         Ext.apply(me, {
-            store : Ext.create('OMV.data.Store', {
-                autoLoad : true,
-                model    : OMV.data.Model.createImplicit({
-                    idProperty  : 'uuid',
-                    fields      : [
-                        { name : 'uuid', type : 'string' },
-                        { name : 'rule1', type : 'string' },
-                        { name : 'rtype', type : 'integer' }
+            store: Ext.create('OMV.data.Store', {
+                autoLoad: true,
+                model: OMV.data.Model.createImplicit({
+                    idProperty: 'uuid',
+                    fields: [
+                        { name: 'uuid', type: 'string' },
+                        { name: 'name', type: 'string' }
                     ]
                 }),
-                proxy : {
-                    type    : 'rpc',
-                    rpcData : {
-                        service : 'BorgBackup',
-                        method  : 'getArchiveList'
+                proxy: {
+                    type: 'rpc',
+                    rpcData: {
+                        service: 'BorgBackup',
+                        method: 'getArchiveList'
                     }
                 }
             })
@@ -193,56 +181,40 @@ Ext.define('OMV.module.admin.service.borgbackup.Archives', {
         me.callParent(arguments);
     },
 
-    onAddButton : function() {
+    onAddButton: function() {
         var me = this;
         Ext.create('OMV.module.admin.service.borgbackup.Archive', {
-            title     : _('Add rule'),
-            uuid      : OMV.UUID_UNDEFINED,
-            listeners : {
-                scope  : me,
-                submit : function() {
+            title: _('Add archive'),
+            uuid: OMV.UUID_UNDEFINED,
+            listeners: {
+                scope: me,
+                submit: function() {
                     this.doReload();
                 }
             }
         }).show();
     },
 
-    onEditButton : function() {
-        var me = this;
-        var record = me.getSelected();
-        Ext.create('OMV.module.admin.service.borgbackup.Archive', {
-            title     : _('Edit rule'),
-            uuid      : record.get('uuid'),
-            listeners : {
-                scope  : me,
-                submit : function() {
-                    this.doReload();
-                }
-            }
-        }).show();
-    },
-
-    doDeletion : function(record) {
+    doDeletion: function(record) {
         var me = this;
         OMV.Rpc.request({
-            scope    : me,
-            callback : me.onDeletion,
-            rpcData  : {
-                service : 'BorgBackup',
-                method  : 'deleteArchive',
-                params  : {
-                    uuid : record.get('uuid')
+            scope: me,
+            callback: me.onDeletion,
+            rpcData: {
+                service: 'BorgBackup',
+                method: 'deleteArchive',
+                params: {
+                    uuid: record.get('uuid')
                 }
             }
         });
     }
-
 });
 
 OMV.WorkspaceManager.registerPanel({
-    id        : 'excludes',
-    path      : '/service/borgbackup',
-    text      : _('Archives'),
-    position  : 30,
-    className : 'OMV.module.admin.service.borgbackup.Archives'
+    id: 'archives',
+    path: '/service/borgbackup',
+    text: _('Archives'),
+    position: 20,
+    className: 'OMV.module.admin.service.borgbackup.Archives'
 });

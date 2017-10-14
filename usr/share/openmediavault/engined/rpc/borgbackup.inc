@@ -33,7 +33,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
 
     public function initialize()
     {
-        $this->registerMethod('getRepoList');
+        $this->registerMethod('enumerateRepoCandidates');
+		$this->registerMethod('getRepoList');
         $this->registerMethod('getRepo');
         $this->registerMethod('setRepo');
         $this->registerMethod('deleteRepo');
@@ -44,6 +45,15 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('deleteArchive');
 
         $this->registerMethod('executeCommand');
+    }
+
+	public function enumerateRepoCandidates($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Get configuration data.
+        $db = \OMV\Config\Database::getInstance();
+        return $db->getAssoc("conf.service.borgbackup.repo");
     }
 
     public function getRepoList($params, $context)

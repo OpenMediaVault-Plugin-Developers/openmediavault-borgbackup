@@ -43,6 +43,7 @@ Ext.define('OMV.module.admin.service.borgbackup.Repo', {
     }],
 
     getFormItems: function () {
+		var me = this;
         return [{
             xtype: 'textfield',
             name: 'name',
@@ -101,7 +102,7 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         sortable: true,
         dataIndex: 'encryption',
         align: 'center',
-        width: 80,
+        width: 100,
         resizable: false,
         trueIcon: 'switch_on.png',
         falseIcon: 'switch_off.png'
