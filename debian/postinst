@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+. /etc/default/openmediavault
+. /usr/share/openmediavault/scripts/helper-functions
+
+case "$1" in
+    configure)
+        # Activate package triggers.
+        dpkg-trigger update-fixperms
+        dpkg-trigger update-locale
+
+        # Initialize and migrate configuration database.
+        echo "Updating configuration database ..."
+        omv-confdbadm create "conf.service.borgbackup"
+        if [ -n "$2" ]; then
+            omv-confdbadm migrate "conf.service.borgbackup" "${2}"
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

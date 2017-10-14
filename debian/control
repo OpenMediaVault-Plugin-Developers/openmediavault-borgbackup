@@ -1,0 +1,16 @@
+Source: openmediavault-borgbackup
+Section: net
+XB-Plugin-Section: backup
+Priority: optional
+Maintainer: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
+Build-Depends: debhelper (>= 9.0.0)
+Standards-Version: 3.9.6
+
+Package: openmediavault-borgbackup
+Architecture: all
+Depends: openmediavault (>= 4.0.6),
+         borgbackup
+Description: borgbackup plugin for OpenMediaVault.
+ BorgBackup is a deduplicating backup program.
+ Optionally, it supports compression and authenticated
+ encryption.

@@ -1,0 +1,5 @@
+openmediavault-borgbackup (4.0) stable; urgency=low
+
+  * Initial release
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 21 Jun 2017 13:03:32 -0500

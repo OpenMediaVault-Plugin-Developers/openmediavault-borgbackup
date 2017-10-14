@@ -1,0 +1,103 @@
+[{
+	"type": "rpc",
+	"id": "rpc.borgbackup.setrepo",
+	"params": {
+		"type": "object",
+		"properties": {
+			"uuid": {
+				"type": "string",
+				"format": "uuidv4",
+				"required": true
+			},
+			"name": {
+				"type": "string",
+				"required": true
+			},
+			"sharedfolderref": {
+				"type": "string",
+				"format": "uuidv4",
+				"required": true
+			},
+			"passphrase": {
+				"type": "string",
+				"required": true
+			},
+			"encryption": {
+				"type": "boolean",
+				"required": true
+			}
+		}
+	}
+},{
+	"type": "rpc",
+	"id": "rpc.borgbackup.setarchive",
+	"params": {
+		"type": "object",
+		"properties": {
+			"uuid": {
+				"type": "string",
+				"format": "uuidv4",
+				"required": true
+			},
+			"name": {
+			    "type": "string",
+				"required": true
+			},
+			"reporef": {
+				"type": "string",
+				"format": "uuidv4",
+				"required": true
+			},
+			"compressiontype": {
+			    "type": "string",
+				"enum": [ "none", "lz4", "lzma", "zlib" ],
+				"required": true
+			},
+			"compressionratio":{
+				"type": "integer",
+				"minimum": 0,
+				"maximum": 9,
+				"required": true
+			},
+			"onefs": {
+			    "type": "boolean",
+				"required": true
+			},
+			"noatime": {
+			    "type": "boolean",
+				"required": true
+			},
+			"include": {
+			    "type": "string",
+				"required": true
+			},
+			"exclude": {
+			    "type": "string",
+				"required": false
+			}
+		}
+	}
+},{
+	"type": "rpc",
+	"id": "rpc.borgbackup.executecommand",
+	"params": {
+		"type": "object",
+		"properties": {
+			"command": {
+				"type": "string",
+				"enum": [
+					"sync", "sync -h", "scrub", "check",
+					"diff", "status", "fix",
+					"up", "down",
+					"smart", "devices", "undelete",
+					"silent"
+				],
+				"required": true
+			},
+			"file": {
+				"type": "string",
+				"required": false
+			}
+		}
+	}
+}]

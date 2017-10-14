@@ -1,0 +1,48 @@
+{
+	"type": "config",
+	"id": "conf.service.borgbackup.archive",
+	"title": "BorgBackup archive",
+	"queryinfo": {
+		"xpath": "//services/borgbackup/archives/archive",
+		"iterable": true,
+		"idproperty": "uuid"
+	},
+	"properties": {
+		"uuid": {
+			"type": "string",
+			"format": "uuidv4"
+		},
+		"name": {
+			"type": "string"
+		},
+		"reporef": {
+			"type": "string",
+			"format": "uuidv4"
+		},
+		"compressiontype": {
+			"type": "string",
+			"enum": [ "none", "lz4", "lzma", "zlib" ],
+			"default": "none"
+		},
+		"compressionratio": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 9,
+			"default": 9
+		},
+		"onefs": {
+			"type": "boolean",
+			"default": false
+		},
+		"noatime": {
+			"type": "boolean",
+			"default": false
+		},
+		"include": {
+			"type": "string"
+		},
+		"exclude": {
+			"type": "string"
+		}
+	}
+}
