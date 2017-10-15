@@ -102,6 +102,10 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.repo');
         // Remove spaces from name
         $params['name'] = str_replace(' ', '_', $params['name']);
+        // Clear uri if type is local
+        if ($params['type'] == 'local') {
+            $params['uri'] = '';
+        }
         $object->setAssoc($params);
         // Set the configuration object.
         $isNew = $object->isNew();
@@ -116,6 +120,25 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             }
         }
         $db->set($object);
+        // initialize repo
+        $cmdArgs = [];
+        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $params['passphrase']);
+        $cmdArgs[] = $this->getProgram;
+        $cmdArgs[] = 'init';
+        if ($params['encryption'] == true) {
+            $cmdArgs[] = '--encryption=keyfile';
+        } else {
+            $cmdArgs[] = '--encryption=none';
+        }
+        if ($params['type'] == 'local') {
+            $cmdArgs[] = \OMV\Rpc\Rpc::call("ShareMgmt", "getPath", [
+                "uuid" => $params['sharedfolderref']
+            ], $context);
+        } else {
+            $cmdArgs[] = $params['uri'];
+        }
+        $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->execute($output);
         // Return the configuration object.
         return $object->getAssoc();
     }
@@ -169,10 +192,6 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.archive');
         // Remove spaces from name
         $params['name'] = str_replace(' ', '_', $params['name']);
-        // Clear uri if type is local
-        if ($params['type'] == 'local') {
-            $params['uri'] = '';
-        }
         $object->setAssoc($params);
         // Set the configuration object.
         $isNew = $object->isNew();
@@ -182,6 +201,39 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             $db->assertIsUnique($object, 'name');
         }
         $db->set($object);
+        // create archive
+        $repo = $db->get('conf.service.borgbackup.repo', $params['reporef']);
+        $cmdArgs = [];
+        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+        $cmdArgs[] = $this->getProgram;
+        $cmdArgs[] = 'create';
+        $cmdArgs[] = sprintf('--compression %s,%s', $params['compressiontype'], $params['compressionratio']);
+        if ($repo->get('type') == 'local') {
+            $path = \OMV\Rpc\Rpc::call("ShareMgmt", "getPath", [
+                "uuid" => $repo->get('sharedfolderref')
+            ], $context);
+        } else {
+            $path = $repo->get['uri'];
+        }
+        $cmdArgs[] = sprintf('%s::%s', $path, $params['name']);
+        $includes = explode(',', $params['include']);
+        foreach ($includes as $dirs) {
+            $cmdArgs[] = escapeshellarg($dirs);
+        }
+        $excludes = explode(',', $params['exclude']);
+        foreach ($excludes as $dirs) {
+            $cmdArgs[] = sprintf('--exclude %s', escapeshellarg($dirs));
+        }
+        if ($params['onefs'] == true) {
+            $cmdArgs[] = '--one-file-system';
+        }
+        if ($params['noatime'] == true) {
+            $cmdArgs[] = '--noatime';
+        }
+        $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setRedirect2to1();
+        $cmd->setBackground(TRUE);
+        $cmd->execute($output);
         // Return the configuration object.
         return $object->getAssoc();
     }
