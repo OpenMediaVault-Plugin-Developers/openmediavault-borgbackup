@@ -40,6 +40,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('getArchiveList');
         $this->registerMethod('getArchive');
         $this->registerMethod('setArchive');
+        $this->registerMethod('createArchive');
         $this->registerMethod('deleteArchive');
     }
 
@@ -131,8 +132,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             $cmdArgs[] = '--encryption=none';
         }
         if ($params['type'] == 'local') {
-            $cmdArgs[] = \OMV\Rpc\Rpc::call("ShareMgmt", "getPath", [
-                "uuid" => $params['sharedfolderref']
+            $cmdArgs[] = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                'uuid' => $params['sharedfolderref']
             ], $context);
         } else {
             $cmdArgs[] = $params['uri'];
@@ -153,6 +154,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $db = \OMV\Config\Database::getInstance();
         $object = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         $db->delete($object);
+        //BORG_DELETE_I_KNOW_WHAT_I_AM_DOING=YES
+
         // Return the deleted configuration object.
         return $object->getAssoc();
     }
@@ -165,9 +168,17 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->validateMethodParams($params, 'rpc.common.getlist');
         // Get configuration data.
         $db = \OMV\Config\Database::getInstance();
-        $objects = $db->getAssoc('conf.service.borgbackup.archive');
+        $objects = $db->get('conf.service.borgbackup.archive');
+        // Add additional share informations.
+        $objectsAssoc = [];
+        foreach ($objects as $objectk => &$objectv) {
+            $repo = $db->get('conf.service.borgbackup.repo', $objectv->get('reporef'));
+            // Add the new property 'reponame'.
+            $objectv->add('reponame', 'string', $repo->get('name'));
+            $objectsAssoc[] = $objectv->getAssoc();
+        }
         // Filter the result.
-        return $this->applyFilter($objects, $params['start'], $params['limit'],
+        return $this->applyFilter($objectsAssoc, $params['start'], $params['limit'],
             $params['sortfield'], $params['sortdir']);
     }
 
@@ -201,41 +212,62 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             $db->assertIsUnique($object, 'name');
         }
         $db->set($object);
-        // create archive
-        $repo = $db->get('conf.service.borgbackup.repo', $params['reporef']);
-        $cmdArgs = [];
-        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
-        $cmdArgs[] = $this->getProgram;
-        $cmdArgs[] = 'create';
-        $cmdArgs[] = sprintf('--compression %s,%s', $params['compressiontype'], $params['compressionratio']);
-        if ($repo->get('type') == 'local') {
-            $path = \OMV\Rpc\Rpc::call("ShareMgmt", "getPath", [
-                "uuid" => $repo->get('sharedfolderref')
-            ], $context);
-        } else {
-            $path = $repo->get['uri'];
-        }
-        $cmdArgs[] = sprintf('%s::%s', $path, $params['name']);
-        $includes = explode(',', $params['include']);
-        foreach ($includes as $dirs) {
-            $cmdArgs[] = escapeshellarg($dirs);
-        }
-        $excludes = explode(',', $params['exclude']);
-        foreach ($excludes as $dirs) {
-            $cmdArgs[] = sprintf('--exclude %s', escapeshellarg($dirs));
-        }
-        if ($params['onefs'] == true) {
-            $cmdArgs[] = '--one-file-system';
-        }
-        if ($params['noatime'] == true) {
-            $cmdArgs[] = '--noatime';
-        }
-        $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->setRedirect2to1();
-        $cmd->setBackground(TRUE);
-        $cmd->execute($output);
         // Return the configuration object.
         return $object->getAssoc();
+    }
+
+    public function createArchive($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.common.objectuuid');
+        $db = \OMV\Config\Database::getInstance();
+        $archive = $db->get('conf.service.borgbackup.archive', $params['uuid']);
+        // create archive
+        $repo = $db->get('conf.service.borgbackup.repo', $archive->get('reporef'));
+        // Create the background process.
+        return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
+            use ($archive, $context, $repo) {
+                $cmdArgs = [];
+                $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+                $cmdArgs[] = $this->getProgram;
+                $cmdArgs[] = 'create';
+                $cmdArgs[] = '--list';
+                $cmdArgs[] = '--stats';
+                $cmdArgs[] = '--verbose';
+                $cmdArgs[] = sprintf('--compression %s,%s', $archive->get('compressiontype'),
+                    $archive->get('compressionratio')
+                );
+                if ($repo->get('type') == 'local') {
+                    $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                        'uuid' => $repo->get('sharedfolderref')
+                    ], $context);
+                } else {
+                    $path = $repo->get('uri');
+                }
+                $cmdArgs[] = sprintf('%s::%s', $path, $archive->get('name'));
+                $includes = explode(',', $archive->get('include'));
+                foreach ($includes as $dirs) {
+                    $cmdArgs[] = escapeshellarg($dirs);
+                }
+                $excludes = explode(',', $archive->get('exclude'));
+                foreach ($excludes as $dirs) {
+                    $cmdArgs[] = sprintf('--exclude %s', escapeshellarg($dirs));
+                }
+                if ($archive->get('onefs') == true) {
+                    $cmdArgs[] = '--one-file-system';
+                }
+                if ($archive->get('noatime') == true) {
+                    $cmdArgs[] = '--noatime';
+                }
+                $cmd = new \OMV\System\Process($cmdArgs);
+                $cmd->setRedirect2to1();
+                $cmdLine = $cmd->getCommandLine();
+                $this->exec($cmdLine, $output, $bgOutputFilename);
+                return $output;
+            }
+        );
     }
 
     public function deleteArchive($params, $context)
@@ -244,11 +276,29 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, 'rpc.common.objectuuid');
-        // Delete the configuration object.
+        // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
-        $object = $db->get('conf.service.borgbackup.archive', $params['uuid']);
-        $db->delete($object);
+        $archive = $db->get('conf.service.borgbackup.archive', $params['uuid']);
+        $repo = $db->get('conf.service.borgbackup.repo', $archive->get('reporef'));
+        // delete archive
+        $cmdArgs = [];
+        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+        $cmdArgs[] = $this->getProgram;
+        $cmdArgs[] = 'delete';
+        if ($repo->get('type') == 'local') {
+            $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                'uuid' => $repo->get('sharedfolderref')
+            ], $context);
+        } else {
+            $path = $repo->get('uri');
+        }
+        $cmdArgs[] = sprintf('%s::%s', $path, $archive->get('name'));
+        $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setQuiet();
+        $cmd->execute($output);
+        // Delete the configuration object.
+        $db->delete($archive);
         // Return the deleted configuration object.
-        return $object->getAssoc();
+        return $archive->getAssoc();
     }
 }

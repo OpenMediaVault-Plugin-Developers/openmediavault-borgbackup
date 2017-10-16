@@ -166,7 +166,54 @@ Ext.define('OMV.module.admin.service.borgbackup.Archives', {
         sortable: true,
         dataIndex: 'name',
         stateId: 'name'
+    },{
+        xtype: 'textcolumn',
+        text: _('Repo'),
+        sortable: true,
+        dataIndex: 'reponame',
+        stateId: 'reponame'
+    },{
+        xtype: 'textcolumn',
+        text: _('Compression'),
+        sortable: true,
+        dataIndex: 'compressiontype',
+        stateId: 'compressiontype'
+    },{
+        xtype: 'textcolumn',
+        text: _('Includes'),
+        sortable: true,
+        dataIndex: 'include',
+        stateId: 'include',
+        flex: 1
+    },{
+        xtype: 'textcolumn',
+        text: _('Excludes'),
+        sortable: true,
+        dataIndex: 'exclude',
+        stateId: 'exclude',
+        flex: 1
     }],
+
+    getTopToolbarItems: function() {
+        var me = this;
+        var items = me.callParent(arguments);
+
+        Ext.Array.insert(items, 1, [{
+            id       : me.getId() + "-create",
+            xtype    : "button",
+            text     : _("Create"),
+            icon     : "images/upload.png",
+            iconCls  : Ext.baseCSSPrefix + "btn-icon-16x16",
+            handler  : Ext.Function.bind(me.onCreateButton, me, [ me ]),
+            scope    : me,
+            disabled : true,
+            selectionConfig : {
+                minSelections : 1,
+                maxSelections : 1
+            }
+        }]);
+        return items;
+    },
 
     initComponent: function() {
         var me = this;
@@ -177,7 +224,11 @@ Ext.define('OMV.module.admin.service.borgbackup.Archives', {
                     idProperty: 'uuid',
                     fields: [
                         { name: 'uuid', type: 'string' },
-                        { name: 'name', type: 'string' }
+                        { name: 'name', type: 'string' },
+                        { name: 'reponame', type: 'string' },
+                        { name: 'compressiontype', type: 'string' },
+                        { name: 'include', type: 'string' },
+                        { name: 'exclude', type: 'string' }
                     ]
                 }),
                 proxy: {
@@ -190,6 +241,21 @@ Ext.define('OMV.module.admin.service.borgbackup.Archives', {
             })
         });
         me.callParent(arguments);
+    },
+
+    doDeletion: function(record) {
+        var me = this;
+        OMV.Rpc.request({
+            scope: me,
+            callback: me.onDeletion,
+            rpcData: {
+                service: 'BorgBackup',
+                method: 'deleteArchive',
+                params: {
+                    uuid: record.get('uuid')
+                }
+            }
+        });
     },
 
     onAddButton: function() {
@@ -206,19 +272,38 @@ Ext.define('OMV.module.admin.service.borgbackup.Archives', {
         }).show();
     },
 
-    doDeletion: function(record) {
+    onCreateButton : function() {
         var me = this;
-        OMV.Rpc.request({
-            scope: me,
-            callback: me.onDeletion,
-            rpcData: {
-                service: 'BorgBackup',
-                method: 'deleteArchive',
-                params: {
-                    uuid: record.get('uuid')
+        var record = me.getSelected();
+        var title = _("Create archive ") + record.get("name") + " ...";
+        var wnd = Ext.create("OMV.window.Execute", {
+            title           : title,
+            rpcService      : "BorgBackup",
+            rpcMethod       : "createArchive",
+            rpcParams       : {
+                "uuid": record.get("uuid")
+            },
+            rpcIgnoreErrors : true,
+            hideStartButton : true,
+            hideStopButton  : true,
+            listeners       : {
+                scope     : me,
+                finish    : function(wnd, response) {
+                    wnd.appendValue(_("Done..."));
+                    wnd.setButtonDisabled("close", false);
+                },
+                exception : function(wnd, error) {
+                    OMV.MessageBox.error(null, error);
+                    wnd.setButtonDisabled("close", false);
+                },
+                close     : function() {
+                    this.doReload();
                 }
             }
         });
+        wnd.setButtonDisabled("close", true);
+        wnd.show();
+        wnd.start();
     }
 });
 
