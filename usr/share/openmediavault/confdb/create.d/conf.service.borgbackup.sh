@@ -26,9 +26,6 @@ set -e
 SERVICE_XPATH_NAME="borgbackup"
 SERVICE_XPATH="/config/services/${SERVICE_XPATH_NAME}"
 
-omv_set_default "OMV_BORGBACKUP_CONFS_DIR" "/var/lib/openmediavault/borgbackup.d"
-omv_set_default "OMV_BORGBACKUP_CRONSCRIPT" "/var/lib/openmediavault/cron.d/borgbackup"
-
 if ! omv_config_exists "${SERVICE_XPATH}"; then
     omv_config_add_node "/config/services" "${SERVICE_XPATH_NAME}"
     omv_config_add_node "${SERVICE_XPATH}" "repos" ""
