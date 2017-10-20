@@ -5,13 +5,22 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
+OMV_BORGBACKUP_CONFS_DIR=${OMV_BORGBACKUP_CONFS_DIR:-"/var/lib/openmediavault/borgbackup.d"}
+OMV_BORGBACKUP_CRONSCRIPT=${OMV_BORGBACKUP_CRONSCRIPT:-"/var/lib/openmediavault/cron.d/borgbackup"}
+
 case "$1" in
     purge)
+        # Remove the configuration data.
         omv_config_delete "/config/services/borgbackup"
+        # remove borgbackup confs
+        rm -rf ${OMV_BORGBACKUP_CONFS_DIR}
+        # remove cron.d file
+        rm -f /etc/cron.d/openmediavault-borgbackup
     ;;
 
     remove)
-
+        # disable borgbackup cron script
+        echo "exit 0" > ${OMV_BORGBACKUP_CRONSCRIPT}
     ;;
 
     upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)

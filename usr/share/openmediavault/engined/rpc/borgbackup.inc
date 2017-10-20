@@ -22,7 +22,6 @@
 class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
 {
     private $getProgram = '/usr/bin/borg';
-    private $getLogFile = '/var/log/borgbackup.log';
 
     public function getName()
     {
@@ -150,12 +149,28 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, 'rpc.common.objectuuid');
-        // Delete the configuration object.
+        // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
         $object = $db->get('conf.service.borgbackup.repo', $params['uuid']);
+        // delete repo
+        $cmdArgs = [];
+        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+        $cmdArgs[] = 'BORG_DELETE_I_KNOW_WHAT_I_AM_DOING=YES';
+        $cmdArgs[] = $this->getProgram;
+        $cmdArgs[] = 'delete';
+        if ($repo->get('type') == 'local') {
+            $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                'uuid' => $repo->get('sharedfolderref')
+            ], $context);
+        } else {
+            $path = $repo->get('uri');
+        }
+        $cmdArgs[] = $path;
+        $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setQuiet();
+        $cmd->execute($output);
+        // Delete the configuration object.
         $db->delete($object);
-        //BORG_DELETE_I_KNOW_WHAT_I_AM_DOING=YES
-
         // Return the deleted configuration object.
         return $object->getAssoc();
     }
@@ -246,7 +261,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 } else {
                     $path = $repo->get('uri');
                 }
-                $cmdArgs[] = sprintf('%s::%s', $path, $archive->get('name'));
+                $cmdArgs[] = sprintf('%s::%s-{now}', $path, $archive->get('name'));
                 $includes = explode(',', $archive->get('include'));
                 foreach ($includes as $dirs) {
                     $cmdArgs[] = escapeshellarg($dirs);

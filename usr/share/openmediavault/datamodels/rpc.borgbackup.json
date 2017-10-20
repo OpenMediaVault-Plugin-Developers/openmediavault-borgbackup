@@ -49,6 +49,10 @@
 	"params": {
 		"type": "object",
 		"properties": {
+			"enable": {
+			    "type": "boolean",
+				"required": true
+			},
 			"uuid": {
 				"type": "string",
 				"format": "uuidv4",
@@ -89,29 +93,31 @@
 			"exclude": {
 			    "type": "string",
 				"required": false
-			}
-		}
-	}
-},{
-	"type": "rpc",
-	"id": "rpc.borgbackup.executecommand",
-	"params": {
-		"type": "object",
-		"properties": {
-			"command": {
-				"type": "string",
-				"enum": [
-					"sync", "sync -h", "scrub", "check",
-					"diff", "status", "fix",
-					"up", "down",
-					"smart", "devices", "undelete",
-					"silent"
-				],
+			},
+			"hourly": {
+				"type": "integer",
+				"minimum": 0,
 				"required": true
 			},
-			"file": {
-				"type": "string",
-				"required": false
+			"daily": {
+				"type": "integer",
+				"minimum": 0,
+				"required": true
+			},
+			"weekly": {
+				"type": "integer",
+				"minimum": 0,
+				"required": true
+			},
+			"monthly": {
+				"type": "integer",
+				"minimum": 0,
+				"required": true
+			},
+			"yearly": {
+				"type": "integer",
+				"minimum": 0,
+				"required": true
 			}
 		}
 	}

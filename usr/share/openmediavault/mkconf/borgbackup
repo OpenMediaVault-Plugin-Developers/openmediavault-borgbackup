@@ -1,8 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 #
-# @author    Volker Theile <volker.theile@openmediavault.org>
 # @author    OpenMediaVault Plugin Developers <plugins@omv-extras.org>
-# @copyright Copyright (c) 2009-2013 Volker Theile
 # @copyright Copyright (c) 2013-2017 OpenMediaVault Plugin Developers
 #
 # This program is free software: you can redistribute it and/or modify
@@ -22,5 +20,194 @@ set -e
 
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
+
+declare -i enable
+declare -i index
+declare -i hourly
+declare -i daily
+declare -i weekly
+declare -i monthly
+declare -i yearly
+
+SCRIPTS_DIR="/var/lib/openmediavault/borgbackup"
+SCRIPT_PREFIX="borgbackup-"
+
+XPATH_NAME="borgbackup"
+XPATH="/config/services/${SERVICE_XPATH_NAME}"
+XPATH_ARCHIVE="${XPATH}/archives/archive"
+XPATH_REPO="${XPATH}/repos/repo"
+
+# create run-parts directories
+# remove previous scripts since they are recreated
+for i in hourly daily weekly monthly yearly; do
+    mkdir -p "${SCRIPTS_DIR}/${i}.d"
+    find "${SCRIPTS_DIR}/${i}.d/" -name "${SCRIPT_PREFIX}*" -delete
+done
+
+# create cron script
+cat <<EOF > /etc/cron.d/openmediavault-borgbackup
+# Create cron file
+# This is the cron file for openmediavault-borgbackup.
+# m h   dom mon dow     user    command
+5 *     * * *           root    run-parts ${SCRIPTS_DIR}/hourly.d/
+30 3    * * *           root    run-parts ${SCRIPTS_DIR}/daily.d/
+0  3    * * 1           root    run-parts ${SCRIPTS_DIR}/weekly.d/
+30 2    1 * *           root    run-parts ${SCRIPTS_DIR}/monthly.d/
+00 2    1 1 *           root    run-parts ${SCRIPTS_DIR}/yearly.d/
+EOF
+
+# process archives
+index=$(omv_config_get_count "${XPATH_ARCHIVE}")
+while [ ${index} -gt 0 ]; do
+
+    pos="[position()=${index}]"
+    enable=$(omv_config_get "${XPATH_ARCHIVE}${pos}/enable")
+
+    if [ ${enable} -eq 1 ]; then
+        uuid=$(omv_config_get "${XPATH_ARCHIVE}${pos}/uuid")
+        aname=$(omv_config_get "${XPATH_ARCHIVE}${pos}/name")
+        ctype=$(omv_config_get "${XPATH_ARCHIVE}${pos}/compressiontype")
+        cratio=$(omv_config_get "${XPATH_ARCHIVE}${pos}/compressionratio")
+        onefs=$(omv_config_get "${XPATH_ARCHIVE}${pos}/onefs")
+        noatime=$(omv_config_get "${XPATH_ARCHIVE}${pos}/noatime")
+        includes=$(omv_config_get "${XPATH_ARCHIVE}${pos}/include")
+        excludes=$(omv_config_get "${XPATH_ARCHIVE}${pos}/exclude")
+
+        hourly=$(omv_config_get "${XPATH_ARCHIVE}${pos}/hourly")
+        daily=$(omv_config_get "${XPATH_ARCHIVE}${pos}/daily")
+        weekly=$(omv_config_get "${XPATH_ARCHIVE}${pos}/weekly")
+        monthly=$(omv_config_get "${XPATH_ARCHIVE}${pos}/monthly")
+        yearly=$(omv_config_get "${XPATH_ARCHIVE}${pos}/yearly")
+
+        if [ ${hourly} -gt 0 ]; then
+            period="hourly"
+        elif [ ${daily} -gt 0 ]; then
+            period="daily"
+        elif [ ${weekly} -gt 0 ]; then
+            period="weekly"
+        elif [ ${monthly} -gt 0 ]; then
+            period="monthly"
+        elif [ ${yearly} -gt 0 ]; then
+            period="yearly"
+        fi
+        script="${SCRIPTS_DIR}/${period}.d/${SCRIPT_PREFIX}${uuid}"
+
+
+        reporef=$(omv_config_get "${XPATH_ARCHIVE}${pos}/reporef")
+        ruuid="[uuid='${reporef}']"
+        rname=$(omv_config_get "${XPATH_REPO}${ruuid}/name")
+        passphrase=$(omv_config_get "${XPATH_REPO}${ruuid}/passphrase")
+        encryption=$(omv_config_get "${XPATH_REPO}${ruuid}/encryption")
+        rtype=$(omv_config_get "${XPATH_REPO}${ruuid}/type")
+
+        if [ "${rtype}" = "local" ]; then
+            sfref=$(omv_config_get "${XPATH_REPO}${ruuid}/sharedfolderref")
+            rpath=$(omv_get_sharedfolder_path "${sfref}")
+        else
+            rpath=$(omv_config_get "${XPATH_REPO}${ruuid}/uri")
+        fi
+
+
+        cat <<EOF > "${script}"
+#!/bin/sh
+
+# Setting this, so the repo does not need to be given on the commandline:
+export BORG_REPO='${rpath}'
+
+# Setting this, so you won't be asked for your repository passphrase:
+export BORG_PASSPHRASE='${passphrase}'
+
+# some helpers and error handling:
+info() { printf "\n%s %s\n\n" "\$( date )" "\$*" >&2; }
+trap 'echo \$( date ) Backup interrupted >&2; exit 2' INT TERM
+
+info "Starting backup"
+
+# Backup the most important directories into an archive named after
+# the machine this script is currently running on:
+
+borg create \\
+    --verbose \\
+    --filter AME \\
+    --list \\
+    --stats \\
+    --show-rc \\
+    --compression ${ctype},${cratio} \\
+    --exclude-caches \\
+EOF
+
+        # add excludes
+        OIFS=$IFS
+        IFS=","
+        for exclude in $(echo "${excludes}"); do
+            echo "    --exclude '${exclude}' \\" >> "${script}"
+        done
+
+        # add archive name
+        echo "    ::'${aname}-{now}' \\" >> "${script}"
+
+        # add includes
+        for include in $(echo "${includes}"); do
+            echo "    ${include} \\" >> "${script}"
+        done
+
+        IFS=$OIFS
+
+        # add prune section of script
+        cat <<EOF >> "${script}"
+
+backup_exit=\$?
+
+info "Pruning repository"
+
+borg prune \\
+    --list \\
+    --prefix '${aname}-' \\
+    --show-rc \\
+EOF
+
+        # show keep-* lines
+        if [ ${hourly} -gt 0 ]; then
+            echo "    --keep-hourly ${hourly} \\" >> "${script}"
+        fi
+        if [ ${daily} -gt 0 ]; then
+            echo "    --keep-daily ${daily} \\" >> "${script}"
+        fi
+        if [ ${weekly} -gt 0 ]; then
+            echo "    --keep-weekly ${weekly} \\" >> "${script}"
+        fi
+        if [ ${monthly} -gt 0 ]; then
+            echo "    --keep-monthly ${monthly} \\" >> "${script}"
+        fi
+        if [ ${yearly} -gt 0 ]; then
+            echo "    --keep-yearly ${yearly} \\" >> "${script}"
+        fi
+
+        # add end of script
+        cat <<EOF >> "${script}"
+
+prune_exit=\$?
+
+# use highest exit code as global exit code
+global_exit=\$(( backup_exit > prune_exit ? backup_exit : prune_exit ))
+
+if [ \${global_exit} -eq 1 ];
+then
+    info "Backup and/or Prune finished with a warning"
+fi
+
+if [ \${global_exit} -gt 1 ];
+then
+    info "Backup and/or Prune finished with an error"
+fi
+
+exit \${global_exit}
+EOF
+
+        chmod 750 "${script}"
+    fi
+
+    index=index-1
+done
 
 exit 0

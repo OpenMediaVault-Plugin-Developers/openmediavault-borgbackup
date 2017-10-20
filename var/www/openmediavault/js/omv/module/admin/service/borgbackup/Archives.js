@@ -46,10 +46,19 @@ Ext.define('OMV.module.admin.service.borgbackup.Archive', {
     getFormItems: function() {
         var me = this;
         return [{
+            xtype: 'checkbox',
+            name: 'enable',
+            fieldLabel: _('Enable'),
+            checked: true
+        },{
             xtype: 'textfield',
             name: 'name',
-            fieldLabel: _('Name'),
-            allowBlank: false
+            fieldLabel: _('Name/Prefix'),
+            allowBlank: false,
+            plugins: [{
+                ptype: 'fieldinfo',
+                text: _('Uses value as prefix for archive name.')
+            }]
         },{
             xtype: 'combo',
             name: 'reporef',
@@ -137,7 +146,67 @@ Ext.define('OMV.module.admin.service.borgbackup.Archive', {
             allowBlank: true,
             plugins: [{
                 ptype: 'fieldinfo',
-                text: _('Put comma between each directory')
+                text: _('Put comma between each directory.')
+            }]
+        },{
+            xtype: 'numberfield',
+            name: 'hourly',
+            fieldLabel: _('Hourly'),
+            minValue: 0,
+            allowDecimals: false,
+            allowBlank: false,
+            value: 0,
+            plugins: [{
+                ptype: 'fieldinfo',
+                text: _('Number of hourly archives to keep.')
+            }]
+        },{
+            xtype: 'numberfield',
+            name: 'daily',
+            fieldLabel: _('Daily'),
+            minValue: 0,
+            allowDecimals: false,
+            allowBlank: false,
+            value: 7,
+            plugins: [{
+                ptype: 'fieldinfo',
+                text: _('Number of daily archives to keep.')
+            }]
+        },{
+            xtype: 'numberfield',
+            name: 'weekly',
+            fieldLabel: _('Weekly'),
+            minValue: 0,
+            allowDecimals: false,
+            allowBlank: false,
+            value: 4,
+            plugins: [{
+                ptype: 'fieldinfo',
+                text: _('Number of weekly archives to keep.')
+            }]
+        },{
+            xtype: 'numberfield',
+            name: 'monthly',
+            fieldLabel: _('Monthly'),
+            minValue: 0,
+            allowDecimals: false,
+            allowBlank: false,
+            value: 3,
+            plugins: [{
+                ptype: 'fieldinfo',
+                text: _('Number of monthly archives to keep.')
+            }]
+        },{
+            xtype: 'numberfield',
+            name: 'yearly',
+            fieldLabel: _('Yearly'),
+            minValue: 0,
+            allowDecimals: false,
+            allowBlank: false,
+            value: 0,
+            plugins: [{
+                ptype: 'fieldinfo',
+                text: _('Number of yearly archives to keep.')
             }]
         }];
     }
@@ -156,11 +225,21 @@ Ext.define('OMV.module.admin.service.borgbackup.Archives', {
         'OMV.module.admin.service.borgbackup.Archive'
     ],
 
-    hideEditButton: true,
     hidePagingToolbar: false,
     stateful: true,
     stateId: 'bdef0cfa-b0ed-11e7-ba14-1b4b82806d9d',
     columns: [{
+        xtype: 'booleaniconcolumn',
+        text: _('Enabled'),
+        sortable: true,
+        dataIndex: 'enable',
+        stateId: 'enable',
+        align: 'center',
+        width: 80,
+        resizable: false,
+        trueIcon: 'switch_on.png',
+        falseIcon: 'switch_off.png'
+    },{
         xtype: 'textcolumn',
         text: _('Name'),
         sortable: true,
@@ -198,13 +277,13 @@ Ext.define('OMV.module.admin.service.borgbackup.Archives', {
         var me = this;
         var items = me.callParent(arguments);
 
-        Ext.Array.insert(items, 1, [{
-            id       : me.getId() + "-create",
-            xtype    : "button",
-            text     : _("Create"),
-            icon     : "images/upload.png",
-            iconCls  : Ext.baseCSSPrefix + "btn-icon-16x16",
-            handler  : Ext.Function.bind(me.onCreateButton, me, [ me ]),
+        Ext.Array.insert(items, 3, [{
+            id       : me.getId() + '-run',
+            xtype    : 'button',
+            text     : _('Run'),
+            icon     : 'images/play.png',
+            iconCls  : Ext.baseCSSPrefix + 'btn-icon-16x16',
+            handler  : Ext.Function.bind(me.onRunButton, me, [ me ]),
             scope    : me,
             disabled : true,
             selectionConfig : {
@@ -224,6 +303,7 @@ Ext.define('OMV.module.admin.service.borgbackup.Archives', {
                     idProperty: 'uuid',
                     fields: [
                         { name: 'uuid', type: 'string' },
+                        { name: 'enable', type: 'boolean' },
                         { name: 'name', type: 'string' },
                         { name: 'reponame', type: 'string' },
                         { name: 'compressiontype', type: 'string' },
@@ -272,36 +352,51 @@ Ext.define('OMV.module.admin.service.borgbackup.Archives', {
         }).show();
     },
 
-    onCreateButton : function() {
+    onEditButton: function () {
         var me = this;
         var record = me.getSelected();
-        var title = _("Create archive ") + record.get("name") + " ...";
-        var wnd = Ext.create("OMV.window.Execute", {
-            title           : title,
-            rpcService      : "BorgBackup",
-            rpcMethod       : "createArchive",
-            rpcParams       : {
-                "uuid": record.get("uuid")
+        Ext.create('OMV.module.admin.service.borgbackup.Archive', {
+            title: _('Edit archive'),
+            uuid: record.get('uuid'),
+            listeners: {
+                scope: me,
+                submit: function () {
+                    this.doReload();
+                }
+            }
+        }).show();
+    },
+
+    onRunButton : function() {
+        var me = this;
+        var record = me.getSelected();
+        var title = _('Create archive for ') + record.get('name') + ' ...';
+        var wnd = Ext.create('OMV.window.Execute', {
+            title: title,
+            rpcService: 'BorgBackup',
+            rpcMethod: 'createArchive',
+            rpcParams: {
+                'uuid': record.get('uuid')
             },
-            rpcIgnoreErrors : true,
-            hideStartButton : true,
-            hideStopButton  : true,
-            listeners       : {
-                scope     : me,
-                finish    : function(wnd, response) {
-                    wnd.appendValue(_("Done..."));
-                    wnd.setButtonDisabled("close", false);
+            rpcIgnoreErrors: true,
+            hideStartButton: true,
+            hideStopButton: true,
+            listeners: {
+                scope: me,
+                finish: function(wnd, response) {
+                    wnd.appendValue(_('Done...'));
+                    wnd.setButtonDisabled('close', false);
                 },
-                exception : function(wnd, error) {
+                exception: function(wnd, error) {
                     OMV.MessageBox.error(null, error);
-                    wnd.setButtonDisabled("close", false);
+                    wnd.setButtonDisabled('close', false);
                 },
-                close     : function() {
+                close: function() {
                     this.doReload();
                 }
             }
         });
-        wnd.setButtonDisabled("close", true);
+        wnd.setButtonDisabled('close', true);
         wnd.show();
         wnd.start();
     }

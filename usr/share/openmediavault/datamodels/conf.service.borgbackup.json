@@ -61,6 +61,10 @@
 					"items": {
 						"type": "object",
 						"properties": {
+							"enable": {
+								"type": "boolean",
+								"default": true
+							},
 							"uuid": {
 								"type": "string",
 								"format": "uuidv4"
@@ -96,6 +100,31 @@
 							},
 							"exclude": {
 								"type": "string"
+							},
+							"hourly": {
+								"type": "integer",
+								"minimum": 0,
+								"default": 0
+							},
+							"daily": {
+								"type": "integer",
+								"minimum": 0,
+								"default": 7
+							},
+							"weekly": {
+								"type": "integer",
+								"minimum": 0,
+								"default": 4
+							},
+							"monthly": {
+								"type": "integer",
+								"minimum": 0,
+								"default": 3
+							},
+							"yearly": {
+								"type": "integer",
+								"minimum": 0,
+								"default": 0
 							}
 						}
 					}
