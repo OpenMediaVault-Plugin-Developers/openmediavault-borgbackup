@@ -117,6 +117,33 @@ Ext.define('OMV.module.admin.service.borgbackup.Repo', {
     }
 });
 
+Ext.define('OMV.module.admin.service.borgbackup.Mount', {
+    extend: 'OMV.workspace.window.Form',
+    uses: [
+        'OMV.form.field.SharedFolderComboBox',
+        'OMV.workspace.window.plugin.ConfigObject'
+    ],
+
+    rpcService: 'BorgBackup',
+    rpcSetMethod: 'mountRepo',
+    plugins: [{
+        ptype: 'configobject'
+    }],
+
+    getFormItems: function () {
+        var me = this;
+        return [{
+            xtype: 'sharedfoldercombo',
+            name: 'sharedfolderref',
+            fieldLabel: _('Shared Folder'),
+            plugins: [{
+                ptype: 'fieldinfo',
+                text: _('Repo will be mounted as a subfolder in the shared folder with the same name as the repo.')
+            }]
+        }];
+    }
+});
+
 Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
     extend: 'OMV.workspace.grid.Panel',
     requires: [
@@ -163,6 +190,40 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         falseIcon: 'switch_off.png'
     }],
 
+    getTopToolbarItems: function() {
+        var me = this;
+        var items = me.callParent(arguments);
+
+        Ext.Array.insert(items, 3, [{
+            id       : me.getId() + '-mount',
+            xtype    : 'button',
+            text     : _('Mount'),
+            icon     : 'images/play.png',
+            iconCls  : Ext.baseCSSPrefix + 'btn-icon-16x16',
+            handler  : Ext.Function.bind(me.onMountButton, me, [ me ]),
+            scope    : me,
+            disabled : true,
+            selectionConfig : {
+                minSelections : 1,
+                maxSelections : 1
+            }
+        },{
+            id       : me.getId() + '-unmount',
+            xtype    : 'button',
+            text     : _('Unmount'),
+            icon     : 'images/pause.png',
+            iconCls  : Ext.baseCSSPrefix + 'btn-icon-16x16',
+            handler  : Ext.Function.bind(me.onUnmountButton, me, [ me ]),
+            scope    : me,
+            disabled : true,
+            selectionConfig : {
+                minSelections : 1,
+                maxSelections : 1
+            }
+        }]);
+        return items;
+    },
+
     initComponent: function () {
         var me = this;
         Ext.apply(me, {
@@ -204,6 +265,36 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         }).show();
     },
 
+    onMountButton: function () {
+        var me = this;
+        var record = me.getSelected();
+        Ext.create('OMV.module.admin.service.borgbackup.Mount', {
+            title: _('Mount repo'),
+            uuid: record.get('uuid'),
+            listeners: {
+                scope: me,
+                submit: function () {
+                    this.doReload();
+                }
+            }
+        }).show();
+    },
+
+    onUnmountButton: function () {
+        var me = this;
+        var record = me.getSelected();
+        OMV.Rpc.request({
+            scope: me,
+            rpcData: {
+                service: 'BorgBackup',
+                method: 'unmountRepo',
+                params: {
+                    uuid: record.get('uuid')
+                }
+            }
+        });
+    },
+
     doDeletion: function (record) {
         var me = this;
         OMV.Rpc.request({
@@ -221,9 +312,9 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
 });
 
 OMV.WorkspaceManager.registerPanel({
-    id        : 'contents',
-    path      : '/service/borgbackup',
-    text      : _('Repos'),
-    position  : 10,
-    className : 'OMV.module.admin.service.borgbackup.RepoList'
+    id: 'contents',
+    path: '/service/borgbackup',
+    text: _('Repos'),
+    position: 10,
+    className: 'OMV.module.admin.service.borgbackup.RepoList'
 });

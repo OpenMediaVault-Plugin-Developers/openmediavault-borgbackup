@@ -34,6 +34,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('getRepoList');
         $this->registerMethod('getRepo');
         $this->registerMethod('setRepo');
+        $this->registerMethod('mountRepo');
         $this->registerMethod('deleteRepo');
 
         $this->registerMethod('getArchiveList');
@@ -137,6 +138,59 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         } else {
             $cmdArgs[] = $params['uri'];
         }
+        $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->execute($output);
+        // Return the configuration object.
+        return $object->getAssoc();
+    }
+
+    public function mountRepo($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.borgbackup.mountrepo');
+        // Prepare the configuration object.
+        $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.repo', $params['uuid']);
+        // mount repo
+        $cmdArgs = [];
+        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $params['passphrase']);
+        $cmdArgs[] = $this->getProgram;
+        $cmdArgs[] = 'mount';
+        if ($object->get('type') == 'local') {
+            $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                'uuid' => $object->get('sharedfolderref')
+            ], $context);
+        } else {
+            $path = $object->get('uri');
+        }
+        $cmdArgs[] = $path;
+        $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+            'uuid' => $params['sharedfolderref']
+        ], $context);
+        $path = sprintf('%s/%s', $path, $object->get('name'));
+        mkdir($path);
+        $cmdArgs[] = $path;
+        $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->execute($output);
+        // Return the configuration object.
+        return $object->getAssoc();
+    }
+
+    public function unmountRepo($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.common.objectuuid');
+        // Prepare the configuration object.
+        $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.repo', $params['uuid']);
+        // unmount repo
+        $cmdArgs = [];
+        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $params['passphrase']);
+        $cmdArgs[] = $this->getProgram;
+        $cmdArgs[] = 'umount';
+        $cmdArgs[] = sprintf('$(mount | grep borg | grep \'%s\' | cut -d" " -f3)', $object->get('name'));
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->execute($output);
         // Return the configuration object.

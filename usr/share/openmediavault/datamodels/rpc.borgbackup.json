@@ -121,4 +121,22 @@
 			}
 		}
 	}
+},{
+	"type": "rpc",
+	"id": "rpc.borgbackup.mountrepo",
+	"params": {
+		"type": "object",
+		"properties": {
+			"uuid": {
+				"type": "string",
+				"format": "uuidv4",
+				"required": true
+			},
+			"sharedfolderref": {
+				"type": "string",
+				"format": "uuidv4",
+				"required": true
+			}
+		}
+	}
 }]
