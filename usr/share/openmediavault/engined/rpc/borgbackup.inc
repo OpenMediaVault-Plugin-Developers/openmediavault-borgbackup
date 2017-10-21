@@ -375,7 +375,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 } else {
                     $path = $repo->get('uri');
                 }
-                $cmdArgs[] = sprintf('%s::%s-{now}', $path, $archive->get('name'));
+                $cmdArgs[] = sprintf('"%s::%s-{now}"', $path, $archive->get('name'));
                 $includes = explode(',', $archive->get('include'));
                 foreach ($includes as $dirs) {
                     $cmdArgs[] = escapeshellarg($dirs);
@@ -422,7 +422,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         } else {
             $path = $repo->get('uri');
         }
-        $cmdArgs[] = sprintf('%s::%s', $path, $archive->get('name'));
+        $cmdArgs[] = sprintf('"%s::%s"', $path, $archive->get('name'));
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setQuiet();
         $cmd->execute($output);
@@ -462,7 +462,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 } else {
                     $path = $repo->get('uri');
                 }
-                $cmdArgs[] = sprintf('%s::%s-{now}', $path, $archive->get('name'));
+                $cmdArgs[] = sprintf('"%s::%s"', $path, $archive->get('name'));
                 $cmd = new \OMV\System\Process($cmdArgs);
                 $cmd->setRedirect2to1();
                 $cmdLine = $cmd->getCommandLine();
