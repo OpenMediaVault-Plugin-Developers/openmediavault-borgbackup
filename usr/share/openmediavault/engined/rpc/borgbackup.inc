@@ -35,6 +35,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('getRepo');
         $this->registerMethod('setRepo');
         $this->registerMethod('mountRepo');
+        $this->registerMethod('unmountRepo');
         $this->registerMethod('deleteRepo');
 
         $this->registerMethod('getArchiveList');
