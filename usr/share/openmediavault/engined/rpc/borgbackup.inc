@@ -195,7 +195,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'umount';
-        $cmdArgs[] = sprintf('$(mount | grep borg | grep \'%s\' | cut -d" " -f3)', $repo->get('name'));
+        $cmdArgs[] = sprintf('$(mount | grep borg | grep "%s" | cut -d" " -f3 | head -n1)', $repo->get('name'));
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->execute($output);
         // Return the configuration object.
