@@ -239,13 +239,14 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, 'rpc.borgbackup.cmd');
         // Prepare the configuration object.
-        $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.repo', $params['uuid']);
+        $db = \OMV\Config\Database::getInstance();
+        $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         // Create the background process.
         return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
-            use ($archive, $context, $params, $repo) {
+            use ($context, $params, $repo) {
                 // mount repo
                 $cmdArgs = [];
-                $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $params['passphrase']);
+                $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
                 $cmdArgs[] = $this->getProgram;
                 switch ($params['command']) {
                     case 'all':
@@ -268,17 +269,18 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                         break;
                 }
                 $cmdArgs[] = '--info';
-                if ($object->get('type') == 'local') {
+                if ($repo->get('type') == 'local') {
                     $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
-                        'uuid' => $object->get('sharedfolderref')
+                        'uuid' => $repo->get('sharedfolderref')
                     ], $context);
                 } else {
-                    $path = $object->get('uri');
+                    $path = $repo->get('uri');
                 }
                 $cmdArgs[] = $path;
                 $cmd = new \OMV\System\Process($cmdArgs);
                 $cmd->setRedirect2to1();
                 $cmdLine = $cmd->getCommandLine();
+                file_put_contents("/tmp/borg", $cmdLine, FILE_APPEND);
                 $this->exec($cmdLine, $output, $bgOutputFilename);
                 return $output;
             }

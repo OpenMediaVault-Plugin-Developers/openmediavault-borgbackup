@@ -348,7 +348,7 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         var me = this;
         var record = me.getSelected();
         var wnd = Ext.create('OMV.window.Execute', {
-            title: _('Checking ') + record.get('name') + ' ...',
+            title: record.get('name') + ' ' + _('repo ...'),
             rpcService: 'BorgBackup',
             rpcMethod: 'repoCommand',
             rpcParams: {
@@ -367,16 +367,13 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
                 exception: function(wnd, error) {
                     OMV.MessageBox.error(null, error);
                     wnd.setButtonDisabled('close', false);
-                },
-                close: function() {
-                    document.location.reload();
                 }
             }
         });
         wnd.setButtonDisabled('close', true);
         wnd.show();
         wnd.start();
-    }    
+    }
 });
 
 OMV.WorkspaceManager.registerPanel({
