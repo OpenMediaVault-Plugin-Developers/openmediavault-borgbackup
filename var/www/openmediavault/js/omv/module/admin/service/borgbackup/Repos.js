@@ -195,30 +195,64 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         var items = me.callParent(arguments);
 
         Ext.Array.insert(items, 3, [{
-            id       : me.getId() + '-mount',
-            xtype    : 'button',
-            text     : _('Mount'),
-            icon     : 'images/play.png',
-            iconCls  : Ext.baseCSSPrefix + 'btn-icon-16x16',
-            handler  : Ext.Function.bind(me.onMountButton, me, [ me ]),
-            scope    : me,
-            disabled : true,
-            selectionConfig : {
-                minSelections : 1,
-                maxSelections : 1
+            xtype: 'button',
+            text: _('Check'),
+            scope: me,
+            icon: 'images/software.png',
+            disabled: true,
+            selectionConfig: {
+                minSelections: 1,
+                maxSelections: 1
+            },
+            menu: [{
+                text: _('All'),
+                icon: 'images/software.png',
+                handler: Ext.Function.bind(me.onCmdButton, me, [ 'all' ])
+            },{
+                text: _('Repos only'),
+                icon: 'images/add.png',
+                handler: Ext.Function.bind(me.onCmdButton, me, [ 'repo' ])
+            },{
+                text: _('Archives only'),
+                icon: 'images/add.png',
+                handler: Ext.Function.bind(me.onCmdButton, me, [ 'archives' ])
+            },{
+                text: _('Verify'),
+                icon: 'images/add.png',
+                handler: Ext.Function.bind(me.onCmdButton, me, [ 'verify' ])
+            }]
+        },{
+            xtype: 'button',
+            text: _('List'),
+            icon: 'images/play.png',
+            handler: Ext.Function.bind(me.onCmdButton, me, [ 'list' ]),
+            scope: me,
+            disabled: true,
+            selectionConfig: {
+                minSelections: 1,
+                maxSelections: 1
             }
         },{
-            id       : me.getId() + '-unmount',
-            xtype    : 'button',
-            text     : _('Unmount'),
-            icon     : 'images/pause.png',
-            iconCls  : Ext.baseCSSPrefix + 'btn-icon-16x16',
-            handler  : Ext.Function.bind(me.onUnmountButton, me, [ me ]),
-            scope    : me,
-            disabled : true,
-            selectionConfig : {
-                minSelections : 1,
-                maxSelections : 1
+            xtype: 'button',
+            text: _('Mount'),
+            icon: 'images/play.png',
+            handler: Ext.Function.bind(me.onMountButton, me, [ me ]),
+            scope: me,
+            disabled: true,
+            selectionConfig: {
+                minSelections: 1,
+                maxSelections: 1
+            }
+        },{
+            xtype: 'button',
+            text: _('Unmount'),
+            icon: 'images/pause.png',
+            handler: Ext.Function.bind(me.onUnmountButton, me, [ me ]),
+            scope: me,
+            disabled: true,
+            selectionConfig: {
+                minSelections: 1,
+                maxSelections: 1
             }
         }]);
         return items;
@@ -308,7 +342,41 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
                 }
             }
         });
-    }
+    },
+
+    onCmdButton : function(command) {
+        var me = this;
+        var record = me.getSelected();
+        var wnd = Ext.create('OMV.window.Execute', {
+            title: _('Checking ') + record.get('name') + ' ...',
+            rpcService: 'BorgBackup',
+            rpcMethod: 'repoCommand',
+            rpcParams: {
+                'command': command,
+                'uuid': record.get('uuid')
+            },
+            rpcIgnoreErrors: true,
+            hideStartButton: true,
+            hideStopButton: true,
+            listeners: {
+                scope: me,
+                finish: function(wnd, response) {
+                    wnd.appendValue(_('Done...'));
+                    wnd.setButtonDisabled('close', false);
+                },
+                exception: function(wnd, error) {
+                    OMV.MessageBox.error(null, error);
+                    wnd.setButtonDisabled('close', false);
+                },
+                close: function() {
+                    document.location.reload();
+                }
+            }
+        });
+        wnd.setButtonDisabled('close', true);
+        wnd.show();
+        wnd.start();
+    }    
 });
 
 OMV.WorkspaceManager.registerPanel({

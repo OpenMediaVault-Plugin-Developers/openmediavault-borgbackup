@@ -34,15 +34,17 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('getRepoList');
         $this->registerMethod('getRepo');
         $this->registerMethod('setRepo');
+        $this->registerMethod('deleteRepo');
+        $this->registerMethod('repoCommand');
         $this->registerMethod('mountRepo');
         $this->registerMethod('unmountRepo');
-        $this->registerMethod('deleteRepo');
 
         $this->registerMethod('getArchiveList');
         $this->registerMethod('getArchive');
         $this->registerMethod('setArchive');
-        $this->registerMethod('createArchive');
         $this->registerMethod('deleteArchive');
+        $this->registerMethod('createArchive');
+        $this->registerMethod('archiveCommand');
     }
 
     public function enumerateRepoCandidates($params, $context)
@@ -230,6 +232,59 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         return $object->getAssoc();
     }
 
+    public function repoCommand($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.borgbackup.cmd');
+        // Prepare the configuration object.
+        $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.repo', $params['uuid']);
+        // Create the background process.
+        return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
+            use ($archive, $context, $params, $repo) {
+                // mount repo
+                $cmdArgs = [];
+                $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $params['passphrase']);
+                $cmdArgs[] = $this->getProgram;
+                switch ($params['command']) {
+                    case 'all':
+                        $cmdArgs[] = 'check';
+                        break;
+                    case 'archives':
+                        $cmdArgs[] = 'check';
+                        $cmdArgs[] = '--archives-only';
+                        break;
+                    case 'list':
+                        $cmdArgs[] = 'list';
+                        break;
+                    case 'repo':
+                        $cmdArgs[] = 'check';
+                        $cmdArgs[] = '--repository-only';
+                        break;
+                    case 'verify':
+                        $cmdArgs[] = 'check';
+                        $cmdArgs[] = '--verify-data';
+                        break;
+                }
+                $cmdArgs[] = '--info';
+                if ($object->get('type') == 'local') {
+                    $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                        'uuid' => $object->get('sharedfolderref')
+                    ], $context);
+                } else {
+                    $path = $object->get('uri');
+                }
+                $cmdArgs[] = $path;
+                $cmd = new \OMV\System\Process($cmdArgs);
+                $cmd->setRedirect2to1();
+                $cmdLine = $cmd->getCommandLine();
+                $this->exec($cmdLine, $output, $bgOutputFilename);
+                return $output;
+            }
+        );
+    }
+
     public function getArchiveList($params, $context)
     {
         // Validate the RPC caller context.
@@ -293,8 +348,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, 'rpc.common.objectuuid');
         $db = \OMV\Config\Database::getInstance();
+        // Get archive configuration object
         $archive = $db->get('conf.service.borgbackup.archive', $params['uuid']);
-        // create archive
+        // Get repo configuration object
         $repo = $db->get('conf.service.borgbackup.repo', $archive->get('reporef'));
         // Create the background process.
         return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
@@ -346,9 +402,10 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, 'rpc.common.objectuuid');
-        // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
+        // Get archive configuration object
         $archive = $db->get('conf.service.borgbackup.archive', $params['uuid']);
+        // Get repo configuration object
         $repo = $db->get('conf.service.borgbackup.repo', $archive->get('reporef'));
         // delete archive
         $cmdArgs = [];
@@ -370,5 +427,45 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $db->delete($archive);
         // Return the deleted configuration object.
         return $archive->getAssoc();
+    }
+
+    public function archiveCommand($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.borgbackup.cmd');
+        $db = \OMV\Config\Database::getInstance();
+        // Get archive configuration object
+        $archive = $db->get('conf.service.borgbackup.archive', $params['uuid']);
+        // Get repo configuration object
+        $repo = $db->get('conf.service.borgbackup.repo', $archive->get('reporef'));
+        // Create the background process.
+        return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
+            use ($archive, $context, $params, $repo) {
+                $cmdArgs = [];
+                $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+                $cmdArgs[] = $this->getProgram;
+                switch ($params['command']) {
+                    case 'list':
+                        $cmdArgs[] = 'list';
+                        break;
+                }
+                $cmdArgs[] = '--info';
+                if ($repo->get('type') == 'local') {
+                    $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                        'uuid' => $repo->get('sharedfolderref')
+                    ], $context);
+                } else {
+                    $path = $repo->get('uri');
+                }
+                $cmdArgs[] = sprintf('%s::%s-{now}', $path, $archive->get('name'));
+                $cmd = new \OMV\System\Process($cmdArgs);
+                $cmd->setRedirect2to1();
+                $cmdLine = $cmd->getCommandLine();
+                $this->exec($cmdLine, $output, $bgOutputFilename);
+                return $output;
+            }
+        );
     }
 }

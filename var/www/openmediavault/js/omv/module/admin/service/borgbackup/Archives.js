@@ -278,17 +278,26 @@ Ext.define('OMV.module.admin.service.borgbackup.Archives', {
         var items = me.callParent(arguments);
 
         Ext.Array.insert(items, 3, [{
-            id       : me.getId() + '-run',
-            xtype    : 'button',
-            text     : _('Run'),
-            icon     : 'images/play.png',
-            iconCls  : Ext.baseCSSPrefix + 'btn-icon-16x16',
-            handler  : Ext.Function.bind(me.onRunButton, me, [ me ]),
-            scope    : me,
-            disabled : true,
-            selectionConfig : {
-                minSelections : 1,
-                maxSelections : 1
+            xtype: 'button',
+            text: _('List'),
+            icon: 'images/play.png',
+            handler: Ext.Function.bind(me.onCmdButton, me, [ 'list' ]),
+            scope: me,
+            disabled: true,
+            selectionConfig: {
+                minSelections: 1,
+                maxSelections: 1
+            }
+        },{
+            xtype: 'button',
+            text: _('Run'),
+            icon: 'images/play.png',
+            handler: Ext.Function.bind(me.onRunButton, me, [ me ]),
+            scope: me,
+            disabled: true,
+            selectionConfig: {
+                minSelections: 1,
+                maxSelections: 1
             }
         }]);
         return items;
@@ -365,6 +374,40 @@ Ext.define('OMV.module.admin.service.borgbackup.Archives', {
                 }
             }
         }).show();
+    },
+
+    onCmdButton : function(command) {
+        var me = this;
+        var record = me.getSelected();
+        var wnd = Ext.create('OMV.window.Execute', {
+            title: _('Checking ') + record.get('name') + ' ...',
+            rpcService: 'BorgBackup',
+            rpcMethod: 'archiveCommand',
+            rpcParams: {
+                'command': command,
+                'uuid': record.get('uuid')
+            },
+            rpcIgnoreErrors: true,
+            hideStartButton: true,
+            hideStopButton: true,
+            listeners: {
+                scope: me,
+                finish: function(wnd, response) {
+                    wnd.appendValue(_('Done...'));
+                    wnd.setButtonDisabled('close', false);
+                },
+                exception: function(wnd, error) {
+                    OMV.MessageBox.error(null, error);
+                    wnd.setButtonDisabled('close', false);
+                },
+                close: function() {
+                    document.location.reload();
+                }
+            }
+        });
+        wnd.setButtonDisabled('close', true);
+        wnd.show();
+        wnd.start();
     },
 
     onRunButton : function() {

@@ -139,4 +139,22 @@
 			}
 		}
 	}
+},,{
+	"type": "rpc",
+	"id": "rpc.borgbackup.cmd",
+	"params": {
+		"type": "object",
+		"properties": {
+			"uuid": {
+				"type": "string",
+				"format": "uuidv4",
+				"required": true
+			},
+			"command: {
+				"type": "string",
+				"format": "uuidv4",
+				"enum": ["all","archives","list","repo","verify"]
+			}
+		}
+	}
 }]
