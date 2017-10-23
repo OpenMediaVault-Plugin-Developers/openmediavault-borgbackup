@@ -1,2 +1,3 @@
+etc/logrotate.d/*           etc/logrotate.d
 usr/share/openmediavault/*  usr/share/openmediavault
 var/www/openmediavault/*    var/www/openmediavault

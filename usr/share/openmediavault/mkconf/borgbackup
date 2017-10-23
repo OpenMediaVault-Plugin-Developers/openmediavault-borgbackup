@@ -29,6 +29,8 @@ declare -i weekly
 declare -i monthly
 declare -i yearly
 
+LOG_FILE="/var/log/borgbackup.log"
+
 SCRIPTS_DIR="/var/lib/openmediavault/borgbackup"
 SCRIPT_PREFIX="borgbackup-"
 
@@ -118,13 +120,10 @@ export BORG_REPO='${rpath}'
 export BORG_PASSPHRASE='${passphrase}'
 
 # some helpers and error handling:
-info() { printf "\n%s %s\n\n" "\$( date )" "\$*" >&2; }
+info() { printf "\n%s %s\n\n" "\$( date )" "\$*" | tee -a ${LOG_FILE}; }
 trap 'echo \$( date ) Backup interrupted >&2; exit 2' INT TERM
 
 info "Starting backup"
-
-# Backup the most important directories into an archive named after
-# the machine this script is currently running on:
 
 borg create \\
     --verbose \\
@@ -152,6 +151,9 @@ EOF
         done
 
         IFS=$OIFS
+
+        # output to log file
+        echo "    2>&1 | tee -a ${LOG_FILE}" >> "${script}"
 
         # add prune section of script
         cat <<EOF >> "${script}"
@@ -182,6 +184,9 @@ EOF
         if [ ${yearly} -gt 0 ]; then
             echo "    --keep-yearly ${yearly} \\" >> "${script}"
         fi
+
+        # output to log file
+        echo "    2>&1 | tee -a ${LOG_FILE}" >> "${script}"
 
         # add end of script
         cat <<EOF >> "${script}"
