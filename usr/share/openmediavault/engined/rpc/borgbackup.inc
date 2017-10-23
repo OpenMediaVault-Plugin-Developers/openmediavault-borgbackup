@@ -532,8 +532,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $sfpath = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
             'uuid' => $params['sharedfolderref']
         ], $context);
-        $cmdArgs[] = sprintf('"%s::%s"', $path, $params['name']);
-        $cmdArgs[] = sprintf('"%s/%s.tar.gz"', $sfpath, $params['name']);
+        $cmdArgs[] = sprintf('"%s::%s"', $path, $params['archive']);
+        $cmdArgs[] = sprintf('"%s/%s.tar.gz"', $sfpath, $params['archive']);
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setQuiet(TRUE);
         $cmd->setBackground(TRUE);

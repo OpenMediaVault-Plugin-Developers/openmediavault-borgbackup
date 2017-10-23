@@ -161,7 +161,7 @@ Ext.define('OMV.module.admin.service.borgbackup.Export', {
         var me = this;
         return [{
             xtype: 'combo',
-            name: 'reporef',
+            name: 'archive',
             fieldLabel: _('Archive'),
             emptyText: _('Select an archive ...'),
             editable: false,
@@ -276,11 +276,14 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
                 text: _('Archives only'),
                 icon: 'images/add.png',
                 handler: Ext.Function.bind(me.onCmdButton, me, [ 'archives' ])
+            /* Remove until newer version of borgbackup is in repo
             },{
                 text: _('Verify'),
                 icon: 'images/add.png',
                 handler: Ext.Function.bind(me.onCmdButton, me, [ 'verify' ])
+            */
             }]
+        /* Remove until newer version of borgbackup is in repo
         },{
             xtype: 'button',
             text: _('Export'),
@@ -292,6 +295,7 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
                 minSelections: 1,
                 maxSelections: 1
             }
+        */
         },{
             xtype: 'button',
             text: _('List'),

@@ -168,7 +168,7 @@
 				"format": "uuidv4",
 				"required": true
 			},
-			"name": {
+			"archive": {
 				"type": "string",
 				"required": true
 			}
