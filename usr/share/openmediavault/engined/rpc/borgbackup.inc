@@ -141,12 +141,13 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             $cmdArgs[] = '--encryption=none';
         }
         if ($params['type'] == 'local') {
-            $cmdArgs[] = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+            $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
                 'uuid' => $params['sharedfolderref']
             ], $context);
         } else {
-            $cmdArgs[] = $params['uri'];
+            $path = $params['uri'];
         }
+        $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->execute($output);
         // Return the configuration object.
@@ -174,11 +175,11 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         } else {
             $path = $repo->get('uri');
         }
-        $cmdArgs[] = $path;
+        $cmdArgs[] = escapeshellarg($path);
         $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
             'uuid' => $params['sharedfolderref']
         ], $context);
-        $path = sprintf('%s/%s', $path, $repo->get('name'));
+        $path = escapeshellarg(sprintf('%s/%s', $path, $repo->get('name')));
         mkdir($path, 0775, true);
         $cmdArgs[] = $path;
         $cmd = new \OMV\System\Process($cmdArgs);
@@ -230,7 +231,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         } else {
             $path = $repo->get('uri');
         }
-        $cmdArgs[] = $path;
+        $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setQuiet(TRUE);
         $cmd->execute($output);
@@ -284,7 +285,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 } else {
                     $path = $repo->get('uri');
                 }
-                $cmdArgs[] = $path;
+                $cmdArgs[] = escapeshellarg($path);
                 $cmd = new \OMV\System\Process($cmdArgs);
                 $cmd->setRedirect2to1();
                 $cmdLine = $cmd->getCommandLine();
@@ -421,6 +422,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'delete';
+        $cmdArgs[] = sprintf('--prefix "%s"', $archive->get('name'));
         if ($repo->get('type') == 'local') {
             $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
                 'uuid' => $repo->get('sharedfolderref')
@@ -428,7 +430,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         } else {
             $path = $repo->get('uri');
         }
-        $cmdArgs[] = sprintf('"%s::%s"', $path, $archive->get('name'));
+        $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setQuiet(TRUE);
         $cmd->execute($output);
@@ -537,7 +539,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             'uuid' => $params['sharedfolderref']
         ], $context);
         $cmdArgs[] = sprintf('"%s::%s"', $path, $params['archive']);
-        $cmdArgs[] = sprintf('"%s/%s.tar.gz"', $sfpath, $params['archive']);
+        $filename = str_replace(' ', '_', $params['archive']);
+        $cmdArgs[] = sprintf('"%s/%s.tar.gz"', $sfpath, $filename);
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setQuiet(TRUE);
         $cmd->setBackground(TRUE);
