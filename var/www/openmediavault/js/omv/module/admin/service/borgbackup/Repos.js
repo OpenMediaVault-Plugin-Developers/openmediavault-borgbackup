@@ -265,14 +265,19 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         var items = me.callParent(arguments);
 
         Ext.Array.insert(items, 3, [{
+            id: me.getId() + "-check",
             xtype: 'button',
             text: _('Check'),
             scope: me,
-            icon: 'images/software.png',
+            icon: 'images/wrench.png',
             disabled: true,
             selectionConfig: {
                 minSelections: 1,
-                maxSelections: 1
+                maxSelections: 1,
+                enabledFn: function(c, records) {
+                    var record = records[0];
+                    return (record.get("mounted") === false);
+                }
             },
             menu: [{
                 text: _('All'),
@@ -280,11 +285,11 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
                 handler: Ext.Function.bind(me.onCmdButton, me, [ 'all' ])
             },{
                 text: _('Repos only'),
-                icon: 'images/add.png',
+                icon: 'images/filesystem.png',
                 handler: Ext.Function.bind(me.onCmdButton, me, [ 'repo' ])
             },{
                 text: _('Archives only'),
-                icon: 'images/add.png',
+                icon: 'images/folder.png',
                 handler: Ext.Function.bind(me.onCmdButton, me, [ 'archives' ])
             /* Remove until newer version of borgbackup is in repo
             },{
@@ -309,7 +314,7 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         },{
             xtype: 'button',
             text: _('List'),
-            icon: 'images/play.png',
+            icon: 'images/details.png',
             handler: Ext.Function.bind(me.onCmdButton, me, [ 'list' ]),
             scope: me,
             disabled: true,
@@ -337,7 +342,7 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
             id: me.getId() + "-unmount",
             xtype: 'button',
             text: _('Unmount'),
-            icon: 'images/pause.png',
+            icon: 'images/eject.png',
             handler: Ext.Function.bind(me.onUnmountButton, me, [ me ]),
             scope: me,
             disabled: true,
@@ -419,10 +424,12 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
             listeners: {
                 scope: me,
                 submit: function () {
-                    var tbarBtnCtrl1 = me.queryById(me.getId() + "-mount");
-                    var tbarBtnCtrl2 = me.queryById(me.getId() + "-unmount");
+                    var tbarBtnCtrl1 = me.queryById(me.getId() + "-check");
+                    var tbarBtnCtrl2 = me.queryById(me.getId() + "-mount");
+                    var tbarBtnCtrl3 = me.queryById(me.getId() + "-unmount");
                     tbarBtnCtrl1.disable();
-                    tbarBtnCtrl2.enable();
+                    tbarBtnCtrl2.disable();
+                    tbarBtnCtrl3.enable();
                     this.doReload();
                 }
             }
@@ -435,10 +442,12 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         OMV.Rpc.request({
             scope: me,
             callback: function(id, success, response) {
-                var tbarBtnCtrl1 = me.queryById(me.getId() + "-unmount");
+                var tbarBtnCtrl1 = me.queryById(me.getId() + "-check");
                 var tbarBtnCtrl2 = me.queryById(me.getId() + "-mount");
-                tbarBtnCtrl1.disable();
-                tbarBtnCtrl2.enable();
+                var tbarBtnCtrl3 = me.queryById(me.getId() + "-unmount");
+                tbarBtnCtrl1.enable();
+                tbarBtnCtrl2.disable();
+                tbarBtnCtrl3.disable();
                 this.doReload();
             },
             rpcData: {

@@ -216,7 +216,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->validateMethodParams($params, 'rpc.common.objectuuid');
         // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
-        $object = $db->get('conf.service.borgbackup.repo', $params['uuid']);
+        $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         // delete repo
         $cmdArgs = [];
         $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
@@ -235,9 +235,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmd->setQuiet(TRUE);
         $cmd->execute($output);
         // Delete the configuration object.
-        $db->delete($object);
+        $db->delete($repo);
         // Return the deleted configuration object.
-        return $object->getAssoc();
+        return $repo->getAssoc();
     }
 
     public function repoCommand($params, $context)
