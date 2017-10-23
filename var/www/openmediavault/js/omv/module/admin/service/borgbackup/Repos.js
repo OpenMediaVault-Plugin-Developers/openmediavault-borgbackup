@@ -144,6 +144,64 @@ Ext.define('OMV.module.admin.service.borgbackup.Mount', {
     }
 });
 
+Ext.define('OMV.module.admin.service.borgbackup.Export', {
+    extend: 'OMV.workspace.window.Form',
+    uses: [
+        'OMV.form.field.SharedFolderComboBox',
+        'OMV.workspace.window.plugin.ConfigObject'
+    ],
+
+    rpcService: 'BorgBackup',
+    rpcSetMethod: 'exportArchive',
+    plugins: [{
+        ptype: 'configobject'
+    }],
+
+    getFormItems: function () {
+        var me = this;
+        return [{
+            xtype: 'combo',
+            name: 'reporef',
+            fieldLabel: _('Archive'),
+            emptyText: _('Select an archive ...'),
+            editable: false,
+            triggerAction: 'all',
+            displayField: 'name',
+            valueField: 'name',
+            allowNone: true,
+            allowBlank: true,
+            store: Ext.create('OMV.data.Store', {
+                autoLoad: true,
+                model: OMV.data.Model.createImplicit({
+                    idProperty: 'name',
+                    fields: [
+                        { name: 'name', type: 'string' }
+                    ]
+                }),
+                proxy : {
+                    type: 'rpc',
+                    rpcData: {
+                        service: 'BorgBackup',
+                        method: 'enumerateArchives',
+                        params: {
+                            'uuid': me.uuid
+                        }
+                    },
+                    appendSortParams : false
+                }
+            })
+        },{
+            xtype: 'sharedfoldercombo',
+            name: 'sharedfolderref',
+            fieldLabel: _('Shared Folder'),
+            plugins: [{
+                ptype: 'fieldinfo',
+                text: _('Export file will be created in this directory with a filename matching the archive name with an extension of .tar.gz.')
+            }]
+        }];
+    }
+});
+
 Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
     extend: 'OMV.workspace.grid.Panel',
     requires: [
@@ -153,6 +211,8 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         'OMV.data.proxy.Rpc'
     ],
     uses: [
+        'OMV.module.admin.service.borgbackup.Export',
+        'OMV.module.admin.service.borgbackup.Mount',
         'OMV.module.admin.service.borgbackup.Repo'
     ],
 
@@ -223,6 +283,17 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
             }]
         },{
             xtype: 'button',
+            text: _('Export'),
+            icon: 'images/play.png',
+            handler: Ext.Function.bind(me.onExportButton, me, [ me ]),
+            scope: me,
+            disabled: true,
+            selectionConfig: {
+                minSelections: 1,
+                maxSelections: 1
+            }
+        },{
+            xtype: 'button',
             text: _('List'),
             icon: 'images/play.png',
             handler: Ext.Function.bind(me.onCmdButton, me, [ 'list' ]),
@@ -290,6 +361,21 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         Ext.create('OMV.module.admin.service.borgbackup.Repo', {
             title: _('Add repo'),
             uuid: OMV.UUID_UNDEFINED,
+            listeners: {
+                scope: me,
+                submit: function () {
+                    this.doReload();
+                }
+            }
+        }).show();
+    },
+
+    onExportButton: function () {
+        var me = this;
+        var record = me.getSelected();
+        Ext.create('OMV.module.admin.service.borgbackup.Export', {
+            title: _('Export archive to tar file'),
+            uuid: record.get('uuid'),
             listeners: {
                 scope: me,
                 submit: function () {

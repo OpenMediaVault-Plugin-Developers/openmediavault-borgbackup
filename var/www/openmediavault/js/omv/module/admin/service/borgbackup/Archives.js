@@ -279,17 +279,6 @@ Ext.define('OMV.module.admin.service.borgbackup.Archives', {
 
         Ext.Array.insert(items, 3, [{
             xtype: 'button',
-            text: _('List'),
-            icon: 'images/play.png',
-            handler: Ext.Function.bind(me.onCmdButton, me, [ 'list' ]),
-            scope: me,
-            disabled: true,
-            selectionConfig: {
-                minSelections: 1,
-                maxSelections: 1
-            }
-        },{
-            xtype: 'button',
             text: _('Run'),
             icon: 'images/play.png',
             handler: Ext.Function.bind(me.onRunButton, me, [ me ]),
