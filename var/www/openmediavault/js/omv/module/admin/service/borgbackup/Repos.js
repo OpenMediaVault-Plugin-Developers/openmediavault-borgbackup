@@ -318,6 +318,7 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
                 maxSelections: 1
             }
         },{
+            id: me.getId() + "-mount",
             xtype: 'button',
             text: _('Mount'),
             icon: 'images/play.png',
@@ -326,9 +327,14 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
             disabled: true,
             selectionConfig: {
                 minSelections: 1,
-                maxSelections: 1
+                maxSelections: 1,
+                enabledFn: function(c, records) {
+                    var record = records[0];
+                    return (record.get("mounted") === false);
+                }
             }
         },{
+            id: me.getId() + "-unmount",
             xtype: 'button',
             text: _('Unmount'),
             icon: 'images/pause.png',
@@ -337,7 +343,11 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
             disabled: true,
             selectionConfig: {
                 minSelections: 1,
-                maxSelections: 1
+                maxSelections: 1,
+                enabledFn: function(c, records) {
+                    var record = records[0];
+                    return (record.get("mounted") === true);
+                }
             }
         }]);
         return items;
@@ -409,6 +419,10 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
             listeners: {
                 scope: me,
                 submit: function () {
+                    var tbarBtnCtrl1 = me.queryById(me.getId() + "-mount");
+                    var tbarBtnCtrl2 = me.queryById(me.getId() + "-unmount");
+                    tbarBtnCtrl1.disable();
+                    tbarBtnCtrl2.enable();
                     this.doReload();
                 }
             }
@@ -421,6 +435,10 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         OMV.Rpc.request({
             scope: me,
             callback: function(id, success, response) {
+                var tbarBtnCtrl1 = me.queryById(me.getId() + "-unmount");
+                var tbarBtnCtrl2 = me.queryById(me.getId() + "-mount");
+                tbarBtnCtrl1.disable();
+                tbarBtnCtrl2.enable();
                 this.doReload();
             },
             rpcData: {
