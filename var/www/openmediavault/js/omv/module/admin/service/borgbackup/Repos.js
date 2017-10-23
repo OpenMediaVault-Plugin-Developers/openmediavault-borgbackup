@@ -248,6 +248,16 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         resizable: false,
         trueIcon: 'switch_on.png',
         falseIcon: 'switch_off.png'
+    },{
+        xtype: 'booleaniconcolumn',
+        header: _('Mounted'),
+        sortable: true,
+        dataIndex: 'mounted',
+        align: 'center',
+        width: 80,
+        resizable: false,
+        trueIcon: 'switch_on.png',
+        falseIcon: 'switch_off.png'
     }],
 
     getTopToolbarItems: function() {
@@ -345,7 +355,8 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
                         { name: 'name', type: 'string' },
                         { name: 'sharedfoldername', type: 'string' },
                         { name: 'uri', type: 'string' },
-                        { name: 'encryption', type: 'boolean' }
+                        { name: 'encryption', type: 'boolean' },
+                        { name: 'mounted', type: 'boolean' }
                     ]
                 }),
                 proxy: {
@@ -409,6 +420,9 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         var record = me.getSelected();
         OMV.Rpc.request({
             scope: me,
+            callback: function(id, success, response) {
+                this.doReload();
+            },
             rpcData: {
                 service: 'BorgBackup',
                 method: 'unmountRepo',

@@ -80,6 +80,10 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $objectv->set('sharedfoldername', $sfObject->get('name'));
                 $objectv->set('uri', gettext("n/a"));
             }
+            // Add the new property 'mounted'.
+            $cmd = sprintf('grep -E "^borgfs.*%s.*fuse" /proc/mounts', $objectv->get('name'));
+            exec($cmd, $output, $return);
+            $objectv->add('mounted', 'boolean', ! $return);
             $objectsAssoc[] = $objectv->getAssoc();
         }
         // Filter the result.
@@ -197,7 +201,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'umount';
-        $cmdArgs[] = sprintf('$(mount | grep borg | grep "%s" | cut -d" " -f3 | head -n1)', $repo->get('name'));
+        $cmdArgs[] = sprintf('$(grep "^borgfs.*%s.*fuse" /proc/mounts | cut -d" " -f2 | head -n1)', $repo->get('name'));
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->execute($output);
         // Return the configuration object.
