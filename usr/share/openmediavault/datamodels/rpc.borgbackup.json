@@ -174,4 +174,32 @@
 			}
 		}
 	}
+},{
+	"type": "rpc",
+	"id": "rpc.borgbackup.extract",
+	"params": {
+		"type": "object",
+		"properties": {
+			"uuid": {
+				"type": "string",
+				"format": "uuidv4",
+				"required": true
+			},
+			"encryption": {
+				"type": "boolean",
+				"required": true
+			},
+			"sharedfolderref": {
+				"type": "string",
+				"oneOf": [{
+					"type": "string",
+					"format": "uuidv4"
+				},{
+					"type": "string",
+					"maxLength": 0
+				}],
+				"required": true
+			},
+		}
+	}
 }]

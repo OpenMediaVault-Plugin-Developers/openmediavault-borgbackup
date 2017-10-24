@@ -202,6 +202,87 @@ Ext.define('OMV.module.admin.service.borgbackup.Export', {
     }
 });
 
+Ext.define('OMV.module.admin.service.borgbackup.Extract', {
+    extend: 'OMV.workspace.window.Form',
+    uses: [
+        'OMV.form.field.SharedFolderComboBox',
+        'OMV.workspace.window.plugin.ConfigObject'
+    ],
+
+    rpcService: 'BorgBackup',
+    rpcSetMethod: 'extractArchive',
+    plugins: [{
+        ptype: 'configobject'
+    }],
+
+    getFormConfig: function() {
+        return {
+            plugins: [{
+                ptype: 'linkedfields',
+                correlations: [{
+                    name: 'sharedfolderref',
+                    conditions: [
+                        { name: 'original', value: false }
+                    ],
+                    properties: [
+                        'show',
+                        '!allowNone'
+                    ]
+                }]
+            }]
+        };
+    },
+
+    getFormItems: function () {
+        var me = this;
+        return [{
+            xtype: 'combo',
+            name: 'archive',
+            fieldLabel: _('Archive'),
+            emptyText: _('Select an archive ...'),
+            editable: false,
+            triggerAction: 'all',
+            displayField: 'name',
+            valueField: 'name',
+            allowNone: true,
+            allowBlank: true,
+            store: Ext.create('OMV.data.Store', {
+                autoLoad: true,
+                model: OMV.data.Model.createImplicit({
+                    idProperty: 'name',
+                    fields: [
+                        { name: 'name', type: 'string' }
+                    ]
+                }),
+                proxy : {
+                    type: 'rpc',
+                    rpcData: {
+                        service: 'BorgBackup',
+                        method: 'enumerateArchives',
+                        params: {
+                            'uuid': me.uuid
+                        }
+                    },
+                    appendSortParams : false
+                }
+            })
+        },{
+            xtype: 'checkbox',
+            name: 'original',
+            fieldLabel: _('Original Location'),
+            checked: false
+        },{
+            xtype: 'sharedfoldercombo',
+            name: 'sharedfolderref',
+            fieldLabel: _('Shared Folder'),
+            plugins: [{
+                ptype: 'fieldinfo',
+                text: _('Export file will be created in this directory with a filename matching the archive name with an extension of .tar.gz.')
+            }]
+        }];
+    }
+});
+
 Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
     extend: 'OMV.workspace.grid.Panel',
     requires: [
@@ -309,6 +390,17 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
             }
         },{
             xtype: 'button',
+            text: _('Extract'),
+            icon: 'images/expand.png',
+            handler: Ext.Function.bind(me.onExpandButton, me, [ me ]),
+            scope: me,
+            disabled: true,
+            selectionConfig: {
+                minSelections: 1,
+                maxSelections: 1
+            }
+        },{
+            xtype: 'button',
             text: _('List'),
             icon: 'images/details.png',
             handler: Ext.Function.bind(me.onCmdButton, me, [ 'list' ]),
@@ -401,6 +493,21 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
         var record = me.getSelected();
         Ext.create('OMV.module.admin.service.borgbackup.Export', {
             title: _('Export archive to tar file'),
+            uuid: record.get('uuid'),
+            listeners: {
+                scope: me,
+                submit: function () {
+                    this.doReload();
+                }
+            }
+        }).show();
+    },
+
+    onExtractButton: function () {
+        var me = this;
+        var record = me.getSelected();
+        Ext.create('OMV.module.admin.service.borgbackup.Extract', {
+            title: _('Extract archive to directory'),
             uuid: record.get('uuid'),
             listeners: {
                 scope: me,
