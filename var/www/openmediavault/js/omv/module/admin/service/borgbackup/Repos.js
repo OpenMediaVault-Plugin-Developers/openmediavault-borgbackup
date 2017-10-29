@@ -157,6 +157,8 @@ Ext.define('OMV.module.admin.service.borgbackup.Export', {
         ptype: 'configobject'
     }],
 
+    width: 500,
+
     getFormItems: function () {
         var me = this;
         return [{
@@ -214,6 +216,8 @@ Ext.define('OMV.module.admin.service.borgbackup.Extract', {
     plugins: [{
         ptype: 'configobject'
     }],
+
+    width: 500,
 
     getFormConfig: function() {
         return {
@@ -392,7 +396,7 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
             xtype: 'button',
             text: _('Extract'),
             icon: 'images/expand.png',
-            handler: Ext.Function.bind(me.onExpandButton, me, [ me ]),
+            handler: Ext.Function.bind(me.onExtractButton, me, [ me ]),
             scope: me,
             disabled: true,
             selectionConfig: {
