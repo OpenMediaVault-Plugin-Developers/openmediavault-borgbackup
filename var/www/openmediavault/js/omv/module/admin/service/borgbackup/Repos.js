@@ -230,7 +230,8 @@ Ext.define('OMV.module.admin.service.borgbackup.Extract', {
                     ],
                     properties: [
                         'show',
-                        '!allowNone'
+                        '!allowNone',
+                        '!allowBlank'
                     ]
                 }]
             }]

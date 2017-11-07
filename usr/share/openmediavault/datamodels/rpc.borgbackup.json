@@ -185,7 +185,7 @@
 				"format": "uuidv4",
 				"required": true
 			},
-			"encryption": {
+			"original": {
 				"type": "boolean",
 				"required": true
 			},

@@ -131,7 +131,7 @@ borg create \\
     --list \\
     --stats \\
     --show-rc \\
-    --compression ${ctype},${cratio} \\
+    --compression auto,${ctype},${cratio} \\
     --exclude-caches \\
 EOF
 
