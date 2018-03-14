@@ -99,6 +99,7 @@ Ext.define('OMV.module.admin.service.borgbackup.Archive', {
             queryMode: 'local',
             store: [
                 [ 'none', _('None') ],
+                [ 'zstd', _('zstd - super fast, medium compression') ],
                 [ 'lz4', _('lz4 - super fast, low compression') ],
                 [ 'zlib', _('zlib - less fast, higher compression') ],
                 [ 'lzma', _('lzma - even slower, even higher compression') ]

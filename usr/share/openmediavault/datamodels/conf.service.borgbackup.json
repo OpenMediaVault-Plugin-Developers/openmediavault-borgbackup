@@ -78,7 +78,7 @@
 							},
 							"compressiontype": {
 								"type": "string",
-								"enum": [ "none", "lz4", "lzma", "zlib" ],
+								"enum": [ "none", "zstd", "lz4", "lzma", "zlib" ],
 								"default": "none"
 							},
 							"compressionratio": {

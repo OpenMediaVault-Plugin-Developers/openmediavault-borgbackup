@@ -402,6 +402,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $cmd = new \OMV\System\Process($cmdArgs);
                 $cmd->setRedirect2to1();
                 $cmdLine = $cmd->getCommandLine();
+                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmdLine));
+                $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
                 $this->exec($cmdLine, $output, $bgOutputFilename);
                 return $output;
             }
@@ -476,6 +478,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $cmd = new \OMV\System\Process($cmdArgs);
                 $cmd->setRedirect2to1();
                 $cmdLine = $cmd->getCommandLine();
+                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmdLine));
+                $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
                 $this->exec($cmdLine, $output, $bgOutputFilename);
                 return $output;
             }
