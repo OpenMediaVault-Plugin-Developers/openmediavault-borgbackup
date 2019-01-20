@@ -1,8 +1,8 @@
-openmediavault-borgbackup (4.1) UNRELEASED; urgency=medium
+openmediavault-borgbackup (4.0.1) stable; urgency=low
 
   * Single quote passwords
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 20 Jan 2019 07:38:44 -0600
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 20 Jan 2019 07:40:34 -0600
 
 openmediavault-borgbackup (4.0) stable; urgency=low
 
