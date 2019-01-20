@@ -3,7 +3,7 @@
  * @author    Volker Theile <volker.theile@openmediavault.org>
  * @author    OpenMediaVault Plugin Developers <plugins@omv-extras.org>
  * @copyright Copyright (c) 2009-2013 Volker Theile
- * @copyright Copyright (c) 2013-2017 OpenMediaVault Plugin Developers
+ * @copyright Copyright (c) 2013-2019 OpenMediaVault Plugin Developers
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -132,7 +132,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         // initialize repo
         $cmdArgs = [];
-        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $params['passphrase']);
+        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $params['passphrase']);
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'init';
         if ($params['encryption'] == true) {
@@ -167,7 +167,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         // mount repo
         $cmdArgs = [];
-        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'mount';
         if ($repo->get('type') == 'local') {
@@ -201,7 +201,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         // unmount repo
         $cmdArgs = [];
-        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'umount';
         $cmdArgs[] = sprintf('$(grep "^borgfs.*%s.*fuse" /proc/mounts | cut -d" " -f2 | head -n1)', $repo->get('name'));
@@ -222,7 +222,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         // delete repo
         $cmdArgs = [];
-        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = 'BORG_DELETE_I_KNOW_WHAT_I_AM_DOING=YES';
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'delete';
@@ -257,7 +257,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             use ($context, $params, $repo) {
                 // mount repo
                 $cmdArgs = [];
-                $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+                $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
                 $cmdArgs[] = $this->getProgram;
                 switch ($params['command']) {
                     case 'all':
@@ -368,7 +368,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
             use ($archive, $context, $repo) {
                 $cmdArgs = [];
-                $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+                $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
                 $cmdArgs[] = $this->getProgram;
                 $cmdArgs[] = 'create';
                 $cmdArgs[] = '--list';
@@ -423,7 +423,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $repo = $db->get('conf.service.borgbackup.repo', $archive->get('reporef'));
         // delete archive
         $cmdArgs = [];
-        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'delete';
         $cmdArgs[] = sprintf('--prefix "%s"', $archive->get('name'));
@@ -459,7 +459,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
             use ($archive, $context, $params, $repo) {
                 $cmdArgs = [];
-                $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+                $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
                 $cmdArgs[] = $this->getProgram;
                 switch ($params['command']) {
                     case 'list':
@@ -497,7 +497,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         // get a list of archives in selected repo
         $cmdArgs = [];
-        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'list';
         $cmdArgs[] = '--short';
@@ -531,7 +531,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         // Get repo configuration object
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         $cmdArgs = [];
-        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'export-tar';
         if ($repo->get('type') == 'local') {
@@ -571,7 +571,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             $sfpath = '/';
         }
         $cmdArgs[] = sprint('cd %s &&', escapeshellarg($sfpath));
-        $cmdArgs[] = sprintf('BORG_PASSPHRASE=%s', $repo->get('passphrase'));
+        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'extract';
         if ($repo->get('type') == 'local') {
