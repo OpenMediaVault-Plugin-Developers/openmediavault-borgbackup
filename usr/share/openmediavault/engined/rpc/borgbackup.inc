@@ -181,9 +181,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
             'uuid' => $params['sharedfolderref']
         ], $context);
-        $path = escapeshellarg(sprintf('%s/%s', $path, $repo->get('name')));
+        $path = sprintf('%s/%s', $path, $repo->get('name'));
         mkdir($path, 0775, true);
-        $cmdArgs[] = $path;
+        $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->execute($output);
         // Return the configuration object.

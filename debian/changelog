@@ -1,3 +1,9 @@
+openmediavault-borgbackup (4.0.2) stable; urgency=low
+
+  * Fix directory creation bug in mountRepo
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 31 Mar 2019 11:00:51 -0500
+
 openmediavault-borgbackup (4.0.1) stable; urgency=low
 
   * Single quote passwords
