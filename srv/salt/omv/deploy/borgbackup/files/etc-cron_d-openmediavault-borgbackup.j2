@@ -1,0 +1,9 @@
+{% set scriptsDir = '/var/lib/openmediavault/borgbackup' %}
+{{ pillar['headers']['multiline'] }}
+# This is the cron file for openmediavault-borgbackup.
+# m h   dom mon dow     user    command
+5 *     * * *           root    run-parts {{ scriptsDir }}/hourly.d/
+30 3    * * *           root    run-parts {{ scriptsDir }}/daily.d/
+0  3    * * 1           root    run-parts {{ scriptsDir }}/weekly.d/
+30 2    1 * *           root    run-parts {{ scriptsDir }}/monthly.d/
+00 2    1 1 *           root    run-parts {{ scriptsDir }}/yearly.d/

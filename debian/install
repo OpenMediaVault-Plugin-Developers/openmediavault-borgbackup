@@ -1,3 +1,4 @@
-etc/logrotate.d/*           etc/logrotate.d
-usr/share/openmediavault/*  usr/share/openmediavault
-var/www/openmediavault/*    var/www/openmediavault
+etc/logrotate.d/* etc/logrotate.d
+srv/* srv
+usr/share/openmediavault/* usr/share/openmediavault
+var/www/openmediavault/* var/www/openmediavault
