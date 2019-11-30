@@ -38,28 +38,38 @@ configure_borg_crond:
     - group: root
     - mode: 644
 
+{% set ns = namespace(type='',sharedfolderref='',uri='',passphrase='') %}
+
 {% for archive in config.archives.archive | selectattr('enable') %}
 
-{%- if config.hourly > 0 %}
+{% for repo in config.repos.repo | selectattr("uuid", "equalto", archive.reporef) %}
+{% set ns.type = repo.type %}
+{% set ns.sharedfolderref = repo.sharedfolderref %}
+{% set ns.uri = repo.uri %}
+{% set ns.passphrase = repo.passphrase %}
+{% endfor %}
+
+{% set period = '' %}
+{% if archive.hourly > 0 %}
 {% set period = 'hourly' %}
-{%- elif config.daily > 0 %}
+{% elif archive.daily > 0 %}
 {% set period = 'daily' %}
-{%- elif config.weekly > 0 %}
+{% elif archive.weekly > 0 %}
 {% set period = 'weekly' %}
-{%- elif config.monthly > 0 %}
+{% elif archive.monthly > 0 %}
 {% set period = 'monthly' %}
-{%- elif config.yearly > 0 %}
+{% elif archive.yearly > 0 %}
 {% set period = 'yearly' %}
-{%- endif %}
+{% endif %}
 
-{% set script = '{{ scriptsDir }}/{{ period }}.d/{{ scriptPrefix }}{{ config.uuid }}' %}
-{% set repo = config.repos.repo | selectattr("uuid", "equalto", archive.reporef) %}
+{% set script = scriptsDir + '/' + period + '.d/' + scriptPrefix + archive.uuid %}
 
-{%- if repo.type == "local" %}
-{% set rpath = salt['omv_conf.get_sharedfolder_mount_path'](repo.sharedfolderref) %}
-{%- else %}
-{% set rpath = '{{ repo.uri }}' %}
-{%- endif %}
+{% set rpath = '' %}
+{% if ns.type == "local" %}
+{% set rpath = salt['omv_conf.get_sharedfolder_mount_path'](ns.sharedfolderref) %}
+{% else %}
+{% set rpath = '{{ ns.uri }}' %}
+{% endif %}
 
 configure_borg_{{ archive.name }}_cron_file:
   file.managed:
@@ -74,7 +84,7 @@ configure_borg_{{ archive.name }}_cron_file:
         export BORG_REPO='{{ rpath }}'
 
         # Setting this, so you won't be asked for your repository passphrase:
-        export BORG_PASSPHRASE='{{ repo.passphrase }}'
+        export BORG_PASSPHRASE='{{ ns.passphrase }}'
 
         # some helpers and error handling:
         info() { printf "\n%s %s\n\n" "$( date )" "$*" | tee -a ${LOG_FILE}; }
