@@ -1,8 +1,8 @@
-openmediavault-borgbackup (5.0) UNRELEASED; urgency=medium
+openmediavault-borgbackup (5.0) stable; urgency=low
 
   * Update for OMV 5.x
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 25 Aug 2019 08:55:48 -0500
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 30 Nov 2019 11:32:01 -0600
 
 openmediavault-borgbackup (4.0.2) stable; urgency=low
 
