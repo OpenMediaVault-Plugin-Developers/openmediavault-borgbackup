@@ -100,13 +100,17 @@ configure_borg_{{ archive.name }}_cron_file:
           --show-rc \\
           --compression auto,{{ archive.compressiontype }},{{ archive.compressionratio }} \\
           --exclude-caches \\
-        {% for exclude in archive.exclude.split(',') %}
+        {%- if archive.exclude | length > 0 %}
+        {%- for exclude in archive.exclude.split(',') %}
           --exclude '{{ exclude }}' \\
         {%- endfor %}
+        {%- endif %}
           ::'{{ archive.name }}-{now}' \\
-        {% for include in archive.include.split(',') %}
+        {%- if archive.include | length > 0 %}
+        {%- for include in archive.include.split(',') %}
           --include '{{ include }}' \\
         {%- endfor %}
+        {%- endif %}
           2>&1 | tee -a {{ logFile }}
 
         backup_exit=$?
