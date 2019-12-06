@@ -66,7 +66,7 @@ configure_borg_crond:
 
 {% set rpath = '' %}
 {% if ns.type == "local" %}
-{% set rpath = salt['omv_conf.get_sharedfolder_mount_path'](ns.sharedfolderref) %}
+{% set rpath = salt['omv_conf.get_sharedfolder_path'](ns.sharedfolderref) %}
 {% else %}
 {% set rpath = '{{ ns.uri }}' %}
 {% endif %}
