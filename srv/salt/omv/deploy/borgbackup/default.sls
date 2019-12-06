@@ -66,7 +66,7 @@ configure_borg_crond:
 
 {% set rpath = '' %}
 {% if ns.type == "local" %}
-{% set rpath = salt['omv_conf.get_sharedfolder_mount_path'](ns.sharedfolderref) %}
+{% set rpath = salt['omv_conf.get_sharedfolder_path'](ns.sharedfolderref) %}
 {% else %}
 {% set rpath = '{{ ns.uri }}' %}
 {% endif %}
@@ -92,23 +92,23 @@ configure_borg_{{ archive.name }}_cron_file:
 
         info "Starting backup"
 
-        borg create \\
-          --verbose \\
-          --filter AME \\
-          --list \\
-          --stats \\
-          --show-rc \\
-          --compression auto,{{ archive.compressiontype }},{{ archive.compressionratio }} \\
-          --exclude-caches \\
+        borg create \
+          --verbose \
+          --filter AME \
+          --list \
+          --stats \
+          --show-rc \
+          --compression auto,{{ archive.compressiontype }},{{ archive.compressionratio }} \
+          --exclude-caches \
         {%- if archive.exclude | length > 0 %}
         {%- for exclude in archive.exclude.split(',') %}
-          --exclude '{{ exclude }}' \\
+          --exclude '{{ exclude }}' \
         {%- endfor %}
         {%- endif %}
-          ::'{{ archive.name }}-{now}' \\
+          ::'{{ archive.name }}-{now}' \
         {%- if archive.include | length > 0 %}
         {%- for include in archive.include.split(',') %}
-          --include '{{ include }}' \\
+          '{{ include }}' \
         {%- endfor %}
         {%- endif %}
           2>&1 | tee -a {{ logFile }}
@@ -117,24 +117,24 @@ configure_borg_{{ archive.name }}_cron_file:
 
         info "Pruning repository"
 
-        borg prune \\
-          --list \\
-          --prefix '{{ archive.name }}-' \\
-          --show-rc \\
+        borg prune \
+          --list \
+          --prefix '{{ archive.name }}-' \
+          --show-rc \
         {%- if archive.hourly > 0 %}
-          --keep-hourly {{ archive.hourly }} \\
+          --keep-hourly {{ archive.hourly }} \
         {%- endif %}
         {%- if archive.daily > 0 %}
-          --keep-daily {{ archive.daily }} \\
+          --keep-daily {{ archive.daily }} \
         {%- endif %}
         {%- if archive.weekly > 0 %}
-          --keep-weekly {{ archive.weekly }} \\
+          --keep-weekly {{ archive.weekly }} \
         {%- endif %}
         {%- if archive.monthly > 0 %}
-          --keep-monthly {{ archive.monthly }} \\
+          --keep-monthly {{ archive.monthly }} \
         {%- endif %}
         {%- if archive.yearly > 0 %}
-          --keep-yearly {{ archive.yearly }} \\
+          --keep-yearly {{ archive.yearly }} \
         {%- endif %}
           2>&1 | tee -a {{ logFile }}
 
