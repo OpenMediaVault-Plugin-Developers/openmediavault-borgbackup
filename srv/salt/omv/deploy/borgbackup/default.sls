@@ -98,6 +98,9 @@ configure_borg_{{ archive.name }}_cron_file:
           --list \
           --stats \
           --show-rc \
+        {%- if archive.onefs %}
+          --one-file-system \
+        {%- endif %}
           --compression auto,{{ archive.compressiontype }},{{ archive.compressionratio }} \
           --exclude-caches \
         {%- if archive.exclude | length > 0 %}

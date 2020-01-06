@@ -200,13 +200,16 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $db = \OMV\Config\Database::getInstance();
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         // unmount repo
+        $repoDir = sprintf('$(grep "^borgfs.*%s.*fuse" /proc/mounts | cut -d" " -f2 | head -n1)', $repo->get('name'));
         $cmdArgs = [];
         $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'umount';
-        $cmdArgs[] = sprintf('$(grep "^borgfs.*%s.*fuse" /proc/mounts | cut -d" " -f2 | head -n1)', $repo->get('name'));
+        $cmdArgs[] = $repoDir;
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->execute($output);
+        // remove temporary mount directory
+        rmdir($repoDir);
         // Return the configuration object.
         return $repo->getAssoc();
     }

@@ -1,3 +1,10 @@
+openmediavault-borgbackup (5.0.2) stable; urgency=low
+
+  * Add one-file-system flag to scheduled archive - github issue #3
+  * Remove temporary mount directory after unmounting repo - github issue #7
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Mon, 06 Jan 2020 15:50:23 -0600
+
 openmediavault-borgbackup (5.0.1) stable; urgency=low
 
   * Backup fixes
