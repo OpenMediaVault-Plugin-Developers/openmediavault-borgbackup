@@ -1,3 +1,9 @@
+openmediavault-borgbackup (5.0.3) stable; urgency=low
+
+  * Fix remote repo scheduled job
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 18 Jan 2020 10:31:53 -0600
+
 openmediavault-borgbackup (5.0.2) stable; urgency=low
 
   * Add one-file-system flag to scheduled archive - github issue #3
