@@ -570,7 +570,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         } else {
             $sfpath = '/';
         }
-        $cmdArgs[] = sprint('cd %s &&', escapeshellarg($sfpath));
+        $cmdArgs[] = sprintf('cd %s &&', escapeshellarg($sfpath));
         $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'extract';
