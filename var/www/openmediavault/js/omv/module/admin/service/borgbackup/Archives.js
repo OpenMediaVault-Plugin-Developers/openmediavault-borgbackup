@@ -209,6 +209,18 @@ Ext.define('OMV.module.admin.service.borgbackup.Archive', {
                 ptype: 'fieldinfo',
                 text: _('Number of yearly archives to keep.')
             }]
+        },{
+            xtype: 'numberfield',
+            name: 'ratelimit',
+            fieldLabel: _('Rate limit'),
+            minValue: 0,
+            allowDecimals: false,
+            allowBlank: false,
+            value: 0,
+            plugins: [{
+                ptype: 'fieldinfo',
+                text: _('Set remote network upload rate limit in kiByte/s (default: 0=unlimited).')
+            }]
         }];
     }
 });

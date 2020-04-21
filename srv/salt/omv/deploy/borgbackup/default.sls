@@ -102,6 +102,9 @@ configure_borg_{{ archive.name }}_cron_file:
           --one-file-system \
         {%- endif %}
           --compression auto,{{ archive.compressiontype }},{{ archive.compressionratio }} \
+        {%- if archive.ratelimit > 0 %}
+          --remote-ratelimit {{ archive.ratelimit }} \
+        {%- endif %}
           --exclude-caches \
         {%- if archive.exclude | length > 0 %}
         {%- for exclude in archive.exclude.split(',') %}
