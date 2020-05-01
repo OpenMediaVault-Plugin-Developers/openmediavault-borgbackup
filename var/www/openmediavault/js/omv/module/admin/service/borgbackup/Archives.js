@@ -55,6 +55,7 @@ Ext.define('OMV.module.admin.service.borgbackup.Archive', {
             name: 'name',
             fieldLabel: _('Name/Prefix'),
             allowBlank: false,
+            maskRe: new RegExp("[a-zA-Z1-9_`]+$"),
             plugins: [{
                 ptype: 'fieldinfo',
                 text: _('Uses value as prefix for archive name.')

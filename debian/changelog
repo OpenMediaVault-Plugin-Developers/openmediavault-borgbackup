@@ -1,3 +1,9 @@
+openmediavault-borgbackup (5.0.7) stable; urgency=low
+
+  * Restrict illegal characters in name field
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 01 May 2020 07:51:44 -0500
+
 openmediavault-borgbackup (5.0.6) stable; urgency=low
 
   * Add remote rate limit to archive

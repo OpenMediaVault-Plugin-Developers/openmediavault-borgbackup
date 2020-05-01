@@ -75,6 +75,7 @@ Ext.define('OMV.module.admin.service.borgbackup.Repo', {
             xtype: 'textfield',
             name: 'name',
             fieldLabel: _('Name'),
+            maskRe: new RegExp("[a-zA-Z1-9_`]+$"),
             allowBlank: false
         },{
             xtype: 'combo',
