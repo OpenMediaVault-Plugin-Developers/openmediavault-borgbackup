@@ -385,8 +385,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                         'uuid' => $repo->get('sharedfolderref')
                     ], $context);
                 } else {
-                    if ($repo->get('ratelimit') > 0) {
-                        $cmdArgs[] = '--remote-ratelimit ' . $repo->get('ratelimit');
+                    if ($archive->get('ratelimit') > 0) {
+                        $cmdArgs[] = '--remote-ratelimit ' . $archive->get('ratelimit');
                     }
                     $path = $repo->get('uri');
                 }

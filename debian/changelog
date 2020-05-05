@@ -1,3 +1,9 @@
+openmediavault-borgbackup (5.0.8) stable; urgency=low
+
+  * Fix typo in archive creation
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 05 May 2020 12:04:07 -0500
+
 openmediavault-borgbackup (5.0.7) stable; urgency=low
 
   * Restrict illegal characters in name field
