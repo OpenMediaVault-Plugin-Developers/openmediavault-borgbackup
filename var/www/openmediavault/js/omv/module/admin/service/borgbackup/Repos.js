@@ -114,6 +114,12 @@ Ext.define('OMV.module.admin.service.borgbackup.Repo', {
             name: 'encryption',
             fieldLabel: _('Encryption'),
             checked: false
+        },{
+            xtype: 'checkbox',
+            name: 'skipinit',
+            fieldLabel: _('Skip init'),
+            checked: false,
+            boxLabel: _("Skip initializaion to import existing repo."),
         }];
     }
 });
@@ -555,7 +561,7 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
                 var tbarBtnCtrl2 = me.queryById(me.getId() + "-mount");
                 var tbarBtnCtrl3 = me.queryById(me.getId() + "-unmount");
                 tbarBtnCtrl1.enable();
-                tbarBtnCtrl2.disable();
+                tbarBtnCtrl2.enable();
                 tbarBtnCtrl3.disable();
                 this.doReload();
             },

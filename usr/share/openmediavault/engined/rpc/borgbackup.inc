@@ -134,11 +134,17 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs = [];
         $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $params['passphrase']);
         $cmdArgs[] = $this->getProgram;
-        $cmdArgs[] = 'init';
-        if ($params['encryption'] == true) {
-            $cmdArgs[] = '--encryption=keyfile';
+        if ($params['skipinit'] == true) {
+            $cmdArgs[] = 'check';
+            $cmdArgs[] = '--repository-only';
+            $cmdArgs[] = '--info';
         } else {
-            $cmdArgs[] = '--encryption=none';
+            $cmdArgs[] = 'init';
+            if ($params['encryption'] == true) {
+                $cmdArgs[] = '--encryption=keyfile';
+            } else {
+                $cmdArgs[] = '--encryption=none';
+            }
         }
         if ($params['type'] == 'local') {
             $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
@@ -150,6 +156,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->execute($output);
+        // Remove skipinit parameter
+        $object->remove('skipinit');
         // Set the configuration object.
         $db->set($object);
         // Return the configuration object.
@@ -170,6 +178,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'mount';
+        $cmdArgs[] = '-o allow_other';
         if ($repo->get('type') == 'local') {
             $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
                 'uuid' => $repo->get('sharedfolderref')

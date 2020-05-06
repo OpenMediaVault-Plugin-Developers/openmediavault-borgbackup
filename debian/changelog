@@ -1,3 +1,10 @@
+openmediavault-borgbackup (5.1) stable; urgency=low
+
+  * Allow import of existing repo
+  * Add allow_other option when mounting repo
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 05 May 2020 22:16:45 -0500
+
 openmediavault-borgbackup (5.0.8) stable; urgency=low
 
   * Fix typo in archive creation

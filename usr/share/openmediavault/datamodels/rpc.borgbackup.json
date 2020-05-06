@@ -40,6 +40,10 @@
 			"encryption": {
 				"type": "boolean",
 				"required": true
+			},
+			"skipinit": {
+				"type": "boolean",
+				"required": true
 			}
 		}
 	}
