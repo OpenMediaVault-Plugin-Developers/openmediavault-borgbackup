@@ -119,7 +119,7 @@ Ext.define('OMV.module.admin.service.borgbackup.Repo', {
             name: 'skipinit',
             fieldLabel: _('Skip init'),
             checked: false,
-            boxLabel: _("Skip initializaion to import existing repo."),
+            boxLabel: _("Skip initialization to import existing repo."),
         }];
     }
 });
