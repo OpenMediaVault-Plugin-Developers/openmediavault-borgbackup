@@ -54,7 +54,7 @@
 		"type": "object",
 		"properties": {
 			"enable": {
-			    "type": "boolean",
+				"type": "boolean",
 				"required": true
 			},
 			"uuid": {
@@ -63,7 +63,7 @@
 				"required": true
 			},
 			"name": {
-			    "type": "string",
+				"type": "string",
 				"required": true
 			},
 			"reporef": {
@@ -72,7 +72,7 @@
 				"required": true
 			},
 			"compressiontype": {
-			    "type": "string",
+				"type": "string",
 				"enum": [ "none", "zstd", "lz4", "lzma", "zlib" ],
 				"required": true
 			},
@@ -83,19 +83,19 @@
 				"required": true
 			},
 			"onefs": {
-			    "type": "boolean",
+				"type": "boolean",
 				"required": true
 			},
 			"noatime": {
-			    "type": "boolean",
+				"type": "boolean",
 				"required": true
 			},
 			"include": {
-			    "type": "string",
+				"type": "string",
 				"required": true
 			},
 			"exclude": {
-			    "type": "string",
+				"type": "string",
 				"required": false
 			},
 			"hourly": {
@@ -126,6 +126,10 @@
 			"ratelimit": {
 				"type": "integer",
 				"minimum": 0,
+				"required": true
+			},
+			"list": {
+				"type": "boolean",
 				"required": true
 			}
 		}

@@ -222,6 +222,12 @@ Ext.define('OMV.module.admin.service.borgbackup.Archive', {
                 ptype: 'fieldinfo',
                 text: _('Set remote network upload rate limit in kiByte/s (default: 0=unlimited).')
             }]
+        },{
+            xtype: 'checkbox',
+            name: 'list',
+            fieldLabel: _('List'),
+            checked: true,
+            boxLabel: _('Output verbose list of files and directories.')
         }];
     }
 });

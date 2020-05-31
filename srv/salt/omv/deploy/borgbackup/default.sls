@@ -95,7 +95,9 @@ configure_borg_{{ archive.name }}_cron_file:
         borg create \
           --verbose \
           --filter AME \
+        {%- if archive.list %}
           --list \
+        {%- endif %}
           --stats \
           --show-rc \
         {%- if archive.onefs %}
