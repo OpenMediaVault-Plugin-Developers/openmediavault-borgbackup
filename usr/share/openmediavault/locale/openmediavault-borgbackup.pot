@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-18 17:51-0500\n"
+"POT-Creation-Date: 2020-05-31 11:27-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,6 +153,9 @@ msgid "One Filesystem"
 msgstr ""
 
 msgid "Original Location"
+msgstr ""
+
+msgid "Output verbose list of files and directories."
 msgstr ""
 
 msgid "Passphrase"

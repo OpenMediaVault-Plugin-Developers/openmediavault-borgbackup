@@ -3,13 +3,17 @@
 # This file is distributed under the same license as the openmediavault-borgbackup package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# clexanis, 2020
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-18 17:51-0500\n"
+"POT-Creation-Date: 2020-05-31 11:27-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
+"Last-Translator: clexanis, 2020\n"
 "Language-Team: French (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,233 +22,244 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
-msgstr ""
+msgstr "0 est la compression la plus rapide et 9 est la meilleure compression"
 
 msgid "Add archive"
-msgstr ""
+msgstr "Ajouter une archive"
 
 msgid "Add repo"
-msgstr ""
+msgstr "Ajouter un dépôt"
 
 msgid "All"
-msgstr ""
+msgstr "Tous"
 
 msgid "Archive"
-msgstr ""
+msgstr "Archive"
 
 msgid "Archives"
-msgstr ""
+msgstr "Archives"
 
 msgid "Archives only"
-msgstr ""
+msgstr "Archives uniquement"
 
 msgid "BorgBackup"
-msgstr ""
+msgstr "BorgBackup"
 
 msgid "Check"
-msgstr ""
+msgstr "Vérifier"
 
 msgid "Checking "
-msgstr ""
+msgstr "Vérification "
 
 msgid "Compression"
-msgstr ""
+msgstr "Compression"
 
 msgid "Compression Ratio"
-msgstr ""
+msgstr "Ratio de compression"
 
 msgid "Compression Type"
-msgstr ""
+msgstr "Type de compression"
 
 msgid "Create archive for "
-msgstr ""
+msgstr "Créer l'archive pour "
 
 msgid "Daily"
-msgstr ""
+msgstr "Quotidiennement"
 
 msgid "Done..."
-msgstr ""
+msgstr "Fait..."
 
 msgid "Edit archive"
-msgstr ""
+msgstr "Modifier l'archive"
 
 msgid "Enable"
-msgstr ""
+msgstr "Activer"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Activé"
 
 msgid "Encryption"
-msgstr ""
+msgstr "Chiffrement"
 
 msgid "Excludes"
-msgstr ""
+msgstr "Exclut"
 
 msgid "Export"
-msgstr ""
+msgstr "Exporter"
 
 msgid "Export archive to tar file"
-msgstr ""
+msgstr "Exporter l'archive vers un fichier tar"
 
 msgid ""
 "Export file will be created in this directory with a filename matching the "
 "archive name with an extension of .tar.gz."
 msgstr ""
+"Le fichier exporté sera créé dans ce répertoire avec un nom de fichier "
+"correspondant au nom de l'archive avec une extension .tar.gz."
 
 msgid "Extract"
-msgstr ""
+msgstr "Extrait"
 
 msgid "Extract archive to directory"
-msgstr ""
+msgstr "Extraire l'archive vers le répertoire"
 
 msgid "Hourly"
-msgstr ""
+msgstr "Toutes les heures"
 
 msgid "Includes"
-msgstr ""
+msgstr "Inclut"
 
 msgid "List"
-msgstr ""
+msgstr "Liste"
 
 msgid "Local"
-msgstr ""
+msgstr "Local"
 
 msgid "Monthly"
-msgstr ""
+msgstr "Mensuel"
 
 msgid "Mount"
-msgstr ""
+msgstr "Monter"
 
 msgid "Mount repo"
-msgstr ""
+msgstr "Monter le dépôt"
 
 msgid "Mounted"
-msgstr ""
+msgstr "Monté"
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form:  "
 "user@hostname:path"
 msgstr ""
+"Doit avoir des clés ssh configurées. Le chemin distant doit être sous la "
+"forme : user@hostname:path"
 
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 msgid "Name/Prefix"
-msgstr ""
+msgstr "Nom/Préfixe"
 
 msgid "No atime"
-msgstr ""
+msgstr "Pas d'atime"
 
 msgid "None"
-msgstr ""
+msgstr "Aucun"
 
 msgid "Number of daily archives to keep."
-msgstr ""
+msgstr "Nombre d'archives quotidiennes à conserver."
 
 msgid "Number of hourly archives to keep."
-msgstr ""
+msgstr "Nombre d'archives horaires à conserver."
 
 msgid "Number of monthly archives to keep."
-msgstr ""
+msgstr "Nombre d'archives mensuelles à conserver."
 
 msgid "Number of weekly archives to keep."
-msgstr ""
+msgstr "Nombre d'archives hebdomadaires à conserver."
 
 msgid "Number of yearly archives to keep."
-msgstr ""
+msgstr "Nombre d'archives annuelles à conserver."
 
 msgid "One Filesystem"
-msgstr ""
+msgstr "Un seul système de fichiers"
 
 msgid "Original Location"
+msgstr "Emplacement d'origine"
+
+msgid "Output verbose list of files and directories."
 msgstr ""
 
 msgid "Passphrase"
-msgstr ""
+msgstr "Phrase de passe"
 
 msgid "Put comma between each directory"
-msgstr ""
+msgstr "Mettez une virgule entre chaque répertoire"
 
 msgid "Put comma between each directory."
-msgstr ""
+msgstr "Mettez une virgule entre chaque répertoire."
 
 msgid "Rate limit"
-msgstr ""
+msgstr "Limite de taux"
 
 msgid "Remote"
-msgstr ""
+msgstr "À distance"
 
 msgid "Remote Path"
-msgstr ""
+msgstr "Chemin distant"
 
 msgid "Repo"
-msgstr ""
+msgstr "Dépôt"
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
 "as the repo."
 msgstr ""
+"Le dépôt sera monté comme un sous-dossier dans le dossier partagé portant le"
+" même nom que le dépôt."
 
 msgid "Repos"
-msgstr ""
+msgstr "Dépots"
 
 msgid "Repos only"
-msgstr ""
+msgstr "Dépôts uniquement"
 
 msgid "Run"
-msgstr ""
+msgstr "Lancer"
 
 msgid "Select a repo ..."
-msgstr ""
+msgstr "Sélectionnez un dépôt ..."
 
 msgid "Select an archive ..."
-msgstr ""
+msgstr "Sélectionnez une archive ..."
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default: 0=unlimited)."
 msgstr ""
+"Définissez la limite du taux de téléversement en kilo-octets (par défaut : 0"
+" = illimité)."
 
 msgid "Shared Folder"
-msgstr ""
+msgstr "Dossier partagé"
 
 msgid "Skip init"
-msgstr ""
+msgstr "Sauter l'initialisation"
 
 msgid "Skip initialization to import existing repo."
-msgstr ""
+msgstr "Sauter l'initialisation pour importer les dépôts existants."
 
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 msgid "Unmount"
-msgstr ""
+msgstr "Démonter"
 
 msgid "Uses value as prefix for archive name."
-msgstr ""
+msgstr "Utilise la valeur comme préfixe pour le nom de l'archive."
 
 msgid "Verify"
-msgstr ""
+msgstr "Vérifier"
 
 msgid "Weekly"
-msgstr ""
+msgstr "Hebdomadaire"
 
 msgid "Yearly"
-msgstr ""
+msgstr "Annuel"
 
 msgid "lz4 - super fast, low compression"
-msgstr ""
+msgstr "LZ4 - Super rapide, faible compression."
 
 msgid "lzma - even slower, even higher compression"
-msgstr ""
+msgstr "LZMA - Encore plus lent, compression encore plus élevée."
 
 msgid "n/a"
-msgstr ""
+msgstr "N/A"
 
 msgid "repo ..."
-msgstr ""
+msgstr "dépôt ..."
 
 msgid "zlib - less fast, higher compression"
-msgstr ""
+msgstr "zlib - Moins rapide, compression plus élevée."
 
 msgid "zstd - super fast, medium compression"
-msgstr ""
+msgstr "Zstd - Super rapide, compression moyenne."

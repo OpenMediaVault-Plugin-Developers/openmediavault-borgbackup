@@ -3,13 +3,17 @@
 # This file is distributed under the same license as the openmediavault-borgbackup package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Pavel Borecki <pavel.borecki@gmail.com>, 2020
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-18 17:51-0500\n"
+"POT-Creation-Date: 2020-05-31 11:27-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2020\n"
 "Language-Team: Czech (Czech Republic) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/cs_CZ/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,233 +22,243 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
-msgstr ""
+msgstr "0 (nula) je nejrychlejší komprese a 9 ta nejlepší"
 
 msgid "Add archive"
-msgstr ""
+msgstr "Přidat archiv"
 
 msgid "Add repo"
-msgstr ""
+msgstr "Přidat repozitář"
 
 msgid "All"
-msgstr ""
+msgstr "Vše"
 
 msgid "Archive"
-msgstr ""
+msgstr "Archiv"
 
 msgid "Archives"
-msgstr ""
+msgstr "Archivy"
 
 msgid "Archives only"
-msgstr ""
+msgstr "Pouze archivy"
 
 msgid "BorgBackup"
-msgstr ""
+msgstr "BorgBackup"
 
 msgid "Check"
-msgstr ""
+msgstr "Zkontrolovat"
 
 msgid "Checking "
-msgstr ""
+msgstr "Kontroluje se"
 
 msgid "Compression"
-msgstr ""
+msgstr "Komprese"
 
 msgid "Compression Ratio"
-msgstr ""
+msgstr "Kompresní poměr"
 
 msgid "Compression Type"
-msgstr ""
+msgstr "Typ komprese"
 
 msgid "Create archive for "
-msgstr ""
+msgstr "Vytvořit archiv pro"
 
 msgid "Daily"
-msgstr ""
+msgstr "Každý den"
 
 msgid "Done..."
-msgstr ""
+msgstr "Hotovo…"
 
 msgid "Edit archive"
-msgstr ""
+msgstr "Upravit archiv"
 
 msgid "Enable"
-msgstr ""
+msgstr "Zapnout"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Zapnuto"
 
 msgid "Encryption"
-msgstr ""
+msgstr "Šifrování"
 
 msgid "Excludes"
-msgstr ""
+msgstr "Vynechává"
 
 msgid "Export"
-msgstr ""
+msgstr "Export"
 
 msgid "Export archive to tar file"
-msgstr ""
+msgstr "Exportovat archiv do tar souboru"
 
 msgid ""
 "Export file will be created in this directory with a filename matching the "
 "archive name with an extension of .tar.gz."
 msgstr ""
+"Soubor s exportem bude vytvořen v této složce s názvem souboru odpovídajícím"
+" názvu archivu s příponou .tar.gz."
 
 msgid "Extract"
-msgstr ""
+msgstr "Rozbalit"
 
 msgid "Extract archive to directory"
-msgstr ""
+msgstr "Rozbalit archiv do složky"
 
 msgid "Hourly"
-msgstr ""
+msgstr "Každou hodinu"
 
 msgid "Includes"
-msgstr ""
+msgstr "Zahrnuje"
 
 msgid "List"
-msgstr ""
+msgstr "Seznam"
 
 msgid "Local"
-msgstr ""
+msgstr "Místní"
 
 msgid "Monthly"
-msgstr ""
+msgstr "Každý měsíc"
 
 msgid "Mount"
-msgstr ""
+msgstr "Připojení"
 
 msgid "Mount repo"
-msgstr ""
+msgstr "Připojit repozitář"
 
 msgid "Mounted"
-msgstr ""
+msgstr "Připojeno"
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form:  "
 "user@hostname:path"
 msgstr ""
+"Je třeba mít nastavené ssh klíče. Popis umístění na protějšku by měl mít "
+"podobu: uzivatel@nazevstroje:popisumisteni"
 
 msgid "Name"
-msgstr ""
+msgstr "Název"
 
 msgid "Name/Prefix"
-msgstr ""
+msgstr "Název/předpona"
 
 msgid "No atime"
-msgstr ""
+msgstr "Bez atime"
 
 msgid "None"
-msgstr ""
+msgstr "Žádné"
 
 msgid "Number of daily archives to keep."
-msgstr ""
+msgstr "Počet archivů za jednotlivé dny, které ponechat."
 
 msgid "Number of hourly archives to keep."
-msgstr ""
+msgstr "Počet archivů za jednotlivé hodiny, které ponechat."
 
 msgid "Number of monthly archives to keep."
-msgstr ""
+msgstr "Počet archivů za jednotlivé měsíce, které ponechat."
 
 msgid "Number of weekly archives to keep."
-msgstr ""
+msgstr "Počet archivů za jednotlivé týdny, které ponechat."
 
 msgid "Number of yearly archives to keep."
-msgstr ""
+msgstr "Počet archivů za jednotlivé roky, které ponechat."
 
 msgid "One Filesystem"
-msgstr ""
+msgstr "Jeden souborový systém"
 
 msgid "Original Location"
+msgstr "Původní umístění"
+
+msgid "Output verbose list of files and directories."
 msgstr ""
 
 msgid "Passphrase"
-msgstr ""
+msgstr "Heslová fráze"
 
 msgid "Put comma between each directory"
-msgstr ""
+msgstr "Jednotlivé složky oddělujte čárkou"
 
 msgid "Put comma between each directory."
-msgstr ""
+msgstr "Jednotlivé složky oddělujte čárkou."
 
 msgid "Rate limit"
-msgstr ""
+msgstr "Omezení rychlosti"
 
 msgid "Remote"
-msgstr ""
+msgstr "Protějšek"
 
 msgid "Remote Path"
-msgstr ""
+msgstr "Popis umístění na protějšku"
 
 msgid "Repo"
-msgstr ""
+msgstr "Repozitář"
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
 "as the repo."
 msgstr ""
+"Repozitář bude připojen jako podsložka ve sdílené složce se stejným názvem, "
+"jako má repozitář"
 
 msgid "Repos"
-msgstr ""
+msgstr "Repozitáře"
 
 msgid "Repos only"
-msgstr ""
+msgstr "Pouze repozitáře"
 
 msgid "Run"
-msgstr ""
+msgstr "Spustit"
 
 msgid "Select a repo ..."
-msgstr ""
+msgstr "Vybrat repozitář…"
 
 msgid "Select an archive ..."
-msgstr ""
+msgstr "Vybrat archiv…"
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default: 0=unlimited)."
 msgstr ""
+"Nastavit omezení rychlosti do sítě v kibibajtech/s (výchozí: 0=neomezeno)."
 
 msgid "Shared Folder"
-msgstr ""
+msgstr "Sdílená složka"
 
 msgid "Skip init"
-msgstr ""
+msgstr "Přeskočit inicializaci"
 
 msgid "Skip initialization to import existing repo."
-msgstr ""
+msgstr "Přeskočit inicializaci pro import existujícího repozitáře."
 
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 msgid "Unmount"
-msgstr ""
+msgstr "Odpojit"
 
 msgid "Uses value as prefix for archive name."
-msgstr ""
+msgstr "Použije hodnotu jako předponu názvu archivu."
 
 msgid "Verify"
-msgstr ""
+msgstr "Ověřit"
 
 msgid "Weekly"
-msgstr ""
+msgstr "Každý týden"
 
 msgid "Yearly"
-msgstr ""
+msgstr "Každý rok"
 
 msgid "lz4 - super fast, low compression"
-msgstr ""
+msgstr "lz4 – super rychlé, nízká komprese"
 
 msgid "lzma - even slower, even higher compression"
-msgstr ""
+msgstr "lzma – ještě pomalejší, ještě vyšší komprese"
 
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
 
 msgid "repo ..."
-msgstr ""
+msgstr "repozitář …"
 
 msgid "zlib - less fast, higher compression"
-msgstr ""
+msgstr "zlib – méně rychlé, vyšší komprese"
 
 msgid "zstd - super fast, medium compression"
-msgstr ""
+msgstr "zstd – super rychlé, střední komprese"

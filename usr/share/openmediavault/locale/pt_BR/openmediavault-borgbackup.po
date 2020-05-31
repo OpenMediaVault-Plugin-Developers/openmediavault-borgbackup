@@ -3,13 +3,17 @@
 # This file is distributed under the same license as the openmediavault-borgbackup package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Marcelo Esteves <marcelopge@gmail.com>, 2020
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-18 17:51-0500\n"
+"POT-Creation-Date: 2020-05-31 11:27-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
+"Last-Translator: Marcelo Esteves <marcelopge@gmail.com>, 2020\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,40 +25,40 @@ msgid "0 is the fastest compression and 9 is the best compression"
 msgstr ""
 
 msgid "Add archive"
-msgstr ""
+msgstr "Adicionar arquivo"
 
 msgid "Add repo"
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "Todos"
 
 msgid "Archive"
-msgstr ""
+msgstr "Arquivo"
 
 msgid "Archives"
-msgstr ""
+msgstr "Arquivos"
 
 msgid "Archives only"
-msgstr ""
+msgstr "Somente arquivos"
 
 msgid "BorgBackup"
 msgstr ""
 
 msgid "Check"
-msgstr ""
+msgstr "Verificar"
 
 msgid "Checking "
-msgstr ""
+msgstr "Verificando"
 
 msgid "Compression"
-msgstr ""
+msgstr "Compressão"
 
 msgid "Compression Ratio"
-msgstr ""
+msgstr "Taxa de Compressão"
 
 msgid "Compression Type"
-msgstr ""
+msgstr "Tipo de Compressão"
 
 msgid "Create archive for "
 msgstr ""
@@ -63,28 +67,28 @@ msgid "Daily"
 msgstr ""
 
 msgid "Done..."
-msgstr ""
+msgstr "Pronto..."
 
 msgid "Edit archive"
-msgstr ""
+msgstr "Editar arquivo"
 
 msgid "Enable"
-msgstr ""
+msgstr "Habilitar"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Habilitado"
 
 msgid "Encryption"
-msgstr ""
+msgstr "Encriptação"
 
 msgid "Excludes"
 msgstr ""
 
 msgid "Export"
-msgstr ""
+msgstr "Exportar"
 
 msgid "Export archive to tar file"
-msgstr ""
+msgstr "Exportar arquivo como .tar"
 
 msgid ""
 "Export file will be created in this directory with a filename matching the "
@@ -92,10 +96,10 @@ msgid ""
 msgstr ""
 
 msgid "Extract"
-msgstr ""
+msgstr "Extrair"
 
 msgid "Extract archive to directory"
-msgstr ""
+msgstr "Extrair arquivo para diretório"
 
 msgid "Hourly"
 msgstr ""
@@ -104,22 +108,22 @@ msgid "Includes"
 msgstr ""
 
 msgid "List"
-msgstr ""
+msgstr "Lista"
 
 msgid "Local"
-msgstr ""
+msgstr "Local"
 
 msgid "Monthly"
 msgstr ""
 
 msgid "Mount"
-msgstr ""
+msgstr "Montar"
 
 msgid "Mount repo"
 msgstr ""
 
 msgid "Mounted"
-msgstr ""
+msgstr "Montado"
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form:  "
@@ -127,16 +131,16 @@ msgid ""
 msgstr ""
 
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 msgid "Name/Prefix"
-msgstr ""
+msgstr "Nome/Prefixo"
 
 msgid "No atime"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Nenhum"
 
 msgid "Number of daily archives to keep."
 msgstr ""
@@ -157,6 +161,9 @@ msgid "One Filesystem"
 msgstr ""
 
 msgid "Original Location"
+msgstr "Localização Original"
+
+msgid "Output verbose list of files and directories."
 msgstr ""
 
 msgid "Passphrase"
@@ -172,10 +179,10 @@ msgid "Rate limit"
 msgstr ""
 
 msgid "Remote"
-msgstr ""
+msgstr "Remoto"
 
 msgid "Remote Path"
-msgstr ""
+msgstr "Caminho Remoto"
 
 msgid "Repo"
 msgstr ""
@@ -192,7 +199,7 @@ msgid "Repos only"
 msgstr ""
 
 msgid "Run"
-msgstr ""
+msgstr "Executar"
 
 msgid "Select a repo ..."
 msgstr ""
@@ -214,16 +221,16 @@ msgid "Skip initialization to import existing repo."
 msgstr ""
 
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 msgid "Unmount"
-msgstr ""
+msgstr "Desmontar"
 
 msgid "Uses value as prefix for archive name."
 msgstr ""
 
 msgid "Verify"
-msgstr ""
+msgstr "Verificar"
 
 msgid "Weekly"
 msgstr ""
@@ -244,7 +251,7 @@ msgid "repo ..."
 msgstr ""
 
 msgid "zlib - less fast, higher compression"
-msgstr ""
+msgstr "zlib - lento, alta compactação"
 
 msgid "zstd - super fast, medium compression"
-msgstr ""
+msgstr "zstd - muito rápido, compactação média"

@@ -3,13 +3,17 @@
 # This file is distributed under the same license as the openmediavault-borgbackup package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# songming <by@songming.me>, 2020
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-18 17:51-0500\n"
+"POT-Creation-Date: 2020-05-31 11:27-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
+"Last-Translator: songming <by@songming.me>, 2020\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,233 +22,236 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
-msgstr ""
+msgstr "0表示最快的压缩，9表示做高的压缩率"
 
 msgid "Add archive"
-msgstr ""
+msgstr "添加归档"
 
 msgid "Add repo"
-msgstr ""
+msgstr "添加源"
 
 msgid "All"
-msgstr ""
+msgstr "所有"
 
 msgid "Archive"
-msgstr ""
+msgstr "归档"
 
 msgid "Archives"
-msgstr ""
+msgstr "归档"
 
 msgid "Archives only"
-msgstr ""
+msgstr "仅归档"
 
 msgid "BorgBackup"
-msgstr ""
+msgstr "BorgBackup"
 
 msgid "Check"
-msgstr ""
+msgstr "检查"
 
 msgid "Checking "
-msgstr ""
+msgstr "检查中"
 
 msgid "Compression"
-msgstr ""
+msgstr "压缩"
 
 msgid "Compression Ratio"
-msgstr ""
+msgstr "压缩率"
 
 msgid "Compression Type"
-msgstr ""
+msgstr "压缩类型"
 
 msgid "Create archive for "
-msgstr ""
+msgstr "创建归档"
 
 msgid "Daily"
-msgstr ""
+msgstr "每天"
 
 msgid "Done..."
-msgstr ""
+msgstr "完成中 ..."
 
 msgid "Edit archive"
-msgstr ""
+msgstr "编辑归档"
 
 msgid "Enable"
-msgstr ""
+msgstr "启用"
 
 msgid "Enabled"
-msgstr ""
+msgstr "已启用"
 
 msgid "Encryption"
-msgstr ""
+msgstr "加密"
 
 msgid "Excludes"
-msgstr ""
+msgstr "扩展参数"
 
 msgid "Export"
-msgstr ""
+msgstr "导出"
 
 msgid "Export archive to tar file"
-msgstr ""
+msgstr "导出归档为 tar 文件"
 
 msgid ""
 "Export file will be created in this directory with a filename matching the "
 "archive name with an extension of .tar.gz."
-msgstr ""
+msgstr "将在该目录创建命名的导出文件，文件扩展名为 tar.gz。"
 
 msgid "Extract"
-msgstr ""
+msgstr "提取"
 
 msgid "Extract archive to directory"
-msgstr ""
+msgstr "提取归档到目录"
 
 msgid "Hourly"
-msgstr ""
+msgstr "每小时"
 
 msgid "Includes"
-msgstr ""
+msgstr "包含"
 
 msgid "List"
-msgstr ""
+msgstr "列表"
 
 msgid "Local"
-msgstr ""
+msgstr "本地"
 
 msgid "Monthly"
-msgstr ""
+msgstr "每月"
 
 msgid "Mount"
-msgstr ""
+msgstr "挂载"
 
 msgid "Mount repo"
-msgstr ""
+msgstr "挂载源"
 
 msgid "Mounted"
-msgstr ""
+msgstr "已挂载"
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form:  "
 "user@hostname:path"
-msgstr ""
+msgstr "必须设置 ssh 密钥，远程路径格式：user@hostname:path"
 
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 msgid "Name/Prefix"
-msgstr ""
+msgstr "名称/前缀"
 
 msgid "No atime"
-msgstr ""
+msgstr "无时间"
 
 msgid "None"
-msgstr ""
+msgstr "无"
 
 msgid "Number of daily archives to keep."
-msgstr ""
+msgstr "保留多少份每日归档。"
 
 msgid "Number of hourly archives to keep."
-msgstr ""
+msgstr "保留多少份每小时归档。"
 
 msgid "Number of monthly archives to keep."
-msgstr ""
+msgstr "保留多少份每月归档。"
 
 msgid "Number of weekly archives to keep."
-msgstr ""
+msgstr "保留多少份每周归档。"
 
 msgid "Number of yearly archives to keep."
-msgstr ""
+msgstr "保留多少份每年归档。"
 
 msgid "One Filesystem"
-msgstr ""
+msgstr "一个文件系统"
 
 msgid "Original Location"
+msgstr "原始位置"
+
+msgid "Output verbose list of files and directories."
 msgstr ""
 
 msgid "Passphrase"
-msgstr ""
+msgstr "密码"
 
 msgid "Put comma between each directory"
-msgstr ""
+msgstr "在每个目录之间用逗号隔开"
 
 msgid "Put comma between each directory."
-msgstr ""
+msgstr "在每个目录之间用逗号隔开"
 
 msgid "Rate limit"
-msgstr ""
+msgstr "限制速率"
 
 msgid "Remote"
-msgstr ""
+msgstr "远程"
 
 msgid "Remote Path"
-msgstr ""
+msgstr "远程路径"
 
 msgid "Repo"
-msgstr ""
+msgstr "源"
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
 "as the repo."
-msgstr ""
+msgstr "源将挂载到共享文件夹的子文件夹，子文件夹与源同名。"
 
 msgid "Repos"
-msgstr ""
+msgstr "源"
 
 msgid "Repos only"
-msgstr ""
+msgstr "仅源"
 
 msgid "Run"
-msgstr ""
+msgstr "运行"
 
 msgid "Select a repo ..."
-msgstr ""
+msgstr "选择源 ..."
 
 msgid "Select an archive ..."
-msgstr ""
+msgstr "选择归档 ..."
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default: 0=unlimited)."
-msgstr ""
+msgstr "限制远程网络上传速率为X kiByte/s（默认：0=不限制）。"
 
 msgid "Shared Folder"
-msgstr ""
+msgstr "共享文件夹"
 
 msgid "Skip init"
-msgstr ""
+msgstr "跳过初始化"
 
 msgid "Skip initialization to import existing repo."
-msgstr ""
+msgstr "跳过初始化以导入现有源。"
 
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 msgid "Unmount"
-msgstr ""
+msgstr "卸载"
 
 msgid "Uses value as prefix for archive name."
-msgstr ""
+msgstr "使用该值作为归档前缀名称。"
 
 msgid "Verify"
-msgstr ""
+msgstr "校验"
 
 msgid "Weekly"
-msgstr ""
+msgstr "每周"
 
 msgid "Yearly"
-msgstr ""
+msgstr "每年"
 
 msgid "lz4 - super fast, low compression"
-msgstr ""
+msgstr "lz4 - 非常快, 低压缩率"
 
 msgid "lzma - even slower, even higher compression"
-msgstr ""
+msgstr "lzma - 最慢, 最高的压缩率"
 
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
 
 msgid "repo ..."
-msgstr ""
+msgstr "源 ..."
 
 msgid "zlib - less fast, higher compression"
-msgstr ""
+msgstr "zlib - 较快, 高压缩率"
 
 msgid "zstd - super fast, medium compression"
-msgstr ""
+msgstr "zstd - 非常快, 中等压缩率"

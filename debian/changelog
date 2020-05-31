@@ -1,6 +1,6 @@
 openmediavault-borgbackup (5.1.1) stable; urgency=low
 
-  * Add option to disable listing files and dirs
+  * Add option to disable listing files and dirs in archive report
 
  -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 31 May 2020 11:22:21 -0500
 
