@@ -383,7 +383,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
                 $cmdArgs[] = $this->getProgram;
                 $cmdArgs[] = 'create';
-                if ($achive->get('list') == true) {
+                if ($archive->get('list') == true) {
                     $cmdArgs[] = '--list';
                 }
                 $cmdArgs[] = '--stats';
