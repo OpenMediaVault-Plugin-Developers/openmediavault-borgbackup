@@ -3,6 +3,9 @@
 # This file is distributed under the same license as the openmediavault-borgbackup package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# kochin <kochinc@outlook.com>, 2020
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,6 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-31 11:27-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
+"Last-Translator: kochin <kochinc@outlook.com>, 2020\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,236 +22,236 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
-msgstr ""
+msgstr "0 為最快速壓縮，9 為最佳壓縮"
 
 msgid "Add archive"
-msgstr ""
+msgstr "新增歸檔"
 
 msgid "Add repo"
-msgstr ""
+msgstr "新增儲存庫"
 
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 msgid "Archive"
-msgstr ""
+msgstr "歸檔"
 
 msgid "Archives"
-msgstr ""
+msgstr "歸檔"
 
 msgid "Archives only"
-msgstr ""
+msgstr "只針對歸檔"
 
 msgid "BorgBackup"
-msgstr ""
+msgstr "BorgBackup"
 
 msgid "Check"
-msgstr ""
+msgstr "檢查"
 
 msgid "Checking "
-msgstr ""
+msgstr "檢查中"
 
 msgid "Compression"
-msgstr ""
+msgstr "壓縮"
 
 msgid "Compression Ratio"
-msgstr ""
+msgstr "壓縮比率"
 
 msgid "Compression Type"
-msgstr ""
+msgstr "壓縮方式"
 
 msgid "Create archive for "
-msgstr ""
+msgstr "建立歸檔針對"
 
 msgid "Daily"
-msgstr ""
+msgstr "每日"
 
 msgid "Done..."
-msgstr ""
+msgstr "完成..."
 
 msgid "Edit archive"
-msgstr ""
+msgstr "編輯歸檔"
 
 msgid "Enable"
-msgstr ""
+msgstr "啟用"
 
 msgid "Enabled"
-msgstr ""
+msgstr "已啟用"
 
 msgid "Encryption"
-msgstr ""
+msgstr "加密"
 
 msgid "Excludes"
-msgstr ""
+msgstr "排除"
 
 msgid "Export"
-msgstr ""
+msgstr "輸出"
 
 msgid "Export archive to tar file"
-msgstr ""
+msgstr "輸出歸檔到 tar 檔案"
 
 msgid ""
 "Export file will be created in this directory with a filename matching the "
 "archive name with an extension of .tar.gz."
-msgstr ""
+msgstr "輸出檔案將會建立在這個目錄裡，檔名會與歸檔名稱相符但有 .tar.gz 延伸檔名。"
 
 msgid "Extract"
-msgstr ""
+msgstr "擷取"
 
 msgid "Extract archive to directory"
-msgstr ""
+msgstr "擷取歸檔到檔案目錄"
 
 msgid "Hourly"
-msgstr ""
+msgstr "每小時"
 
 msgid "Includes"
-msgstr ""
+msgstr "包含"
 
 msgid "List"
-msgstr ""
+msgstr "列表"
 
 msgid "Local"
-msgstr ""
+msgstr "本地"
 
 msgid "Monthly"
-msgstr ""
+msgstr "每月"
 
 msgid "Mount"
-msgstr ""
+msgstr "裝載"
 
 msgid "Mount repo"
-msgstr ""
+msgstr "裝載儲存庫"
 
 msgid "Mounted"
-msgstr ""
+msgstr "已裝載"
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form:  "
 "user@hostname:path"
-msgstr ""
+msgstr "必須設置好 ssh 密鑰。遠端路徑應該是這樣的形式：user@hostname:path"
 
 msgid "Name"
-msgstr ""
+msgstr "名稱"
 
 msgid "Name/Prefix"
-msgstr ""
+msgstr "名稱/前綴詞"
 
 msgid "No atime"
-msgstr ""
+msgstr "無 atime"
 
 msgid "None"
-msgstr ""
+msgstr "無"
 
 msgid "Number of daily archives to keep."
-msgstr ""
+msgstr "所要保存的每日歸檔數目。"
 
 msgid "Number of hourly archives to keep."
-msgstr ""
+msgstr "所要保存的每小時歸檔數目。"
 
 msgid "Number of monthly archives to keep."
-msgstr ""
+msgstr "所要保存的每月歸檔數目。"
 
 msgid "Number of weekly archives to keep."
-msgstr ""
+msgstr "所要保存的每週歸檔數目。"
 
 msgid "Number of yearly archives to keep."
-msgstr ""
+msgstr "所要保存的每年歸檔數目。"
 
 msgid "One Filesystem"
-msgstr ""
+msgstr "單一檔案系統"
 
 msgid "Original Location"
-msgstr ""
+msgstr "原始位置"
 
 msgid "Output verbose list of files and directories."
-msgstr ""
+msgstr "輸出檔案與目錄的詳盡列表。"
 
 msgid "Passphrase"
-msgstr ""
+msgstr "密語"
 
 msgid "Put comma between each directory"
-msgstr ""
+msgstr "在每個檔案目錄間放入逗號"
 
 msgid "Put comma between each directory."
-msgstr ""
+msgstr "在每個檔案目錄間放入逗號。"
 
 msgid "Rate limit"
-msgstr ""
+msgstr "傳輸速率限制"
 
 msgid "Remote"
-msgstr ""
+msgstr "遠端"
 
 msgid "Remote Path"
-msgstr ""
+msgstr "遠端路徑"
 
 msgid "Repo"
-msgstr ""
+msgstr "儲存庫"
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
 "as the repo."
-msgstr ""
+msgstr "儲存庫將被裝載成共享檔案夾裡的一個子目錄，它與儲存庫會有相同的名稱。"
 
 msgid "Repos"
-msgstr ""
+msgstr "儲存庫"
 
 msgid "Repos only"
-msgstr ""
+msgstr "只針對儲存庫"
 
 msgid "Run"
-msgstr ""
+msgstr "執行"
 
 msgid "Select a repo ..."
-msgstr ""
+msgstr "選擇一個儲存庫 ..."
 
 msgid "Select an archive ..."
-msgstr ""
+msgstr "選擇一個歸檔 ..."
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default: 0=unlimited)."
-msgstr ""
+msgstr "以 kiByte/s 設定遠端網路上傳速率限制 (預設：0=無限制)。"
 
 msgid "Shared Folder"
-msgstr ""
+msgstr "共享檔案夾"
 
 msgid "Skip init"
-msgstr ""
+msgstr "跳過初始化"
 
 msgid "Skip initialization to import existing repo."
-msgstr ""
+msgstr "跳過初始化以輸入現存儲存庫。"
 
 msgid "Type"
-msgstr ""
+msgstr "方式"
 
 msgid "Unmount"
-msgstr ""
+msgstr "卸載"
 
 msgid "Uses value as prefix for archive name."
-msgstr ""
+msgstr "將值當作歸檔名稱的前綴詞。"
 
 msgid "Verify"
-msgstr ""
+msgstr "驗證"
 
 msgid "Weekly"
-msgstr ""
+msgstr "每週"
 
 msgid "Yearly"
-msgstr ""
+msgstr "每年"
 
 msgid "lz4 - super fast, low compression"
-msgstr ""
+msgstr "lz4 - 超快、低壓縮"
 
 msgid "lzma - even slower, even higher compression"
-msgstr ""
+msgstr "lzma - 更慢、更高壓縮"
 
 msgid "n/a"
-msgstr ""
+msgstr "不適用"
 
 msgid "repo ..."
-msgstr ""
+msgstr "儲存庫 ..."
 
 msgid "zlib - less fast, higher compression"
-msgstr ""
+msgstr "zlib - 沒那麼快、高壓縮"
 
 msgid "zstd - super fast, medium compression"
-msgstr ""
+msgstr "zstd - 超快、中壓縮"
