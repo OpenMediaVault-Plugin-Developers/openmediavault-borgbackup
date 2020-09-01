@@ -18,51 +18,51 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-// require('js/omv/WorkspaceManager.js')
-// require('js/omv/workspace/grid/Panel.js')
-// require('js/omv/workspace/window/Form.js')
-// require('js/omv/workspace/window/plugin/ConfigObject.js')
-// require('js/omv/Rpc.js')
-// require('js/omv/data/Store.js')
-// require('js/omv/data/Model.js')
-// require('js/omv/data/proxy/Rpc.js')
-// require('js/omv/form/field/SharedFolderComboBox.js')
+// require("js/omv/WorkspaceManager.js")
+// require("js/omv/workspace/grid/Panel.js")
+// require("js/omv/workspace/window/Form.js")
+// require("js/omv/workspace/window/plugin/ConfigObject.js")
+// require("js/omv/Rpc.js")
+// require("js/omv/data/Store.js")
+// require("js/omv/data/Model.js")
+// require("js/omv/data/proxy/Rpc.js")
+// require("js/omv/form/field/SharedFolderComboBox.js")
 
-Ext.define('OMV.module.admin.service.borgbackup.Repo', {
-    extend: 'OMV.workspace.window.Form',
+Ext.define("OMV.module.admin.service.borgbackup.Repo", {
+    extend: "OMV.workspace.window.Form",
     uses: [
-        'OMV.form.field.SharedFolderComboBox',
-        'OMV.workspace.window.plugin.ConfigObject'
+        "OMV.form.field.SharedFolderComboBox",
+        "OMV.workspace.window.plugin.ConfigObject"
     ],
 
-    rpcService: 'BorgBackup',
-    rpcGetMethod: 'getRepo',
-    rpcSetMethod: 'setRepo',
+    rpcService: "BorgBackup",
+    rpcGetMethod: "getRepo",
+    rpcSetMethod: "setRepo",
     plugins: [{
-        ptype: 'configobject'
+        ptype: "configobject"
     }],
 
     getFormConfig: function() {
         return {
             plugins: [{
-                ptype: 'linkedfields',
+                ptype: "linkedfields",
                 correlations: [{
-                    name: 'sharedfolderref',
+                    name: "sharedfolderref",
                     conditions: [
-                        { name: 'type', value: 'local' }
+                        { name: "type", value: "local" }
                     ],
                     properties: [
-                        'show',
-                        '!allowBlank'
+                        "show",
+                        "!allowBlank"
                     ]
                 },{
-                    name: 'uri',
+                    name: "uri",
                     conditions: [
-                        { name: 'type', value: 'remote' }
+                        { name: "type", value: "remote" }
                     ],
                     properties: [
-                        'show',
-                        '!allowBlank'
+                        "show",
+                        "!allowBlank"
                     ]
                 }]
             }]
@@ -72,96 +72,96 @@ Ext.define('OMV.module.admin.service.borgbackup.Repo', {
     getFormItems: function () {
         var me = this;
         return [{
-            xtype: 'textfield',
-            name: 'name',
-            fieldLabel: _('Name'),
+            xtype: "textfield",
+            name: "name",
+            fieldLabel: _("Name"),
             maskRe: new RegExp("[a-zA-Z1-9_`]+$"),
             allowBlank: false
         },{
-            xtype: 'combo',
-            name: 'type',
-            fieldLabel: _('Type'),
-            queryMode: 'local',
+            xtype: "combo",
+            name: "type",
+            fieldLabel: _("Type"),
+            queryMode: "local",
             store: [
-                [ 'local', _('Local') ],
-                [ 'remote', _('Remote') ]
+                [ "local", _("Local") ],
+                [ "remote", _("Remote") ]
             ],
             allowBlank: false,
             editable: false,
-            triggerAction: 'all',
-            value: 'local'
+            triggerAction: "all",
+            value: "local"
         },{
-            xtype: 'sharedfoldercombo',
-            name: 'sharedfolderref',
-            fieldLabel: _('Shared Folder')
+            xtype: "sharedfoldercombo",
+            name: "sharedfolderref",
+            fieldLabel: _("Shared Folder")
         },{
-            xtype: 'textfield',
-            name: 'uri',
-            fieldLabel: _('Remote Path'),
+            xtype: "textfield",
+            name: "uri",
+            fieldLabel: _("Remote Path"),
             allowBlank: true,
             hidden: true,
             plugins: [{
-                ptype: 'fieldinfo',
-                text: _('Must have ssh keys setup.  Remote path should be in the form:  user@hostname:path')
+                ptype: "fieldinfo",
+                text: _("Must have ssh keys setup.  Remote path should be in the form:  user@hostname:path")
             }]
         },{
-            xtype: 'passwordfield',
-            name: 'passphrase',
-            fieldLabel: _('Passphrase'),
-            value: ''
+            xtype: "passwordfield",
+            name: "passphrase",
+            fieldLabel: _("Passphrase"),
+            value: ""
         },{
-            xtype: 'checkbox',
-            name: 'encryption',
-            fieldLabel: _('Encryption'),
+            xtype: "checkbox",
+            name: "encryption",
+            fieldLabel: _("Encryption"),
             checked: false
         },{
-            xtype: 'checkbox',
-            name: 'skipinit',
-            fieldLabel: _('Skip init'),
+            xtype: "checkbox",
+            name: "skipinit",
+            fieldLabel: _("Skip init"),
             checked: false,
             boxLabel: _("Skip initialization to import existing repo."),
         }];
     }
 });
 
-Ext.define('OMV.module.admin.service.borgbackup.Mount', {
-    extend: 'OMV.workspace.window.Form',
+Ext.define("OMV.module.admin.service.borgbackup.Mount", {
+    extend: "OMV.workspace.window.Form",
     uses: [
-        'OMV.form.field.SharedFolderComboBox',
-        'OMV.workspace.window.plugin.ConfigObject'
+        "OMV.form.field.SharedFolderComboBox",
+        "OMV.workspace.window.plugin.ConfigObject"
     ],
 
-    rpcService: 'BorgBackup',
-    rpcSetMethod: 'mountRepo',
+    rpcService: "BorgBackup",
+    rpcSetMethod: "mountRepo",
     plugins: [{
-        ptype: 'configobject'
+        ptype: "configobject"
     }],
 
     getFormItems: function () {
         var me = this;
         return [{
-            xtype: 'sharedfoldercombo',
-            name: 'sharedfolderref',
-            fieldLabel: _('Shared Folder'),
+            xtype: "sharedfoldercombo",
+            name: "sharedfolderref",
+            fieldLabel: _("Shared Folder"),
             plugins: [{
-                ptype: 'fieldinfo',
-                text: _('Repo will be mounted as a subfolder in the shared folder with the same name as the repo.')
+                ptype: "fieldinfo",
+                text: _("Repo will be mounted as a subfolder in the shared folder with the same name as the repo.")
             }]
         }];
     }
 });
 
-Ext.define('OMV.module.admin.service.borgbackup.Export', {
-    extend: 'OMV.workspace.window.Form',
+Ext.define("OMV.module.admin.service.borgbackup.Export", {
+    extend: "OMV.workspace.window.Form",
     uses: [
-        'OMV.form.field.SharedFolderComboBox',
-        'OMV.workspace.window.plugin.ConfigObject'
+        "OMV.form.field.SharedFolderComboBox",
+        "OMV.workspace.window.plugin.ConfigObject"
     ],
 
-    rpcService: 'BorgBackup',
-    rpcSetMethod: 'exportArchive',
+    rpcService: "BorgBackup",
+    rpcSetMethod: "exportArchive",
     plugins: [{
-        ptype: 'configobject'
+        ptype: "configobject"
     }],
 
     width: 500,
@@ -169,59 +169,59 @@ Ext.define('OMV.module.admin.service.borgbackup.Export', {
     getFormItems: function () {
         var me = this;
         return [{
-            xtype: 'combo',
-            name: 'archive',
-            fieldLabel: _('Archive'),
-            emptyText: _('Select an archive ...'),
+            xtype: "combo",
+            name: "archive",
+            fieldLabel: _("Archive"),
+            emptyText: _("Select an archive ..."),
             editable: false,
-            triggerAction: 'all',
-            displayField: 'name',
-            valueField: 'name',
+            triggerAction: "all",
+            displayField: "name",
+            valueField: "name",
             allowNone: true,
             allowBlank: true,
-            store: Ext.create('OMV.data.Store', {
+            store: Ext.create("OMV.data.Store", {
                 autoLoad: true,
                 model: OMV.data.Model.createImplicit({
-                    idProperty: 'name',
+                    idProperty: "name",
                     fields: [
-                        { name: 'name', type: 'string' }
+                        { name: "name", type: "string" }
                     ]
                 }),
                 proxy : {
-                    type: 'rpc',
+                    type: "rpc",
                     rpcData: {
-                        service: 'BorgBackup',
-                        method: 'enumerateArchives',
+                        service: "BorgBackup",
+                        method: "enumerateArchives",
                         params: {
-                            'uuid': me.uuid
+                            "uuid": me.uuid
                         }
                     },
                     appendSortParams : false
                 }
             })
         },{
-            xtype: 'sharedfoldercombo',
-            name: 'sharedfolderref',
-            fieldLabel: _('Shared Folder'),
+            xtype: "sharedfoldercombo",
+            name: "sharedfolderref",
+            fieldLabel: _("Shared Folder"),
             plugins: [{
-                ptype: 'fieldinfo',
-                text: _('Export file will be created in this directory with a filename matching the archive name with an extension of .tar.gz.')
+                ptype: "fieldinfo",
+                text: _("Export file will be created in this directory with a filename matching the archive name with an extension of .tar.gz.")
             }]
         }];
     }
 });
 
-Ext.define('OMV.module.admin.service.borgbackup.Extract', {
-    extend: 'OMV.workspace.window.Form',
+Ext.define("OMV.module.admin.service.borgbackup.Extract", {
+    extend: "OMV.workspace.window.Form",
     uses: [
-        'OMV.form.field.SharedFolderComboBox',
-        'OMV.workspace.window.plugin.ConfigObject'
+        "OMV.form.field.SharedFolderComboBox",
+        "OMV.workspace.window.plugin.ConfigObject"
     ],
 
-    rpcService: 'BorgBackup',
-    rpcSetMethod: 'extractArchive',
+    rpcService: "BorgBackup",
+    rpcSetMethod: "extractArchive",
     plugins: [{
-        ptype: 'configobject'
+        ptype: "configobject"
     }],
 
     width: 500,
@@ -229,16 +229,16 @@ Ext.define('OMV.module.admin.service.borgbackup.Extract', {
     getFormConfig: function() {
         return {
             plugins: [{
-                ptype: 'linkedfields',
+                ptype: "linkedfields",
                 correlations: [{
-                    name: 'sharedfolderref',
+                    name: "sharedfolderref",
                     conditions: [
-                        { name: 'original', value: false }
+                        { name: "original", value: false }
                     ],
                     properties: [
-                        'show',
-                        '!allowNone',
-                        '!allowBlank'
+                        "show",
+                        "!allowNone",
+                        "!allowBlank"
                     ]
                 }]
             }]
@@ -248,109 +248,109 @@ Ext.define('OMV.module.admin.service.borgbackup.Extract', {
     getFormItems: function () {
         var me = this;
         return [{
-            xtype: 'combo',
-            name: 'archive',
-            fieldLabel: _('Archive'),
-            emptyText: _('Select an archive ...'),
+            xtype: "combo",
+            name: "archive",
+            fieldLabel: _("Archive"),
+            emptyText: _("Select an archive ..."),
             editable: false,
-            triggerAction: 'all',
-            displayField: 'name',
-            valueField: 'name',
+            triggerAction: "all",
+            displayField: "name",
+            valueField: "name",
             allowNone: true,
             allowBlank: true,
-            store: Ext.create('OMV.data.Store', {
+            store: Ext.create("OMV.data.Store", {
                 autoLoad: true,
                 model: OMV.data.Model.createImplicit({
-                    idProperty: 'name',
+                    idProperty: "name",
                     fields: [
-                        { name: 'name', type: 'string' }
+                        { name: "name", type: "string" }
                     ]
                 }),
                 proxy : {
-                    type: 'rpc',
+                    type: "rpc",
                     rpcData: {
-                        service: 'BorgBackup',
-                        method: 'enumerateArchives',
+                        service: "BorgBackup",
+                        method: "enumerateArchives",
                         params: {
-                            'uuid': me.uuid
+                            "uuid": me.uuid
                         }
                     },
                     appendSortParams : false
                 }
             })
         },{
-            xtype: 'checkbox',
-            name: 'original',
-            fieldLabel: _('Original Location'),
+            xtype: "checkbox",
+            name: "original",
+            fieldLabel: _("Original Location"),
             checked: false
         },{
-            xtype: 'sharedfoldercombo',
-            name: 'sharedfolderref',
-            fieldLabel: _('Shared Folder'),
+            xtype: "sharedfoldercombo",
+            name: "sharedfolderref",
+            fieldLabel: _("Shared Folder"),
             plugins: [{
-                ptype: 'fieldinfo',
-                text: _('Export file will be created in this directory with a filename matching the archive name with an extension of .tar.gz.')
+                ptype: "fieldinfo",
+                text: _("Export file will be created in this directory with a filename matching the archive name with an extension of .tar.gz.")
             }]
         }];
     }
 });
 
-Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
-    extend: 'OMV.workspace.grid.Panel',
+Ext.define("OMV.module.admin.service.borgbackup.RepoList", {
+    extend: "OMV.workspace.grid.Panel",
     requires: [
-        'OMV.Rpc',
-        'OMV.data.Store',
-        'OMV.data.Model',
-        'OMV.data.proxy.Rpc'
+        "OMV.Rpc",
+        "OMV.data.Store",
+        "OMV.data.Model",
+        "OMV.data.proxy.Rpc"
     ],
     uses: [
-        'OMV.module.admin.service.borgbackup.Export',
-        'OMV.module.admin.service.borgbackup.Mount',
-        'OMV.module.admin.service.borgbackup.Repo'
+        "OMV.module.admin.service.borgbackup.Export",
+        "OMV.module.admin.service.borgbackup.Mount",
+        "OMV.module.admin.service.borgbackup.Repo"
     ],
 
     hideEditButton: true,
     hidePagingToolbar: false,
     stateful: true,
-    stateId: 'bce5761c-b0e0-11e7-993b-27be4a786741',
+    stateId: "bce5761c-b0e0-11e7-993b-27be4a786741",
     columns: [{
-        xtype: 'textcolumn',
-        text: _('Name'),
+        xtype: "textcolumn",
+        text: _("Name"),
         sortable: true,
-        dataIndex: 'name',
-        stateId: 'name'
+        dataIndex: "name",
+        stateId: "name"
     },{
-        xtype: 'textcolumn',
-        text: _('Shared Folder'),
+        xtype: "textcolumn",
+        text: _("Shared Folder"),
         sortable: true,
-        dataIndex: 'sharedfoldername',
-        stateId: 'sharedfoldername'
+        dataIndex: "sharedfoldername",
+        stateId: "sharedfoldername"
     },{
-        xtype: 'textcolumn',
-        text: _('Remote Path'),
+        xtype: "textcolumn",
+        text: _("Remote Path"),
         sortable: true,
-        dataIndex: 'uri',
-        stateId: 'uri'
+        dataIndex: "uri",
+        stateId: "uri"
     },{
-        xtype: 'booleaniconcolumn',
-        header: _('Encryption'),
+        xtype: "booleaniconcolumn",
+        header: _("Encryption"),
         sortable: true,
-        dataIndex: 'encryption',
-        align: 'center',
+        dataIndex: "encryption",
+        align: "center",
         width: 100,
         resizable: false,
-        trueIcon: 'switch_on.png',
-        falseIcon: 'switch_off.png'
+        trueIcon: "switch_on.png",
+        falseIcon: "switch_off.png"
     },{
-        xtype: 'booleaniconcolumn',
-        header: _('Mounted'),
+        xtype: "booleaniconcolumn",
+        header: _("Mounted"),
         sortable: true,
-        dataIndex: 'mounted',
-        align: 'center',
+        dataIndex: "mounted",
+        align: "center",
         width: 80,
         resizable: false,
-        trueIcon: 'switch_on.png',
-        falseIcon: 'switch_off.png'
+        trueIcon: "switch_on.png",
+        falseIcon: "switch_off.png"
     }],
 
     getTopToolbarItems: function() {
@@ -359,10 +359,10 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
 
         Ext.Array.insert(items, 3, [{
             id: me.getId() + "-check",
-            xtype: 'button',
-            text: _('Check'),
+            xtype: "button",
+            text: _("Check"),
             scope: me,
-            icon: 'images/wrench.png',
+            icon: "images/wrench.png",
             disabled: true,
             selectionConfig: {
                 minSelections: 1,
@@ -373,26 +373,26 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
                 }
             },
             menu: [{
-                text: _('All'),
-                icon: 'images/software.png',
-                handler: Ext.Function.bind(me.onCmdButton, me, [ 'all' ])
+                text: _("All"),
+                icon: "images/software.png",
+                handler: Ext.Function.bind(me.onCmdButton, me, [ "all" ])
             },{
-                text: _('Repos only'),
-                icon: 'images/filesystem.png',
-                handler: Ext.Function.bind(me.onCmdButton, me, [ 'repo' ])
+                text: _("Repos only"),
+                icon: "images/filesystem.png",
+                handler: Ext.Function.bind(me.onCmdButton, me, [ "repo" ])
             },{
-                text: _('Archives only'),
-                icon: 'images/folder.png',
-                handler: Ext.Function.bind(me.onCmdButton, me, [ 'archives' ])
+                text: _("Archives only"),
+                icon: "images/folder.png",
+                handler: Ext.Function.bind(me.onCmdButton, me, [ "archives" ])
             },{
-                text: _('Verify'),
-                icon: 'images/add.png',
-                handler: Ext.Function.bind(me.onCmdButton, me, [ 'verify' ])
+                text: _("Verify"),
+                icon: "images/add.png",
+                handler: Ext.Function.bind(me.onCmdButton, me, [ "verify" ])
             }]
         },{
-            xtype: 'button',
-            text: _('Export'),
-            icon: 'images/download.png',
+            xtype: "button",
+            text: _("Export"),
+            icon: "images/download.png",
             handler: Ext.Function.bind(me.onExportButton, me, [ me ]),
             scope: me,
             disabled: true,
@@ -401,9 +401,9 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
                 maxSelections: 1
             }
         },{
-            xtype: 'button',
-            text: _('Extract'),
-            icon: 'images/expand.png',
+            xtype: "button",
+            text: _("Extract"),
+            icon: "images/expand.png",
             handler: Ext.Function.bind(me.onExtractButton, me, [ me ]),
             scope: me,
             disabled: true,
@@ -412,10 +412,10 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
                 maxSelections: 1
             }
         },{
-            xtype: 'button',
-            text: _('List'),
-            icon: 'images/details.png',
-            handler: Ext.Function.bind(me.onCmdButton, me, [ 'list' ]),
+            xtype: "button",
+            text: _("List"),
+            icon: "images/details.png",
+            handler: Ext.Function.bind(me.onCmdButton, me, [ "list" ]),
             scope: me,
             disabled: true,
             selectionConfig: {
@@ -424,9 +424,9 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
             }
         },{
             id: me.getId() + "-mount",
-            xtype: 'button',
-            text: _('Mount'),
-            icon: 'images/play.png',
+            xtype: "button",
+            text: _("Mount"),
+            icon: "images/play.png",
             handler: Ext.Function.bind(me.onMountButton, me, [ me ]),
             scope: me,
             disabled: true,
@@ -440,9 +440,9 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
             }
         },{
             id: me.getId() + "-unmount",
-            xtype: 'button',
-            text: _('Unmount'),
-            icon: 'images/eject.png',
+            xtype: "button",
+            text: _("Unmount"),
+            icon: "images/eject.png",
             handler: Ext.Function.bind(me.onUnmountButton, me, [ me ]),
             scope: me,
             disabled: true,
@@ -461,24 +461,24 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
     initComponent: function () {
         var me = this;
         Ext.apply(me, {
-            store: Ext.create('OMV.data.Store', {
+            store: Ext.create("OMV.data.Store", {
                 autoLoad: true,
                 model: OMV.data.Model.createImplicit({
-                    idProperty: 'uuid',
+                    idProperty: "uuid",
                     fields: [
-                        { name: 'uuid', type: 'string' },
-                        { name: 'name', type: 'string' },
-                        { name: 'sharedfoldername', type: 'string' },
-                        { name: 'uri', type: 'string' },
-                        { name: 'encryption', type: 'boolean' },
-                        { name: 'mounted', type: 'boolean' }
+                        { name: "uuid", type: "string" },
+                        { name: "name", type: "string" },
+                        { name: "sharedfoldername", type: "string" },
+                        { name: "uri", type: "string" },
+                        { name: "encryption", type: "boolean" },
+                        { name: "mounted", type: "boolean" }
                     ]
                 }),
                 proxy: {
-                    type: 'rpc',
+                    type: "rpc",
                     rpcData: {
-                        service: 'BorgBackup',
-                        method: 'getRepoList'
+                        service: "BorgBackup",
+                        method: "getRepoList"
                     }
                 }
             })
@@ -488,8 +488,8 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
 
     onAddButton: function () {
         var me = this;
-        Ext.create('OMV.module.admin.service.borgbackup.Repo', {
-            title: _('Add repo'),
+        Ext.create("OMV.module.admin.service.borgbackup.Repo", {
+            title: _("Add repo"),
             uuid: OMV.UUID_UNDEFINED,
             listeners: {
                 scope: me,
@@ -503,9 +503,9 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
     onExportButton: function () {
         var me = this;
         var record = me.getSelected();
-        Ext.create('OMV.module.admin.service.borgbackup.Export', {
-            title: _('Export archive to tar file'),
-            uuid: record.get('uuid'),
+        Ext.create("OMV.module.admin.service.borgbackup.Export", {
+            title: _("Export archive to tar file"),
+            uuid: record.get("uuid"),
             listeners: {
                 scope: me,
                 submit: function () {
@@ -518,9 +518,9 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
     onExtractButton: function () {
         var me = this;
         var record = me.getSelected();
-        Ext.create('OMV.module.admin.service.borgbackup.Extract', {
-            title: _('Extract archive to directory'),
-            uuid: record.get('uuid'),
+        Ext.create("OMV.module.admin.service.borgbackup.Extract", {
+            title: _("Extract archive to directory"),
+            uuid: record.get("uuid"),
             listeners: {
                 scope: me,
                 submit: function () {
@@ -533,9 +533,9 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
     onMountButton: function () {
         var me = this;
         var record = me.getSelected();
-        Ext.create('OMV.module.admin.service.borgbackup.Mount', {
-            title: _('Mount repo'),
-            uuid: record.get('uuid'),
+        Ext.create("OMV.module.admin.service.borgbackup.Mount", {
+            title: _("Mount repo"),
+            uuid: record.get("uuid"),
             listeners: {
                 scope: me,
                 submit: function () {
@@ -566,10 +566,10 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
                 this.doReload();
             },
             rpcData: {
-                service: 'BorgBackup',
-                method: 'unmountRepo',
+                service: "BorgBackup",
+                method: "unmountRepo",
                 params: {
-                    uuid: record.get('uuid')
+                    uuid: record.get("uuid")
                 }
             }
         });
@@ -581,10 +581,10 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
             scope: me,
             callback: me.onDeletion,
             rpcData: {
-                service: 'BorgBackup',
-                method: 'deleteRepo',
+                service: "BorgBackup",
+                method: "deleteRepo",
                 params: {
-                    uuid: record.get('uuid')
+                    uuid: record.get("uuid")
                 }
             }
         });
@@ -593,13 +593,13 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
     onCmdButton : function(command) {
         var me = this;
         var record = me.getSelected();
-        var wnd = Ext.create('OMV.window.Execute', {
-            title: record.get('name') + ' ' + _('repo ...'),
-            rpcService: 'BorgBackup',
-            rpcMethod: 'repoCommand',
+        var wnd = Ext.create("OMV.window.Execute", {
+            title: record.get("name") + " " + _("repo ..."),
+            rpcService: "BorgBackup",
+            rpcMethod: "repoCommand",
             rpcParams: {
-                'command': command,
-                'uuid': record.get('uuid')
+                "command": command,
+                "uuid": record.get("uuid")
             },
             rpcIgnoreErrors: true,
             hideStartButton: true,
@@ -607,25 +607,25 @@ Ext.define('OMV.module.admin.service.borgbackup.RepoList', {
             listeners: {
                 scope: me,
                 finish: function(wnd, response) {
-                    wnd.appendValue(_('Done...'));
-                    wnd.setButtonDisabled('close', false);
+                    wnd.appendValue(_("Done..."));
+                    wnd.setButtonDisabled("close", false);
                 },
                 exception: function(wnd, error) {
                     OMV.MessageBox.error(null, error);
-                    wnd.setButtonDisabled('close', false);
+                    wnd.setButtonDisabled("close", false);
                 }
             }
         });
-        wnd.setButtonDisabled('close', true);
+        wnd.setButtonDisabled("close", true);
         wnd.show();
         wnd.start();
     }
 });
 
 OMV.WorkspaceManager.registerPanel({
-    id: 'contents',
-    path: '/service/borgbackup',
-    text: _('Repos'),
+    id: "contents",
+    path: "/service/borgbackup",
+    text: _("Repos"),
     position: 10,
-    className: 'OMV.module.admin.service.borgbackup.RepoList'
+    className: "OMV.module.admin.service.borgbackup.RepoList"
 });

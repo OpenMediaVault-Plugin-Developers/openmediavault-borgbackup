@@ -17,12 +17,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-// require('js/omv/WorkspaceManager.js')
+// require("js/omv/WorkspaceManager.js")
 
 OMV.WorkspaceManager.registerNode({
-    id: 'borgbackup',
-    path: '/service',
-    text: _('BorgBackup'),
-    icon16: 'images/rsync.png',
-    iconSvg: 'images/rsync.svg'
+    id: "borgbackup",
+    path: "/service",
+    text: _("BorgBackup"),
+    icon16: "images/rsync.png",
+    iconSvg: "images/rsync.svg"
 });
