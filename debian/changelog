@@ -1,3 +1,9 @@
+openmediavault-borgbackup (5.1.4) stable; urgency=low
+
+  * Change size of archive window
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 18 Sep 2020 06:04:42 -0500
+
 openmediavault-borgbackup (5.1.3) stable; urgency=low
 
   * Use double quotes instead of single quotes in javascript

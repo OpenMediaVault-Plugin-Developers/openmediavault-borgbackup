@@ -34,7 +34,8 @@ Ext.define("OMV.module.admin.service.borgbackup.Archive", {
         "OMV.workspace.window.plugin.ConfigObject"
     ],
 
-    width: 500,
+    width: 600,
+    height: 600,
 
     rpcService: "BorgBackup",
     rpcGetMethod: "getArchive",
