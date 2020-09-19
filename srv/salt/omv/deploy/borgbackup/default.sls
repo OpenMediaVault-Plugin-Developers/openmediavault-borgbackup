@@ -86,9 +86,6 @@ configure_borg_{{ archive.name }}_cron_file:
         # Setting this, so you won't be asked for your repository passphrase:
         export BORG_PASSPHRASE='{{ ns.passphrase }}'
 
-        # get date string
-        dateNow=$(date +"%d-%b-%Y_%H-%M-%S")
-
         # some helpers and error handling:
         info() { printf "\n%s %s\n\n" "$( date )" "$*" | tee -a ${LOG_FILE}; }
         trap 'echo $( date ) Backup interrupted >&2; exit 2' INT TERM
@@ -116,7 +113,7 @@ configure_borg_{{ archive.name }}_cron_file:
           --exclude '{{ exclude }}' \
         {%- endfor %}
         {%- endif %}
-          ::"{{ archive.name }}-${dateNow}" \
+          ::"{{ archive.name }}-{now:%Y-%m-%d_%H-%M-%S}" \
         {%- if archive.include | length > 0 %}
         {%- for include in archive.include.split(',') %}
           '{{ include }}' \

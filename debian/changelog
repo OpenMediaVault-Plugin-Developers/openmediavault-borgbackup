@@ -1,3 +1,9 @@
+openmediavault-borgbackup (5.1.5) stable; urgency=low
+
+  * Improve sortability of archive label
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 19 Sep 2020 16:22:27 -0500
+
 openmediavault-borgbackup (5.1.4) stable; urgency=low
 
   * Change size of archive window
