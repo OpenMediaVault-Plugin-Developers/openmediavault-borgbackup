@@ -1,3 +1,9 @@
+openmediavault-borgbackup (5.1.6) stable; urgency=low
+
+  * Use info instead of check when adding an existing repo
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 29 Oct 2020 06:13:02 -0500
+
 openmediavault-borgbackup (5.1.5) stable; urgency=low
 
   * Improve sortability of archive label

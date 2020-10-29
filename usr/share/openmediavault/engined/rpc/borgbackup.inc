@@ -135,9 +135,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $params['passphrase']);
         $cmdArgs[] = $this->getProgram;
         if ($params['skipinit'] == true) {
-            $cmdArgs[] = 'check';
-            $cmdArgs[] = '--repository-only';
-            $cmdArgs[] = '--info';
+            $cmdArgs[] = 'info';
         } else {
             $cmdArgs[] = 'init';
             if ($params['encryption'] == true) {
