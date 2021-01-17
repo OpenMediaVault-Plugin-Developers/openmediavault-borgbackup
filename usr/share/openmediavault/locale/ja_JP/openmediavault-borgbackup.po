@@ -3,6 +3,9 @@
 # This file is distributed under the same license as the openmediavault-borgbackup package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Toshihiro Kan <kansuke4649@gmail.com>, 2020
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,6 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-31 11:27-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
+"Last-Translator: Toshihiro Kan <kansuke4649@gmail.com>, 2020\n"
 "Language-Team: Japanese (Japan) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/ja_JP/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,73 +22,73 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
-msgstr ""
+msgstr "0が最も速い圧縮で、9が最高の圧縮"
 
 msgid "Add archive"
-msgstr ""
+msgstr "アーカイブを追加"
 
 msgid "Add repo"
-msgstr ""
+msgstr "リポジトリを追加"
 
 msgid "All"
-msgstr ""
+msgstr "すべて"
 
 msgid "Archive"
-msgstr ""
+msgstr "アーカイブ"
 
 msgid "Archives"
-msgstr ""
+msgstr "アーカイブ"
 
 msgid "Archives only"
-msgstr ""
+msgstr "アーカイブのみ"
 
 msgid "BorgBackup"
-msgstr ""
+msgstr "BorgBackup"
 
 msgid "Check"
-msgstr ""
+msgstr "チェック"
 
 msgid "Checking "
-msgstr ""
+msgstr "チェック中"
 
 msgid "Compression"
-msgstr ""
+msgstr "圧縮"
 
 msgid "Compression Ratio"
-msgstr ""
+msgstr "圧縮レート"
 
 msgid "Compression Type"
-msgstr ""
+msgstr "圧縮タイプ"
 
 msgid "Create archive for "
-msgstr ""
+msgstr "次のアーカイブを作成 "
 
 msgid "Daily"
-msgstr ""
+msgstr "毎日"
 
 msgid "Done..."
-msgstr ""
+msgstr "完了..."
 
 msgid "Edit archive"
-msgstr ""
+msgstr "アーカイブの編集"
 
 msgid "Enable"
-msgstr ""
+msgstr "有効"
 
 msgid "Enabled"
-msgstr ""
+msgstr "有効化済"
 
 msgid "Encryption"
-msgstr ""
+msgstr "暗号化"
 
 msgid "Excludes"
-msgstr ""
+msgstr "除く"
 
 msgid "Export"
-msgstr ""
+msgstr "書き出し"
 
 msgid "Export archive to tar file"
-msgstr ""
+msgstr "アーカイブをtarファイルで書き出す"
 
 msgid ""
 "Export file will be created in this directory with a filename matching the "
@@ -92,34 +96,34 @@ msgid ""
 msgstr ""
 
 msgid "Extract"
-msgstr ""
+msgstr "抽出"
 
 msgid "Extract archive to directory"
-msgstr ""
+msgstr "アーカイブをディレクトリに抽出する"
 
 msgid "Hourly"
-msgstr ""
+msgstr "毎時"
 
 msgid "Includes"
-msgstr ""
+msgstr "含む"
 
 msgid "List"
-msgstr ""
+msgstr "リスト"
 
 msgid "Local"
-msgstr ""
+msgstr "ローカル"
 
 msgid "Monthly"
-msgstr ""
+msgstr "毎月"
 
 msgid "Mount"
-msgstr ""
+msgstr "マウント"
 
 msgid "Mount repo"
-msgstr ""
+msgstr "リポジトリのマウント"
 
 msgid "Mounted"
-msgstr ""
+msgstr "マウント済"
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form:  "
@@ -127,16 +131,16 @@ msgid ""
 msgstr ""
 
 msgid "Name"
-msgstr ""
+msgstr "名前"
 
 msgid "Name/Prefix"
-msgstr ""
+msgstr "名前/プリフィックス"
 
 msgid "No atime"
-msgstr ""
+msgstr "時間がない"
 
 msgid "None"
-msgstr ""
+msgstr "なし"
 
 msgid "Number of daily archives to keep."
 msgstr ""
@@ -195,7 +199,7 @@ msgid "Repos only"
 msgstr ""
 
 msgid "Run"
-msgstr ""
+msgstr "実行"
 
 msgid "Select a repo ..."
 msgstr ""
@@ -217,37 +221,37 @@ msgid "Skip initialization to import existing repo."
 msgstr ""
 
 msgid "Type"
-msgstr ""
+msgstr "タイプ"
 
 msgid "Unmount"
-msgstr ""
+msgstr "アンマウント"
 
 msgid "Uses value as prefix for archive name."
 msgstr ""
 
 msgid "Verify"
-msgstr ""
+msgstr "確認"
 
 msgid "Weekly"
-msgstr ""
+msgstr "毎週"
 
 msgid "Yearly"
-msgstr ""
+msgstr "毎年"
 
 msgid "lz4 - super fast, low compression"
-msgstr ""
+msgstr "lz4 - 超高速, 低圧縮"
 
 msgid "lzma - even slower, even higher compression"
-msgstr ""
+msgstr "lzma - 超低速, 超高圧縮"
 
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
 
 msgid "repo ..."
-msgstr ""
+msgstr "リポジトリ ..."
 
 msgid "zlib - less fast, higher compression"
-msgstr ""
+msgstr "zlib - まぁまぁ高速, 高圧縮"
 
 msgid "zstd - super fast, medium compression"
-msgstr ""
+msgstr "zstd - 超高速, 中程度の圧縮"

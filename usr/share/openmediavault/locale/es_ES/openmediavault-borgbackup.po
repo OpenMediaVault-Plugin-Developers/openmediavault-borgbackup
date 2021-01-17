@@ -167,7 +167,7 @@ msgid "Original Location"
 msgstr "Ubicación original"
 
 msgid "Output verbose list of files and directories."
-msgstr ""
+msgstr "Muestra una lista detallada de archivos y directorios."
 
 msgid "Passphrase"
 msgstr "Contraseña"
