@@ -1,3 +1,9 @@
+openmediavault-borgbackup (5.1.7) stable; urgency=low
+
+  * Update manual archive timestamp
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 16 Jan 2021 19:20:35 -0600
+
 openmediavault-borgbackup (5.1.6) stable; urgency=low
 
   * Use info instead of check when adding an existing repo

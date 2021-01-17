@@ -399,7 +399,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                     }
                     $path = $repo->get('uri');
                 }
-                $cmdArgs[] = sprintf('"%s::%s-{now}"', $path, $archive->get('name'));
+                $cmdArgs[] = sprintf('"%s::%s-{now:%%Y-%%m-%%d_%%H-%%M-%%S}"', $path, $archive->get('name'));
                 $includes = explode(',', $archive->get('include'));
                 foreach ($includes as $dirs) {
                     $cmdArgs[] = escapeshellarg($dirs);
