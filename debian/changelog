@@ -1,3 +1,9 @@
+openmediavault-borgbackup (5.1.8) stable; urgency=low
+
+  * Throw better output error when failing to create a new repo
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Mon, 22 Feb 2021 15:45:54 -0600
+
 openmediavault-borgbackup (5.1.7) stable; urgency=low
 
   * Update manual archive timestamp
