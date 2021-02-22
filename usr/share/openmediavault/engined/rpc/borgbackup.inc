@@ -153,7 +153,12 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->execute($output);
+        $cmd->setRedirect2to1();
+        $cmdLine = $cmd->getCommandLine();
+        $cmd->execute($output, $exitStatus);
+        if (0 !== $exitStatus) {
+            throw new \OMV\ExecException($cmdLine, $output);
+        }
         // Remove skipinit parameter
         $object->remove('skipinit');
         // Set the configuration object.
