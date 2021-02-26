@@ -20,7 +20,7 @@ case "$1" in
             omv-confdbadm migrate "conf.service.borgbackup" "${2}"
         fi
 
-        omv-salt deploy run borgbackup
+        omv-salt deploy run --quiet borgbackup
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
