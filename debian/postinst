@@ -11,6 +11,8 @@ case "$1" in
         dpkg-trigger update-fixperms
         dpkg-trigger update-locale
 
+        omv_set_default "OMV_BORGBACKUP_STARTING_HOUR" 2 false
+
         # Initialize and migrate configuration database.
         echo "Updating configuration database ..."
         omv-confdbadm create "conf.service.borgbackup"
@@ -18,7 +20,7 @@ case "$1" in
             omv-confdbadm migrate "conf.service.borgbackup" "${2}"
         fi
 
-        omv-salt deploy run --quiet borgbackup
+        omv-salt deploy run borgbackup
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
