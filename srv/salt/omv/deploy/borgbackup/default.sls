@@ -88,7 +88,18 @@ configure_borg_{{ archive.name }}_cron_file:
 
         # some helpers and error handling:
         info() { printf "\n%s %s\n\n" "$( date )" "$*" | tee -a ${LOG_FILE}; }
-        trap 'echo $( date ) Backup interrupted >&2; exit 2' INT TERM
+        cleanup() {
+            exit_code=$?
+            rm -f "/run/{{ scriptPrefix + archive.uuid }}"
+
+            if [ ${exit_code} -ne 0 ]; then
+                echo $( date ) Backup interrupted >&2
+            fi
+
+            exit ${exit_code}
+        }
+        trap cleanup EXIT INT TERM
+        touch "/run/{{ scriptPrefix + archive.uuid }}"
 
         info "Starting backup"
 
