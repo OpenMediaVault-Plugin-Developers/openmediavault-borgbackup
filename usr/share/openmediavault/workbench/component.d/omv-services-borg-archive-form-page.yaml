@@ -1,0 +1,149 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-borgbackup-archive-form-page
+  type: formPage
+  config:
+    request:
+      service: BorgBackup
+      get:
+        method: getArchive
+        params:
+          uuid: "{{ _routeParams.uuid }}"
+      post:
+        method: setArchive
+    fields:
+      - type: confObjUuid
+      - type: checkbox
+        name: enable
+        label: _("Enable")
+        value: true
+      - type: textInput
+        name: name
+        label: _("Name/Prefix")
+        validators:
+          required: true
+          patternType: 'shareName'
+        hint: _("Uses value as prefix for archive name.")
+      - type: select
+        name: reporef
+        label: _('Repo')
+        placeholder: _("Select a repo ...")
+        textField: name
+        valueField: uuid
+        store:
+          proxy:
+            service: BorgBackup
+            get:
+              method: enumerateRepoCandidates
+      - type: select
+        name: compressiontype
+        label: _("Compression Type")
+        value: "none"
+        store:
+          data:
+            - ["none", _("None")]
+            - ["zstd", _("zstd - super fast / medium compression")]
+            - ["lz4", _("lz4 - super fast / low compression")]
+            - ["zlib", _("zlib - less fast / higher compression")]
+            - ["lzma", _("lzma - even slower / even higher compression")]
+      - type: numberInput
+        name: compressionratio
+        label: _("Compression ratio")
+        value: 9
+        hint: _("0 is the fastest compression and 9 is the best compression")
+        validators:
+          min: 0
+          max: 9
+          patternType: integer
+          required: true
+      - type: checkbox
+        name: onefs
+        label: _("One filesystem only")
+        value: false
+        hint: _("If this is enabled, borg won't span filesystem partitions within a backup point.")
+      - type: checkbox
+        name: noatime
+        label: _("No atime")
+        value: false
+      - type: textInput
+        name: include
+        label: _("Includes")
+        hint: _("Put comma between each directory")
+      - type: textInput
+        name: exclude
+        label: _("Excludes")
+        hint: _("Put comma between each directory")
+      - type: numberInput
+        name: hourly
+        label: _("Retain hourly")
+        value: 0
+        hint: _('Number of hourly backups to keep.')
+        validators:
+          min: 0
+          max: 999
+          patternType: integer
+          required: true
+      - type: numberInput
+        name: daily
+        label: _("Retain daily")
+        value: 7
+        hint: _('Number of daily backups to keep.')
+        validators:
+          min: 0
+          max: 999
+          patternType: integer
+          required: true
+      - type: numberInput
+        name: weekly
+        label: _("Retain weekly")
+        value: 4
+        hint: _('Number of weekly backups to keep.')
+        validators:
+          min: 0
+          max: 999
+          patternType: integer
+          required: true
+      - type: numberInput
+        name: monthly
+        label: _("Retain monthly")
+        value: 3
+        hint: _('Number of monthly backups to keep.')
+        validators:
+          min: 0
+          max: 999
+          patternType: integer
+          required: true
+      - type: numberInput
+        name: yearly
+        label: _("Retain yearly")
+        value: 0
+        hint: _('Number of yearly backups to keep.')
+        validators:
+          min: 0
+          max: 99
+          patternType: integer
+          required: true
+      - type: numberInput
+        name: ratelimit
+        label: _("Rate limit")
+        value: 0
+        hint: _("Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited).")
+        validators:
+          min: 0
+          patternType: integer
+          required: true
+      - type: checkbox
+        name: list
+        label: _("List")
+        value: true
+        hint: _("Output verbose list of files and directories.")
+    buttons:
+      - template: submit
+        execute:
+          type: url
+          url: "/services/borgbackup/archives"
+      - template: cancel
+        execute:
+          type: url
+          url: "/services/borgbackup/archives"

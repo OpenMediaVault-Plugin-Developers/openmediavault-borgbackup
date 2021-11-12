@@ -1,0 +1,8 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/borgbackup/archives/edit/:uuid"
+  title: _("Edit")
+  editing: true
+  notificationTitle: _("Edit archive.")
+  component: omv-services-borgbackup-archive-form-page

@@ -3,12 +3,12 @@ Section: net
 XB-Plugin-Section: backup
 Priority: optional
 Maintainer: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
-Build-Depends: debhelper (>= 9.0.0)
-Standards-Version: 3.9.6
+Build-Depends: debhelper (>= 12)
+Standards-Version: 4.3.0
 
 Package: openmediavault-borgbackup
 Architecture: all
-Depends: openmediavault (>= 4.0.6),
+Depends: openmediavault (>= 6),
          borgbackup (>= 1.1.0)
 Description: borgbackup plugin for OpenMediaVault.
  BorgBackup is a deduplicating backup program.

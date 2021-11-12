@@ -1,0 +1,282 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-borgbackup-repos-datatable-page
+  type: datatablePage
+  config:
+    autoReload: false
+    stateId: bce5761c-b0e0-11e7-993b-27be4a786741
+    sorters:
+      - dir: asc
+        prop: name
+    store:
+      proxy:
+        service: BorgBackup
+        get:
+          method: getRepoList
+    columns:
+      - name: _("Name")
+        prop: name
+        flexGrow: 1
+        sortable: true
+      - name: _("Shared Folder")
+        prop: sharedfoldername
+        flexGrow: 1
+        sortable: true
+      - name: _("Remote Path")
+        prop: uri
+        flexGrow: 2
+        sortable: true
+      - name: _("Encryption")
+        prop: encryption
+        sortable: true
+        cellTemplateName: checkIcon
+        flexGrow: 1
+      - name: _("Mounted")
+        prop: mounted
+        sortable: true
+        cellTemplateName: checkIcon
+        flexGrow: 1
+    actions:
+      - template: create
+        execute:
+          type: url
+          url: "/services/borgbackup/repos/create"
+      - template: delete
+        execute:
+          type: request
+          request:
+            service: BorgBackup
+            method: deleteRepo
+            params:
+              uuid: "{{ _selected[0].uuid }}"
+      - type: menu
+        icon: mdi:check-underline
+        tooltip: _("Check")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+        actions:
+          - text: _("All")
+            execute:
+              type: taskDialog
+              taskDialog:
+                config:
+                  title: _("Check all ...")
+                  startOnInit: true
+                  request:
+                    service: BorgBackup
+                    method: repoCommand
+                    params:
+                      command: "all"
+                      uuid: "{{ _selected[0].uuid }}"
+                  buttons:
+                    stop:
+                      hidden: true
+          - text: _("Repos only")
+            execute:
+              type: taskDialog
+              taskDialog:
+                config:
+                  title: _("Check repos only ...")
+                  startOnInit: true
+                  request:
+                    service: BorgBackup
+                    method: repoCommand
+                    params:
+                      command: "repo"
+                      uuid: "{{ _selected[0].uuid }}"
+                  buttons:
+                    stop:
+                      hidden: true
+          - text: _("Archives only")
+            execute:
+              type: taskDialog
+              taskDialog:
+                config:
+                  title: _("Check archives only ...")
+                  startOnInit: true
+                  request:
+                    service: BorgBackup
+                    method: repoCommand
+                    params:
+                      command: "archives"
+                      uuid: "{{ _selected[0].uuid }}"
+                  buttons:
+                    stop:
+                      hidden: true
+          - text: _("Verify")
+            execute:
+              type: taskDialog
+              taskDialog:
+                config:
+                  title: _("Check repo ...")
+                  startOnInit: true
+                  request:
+                    service: BorgBackup
+                    method: repoCommand
+                    params:
+                      command: "verify"
+                      uuid: "{{ _selected[0].uuid }}"
+                  buttons:
+                    stop:
+                      hidden: true
+      - type: iconButton
+        tooltip: _("Export")
+        icon: mdi:export
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+        execute:
+          type: formDialog
+          formDialog:
+            title: _('Extract archive to tar file')
+            fields:
+              - type: hidden
+                name: uuid
+                value: "{{ _selected[0].uuid }}"
+              - type: select
+                name: archive
+                label: _("Archive")
+                placeholder: _("Select an archive ...")
+                valueField: name
+                textField: name
+                store:
+                  proxy:
+                    service: BorgBackup
+                    get:
+                      method: enumerateArchives
+                      params:
+                        uuid: "{{ _selected[0].uuid }}"
+              - type: sharedFolderSelect
+                name: sharedfolderref
+                label: _("Shared folder")
+                hint: _("Export file will be created in this directory with a filename matching the archive name with an extension of .tar.gz.")
+            buttons:
+              submit:
+                text: _('Export')
+                execute:
+                  type: request
+                  request:
+                    service: BorgBackup
+                    method: exportArchive
+      - type: iconButton
+        tooltip: _("Extract")
+        icon: mdi:folder-move-outline
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+        execute:
+          type: formDialog
+          formDialog:
+            title: _('Extract archive to directory')
+            fields:
+              - type: hidden
+                name: uuid
+                value: "{{ _selected[0].uuid }}"
+              - type: select
+                name: archive
+                label: _("Archive")
+                placeholder: _("Select an archive ...")
+                valueField: name
+                textField: name
+                store:
+                  proxy:
+                    service: BorgBackup
+                    get:
+                      method: enumerateArchives
+                      params:
+                        uuid: "{{ _selected[0].uuid }}"
+              - type: checkbox
+                name: original
+                label: _("Original location")
+                value: false
+              - type: sharedFolderSelect
+                name: sharedfolderref
+                label: _("Shared folder")
+                hint: _("Export file will be created in this directory with a filename matching the archive name with an extension of .tar.gz.")
+                modifiers:
+                  - type: visible
+                    constraint:
+                      operator: falsy
+                      arg0:
+                        prop: original
+            buttons:
+              submit:
+                text: _('Extract')
+                execute:
+                  type: request
+                  request:
+                    service: BorgBackup
+                    method: extractArchive
+      - type: iconButton
+        tooltip: _("List")
+        icon: mdi:format-list-bulleted-square
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+        execute:
+          type: taskDialog
+          taskDialog:
+            config:
+              title: _("Check repo ...")
+              startOnInit: true
+              request:
+                service: BorgBackup
+                method: repoCommand
+                params:
+                  command: "list"
+                  uuid: "{{ _selected[0].uuid }}"
+              buttons:
+                stop:
+                  hidden: true
+      - type: iconButton
+        tooltip: _("Mount")
+        icon: mdi:play-outline
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            operator: falsy
+            arg0:
+              prop: mounted
+        execute:
+          type: formDialog
+          formDialog:
+            title: _('Mount repo')
+            fields:
+              - type: hidden
+                name: uuid
+                value: "{{ _selected[0].name }}"
+              - type: sharedFolderSelect
+                name: sharedfolderref
+                label: _("Shared folder")
+                hint: _("Repo will be mounted as a subfolder in the shared folder with the same name as the repo.")
+            buttons:
+              submit:
+                text: _('Mount')
+                execute:
+                  type: request
+                  request:
+                    service: BorgBackup
+                    method: mountRepo
+      - type: iconButton
+        tooptip: _("Unmount")
+        icon: mdi:eject-outline
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            operator: eq
+            arg0:
+              prop: mounted
+            arg1: 1
+        execute:
+          type: request
+          request:
+            service: BorgBackup
+            method: unmountRepo
+            params:
+              uuid: "{{ _selected[0].uuid }}"
+            task: true
+            successUrl: /services/borgbackup/repos

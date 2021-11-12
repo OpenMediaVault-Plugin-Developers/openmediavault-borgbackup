@@ -1,0 +1,74 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-borgbackup-repo-form-page
+  type: formPage
+  config:
+    request:
+      service: BorgBackup
+      get:
+        method: getRepo
+        params:
+          uuid: "{{ _routeParams.uuid }}"
+      post:
+        method: setRepo
+    fields:
+      - type: confObjUuid
+      - type: textInput
+        name: name
+        label: _("Name")
+        validators:
+          required: true
+          patternType: 'shareName'
+      - type: select
+        name: type
+        label: _("Type")
+        value: "local"
+        store:
+          data:
+            - ["local", _("Local")]
+            - ["remote", _("Remote")]
+      - type: sharedFolderSelect
+        name: sharedfolderref
+        label: _("Shared folder")
+        modifiers:
+          - type: hidden
+            constraint:
+              operator: eq
+              arg0:
+                prop: type
+              arg1: "remote"
+      - type: textInput
+        name: uri
+        label: _("Remote path")
+        value: ""
+        hint: _("Must have ssh keys setup.  Remote path should be in the form&#58;  user@hostname&#58;path")
+        modifiers:
+          - type: hidden
+            constraint:
+              operator: eq
+              arg0:
+                prop: type
+              arg1: "local"
+      - type: passwordInput
+        name: passphrase
+        label: _("Passphrase")
+        value: ""
+      - type: checkbox
+        name: encryption
+        label: _("Encryption")
+        value: false
+      - type: checkbox
+        name: skipinit
+        label: _("Skip init")
+        value: false
+        hint: _("Skip initialization to import existing repo.")
+    buttons:
+      - template: submit
+        execute:
+          type: url
+          url: "/services/borgbackup/repos"
+      - template: cancel
+        execute:
+          type: url
+          url: "/services/borgbackup/repos"

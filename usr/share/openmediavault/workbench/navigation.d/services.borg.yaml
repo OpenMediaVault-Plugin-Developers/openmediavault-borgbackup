@@ -1,0 +1,7 @@
+version: "1.0"
+type: navigation-item
+data:
+  path: "services.borgbackup"
+  text: _("BorgBackup")
+  icon: "mdi:content-duplicate"
+  url: "/services/borgbackup"

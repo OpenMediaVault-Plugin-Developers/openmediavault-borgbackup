@@ -1,0 +1,7 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/borgbackup/repos/create"
+  title: _("Create")
+  notificationTitle: _("Created repo.")
+  component: omv-services-borgbackup-repo-form-page

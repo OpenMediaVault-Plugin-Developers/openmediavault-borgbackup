@@ -1,0 +1,76 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-borgbackup-archives-datatable-page
+  type: datatablePage
+  config:
+    autoReload: false
+    stateId: bdef0cfa-b0ed-11e7-ba14-1b4b82806d9d
+    sorters:
+      - dir: asc
+        prop: rule1
+    store:
+      proxy:
+        service: BorgBackup
+        get:
+          method: getArchiveList
+    columns:
+      - name: _("Encryption")
+        prop: encryption
+        sortable: true
+        cellTemplateName: checkIcon
+        flexGrow: 1
+      - name: _("Name")
+        prop: name
+        flexGrow: 1
+        sortable: true
+      - name: _("Repo")
+        prop: reponame
+        flexGrow: 1
+        sortable: true
+      - name: _("Compression")
+        prop: compressiontype
+        flexGrow: 1
+        sortable: true
+      - name: _("Includes")
+        prop: include
+        flexGrow: 1
+        sortable: true
+      - name: _("Excludes")
+        prop: exclude
+        flexGrow: 1
+        sortable: true
+    actions:
+      - template: create
+        execute:
+          type: url
+          url: "/services/borgbackup/archives/create"
+      - template: edit
+        execute:
+          type: url
+          url: "/services/borgbackup/archives/edit/{{ _selected[0].uuid }}"
+      - template: delete
+        execute:
+          type: request
+          request:
+            service: BorgBackup
+            method: deleteArchive
+            params:
+              uuid: "{{ _selected[0].uuid }}"
+      - type: iconButton
+        icon: mdi:play-outline
+        tooltip: _("Run")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+        execute:
+          type: taskDialog
+          taskDialog:
+            config:
+              title: _("Create archive for ...")
+              startOnInit: true
+              request:
+                service: BorgBackup
+                method: createArchive
+                params:
+                  uuid: "{{ _selected[0].uuid }}"

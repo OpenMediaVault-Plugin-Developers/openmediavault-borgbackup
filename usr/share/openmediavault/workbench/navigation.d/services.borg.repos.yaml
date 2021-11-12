@@ -1,0 +1,8 @@
+version: "1.0"
+type: navigation-item
+data:
+  path: "services.borgbackup.repos"
+  text: _("Repos")
+  position: 10
+  icon: mdi:folder-multiple-outline
+  url: "/services/borgbackup/repos"

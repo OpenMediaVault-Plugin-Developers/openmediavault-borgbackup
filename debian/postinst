@@ -8,8 +8,7 @@ set -e
 case "$1" in
     configure)
         # Activate package triggers.
-        dpkg-trigger update-fixperms
-        dpkg-trigger update-locale
+        dpkg-trigger update-workbench
 
         omv_set_default "OMV_BORGBACKUP_STARTING_HOUR" 2 false
 
@@ -20,7 +19,7 @@ case "$1" in
             omv-confdbadm migrate "conf.service.borgbackup" "${2}"
         fi
 
-        omv-salt deploy run --quiet borgbackup
+        omv-salt deploy run borgbackup || :
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

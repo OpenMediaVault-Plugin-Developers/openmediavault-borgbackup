@@ -30,8 +30,7 @@
 				"required": true
 			},
 			"uri": {
-				"type": "string",
-				"required": true
+				"type": "string"
 			},
 			"passphrase": {
 				"type": "string",

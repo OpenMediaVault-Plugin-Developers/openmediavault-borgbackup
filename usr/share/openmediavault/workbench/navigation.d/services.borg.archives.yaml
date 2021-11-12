@@ -1,0 +1,8 @@
+version: "1.0"
+type: navigation-item
+data:
+  path: "services.borgbackup.archives"
+  text: _("Archives")
+  position: 20
+  icon: mdi:archive-outline
+  url: "/services/borgbackup/archives"
