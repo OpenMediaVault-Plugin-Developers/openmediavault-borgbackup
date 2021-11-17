@@ -237,9 +237,9 @@ data:
           minSelected: 1
           maxSelected: 1
           constraint:
-            operator: falsy
-            arg0:
-              prop: mounted
+            - operator: falsy
+              arg0:
+                prop: mounted
         execute:
           type: formDialog
           formDialog:
@@ -267,10 +267,9 @@ data:
           minSelected: 1
           maxSelected: 1
           constraint:
-            operator: eq
-            arg0:
-              prop: mounted
-            arg1: 1
+            - operator: truthy
+              arg0:
+                prop: mounted
         execute:
           type: request
           request:
