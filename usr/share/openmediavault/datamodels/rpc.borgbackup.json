@@ -95,7 +95,13 @@
 			},
 			"exclude": {
 				"type": "string",
-				"required": false
+				"oneOf": [{
+					"type": "string"
+				},{
+					"type": "string",
+					"maxLength": 0
+				}],
+				"required": true
 			},
 			"hourly": {
 				"type": "integer",

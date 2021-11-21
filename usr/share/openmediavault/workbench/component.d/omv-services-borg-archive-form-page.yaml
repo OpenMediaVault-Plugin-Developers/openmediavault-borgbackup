@@ -74,6 +74,9 @@ data:
         name: exclude
         label: _("Excludes")
         hint: _("Put comma between each directory")
+        value: ""
+        validators:
+          required: false
       - type: numberInput
         name: hourly
         label: _("Retain hourly")
