@@ -1,3 +1,9 @@
+openmediavault-borgbackup (6.0.1) stable; urgency=low
+
+  * Check for associated archives before deleting repo
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 28 Dec 2021 17:30:41 -0600
+
 openmediavault-borgbackup (6.0) stable; urgency=low
 
   * Update for OMV 6.x

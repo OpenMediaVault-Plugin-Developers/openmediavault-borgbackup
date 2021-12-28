@@ -234,6 +234,21 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->validateMethodParams($params, 'rpc.common.objectuuid');
         // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
+        // check to see if archive is using repo to be deleted
+        $archives = $db->get('conf.service.borgbackup.archive');
+        $found = false;
+        foreach ($archives as $archive) {
+            $reporef = $archive->get('reporef');
+            if ($reporef == $params['uuid']) {
+                $found = true;
+                break;
+            }
+        }
+        if ($found) {
+            throw new \OMV\ExecException(gettext(
+              "Repo is in use. Delete archives associated with this repo first!"
+            ));
+        }
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         // delete repo
         $cmdArgs = [];
