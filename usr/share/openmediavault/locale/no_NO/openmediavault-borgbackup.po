@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 11:27-0500\n"
+"POT-Creation-Date: 2022-01-11 18:36-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Language-Team: Norwegian (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/no/)\n"
 "MIME-Version: 1.0\n"
@@ -18,12 +18,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
-msgstr ""
-
-msgid "Add archive"
-msgstr ""
-
-msgid "Add repo"
 msgstr ""
 
 msgid "All"
@@ -44,28 +38,51 @@ msgstr ""
 msgid "Check"
 msgstr ""
 
-msgid "Checking "
+msgid "Check all ..."
+msgstr ""
+
+msgid "Check archives only ..."
+msgstr ""
+
+msgid "Check repo ..."
+msgstr ""
+
+msgid "Check repos only ..."
+msgstr ""
+
+msgid ""
+"Checked = send email on error or success.<br/>Unchecked = send email on "
+"error only."
 msgstr ""
 
 msgid "Compression"
 msgstr ""
 
-msgid "Compression Ratio"
-msgstr ""
-
 msgid "Compression Type"
 msgstr ""
 
-msgid "Create archive for "
+msgid "Compression ratio"
 msgstr ""
 
-msgid "Daily"
+msgid "Create"
 msgstr ""
 
-msgid "Done..."
+msgid "Create archive for ..."
 msgstr ""
 
-msgid "Edit archive"
+msgid "Created archive."
+msgstr ""
+
+msgid "Created repo."
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Edit archive."
+msgstr ""
+
+msgid "Email"
 msgstr ""
 
 msgid "Enable"
@@ -83,9 +100,6 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-msgid "Export archive to tar file"
-msgstr ""
-
 msgid ""
 "Export file will be created in this directory with a filename matching the "
 "archive name with an extension of .tar.gz."
@@ -94,10 +108,9 @@ msgstr ""
 msgid "Extract"
 msgstr ""
 
-msgid "Extract archive to directory"
-msgstr ""
-
-msgid "Hourly"
+msgid ""
+"If this is enabled, borg won't span filesystem partitions within a backup "
+"point."
 msgstr ""
 
 msgid "Includes"
@@ -109,21 +122,15 @@ msgstr ""
 msgid "Local"
 msgstr ""
 
-msgid "Monthly"
-msgstr ""
-
 msgid "Mount"
-msgstr ""
-
-msgid "Mount repo"
 msgstr ""
 
 msgid "Mounted"
 msgstr ""
 
 msgid ""
-"Must have ssh keys setup.  Remote path should be in the form:  "
-"user@hostname:path"
+"Must have ssh keys setup.  Remote path should be in the form&#58;  "
+"user@hostname&#58;path"
 msgstr ""
 
 msgid "Name"
@@ -138,25 +145,10 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-msgid "Number of daily archives to keep."
+msgid "One filesystem only"
 msgstr ""
 
-msgid "Number of hourly archives to keep."
-msgstr ""
-
-msgid "Number of monthly archives to keep."
-msgstr ""
-
-msgid "Number of weekly archives to keep."
-msgstr ""
-
-msgid "Number of yearly archives to keep."
-msgstr ""
-
-msgid "One Filesystem"
-msgstr ""
-
-msgid "Original Location"
+msgid "Original location"
 msgstr ""
 
 msgid "Output verbose list of files and directories."
@@ -168,9 +160,6 @@ msgstr ""
 msgid "Put comma between each directory"
 msgstr ""
 
-msgid "Put comma between each directory."
-msgstr ""
-
 msgid "Rate limit"
 msgstr ""
 
@@ -180,7 +169,13 @@ msgstr ""
 msgid "Remote Path"
 msgstr ""
 
+msgid "Remote path"
+msgstr ""
+
 msgid "Repo"
+msgstr ""
+
+msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr ""
 
 msgid ""
@@ -194,6 +189,21 @@ msgstr ""
 msgid "Repos only"
 msgstr ""
 
+msgid "Retain daily"
+msgstr ""
+
+msgid "Retain hourly"
+msgstr ""
+
+msgid "Retain monthly"
+msgstr ""
+
+msgid "Retain weekly"
+msgstr ""
+
+msgid "Retain yearly"
+msgstr ""
+
 msgid "Run"
 msgstr ""
 
@@ -204,10 +214,13 @@ msgid "Select an archive ..."
 msgstr ""
 
 msgid ""
-"Set remote network upload rate limit in kiByte/s (default: 0=unlimited)."
+"Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
 msgstr ""
 
 msgid "Shared Folder"
+msgstr ""
+
+msgid "Shared folder"
 msgstr ""
 
 msgid "Skip init"
@@ -228,26 +241,17 @@ msgstr ""
 msgid "Verify"
 msgstr ""
 
-msgid "Weekly"
+msgid "lz4 - super fast / low compression"
 msgstr ""
 
-msgid "Yearly"
-msgstr ""
-
-msgid "lz4 - super fast, low compression"
-msgstr ""
-
-msgid "lzma - even slower, even higher compression"
+msgid "lzma - even slower / even higher compression"
 msgstr ""
 
 msgid "n/a"
 msgstr ""
 
-msgid "repo ..."
+msgid "zlib - less fast / higher compression"
 msgstr ""
 
-msgid "zlib - less fast, higher compression"
-msgstr ""
-
-msgid "zstd - super fast, medium compression"
+msgid "zstd - super fast / medium compression"
 msgstr ""

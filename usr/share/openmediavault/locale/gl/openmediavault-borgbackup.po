@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 11:27-0500\n"
+"POT-Creation-Date: 2022-01-11 18:36-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>, 2020\n"
 "Language-Team: Galician (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/gl/)\n"
@@ -23,12 +23,6 @@ msgstr ""
 
 msgid "0 is the fastest compression and 9 is the best compression"
 msgstr "0 é a compresión máis rápida e 9 é a mellor compresión"
-
-msgid "Add archive"
-msgstr "Engadir arquivo"
-
-msgid "Add repo"
-msgstr "Engadir repo"
 
 msgid "All"
 msgstr "Todo"
@@ -48,29 +42,52 @@ msgstr "BorgBackup"
 msgid "Check"
 msgstr "Comprobar"
 
-msgid "Checking "
-msgstr "Comprobando"
+msgid "Check all ..."
+msgstr ""
+
+msgid "Check archives only ..."
+msgstr ""
+
+msgid "Check repo ..."
+msgstr ""
+
+msgid "Check repos only ..."
+msgstr ""
+
+msgid ""
+"Checked = send email on error or success.<br/>Unchecked = send email on "
+"error only."
+msgstr ""
 
 msgid "Compression"
 msgstr "Compresión"
 
-msgid "Compression Ratio"
-msgstr "Taxa de compresión"
-
 msgid "Compression Type"
 msgstr "Tipo de copresión"
 
-msgid "Create archive for "
-msgstr "Crear arquivo para"
+msgid "Compression ratio"
+msgstr ""
 
-msgid "Daily"
-msgstr "Diario"
+msgid "Create"
+msgstr ""
 
-msgid "Done..."
-msgstr "Feito…"
+msgid "Create archive for ..."
+msgstr ""
 
-msgid "Edit archive"
-msgstr "Editar arquivo"
+msgid "Created archive."
+msgstr ""
+
+msgid "Created repo."
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Edit archive."
+msgstr ""
+
+msgid "Email"
+msgstr ""
 
 msgid "Enable"
 msgstr "Activar"
@@ -87,9 +104,6 @@ msgstr "Excluír"
 msgid "Export"
 msgstr "Exportar"
 
-msgid "Export archive to tar file"
-msgstr "Exportar o arquivo a ficheiro tar"
-
 msgid ""
 "Export file will be created in this directory with a filename matching the "
 "archive name with an extension of .tar.gz."
@@ -100,11 +114,10 @@ msgstr ""
 msgid "Extract"
 msgstr "Extraer"
 
-msgid "Extract archive to directory"
-msgstr "Extraer o arquivo no directorio"
-
-msgid "Hourly"
-msgstr "Cada hora"
+msgid ""
+"If this is enabled, borg won't span filesystem partitions within a backup "
+"point."
+msgstr ""
 
 msgid "Includes"
 msgstr "Incluír"
@@ -115,24 +128,16 @@ msgstr "Lista"
 msgid "Local"
 msgstr "Local"
 
-msgid "Monthly"
-msgstr "Mensual"
-
 msgid "Mount"
 msgstr "Montar"
-
-msgid "Mount repo"
-msgstr "Montar repositorio"
 
 msgid "Mounted"
 msgstr "Montado"
 
 msgid ""
-"Must have ssh keys setup.  Remote path should be in the form:  "
-"user@hostname:path"
+"Must have ssh keys setup.  Remote path should be in the form&#58;  "
+"user@hostname&#58;path"
 msgstr ""
-"Debe ter a configuradas as chaves ssh. A ruta remota debe estar na forma: "
-"usuario@nome_do_servidor:ruta"
 
 msgid "Name"
 msgstr "Nome"
@@ -146,26 +151,11 @@ msgstr "Sen tempo"
 msgid "None"
 msgstr "Ningún"
 
-msgid "Number of daily archives to keep."
-msgstr "Número de arquivos diarios que hai que gardar."
+msgid "One filesystem only"
+msgstr ""
 
-msgid "Number of hourly archives to keep."
-msgstr "Número de arquivos por hora que hai que gardar."
-
-msgid "Number of monthly archives to keep."
-msgstr "Número de arquivos mensuais que hai que gardar."
-
-msgid "Number of weekly archives to keep."
-msgstr "Número de arquivos semanais que hai que gardar."
-
-msgid "Number of yearly archives to keep."
-msgstr "Número de arquivos anuais que hai que gardar."
-
-msgid "One Filesystem"
-msgstr "Un sistema de ficheiros"
-
-msgid "Original Location"
-msgstr "Localización orixinal"
+msgid "Original location"
+msgstr ""
 
 msgid "Output verbose list of files and directories."
 msgstr "Saída de lista detallada de ficheiros e directorios."
@@ -176,9 +166,6 @@ msgstr "Frase de paso"
 msgid "Put comma between each directory"
 msgstr "Poña unha coma entre cada directorio"
 
-msgid "Put comma between each directory."
-msgstr "Poña unha coma entre cada directorio."
-
 msgid "Rate limit"
 msgstr "Límite de taxa"
 
@@ -188,8 +175,14 @@ msgstr "Remota"
 msgid "Remote Path"
 msgstr "Ruta remota"
 
+msgid "Remote path"
+msgstr ""
+
 msgid "Repo"
 msgstr "Repositorio"
+
+msgid "Repo is in use. Delete archives associated with this repo first!"
+msgstr ""
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
@@ -204,6 +197,21 @@ msgstr "Repositorios"
 msgid "Repos only"
 msgstr "Só repositorios"
 
+msgid "Retain daily"
+msgstr ""
+
+msgid "Retain hourly"
+msgstr ""
+
+msgid "Retain monthly"
+msgstr ""
+
+msgid "Retain weekly"
+msgstr ""
+
+msgid "Retain yearly"
+msgstr ""
+
 msgid "Run"
 msgstr "Executar"
 
@@ -214,13 +222,14 @@ msgid "Select an archive ..."
 msgstr "Seleccionar un arquivo…"
 
 msgid ""
-"Set remote network upload rate limit in kiByte/s (default: 0=unlimited)."
+"Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
 msgstr ""
-"Estableza o límite da taxa de carga da rede remota en kiByte/s (por omisión:"
-" 0=ilimitado)."
 
 msgid "Shared Folder"
 msgstr "Cartafol compartido"
+
+msgid "Shared folder"
+msgstr ""
 
 msgid "Skip init"
 msgstr "Omitir o inicio"
@@ -240,26 +249,17 @@ msgstr "Usar o valor como prefixo para o nome do arquivo."
 msgid "Verify"
 msgstr "Verificar"
 
-msgid "Weekly"
-msgstr "Semanal"
+msgid "lz4 - super fast / low compression"
+msgstr ""
 
-msgid "Yearly"
-msgstr "Anual"
-
-msgid "lz4 - super fast, low compression"
-msgstr "lz4: moi rápido e baixa compresión."
-
-msgid "lzma - even slower, even higher compression"
-msgstr "lzma: aínda máis lenta e aínda maior compresión"
+msgid "lzma - even slower / even higher compression"
+msgstr ""
 
 msgid "n/a"
 msgstr "n/d"
 
-msgid "repo ..."
-msgstr "repositorio…"
+msgid "zlib - less fast / higher compression"
+msgstr ""
 
-msgid "zlib - less fast, higher compression"
-msgstr "zlib: máis lento e maior compresión"
-
-msgid "zstd - super fast, medium compression"
-msgstr "zstd: moi rápido e compresión media"
+msgid "zstd - super fast / medium compression"
+msgstr ""

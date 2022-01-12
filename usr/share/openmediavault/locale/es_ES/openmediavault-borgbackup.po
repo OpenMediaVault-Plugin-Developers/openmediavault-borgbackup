@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Raul Fernandez Garcia <raulfg3@gmail.com>, 2020
+# Raul Fernandez Garcia <raulfg3@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 11:27-0500\n"
+"POT-Creation-Date: 2022-01-11 18:36-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2020\n"
+"Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,12 +23,6 @@ msgstr ""
 
 msgid "0 is the fastest compression and 9 is the best compression"
 msgstr "0 is la compresión más rápida ( y peor) y 9 la más lenta ( y mejor)"
-
-msgid "Add archive"
-msgstr "Añadir archivo"
-
-msgid "Add repo"
-msgstr "Añadir repositorio"
 
 msgid "All"
 msgstr "Todos"
@@ -48,29 +42,52 @@ msgstr "BorgBackup"
 msgid "Check"
 msgstr "Validar"
 
-msgid "Checking "
-msgstr "Validando"
+msgid "Check all ..."
+msgstr "Revisar todo ..."
+
+msgid "Check archives only ..."
+msgstr "Revisar solo archivos ..."
+
+msgid "Check repo ..."
+msgstr "Revisar repo ..."
+
+msgid "Check repos only ..."
+msgstr "Revisar repos únicamente ..."
+
+msgid ""
+"Checked = send email on error or success.<br/>Unchecked = send email on "
+"error only."
+msgstr ""
 
 msgid "Compression"
 msgstr "Compresión"
 
-msgid "Compression Ratio"
-msgstr "Ratio de Compresión"
-
 msgid "Compression Type"
 msgstr "Tipo de Compresión"
 
-msgid "Create archive for "
-msgstr "Crear archivo para"
+msgid "Compression ratio"
+msgstr "Ratio de compresión"
 
-msgid "Daily"
-msgstr "Diario"
+msgid "Create"
+msgstr "Crear"
 
-msgid "Done..."
-msgstr "Hecho..."
+msgid "Create archive for ..."
+msgstr "Crear archivo para ..."
 
-msgid "Edit archive"
-msgstr "Editar archivo"
+msgid "Created archive."
+msgstr "Archivo creado."
+
+msgid "Created repo."
+msgstr "repo creado."
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Edit archive."
+msgstr "Editar archivo."
+
+msgid "Email"
+msgstr ""
 
 msgid "Enable"
 msgstr "Habilitar"
@@ -87,9 +104,6 @@ msgstr "Excluidos"
 msgid "Export"
 msgstr "Exportar"
 
-msgid "Export archive to tar file"
-msgstr "Exportar a un archivo tar"
-
 msgid ""
 "Export file will be created in this directory with a filename matching the "
 "archive name with an extension of .tar.gz."
@@ -100,11 +114,12 @@ msgstr ""
 msgid "Extract"
 msgstr "Extraer"
 
-msgid "Extract archive to directory"
-msgstr "Extraer el archivo en el directorio"
-
-msgid "Hourly"
-msgstr "Cada hora"
+msgid ""
+"If this is enabled, borg won't span filesystem partitions within a backup "
+"point."
+msgstr ""
+"Si está habilitado, borg no abarcará las particiones del sistema de archivos"
+" dentro de un punto de backup."
 
 msgid "Includes"
 msgstr "Incluye"
@@ -115,23 +130,18 @@ msgstr "Lista"
 msgid "Local"
 msgstr "Local"
 
-msgid "Monthly"
-msgstr "Mensualmente"
-
 msgid "Mount"
 msgstr "Montaje"
-
-msgid "Mount repo"
-msgstr "Repositorio de montaje"
 
 msgid "Mounted"
 msgstr "Montado"
 
 msgid ""
-"Must have ssh keys setup.  Remote path should be in the form:  "
-"user@hostname:path"
+"Must have ssh keys setup.  Remote path should be in the form&#58;  "
+"user@hostname&#58;path"
 msgstr ""
-"Debe tener claves SSH. La ruta remota es en la forma: user@hostname:path"
+"Debe tener configuradas las claves ssh. La ruta remota debe tener el "
+"formato&#58;  user@hostname&#58;path"
 
 msgid "Name"
 msgstr "Nombre"
@@ -145,25 +155,10 @@ msgstr "Sin atime"
 msgid "None"
 msgstr "Ninguno"
 
-msgid "Number of daily archives to keep."
-msgstr "Número de archivos diarios a mantener."
+msgid "One filesystem only"
+msgstr "Un sistema de archivos únicamente"
 
-msgid "Number of hourly archives to keep."
-msgstr "Número de archivos horarios a mantener."
-
-msgid "Number of monthly archives to keep."
-msgstr "Número de archivos mensuales a mantener."
-
-msgid "Number of weekly archives to keep."
-msgstr "Número de archivos semanales a mantener."
-
-msgid "Number of yearly archives to keep."
-msgstr "Número de archivos anuales a mantener."
-
-msgid "One Filesystem"
-msgstr "Un Sistema de Archivos"
-
-msgid "Original Location"
+msgid "Original location"
 msgstr "Ubicación original"
 
 msgid "Output verbose list of files and directories."
@@ -175,9 +170,6 @@ msgstr "Contraseña"
 msgid "Put comma between each directory"
 msgstr "Use la coma, para separar los directorios"
 
-msgid "Put comma between each directory."
-msgstr "Use la coma, para separar los directorios"
-
 msgid "Rate limit"
 msgstr "Limite de Ancho de Banda"
 
@@ -187,8 +179,14 @@ msgstr "Remoto"
 msgid "Remote Path"
 msgstr "Ruta remota"
 
+msgid "Remote path"
+msgstr "Ruta remota"
+
 msgid "Repo"
 msgstr "Repositorio"
+
+msgid "Repo is in use. Delete archives associated with this repo first!"
+msgstr "Repo en uso. !Borre archivos asociados a este repo primero!"
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
@@ -203,6 +201,21 @@ msgstr "Repositorios"
 msgid "Repos only"
 msgstr "Solo Repositorios"
 
+msgid "Retain daily"
+msgstr "Retener diariamente"
+
+msgid "Retain hourly"
+msgstr "Retener 1 hora"
+
+msgid "Retain monthly"
+msgstr "retener 1 mes"
+
+msgid "Retain weekly"
+msgstr "retener 1 semana"
+
+msgid "Retain yearly"
+msgstr "retener 1 año"
+
 msgid "Run"
 msgstr "Ejecutar"
 
@@ -213,12 +226,15 @@ msgid "Select an archive ..."
 msgstr "Seleccionar un archivo ..."
 
 msgid ""
-"Set remote network upload rate limit in kiByte/s (default: 0=unlimited)."
+"Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
 msgstr ""
-"Definir el limite en  kiByte/s de la subida remota (por defecto: "
-"0=ilimitado)."
+"Establezca el límite de velocidad de carga de la red remota en kiByte / s "
+"(predeterminado&#58; 0=unlimited)."
 
 msgid "Shared Folder"
+msgstr "Carpeta compartida"
+
+msgid "Shared folder"
 msgstr "Carpeta compartida"
 
 msgid "Skip init"
@@ -239,26 +255,17 @@ msgstr "Usa el valor como prefijo del nombre de archivo"
 msgid "Verify"
 msgstr "Verificar"
 
-msgid "Weekly"
-msgstr "Semanalmente"
+msgid "lz4 - super fast / low compression"
+msgstr "lz4 - super rápido / baja compresión"
 
-msgid "Yearly"
-msgstr "Anualmente"
-
-msgid "lz4 - super fast, low compression"
-msgstr "lz4 - super rapido, compresión baja"
-
-msgid "lzma - even slower, even higher compression"
-msgstr "lzma - más lento, mayor compresión"
+msgid "lzma - even slower / even higher compression"
+msgstr "lzma - más lento / mayor compresión"
 
 msgid "n/a"
 msgstr "n/d"
 
-msgid "repo ..."
-msgstr "repo ..."
+msgid "zlib - less fast / higher compression"
+msgstr "zlib - menos rápido / mayor compresión"
 
-msgid "zlib - less fast, higher compression"
-msgstr "zlib - el más lento, la mayor compresión"
-
-msgid "zstd - super fast, medium compression"
-msgstr "zstd - super rapido, compresión media"
+msgid "zstd - super fast / medium compression"
+msgstr "zstd - super rápido / compresión media"

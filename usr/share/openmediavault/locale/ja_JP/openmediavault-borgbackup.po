@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 11:27-0500\n"
+"POT-Creation-Date: 2022-01-11 18:36-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Toshihiro Kan <kansuke4649@gmail.com>, 2021\n"
 "Language-Team: Japanese (Japan) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/ja_JP/)\n"
@@ -23,12 +23,6 @@ msgstr ""
 
 msgid "0 is the fastest compression and 9 is the best compression"
 msgstr "0が最も速い圧縮で、9が最高の圧縮"
-
-msgid "Add archive"
-msgstr "アーカイブを追加"
-
-msgid "Add repo"
-msgstr "リポジトリを追加"
 
 msgid "All"
 msgstr "すべて"
@@ -48,29 +42,52 @@ msgstr "BorgBackup"
 msgid "Check"
 msgstr "チェック"
 
-msgid "Checking "
-msgstr "チェック中"
+msgid "Check all ..."
+msgstr ""
+
+msgid "Check archives only ..."
+msgstr ""
+
+msgid "Check repo ..."
+msgstr ""
+
+msgid "Check repos only ..."
+msgstr ""
+
+msgid ""
+"Checked = send email on error or success.<br/>Unchecked = send email on "
+"error only."
+msgstr ""
 
 msgid "Compression"
 msgstr "圧縮"
 
-msgid "Compression Ratio"
-msgstr "圧縮レート"
-
 msgid "Compression Type"
 msgstr "圧縮タイプ"
 
-msgid "Create archive for "
-msgstr "次のアーカイブを作成 "
+msgid "Compression ratio"
+msgstr ""
 
-msgid "Daily"
-msgstr "毎日"
+msgid "Create"
+msgstr ""
 
-msgid "Done..."
-msgstr "完了..."
+msgid "Create archive for ..."
+msgstr ""
 
-msgid "Edit archive"
-msgstr "アーカイブの編集"
+msgid "Created archive."
+msgstr ""
+
+msgid "Created repo."
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Edit archive."
+msgstr ""
+
+msgid "Email"
+msgstr ""
 
 msgid "Enable"
 msgstr "有効"
@@ -87,9 +104,6 @@ msgstr "除く"
 msgid "Export"
 msgstr "書き出し"
 
-msgid "Export archive to tar file"
-msgstr "アーカイブをtarファイルで書き出す"
-
 msgid ""
 "Export file will be created in this directory with a filename matching the "
 "archive name with an extension of .tar.gz."
@@ -98,11 +112,10 @@ msgstr "エクスポートファイルは、このディレクトリにアーカ
 msgid "Extract"
 msgstr "抽出"
 
-msgid "Extract archive to directory"
-msgstr "アーカイブをディレクトリに抽出する"
-
-msgid "Hourly"
-msgstr "毎時"
+msgid ""
+"If this is enabled, borg won't span filesystem partitions within a backup "
+"point."
+msgstr ""
 
 msgid "Includes"
 msgstr "含む"
@@ -113,22 +126,16 @@ msgstr "リスト"
 msgid "Local"
 msgstr "ローカル"
 
-msgid "Monthly"
-msgstr "毎月"
-
 msgid "Mount"
 msgstr "マウント"
-
-msgid "Mount repo"
-msgstr "リポジトリのマウント"
 
 msgid "Mounted"
 msgstr "マウント済"
 
 msgid ""
-"Must have ssh keys setup.  Remote path should be in the form:  "
-"user@hostname:path"
-msgstr "sshキーを設定する必要があります。 リモートパスは、user@hostname:pathの形式である必要があります。"
+"Must have ssh keys setup.  Remote path should be in the form&#58;  "
+"user@hostname&#58;path"
+msgstr ""
 
 msgid "Name"
 msgstr "名前"
@@ -142,26 +149,11 @@ msgstr "時間がない"
 msgid "None"
 msgstr "なし"
 
-msgid "Number of daily archives to keep."
-msgstr "保持する日次アーカイブの数。"
+msgid "One filesystem only"
+msgstr ""
 
-msgid "Number of hourly archives to keep."
-msgstr "保持する毎時アーカイブの数。"
-
-msgid "Number of monthly archives to keep."
-msgstr "保持する月間アーカイブの数。"
-
-msgid "Number of weekly archives to keep."
-msgstr "保持する週間アーカイブの数。"
-
-msgid "Number of yearly archives to keep."
-msgstr "保持する年間アーカイブの数。"
-
-msgid "One Filesystem"
-msgstr "One Filesystem"
-
-msgid "Original Location"
-msgstr "元の場所"
+msgid "Original location"
+msgstr ""
 
 msgid "Output verbose list of files and directories."
 msgstr "ファイルとディレクトリの詳細なリストを出力します。"
@@ -172,9 +164,6 @@ msgstr "パスフレーズ"
 msgid "Put comma between each directory"
 msgstr "各ディレクトリの間にコンマを入れます"
 
-msgid "Put comma between each directory."
-msgstr "各ディレクトリの間にコンマを入れます。"
-
 msgid "Rate limit"
 msgstr "レート制限"
 
@@ -184,8 +173,14 @@ msgstr "リモート"
 msgid "Remote Path"
 msgstr "リモートパス"
 
+msgid "Remote path"
+msgstr ""
+
 msgid "Repo"
 msgstr "リポジトリ"
+
+msgid "Repo is in use. Delete archives associated with this repo first!"
+msgstr ""
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
@@ -198,6 +193,21 @@ msgstr "リポジトリ"
 msgid "Repos only"
 msgstr "リポジトリだけ"
 
+msgid "Retain daily"
+msgstr ""
+
+msgid "Retain hourly"
+msgstr ""
+
+msgid "Retain monthly"
+msgstr ""
+
+msgid "Retain weekly"
+msgstr ""
+
+msgid "Retain yearly"
+msgstr ""
+
 msgid "Run"
 msgstr "実行"
 
@@ -208,11 +218,14 @@ msgid "Select an archive ..."
 msgstr "アーカイブを選択 ..."
 
 msgid ""
-"Set remote network upload rate limit in kiByte/s (default: 0=unlimited)."
-msgstr "リモートネットワークのアップロードレート制限をkiByte/sで設定します（デフォルト：0 =無制限）。"
+"Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
+msgstr ""
 
 msgid "Shared Folder"
 msgstr "共有フォルダ"
+
+msgid "Shared folder"
+msgstr ""
 
 msgid "Skip init"
 msgstr "initをスキップ"
@@ -232,26 +245,17 @@ msgstr "アーカイブ名のプレフィックスとして値を使用します
 msgid "Verify"
 msgstr "確認"
 
-msgid "Weekly"
-msgstr "毎週"
+msgid "lz4 - super fast / low compression"
+msgstr ""
 
-msgid "Yearly"
-msgstr "毎年"
-
-msgid "lz4 - super fast, low compression"
-msgstr "lz4 - 超高速, 低圧縮"
-
-msgid "lzma - even slower, even higher compression"
-msgstr "lzma - 超低速, 超高圧縮"
+msgid "lzma - even slower / even higher compression"
+msgstr ""
 
 msgid "n/a"
 msgstr "n/a"
 
-msgid "repo ..."
-msgstr "リポジトリ ..."
+msgid "zlib - less fast / higher compression"
+msgstr ""
 
-msgid "zlib - less fast, higher compression"
-msgstr "zlib - まぁまぁ高速, 高圧縮"
-
-msgid "zstd - super fast, medium compression"
-msgstr "zstd - 超高速, 中程度の圧縮"
+msgid "zstd - super fast / medium compression"
+msgstr ""
