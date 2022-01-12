@@ -136,6 +136,10 @@
 			"list": {
 				"type": "boolean",
 				"required": true
+			},
+			"email": {
+				"type": "boolean",
+				"required": true
 			}
 		}
 	}

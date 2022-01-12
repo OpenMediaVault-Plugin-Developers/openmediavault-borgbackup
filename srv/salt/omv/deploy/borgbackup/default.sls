@@ -71,6 +71,12 @@ configure_borg_crond:
 {% set rpath = ns.uri %}
 {% endif %}
 
+{% if archive.email %}
+{% set email = '2>&1 | tee -a ' ~ logFile %}
+{% else %}
+{% set email = '>> ' ~ logFile ~ ' 2>&1' %}
+{% endif %}
+
 configure_borg_{{ archive.name }}_cron_file:
   file.managed:
     - name: '{{ script }}'
@@ -87,10 +93,10 @@ configure_borg_{{ archive.name }}_cron_file:
         export BORG_PASSPHRASE='{{ ns.passphrase }}'
 
         # some helpers and error handling:
-        info() { printf "\n%s %s\n\n" "$( date )" "$*" | tee -a ${LOG_FILE}; }
+        info() { printf "\n%s %s\n\n" "$( date )" "$*"; }
         trap 'echo $( date ) Backup interrupted >&2; exit 2' INT TERM
 
-        info "Starting backup"
+        info "Starting backup" {{ email }}
 
         borg create \
           --verbose \
@@ -119,11 +125,11 @@ configure_borg_{{ archive.name }}_cron_file:
           '{{ include }}' \
         {%- endfor %}
         {%- endif %}
-          2>&1 | tee -a {{ logFile }}
+          {{ email }}
 
         backup_exit=$?
 
-        info "Pruning repository"
+        info "Pruning repository" {{ email }}
 
         borg prune \
           --list \
@@ -144,7 +150,7 @@ configure_borg_{{ archive.name }}_cron_file:
         {%- if archive.yearly > 0 %}
           --keep-yearly {{ archive.yearly }} \
         {%- endif %}
-          2>&1 | tee -a {{ logFile }}
+          {{ email }}
 
         prune_exit=$?
 

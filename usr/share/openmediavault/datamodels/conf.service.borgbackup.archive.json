@@ -81,6 +81,10 @@
 		"list": {
 			"type": "boolean",
 			"default": true
+		},
+		"email": {
+			"type": "boolean",
+			"default": true
 		}
 	}
 }

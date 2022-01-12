@@ -141,6 +141,11 @@ data:
         label: _("List")
         value: true
         hint: _("Output verbose list of files and directories.")
+      - type: checkbox
+        name: email
+        label: _("Email")
+        value: true
+        hint: _("Checked = send email on error or success.<br/>Unchecked = send email on error only.")
     buttons:
       - template: submit
         execute:
