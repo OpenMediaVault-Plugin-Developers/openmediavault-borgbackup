@@ -220,8 +220,6 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = $repoDir;
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->execute($output);
-        // remove temporary mount directory
-        rmdir($repoDir);
         // Return the configuration object.
         return $repo->getAssoc();
     }
