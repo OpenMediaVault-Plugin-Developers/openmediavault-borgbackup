@@ -1,3 +1,11 @@
+openmediavault-borgbackup (6.1.1) stable; urgency=low
+
+  * Pass uuid to mount instead of name
+  * Remove rmdir since that is a shared folder directory
+  * Fix repo unmount
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 23 Jan 2022 15:43:40 -0600
+
 openmediavault-borgbackup (6.1.0) stable; urgency=low
 
   * Add email option to archive

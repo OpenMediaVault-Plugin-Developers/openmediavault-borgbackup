@@ -277,5 +277,5 @@ data:
             method: unmountRepo
             params:
               uuid: "{{ _selected[0].uuid }}"
-            task: true
+            task: false
             successUrl: /services/borgbackup/repos
