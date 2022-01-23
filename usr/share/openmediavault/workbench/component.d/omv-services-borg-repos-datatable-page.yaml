@@ -247,7 +247,7 @@ data:
             fields:
               - type: hidden
                 name: uuid
-                value: "{{ _selected[0].name }}"
+                value: "{{ _selected[0].uuid }}"
               - type: sharedFolderSelect
                 name: sharedfolderref
                 label: _("Shared folder")
