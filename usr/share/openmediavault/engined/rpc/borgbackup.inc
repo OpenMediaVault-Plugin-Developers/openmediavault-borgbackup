@@ -221,7 +221,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->execute($output);
         // Return the configuration object.
-        return $repo->getAssoc();
+        //return $repo->getAssoc();
     }
 
     public function deleteRepo($params, $context)
