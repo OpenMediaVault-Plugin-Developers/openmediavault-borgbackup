@@ -58,6 +58,24 @@ data:
             params:
               uuid: "{{ _selected[0].uuid }}"
       - type: iconButton
+        icon: mdi:folder-information-outline
+        tooltip: _("Info")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+        execute:
+          type: taskDialog
+          taskDialog:
+            config:
+              title: _("Archive info ...")
+              startOnInit: true
+              request:
+                service: BorgBackup
+                method: archiveCommand
+                params:
+                  command: "info"
+                  uuid: "{{ _selected[0].uuid }}"
+      - type: iconButton
         icon: mdi:play-outline
         tooltip: _("Run")
         enabledConstraints:

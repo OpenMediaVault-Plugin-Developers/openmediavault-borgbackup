@@ -231,6 +231,24 @@ data:
                 stop:
                   hidden: true
       - type: iconButton
+        tooltip: _("Info")
+        icon: mdi:folder-information-outline
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+        execute:
+          type: taskDialog
+          taskDialog:
+            config:
+              title: _("Repo info ...")
+              startOnInit: true
+              request:
+                service: BorgBackup
+                method: repoCommand
+                params:
+                  command: "info"
+                  uuid: "{{ _selected[0].uuid }}"
+      - type: iconButton
         tooltip: _("Mount")
         icon: mdi:play-outline
         enabledConstraints:

@@ -295,6 +295,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                         $cmdArgs[] = 'check';
                         $cmdArgs[] = '--archives-only';
                         break;
+                    case 'info':
+                        $cmdArgs[] = 'info';
+                        break;
                     case 'list':
                         $cmdArgs[] = 'list';
                         break;
@@ -307,7 +310,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                         $cmdArgs[] = '--verify-data';
                         break;
                 }
-                $cmdArgs[] = '--info';
+                if ($params['command'] != 'info') {
+                    $cmdArgs[] = '--info';
+                }
                 if ($repo->get('type') == 'local') {
                     $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
                         'uuid' => $repo->get('sharedfolderref')
@@ -495,11 +500,16 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
                 $cmdArgs[] = $this->getProgram;
                 switch ($params['command']) {
+                    case 'info':
+                        $cmdArgs[] = 'info';
+                        break;
                     case 'list':
                         $cmdArgs[] = 'list';
                         break;
                 }
-                $cmdArgs[] = '--info';
+                if ($params['command'] != 'info') {
+                    $cmdArgs[] = '--info';
+                }
                 if ($repo->get('type') == 'local') {
                     $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
                         'uuid' => $repo->get('sharedfolderref')
