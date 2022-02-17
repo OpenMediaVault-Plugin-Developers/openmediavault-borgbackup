@@ -36,6 +36,8 @@ data:
             service: BorgBackup
             get:
               method: enumerateRepoCandidates
+        validators:
+          required: true
       - type: select
         name: compressiontype
         label: _("Compression Type")
@@ -70,6 +72,9 @@ data:
         name: include
         label: _("Includes")
         hint: _("Put comma between each directory")
+        value: ""
+        validators:
+          required: true
       - type: textInput
         name: exclude
         label: _("Excludes")

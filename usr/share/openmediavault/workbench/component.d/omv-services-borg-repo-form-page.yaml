@@ -31,6 +31,7 @@ data:
       - type: sharedFolderSelect
         name: sharedfolderref
         label: _("Shared folder")
+        value: ""
         modifiers:
           - type: hidden
             constraint:

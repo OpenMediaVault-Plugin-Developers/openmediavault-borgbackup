@@ -1,3 +1,9 @@
+openmediavault-borgbackup (6.1.2) stable; urgency=low
+
+  * Fix remote repo bug
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 17 Feb 2022 06:02:31 -0600
+
 openmediavault-borgbackup (6.1.1) stable; urgency=low
 
   * Pass uuid to mount instead of name
