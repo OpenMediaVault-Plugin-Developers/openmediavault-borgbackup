@@ -58,6 +58,8 @@ msgid ""
 "Checked = send email on error or success.<br/>Unchecked = send email on "
 "error only."
 msgstr ""
+"Marcado = enviar correo electrónico en caso de error o éxito. Sin marcar = "
+"enviar correo electrónico solo en caso de error."
 
 msgid "Compression"
 msgstr "Compresión"
@@ -87,7 +89,7 @@ msgid "Edit archive."
 msgstr "Editar archivo."
 
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 msgid "Enable"
 msgstr "Habilitar"

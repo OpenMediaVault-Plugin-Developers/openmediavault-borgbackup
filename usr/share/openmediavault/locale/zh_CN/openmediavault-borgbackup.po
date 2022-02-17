@@ -57,7 +57,7 @@ msgstr "仅检查源 ..."
 msgid ""
 "Checked = send email on error or success.<br/>Unchecked = send email on "
 "error only."
-msgstr ""
+msgstr "已检查 = 发送错误或成功到邮件。<br/>未检查 = 仅发送错误到邮件"
 
 msgid "Compression"
 msgstr "压缩"
@@ -87,7 +87,7 @@ msgid "Edit archive."
 msgstr "编辑归档"
 
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 msgid "Enable"
 msgstr "启用"
