@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Jonatan Nyberg <jonatan@autistici.org>, 2021
+# Jonatan Nyberg <jonatan@autistici.org>, 2022
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-11 18:36-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: Jonatan Nyberg <jonatan@autistici.org>, 2021\n"
+"Last-Translator: Jonatan Nyberg <jonatan@autistici.org>, 2022\n"
 "Language-Team: Swedish (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -66,28 +66,28 @@ msgid "Compression Type"
 msgstr "Kompressionstyp"
 
 msgid "Compression ratio"
-msgstr ""
+msgstr "Kompressionskvot"
 
 msgid "Create"
-msgstr ""
+msgstr "Skapa"
 
 msgid "Create archive for ..."
-msgstr ""
+msgstr "Skapa arkiv för ..."
 
 msgid "Created archive."
-msgstr ""
+msgstr "Skapat arkiv."
 
 msgid "Created repo."
-msgstr ""
+msgstr "Skapade förråd."
 
 msgid "Edit"
-msgstr ""
+msgstr "Redigera"
 
 msgid "Edit archive."
-msgstr ""
+msgstr "Redigera arkiv."
 
 msgid "Email"
-msgstr ""
+msgstr "E-post"
 
 msgid "Enable"
 msgstr "Aktivera"
@@ -118,6 +118,8 @@ msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
 "point."
 msgstr ""
+"Om detta är aktiverat kommer borg inte att sträcka sig över "
+"filsystempartitioner inom en säkerhetskopia."
 
 msgid "Includes"
 msgstr "Inkluderar"
@@ -138,6 +140,8 @@ msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
 "user@hostname&#58;path"
 msgstr ""
+"Måste ha ssh-nycklar inställda. Fjärrsökväg ska vara i formen&#58; "
+"användare@värdnamn&#58;sökväg"
 
 msgid "Name"
 msgstr "Namn"
@@ -152,10 +156,10 @@ msgid "None"
 msgstr "Ingen"
 
 msgid "One filesystem only"
-msgstr ""
+msgstr "Endast ett filsystem"
 
 msgid "Original location"
-msgstr ""
+msgstr "Ursprunglig plats"
 
 msgid "Output verbose list of files and directories."
 msgstr "Mata ut en detaljerad lista över filer och mappar."
@@ -176,13 +180,14 @@ msgid "Remote Path"
 msgstr "Fjärrsökväg"
 
 msgid "Remote path"
-msgstr ""
+msgstr "Fjärrsökväg"
 
 msgid "Repo"
 msgstr "Förråd"
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr ""
+"Förrådet används. Ta bort arkiv som är associerade med detta förråd först!"
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
@@ -224,12 +229,14 @@ msgstr "Välj ett arkiv ..."
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
 msgstr ""
+"Ställ in gräns för sändningshastighet för fjärrnätverk i kiByte/s "
+"(standard&#58; 0=obegränsad)."
 
 msgid "Shared Folder"
 msgstr "Delad mapp"
 
 msgid "Shared folder"
-msgstr ""
+msgstr "Delad mapp"
 
 msgid "Skip init"
 msgstr "Hoppa över init"
@@ -250,16 +257,16 @@ msgid "Verify"
 msgstr "Verifiera"
 
 msgid "lz4 - super fast / low compression"
-msgstr ""
+msgstr "lz4 - supersnabb / låg komprimering"
 
 msgid "lzma - even slower / even higher compression"
-msgstr ""
+msgstr "lzma - ännu långsammare / ännu högre komprimering"
 
 msgid "n/a"
 msgstr "n/a"
 
 msgid "zlib - less fast / higher compression"
-msgstr ""
+msgstr "zlib - mindre snabb / högre komprimering"
 
 msgid "zstd - super fast / medium compression"
-msgstr ""
+msgstr "zstd - supersnabb / medelhög komprimering"
