@@ -5,13 +5,20 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
+remove_action() {
+    dpkg-trigger update-workbench
+}
+
+
 case "$1" in
     purge)
+        remove_action
         # Remove the configuration data.
         omv_config_delete "/config/services/borgbackup"
     ;;
 
     remove)
+        remove_action
         # remove borgbackup confs
         rm -rf /var/lib/openmediavault/borgbackup
         # remove cron.d file
