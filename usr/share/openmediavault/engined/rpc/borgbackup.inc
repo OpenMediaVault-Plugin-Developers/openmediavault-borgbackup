@@ -132,7 +132,6 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         // initialize repo
         $cmdArgs = [];
-        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $params['passphrase']);
         $cmdArgs[] = $this->getProgram;
         if ($params['skipinit'] == true) {
             $cmdArgs[] = 'info';
@@ -153,6 +152,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setEnv("BORG_PASSPHRASE", $params['passphrase']);
+        $cmd->setEnv("BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK", "yes");
         $cmd->setRedirect2to1();
         $cmdLine = $cmd->getCommandLine();
         $cmd->execute($output, $exitStatus);
@@ -178,7 +179,6 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         // mount repo
         $cmdArgs = [];
-        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'mount';
         $cmdArgs[] = '-o allow_other';
@@ -197,6 +197,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         mkdir($path, 0775, true);
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setEnv("BORG_PASSPHRASE", $repo->get('passphrase'));
         $cmd->execute($output);
         // Return the configuration object.
         return $repo->getAssoc();
@@ -214,11 +215,11 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         // unmount repo
         $repoDir = sprintf('$(grep "^borgfs.*%s.*fuse" /proc/mounts | cut -d" " -f2 | head -n1)', $repo->get('name'));
         $cmdArgs = [];
-        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'umount';
         $cmdArgs[] = $repoDir;
         $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setEnv("BORG_PASSPHRASE", $repo->get('passphrase'));
         $cmd->execute($output);
         // Return the configuration object.
         //return $repo->getAssoc();
@@ -250,8 +251,6 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         // delete repo
         $cmdArgs = [];
-        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
-        $cmdArgs[] = 'BORG_DELETE_I_KNOW_WHAT_I_AM_DOING=YES';
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'delete';
         if ($repo->get('type') == 'local') {
@@ -263,6 +262,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setEnv("BORG_PASSPHRASE", $repo->get('passphrase'));
+        $cmd->setEnv("BORG_DELETE_I_KNOW_WHAT_I_AM_DOING", "YES");
         $cmd->setQuiet(TRUE);
         $cmd->execute($output);
         // Delete the configuration object.
@@ -461,7 +462,6 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $repo = $db->get('conf.service.borgbackup.repo', $archive->get('reporef'));
         // delete archive
         $cmdArgs = [];
-        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'delete';
         $cmdArgs[] = sprintf('--prefix "%s"', $archive->get('name'));
@@ -474,6 +474,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setEnv("BORG_PASSPHRASE", $repo->get('passphrase'));
         $cmd->setQuiet(TRUE);
         $cmd->execute($output);
         // Delete the configuration object.
@@ -540,7 +541,6 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         // get a list of archives in selected repo
         $cmdArgs = [];
-        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'list';
         $cmdArgs[] = '--short';
@@ -553,6 +553,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setEnv("BORG_PASSPHRASE", $repo->get('passphrase'));
         $cmd->execute($output);
         $archives = [];
         foreach ($output as $archive) {
@@ -574,7 +575,6 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         // Get repo configuration object
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         $cmdArgs = [];
-        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'export-tar';
         if ($repo->get('type') == 'local') {
@@ -591,6 +591,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $filename = str_replace(' ', '_', $params['archive']);
         $cmdArgs[] = sprintf('"%s/%s.tar.gz"', $sfpath, $filename);
         $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setEnv("BORG_PASSPHRASE", $repo->get('passphrase'));
         $cmd->setQuiet(TRUE);
         $cmd->setBackground(TRUE);
         $cmd->execute($output);
@@ -614,7 +615,6 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             $sfpath = '/';
         }
         $cmdArgs[] = sprintf('cd %s &&', escapeshellarg($sfpath));
-        $cmdArgs[] = sprintf("BORG_PASSPHRASE='%s'", $repo->get('passphrase'));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'extract';
         if ($repo->get('type') == 'local') {
@@ -626,6 +626,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         $cmdArgs[] = sprintf('"%s::%s"', $path, $params['archive']);
         $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setEnv("BORG_PASSPHRASE", $repo->get('passphrase'));
         $cmd->setQuiet(TRUE);
         $cmd->setBackground(TRUE);
         $cmd->execute($output);
