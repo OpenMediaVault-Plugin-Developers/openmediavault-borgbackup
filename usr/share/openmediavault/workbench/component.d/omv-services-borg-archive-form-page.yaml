@@ -151,6 +151,14 @@ data:
         label: _("Email")
         value: true
         hint: _("Checked = send email on error or success.<br/>Unchecked = send email on error only.")
+      - type: textInput
+        name: prescript
+        label: _("Pre-script")
+        hint: _("Run script from this path before backup.")
+      - type: textInput
+        name: postscript
+        label: _("Post-script")
+        hint: _("Run script from this path after backup.")
     buttons:
       - template: submit
         execute:

@@ -96,6 +96,11 @@ configure_borg_{{ archive.name }}_cron_file:
         info() { printf "\n%s %s\n\n" "$( date )" "$*"; }
         trap 'echo $( date ) Backup interrupted >&2; exit 2' INT TERM
 
+        {%- if archive.prescript | length > 1 %}
+        info "Executing pre-script" {{ email }}
+        {{ archive.prescript }}
+        {%- endif %}
+
         info "Starting backup" {{ email }}
 
         borg create \
@@ -128,6 +133,11 @@ configure_borg_{{ archive.name }}_cron_file:
           {{ email }}
 
         backup_exit=$?
+
+        {%- if archive.postscript | length > 1 %}
+        info "Executing post-script" {{ email }}
+        {{ archive.postscript }}
+        {%- endif %}
 
         info "Pruning repository" {{ email }}
 

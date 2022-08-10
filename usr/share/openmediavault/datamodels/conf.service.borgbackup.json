@@ -1,148 +1,166 @@
 {
-	"type": "config",
-	"id": "conf.service.borgbackup",
-	"title": "BorgBackup",
-	"queryinfo": {
-		"xpath": "//services/borgbackup",
-		"iterable": false
-	},
-	"properties": {
-		"repos": {
-			"type": "object",
-			"properties": {
-				"repo": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"uuid": {
-								"type": "string",
-								"format": "uuidv4"
-							},
-							"name": {
-								"type": "string"
-							},
-							"type":{
-								"type": "string",
-								"enum": [ "local", "remote" ],
-								"default": "local"
-							},
-							"sharedfolderref": {
-								"type": "string",
-								"oneOf": [{
-									"type": "string",
-									"format": "uuidv4"
-								},{
-									"type": "string",
-									"maxLength": 0
-								}],
-								"default": ""
-							},
-							"uri": {
-								"type": "string",
-								"default": ""
-							},
-							"passphrase": {
-								"type": "string"
-							},
-							"encryption": {
-								"type": "boolean"
-							}
-						}
-					}
-				}
-			}
-		},
-		"archives": {
-			"type": "object",
-			"properties": {
-				"archive": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"enable": {
-								"type": "boolean",
-								"default": true
-							},
-							"uuid": {
-								"type": "string",
-								"format": "uuidv4"
-							},
-							"name": {
-								"type": "string"
-							},
-							"reporef": {
-								"type": "string",
-								"format": "uuidv4"
-							},
-							"compressiontype": {
-								"type": "string",
-								"enum": [ "none", "zstd", "lz4", "lzma", "zlib" ],
-								"default": "none"
-							},
-							"compressionratio": {
-								"type": "integer",
-								"minimum": 0,
-								"maximum": 9,
-								"default": 9
-							},
-							"onefs": {
-								"type": "boolean",
-								"default": false
-							},
-							"noatime": {
-								"type": "boolean",
-								"default": false
-							},
-							"include": {
-								"type": "string"
-							},
-							"exclude": {
-								"type": "string"
-							},
-							"hourly": {
-								"type": "integer",
-								"minimum": 0,
-								"default": 0
-							},
-							"daily": {
-								"type": "integer",
-								"minimum": 0,
-								"default": 7
-							},
-							"weekly": {
-								"type": "integer",
-								"minimum": 0,
-								"default": 4
-							},
-							"monthly": {
-								"type": "integer",
-								"minimum": 0,
-								"default": 3
-							},
-							"yearly": {
-								"type": "integer",
-								"minimum": 0,
-								"default": 0
-							},
-							"ratelimit": {
-								"type": "integer",
-								"minimum": 0,
-								"default": 0
-							},
-							"list": {
-								"type": "boolean",
-								"default": true
-							},
-							"email": {
-								"type": "boolean",
-								"default": true
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+  "type": "config",
+  "id": "conf.service.borgbackup",
+  "title": "BorgBackup",
+  "queryinfo": {
+    "xpath": "//services/borgbackup",
+    "iterable": false
+  },
+  "properties": {
+    "repos": {
+      "type": "object",
+      "properties": {
+        "repo": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "format": "uuidv4"
+              },
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "local",
+                  "remote"
+                ],
+                "default": "local"
+              },
+              "sharedfolderref": {
+                "type": "string",
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "format": "uuidv4"
+                  },
+                  {
+                    "type": "string",
+                    "maxLength": 0
+                  }
+                ],
+                "default": ""
+              },
+              "uri": {
+                "type": "string",
+                "default": ""
+              },
+              "passphrase": {
+                "type": "string"
+              },
+              "encryption": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "archives": {
+      "type": "object",
+      "properties": {
+        "archive": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "enable": {
+                "type": "boolean",
+                "default": true
+              },
+              "uuid": {
+                "type": "string",
+                "format": "uuidv4"
+              },
+              "name": {
+                "type": "string"
+              },
+              "reporef": {
+                "type": "string",
+                "format": "uuidv4"
+              },
+              "compressiontype": {
+                "type": "string",
+                "enum": [
+                  "none",
+                  "zstd",
+                  "lz4",
+                  "lzma",
+                  "zlib"
+                ],
+                "default": "none"
+              },
+              "compressionratio": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9,
+                "default": 9
+              },
+              "onefs": {
+                "type": "boolean",
+                "default": false
+              },
+              "noatime": {
+                "type": "boolean",
+                "default": false
+              },
+              "include": {
+                "type": "string"
+              },
+              "exclude": {
+                "type": "string"
+              },
+              "hourly": {
+                "type": "integer",
+                "minimum": 0,
+                "default": 0
+              },
+              "daily": {
+                "type": "integer",
+                "minimum": 0,
+                "default": 7
+              },
+              "weekly": {
+                "type": "integer",
+                "minimum": 0,
+                "default": 4
+              },
+              "monthly": {
+                "type": "integer",
+                "minimum": 0,
+                "default": 3
+              },
+              "yearly": {
+                "type": "integer",
+                "minimum": 0,
+                "default": 0
+              },
+              "ratelimit": {
+                "type": "integer",
+                "minimum": 0,
+                "default": 0
+              },
+              "list": {
+                "type": "boolean",
+                "default": true
+              },
+              "email": {
+                "type": "boolean",
+                "default": true
+              },
+              "prescript": {
+                "type": "string"
+              },
+              "postscript": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

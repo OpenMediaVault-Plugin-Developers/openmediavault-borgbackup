@@ -1,48 +1,54 @@
 {
-	"type": "config",
-	"id": "conf.service.borgbackup.repo",
-	"title": "BorgBackup repo",
-	"queryinfo": {
-		"xpath": "//services/borgbackup/repos/repo",
-		"iterable": true,
-		"idproperty": "uuid"
-	},
-	"properties": {
-		"uuid": {
-			"type": "string",
-			"format": "uuidv4"
-		},
-		"name": {
-			"type": "string"
-		},
-		"type":{
-			"type": "string",
-			"enum": [ "local", "remote" ],
-			"default": "local"
-		},
-		"sharedfolderref": {
-			"type": "string",
-			"oneOf": [{
-				"type": "string",
-				"format": "uuidv4"
-			},{
-				"type": "string",
-				"maxLength": 0
-			}],
-			"default": ""
-		},
-		"uri": {
-			"type": "string",
-			"default": ""
-		},
-		"passphrase": {
-			"type": "string"
-		},
-		"encryption": {
-			"type": "boolean"
-		},
-		"skipinit": {
-			"type": "boolean"
-		}
-	}
+  "type": "config",
+  "id": "conf.service.borgbackup.repo",
+  "title": "BorgBackup repo",
+  "queryinfo": {
+    "xpath": "//services/borgbackup/repos/repo",
+    "iterable": true,
+    "idproperty": "uuid"
+  },
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "format": "uuidv4"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "local",
+        "remote"
+      ],
+      "default": "local"
+    },
+    "sharedfolderref": {
+      "type": "string",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uuidv4"
+        },
+        {
+          "type": "string",
+          "maxLength": 0
+        }
+      ],
+      "default": ""
+    },
+    "uri": {
+      "type": "string",
+      "default": ""
+    },
+    "passphrase": {
+      "type": "string"
+    },
+    "encryption": {
+      "type": "boolean"
+    },
+    "skipinit": {
+      "type": "boolean"
+    }
+  }
 }

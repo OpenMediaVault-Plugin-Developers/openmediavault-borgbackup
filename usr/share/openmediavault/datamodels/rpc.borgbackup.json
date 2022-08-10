@@ -1,227 +1,267 @@
-[{
-	"type": "rpc",
-	"id": "rpc.borgbackup.setrepo",
-	"params": {
-		"type": "object",
-		"properties": {
-			"uuid": {
-				"type": "string",
-				"format": "uuidv4",
-				"required": true
-			},
-			"name": {
-				"type": "string",
-				"required": true
-			},
-			"type":{
-				"type": "string",
-				"enum": [ "local", "remote" ],
-				"required": true
-			},
-			"sharedfolderref": {
-				"type": "string",
-				"oneOf": [{
-					"type": "string",
-					"format": "uuidv4"
-				},{
-					"type": "string",
-					"maxLength": 0
-				}],
-				"required": true
-			},
-			"uri": {
-				"type": "string"
-			},
-			"passphrase": {
-				"type": "string",
-				"required": true
-			},
-			"encryption": {
-				"type": "boolean",
-				"required": true
-			},
-			"skipinit": {
-				"type": "boolean",
-				"required": true
-			}
-		}
-	}
-},{
-	"type": "rpc",
-	"id": "rpc.borgbackup.setarchive",
-	"params": {
-		"type": "object",
-		"properties": {
-			"enable": {
-				"type": "boolean",
-				"required": true
-			},
-			"uuid": {
-				"type": "string",
-				"format": "uuidv4",
-				"required": true
-			},
-			"name": {
-				"type": "string",
-				"required": true
-			},
-			"reporef": {
-				"type": "string",
-				"format": "uuidv4",
-				"required": true
-			},
-			"compressiontype": {
-				"type": "string",
-				"enum": [ "none", "zstd", "lz4", "lzma", "zlib" ],
-				"required": true
-			},
-			"compressionratio":{
-				"type": "integer",
-				"minimum": 0,
-				"maximum": 9,
-				"required": true
-			},
-			"onefs": {
-				"type": "boolean",
-				"required": true
-			},
-			"noatime": {
-				"type": "boolean",
-				"required": true
-			},
-			"include": {
-				"type": "string",
-				"required": true
-			},
-			"exclude": {
-				"type": "string",
-				"oneOf": [{
-					"type": "string"
-				},{
-					"type": "string",
-					"maxLength": 0
-				}],
-				"required": true
-			},
-			"hourly": {
-				"type": "integer",
-				"minimum": 0,
-				"required": true
-			},
-			"daily": {
-				"type": "integer",
-				"minimum": 0,
-				"required": true
-			},
-			"weekly": {
-				"type": "integer",
-				"minimum": 0,
-				"required": true
-			},
-			"monthly": {
-				"type": "integer",
-				"minimum": 0,
-				"required": true
-			},
-			"yearly": {
-				"type": "integer",
-				"minimum": 0,
-				"required": true
-			},
-			"ratelimit": {
-				"type": "integer",
-				"minimum": 0,
-				"required": true
-			},
-			"list": {
-				"type": "boolean",
-				"required": true
-			},
-			"email": {
-				"type": "boolean",
-				"required": true
-			}
-		}
-	}
-},{
-	"type": "rpc",
-	"id": "rpc.borgbackup.mountrepo",
-	"params": {
-		"type": "object",
-		"properties": {
-			"uuid": {
-				"type": "string",
-				"format": "uuidv4",
-				"required": true
-			},
-			"sharedfolderref": {
-				"type": "string",
-				"format": "uuidv4",
-				"required": true
-			}
-		}
-	}
-},{
-	"type": "rpc",
-	"id": "rpc.borgbackup.cmd",
-	"params": {
-		"type": "object",
-		"properties": {
-			"uuid": {
-				"type": "string",
-				"format": "uuidv4",
-				"required": true
-			},
-			"command": {
-				"type": "string",
-				"enum": ["all","archives","info","list","repo","verify"],
-				"required": true
-			}
-		}
-	}
-},{
-	"type": "rpc",
-	"id": "rpc.borgbackup.export",
-	"params": {
-		"type": "object",
-		"properties": {
-			"uuid": {
-				"type": "string",
-				"format": "uuidv4",
-				"required": true
-			},
-			"archive": {
-				"type": "string",
-				"required": true
-			}
-		}
-	}
-},{
-	"type": "rpc",
-	"id": "rpc.borgbackup.extract",
-	"params": {
-		"type": "object",
-		"properties": {
-			"uuid": {
-				"type": "string",
-				"format": "uuidv4",
-				"required": true
-			},
-			"original": {
-				"type": "boolean",
-				"required": true
-			},
-			"sharedfolderref": {
-				"type": "string",
-				"oneOf": [{
-					"type": "string",
-					"format": "uuidv4"
-				},{
-					"type": "string",
-					"maxLength": 0
-				}],
-				"required": true
-			}
-		}
-	}
-}]
+[
+  {
+    "type": "rpc",
+    "id": "rpc.borgbackup.setrepo",
+    "params": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "local",
+            "remote"
+          ],
+          "required": true
+        },
+        "sharedfolderref": {
+          "type": "string",
+          "oneOf": [
+            {
+              "type": "string",
+              "format": "uuidv4"
+            },
+            {
+              "type": "string",
+              "maxLength": 0
+            }
+          ],
+          "required": true
+        },
+        "uri": {
+          "type": "string"
+        },
+        "passphrase": {
+          "type": "string",
+          "required": true
+        },
+        "encryption": {
+          "type": "boolean",
+          "required": true
+        },
+        "skipinit": {
+          "type": "boolean",
+          "required": true
+        }
+      }
+    }
+  },
+  {
+    "type": "rpc",
+    "id": "rpc.borgbackup.setarchive",
+    "params": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "required": true
+        },
+        "uuid": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "reporef": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "compressiontype": {
+          "type": "string",
+          "enum": [
+            "none",
+            "zstd",
+            "lz4",
+            "lzma",
+            "zlib"
+          ],
+          "required": true
+        },
+        "compressionratio": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9,
+          "required": true
+        },
+        "onefs": {
+          "type": "boolean",
+          "required": true
+        },
+        "noatime": {
+          "type": "boolean",
+          "required": true
+        },
+        "include": {
+          "type": "string",
+          "required": true
+        },
+        "exclude": {
+          "type": "string",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string",
+              "maxLength": 0
+            }
+          ],
+          "required": true
+        },
+        "hourly": {
+          "type": "integer",
+          "minimum": 0,
+          "required": true
+        },
+        "daily": {
+          "type": "integer",
+          "minimum": 0,
+          "required": true
+        },
+        "weekly": {
+          "type": "integer",
+          "minimum": 0,
+          "required": true
+        },
+        "monthly": {
+          "type": "integer",
+          "minimum": 0,
+          "required": true
+        },
+        "yearly": {
+          "type": "integer",
+          "minimum": 0,
+          "required": true
+        },
+        "ratelimit": {
+          "type": "integer",
+          "minimum": 0,
+          "required": true
+        },
+        "list": {
+          "type": "boolean",
+          "required": true
+        },
+        "email": {
+          "type": "boolean",
+          "required": true
+        },
+        "prescript": {
+          "type": "string",
+          "required": true
+        },
+        "postscript": {
+          "type": "string",
+          "required": true
+        }
+      }
+    }
+  },
+  {
+    "type": "rpc",
+    "id": "rpc.borgbackup.mountrepo",
+    "params": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "sharedfolderref": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        }
+      }
+    }
+  },
+  {
+    "type": "rpc",
+    "id": "rpc.borgbackup.cmd",
+    "params": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "command": {
+          "type": "string",
+          "enum": [
+            "all",
+            "archives",
+            "info",
+            "list",
+            "repo",
+            "verify"
+          ],
+          "required": true
+        }
+      }
+    }
+  },
+  {
+    "type": "rpc",
+    "id": "rpc.borgbackup.export",
+    "params": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "archive": {
+          "type": "string",
+          "required": true
+        }
+      }
+    }
+  },
+  {
+    "type": "rpc",
+    "id": "rpc.borgbackup.extract",
+    "params": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "original": {
+          "type": "boolean",
+          "required": true
+        },
+        "sharedfolderref": {
+          "type": "string",
+          "oneOf": [
+            {
+              "type": "string",
+              "format": "uuidv4"
+            },
+            {
+              "type": "string",
+              "maxLength": 0
+            }
+          ],
+          "required": true
+        }
+      }
+    }
+  }
+]
