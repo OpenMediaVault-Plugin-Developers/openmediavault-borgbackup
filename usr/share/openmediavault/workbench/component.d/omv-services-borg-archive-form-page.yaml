@@ -154,10 +154,12 @@ data:
       - type: textInput
         name: prescript
         label: _("Pre-script")
+        value: ""
         hint: _("Run script from this path before backup.")
       - type: textInput
         name: postscript
         label: _("Post-script")
+        value: ""
         hint: _("Run script from this path after backup.")
     buttons:
       - template: submit
