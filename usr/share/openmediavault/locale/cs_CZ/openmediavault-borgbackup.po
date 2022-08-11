@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-11 18:36-0600\n"
+"POT-Creation-Date: 2022-08-10 18:48-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2021\n"
 "Language-Team: Czech (Czech Republic) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/cs_CZ/)\n"
@@ -29,6 +29,9 @@ msgstr "Vše"
 
 msgid "Archive"
 msgstr "Archiv"
+
+msgid "Archive info ..."
+msgstr ""
 
 msgid "Archives"
 msgstr "Archivy"
@@ -122,6 +125,9 @@ msgstr ""
 msgid "Includes"
 msgstr "Zahrnuje"
 
+msgid "Info"
+msgstr ""
+
 msgid "List"
 msgstr "Seznam"
 
@@ -163,6 +169,12 @@ msgstr "Vypsat podrobný seznam souborů a složek."
 msgid "Passphrase"
 msgstr "Heslová fráze"
 
+msgid "Post-script"
+msgstr ""
+
+msgid "Pre-script"
+msgstr ""
+
 msgid "Put comma between each directory"
 msgstr "Jednotlivé složky oddělujte čárkou"
 
@@ -180,6 +192,9 @@ msgstr ""
 
 msgid "Repo"
 msgstr "Repozitář"
+
+msgid "Repo info ..."
+msgstr ""
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr ""
@@ -214,6 +229,12 @@ msgstr ""
 
 msgid "Run"
 msgstr "Spustit"
+
+msgid "Run script from this path after backup."
+msgstr ""
+
+msgid "Run script from this path before backup."
+msgstr ""
 
 msgid "Select a repo ..."
 msgstr "Vybrat repozitář…"

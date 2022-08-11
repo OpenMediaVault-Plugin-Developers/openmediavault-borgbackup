@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-11 18:36-0600\n"
+"POT-Creation-Date: 2022-08-10 18:48-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: kochin <kochinc@outlook.com>, 2022\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/zh_TW/)\n"
@@ -29,6 +29,9 @@ msgstr "全部"
 
 msgid "Archive"
 msgstr "歸檔"
+
+msgid "Archive info ..."
+msgstr ""
 
 msgid "Archives"
 msgstr "歸檔"
@@ -120,6 +123,9 @@ msgstr "若這被啟用，borg 將不會在一個備份點內跨越檔案系統�
 msgid "Includes"
 msgstr "包含"
 
+msgid "Info"
+msgstr ""
+
 msgid "List"
 msgstr "列表"
 
@@ -161,6 +167,12 @@ msgstr "輸出檔案與目錄的詳盡列表。"
 msgid "Passphrase"
 msgstr "密語"
 
+msgid "Post-script"
+msgstr ""
+
+msgid "Pre-script"
+msgstr ""
+
 msgid "Put comma between each directory"
 msgstr "在每個檔案目錄間放入逗號"
 
@@ -178,6 +190,9 @@ msgstr "遠端路徑"
 
 msgid "Repo"
 msgstr "儲存庫"
+
+msgid "Repo info ..."
+msgstr ""
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr "儲存庫正被使用中。請先刪除此儲存庫內的歸檔！"
@@ -210,6 +225,12 @@ msgstr "每年保留"
 
 msgid "Run"
 msgstr "執行"
+
+msgid "Run script from this path after backup."
+msgstr ""
+
+msgid "Run script from this path before backup."
+msgstr ""
 
 msgid "Select a repo ..."
 msgstr "選擇一個儲存庫 ..."

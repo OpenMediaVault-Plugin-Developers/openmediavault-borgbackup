@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-11 18:36-0600\n"
+"POT-Creation-Date: 2022-08-10 18:48-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,9 @@ msgstr "All"
 
 msgid "Archive"
 msgstr "Archive"
+
+msgid "Archive info ..."
+msgstr "Archive info ..."
 
 msgid "Archives"
 msgstr "Archives"
@@ -122,6 +125,9 @@ msgstr ""
 msgid "Includes"
 msgstr "Includes"
 
+msgid "Info"
+msgstr "Info"
+
 msgid "List"
 msgstr "List"
 
@@ -165,6 +171,12 @@ msgstr "Output verbose list of files and directories."
 msgid "Passphrase"
 msgstr "Passphrase"
 
+msgid "Post-script"
+msgstr "Post-script"
+
+msgid "Pre-script"
+msgstr "Pre-script"
+
 msgid "Put comma between each directory"
 msgstr "Put comma between each directory"
 
@@ -182,6 +194,9 @@ msgstr "Remote path"
 
 msgid "Repo"
 msgstr "Repo"
+
+msgid "Repo info ..."
+msgstr "Repo info ..."
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr "Repo is in use. Delete archives associated with this repo first!"
@@ -216,6 +231,12 @@ msgstr "Retain yearly"
 
 msgid "Run"
 msgstr "Run"
+
+msgid "Run script from this path after backup."
+msgstr "Run script from this path after backup."
+
+msgid "Run script from this path before backup."
+msgstr "Run script from this path before backup."
 
 msgid "Select a repo ..."
 msgstr "Select a repo ..."

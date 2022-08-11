@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-11 18:36-0600\n"
+"POT-Creation-Date: 2022-08-10 18:48-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Jonatan Nyberg <jonatan@autistici.org>, 2022\n"
 "Language-Team: Swedish (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/sv/)\n"
@@ -29,6 +29,9 @@ msgstr "Alla"
 
 msgid "Archive"
 msgstr "Arkiv"
+
+msgid "Archive info ..."
+msgstr ""
 
 msgid "Archives"
 msgstr "Arkiv"
@@ -124,6 +127,9 @@ msgstr ""
 msgid "Includes"
 msgstr "Inkluderar"
 
+msgid "Info"
+msgstr ""
+
 msgid "List"
 msgstr "Lista"
 
@@ -167,6 +173,12 @@ msgstr "Mata ut en detaljerad lista över filer och mappar."
 msgid "Passphrase"
 msgstr "Lösenord"
 
+msgid "Post-script"
+msgstr ""
+
+msgid "Pre-script"
+msgstr ""
+
 msgid "Put comma between each directory"
 msgstr "Lägg kommatecken mellan varje mapp"
 
@@ -184,6 +196,9 @@ msgstr "Fjärrsökväg"
 
 msgid "Repo"
 msgstr "Förråd"
+
+msgid "Repo info ..."
+msgstr ""
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr ""
@@ -219,6 +234,12 @@ msgstr ""
 
 msgid "Run"
 msgstr "Kör"
+
+msgid "Run script from this path after backup."
+msgstr ""
+
+msgid "Run script from this path before backup."
+msgstr ""
 
 msgid "Select a repo ..."
 msgstr "Välj ett förråd ..."

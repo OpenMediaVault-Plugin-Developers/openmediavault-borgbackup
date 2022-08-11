@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-11 18:36-0600\n"
+"POT-Creation-Date: 2022-08-10 18:48-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Toshihiro Kan <kansuke4649@gmail.com>, 2021\n"
 "Language-Team: Japanese (Japan) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/ja_JP/)\n"
@@ -29,6 +29,9 @@ msgstr "すべて"
 
 msgid "Archive"
 msgstr "アーカイブ"
+
+msgid "Archive info ..."
+msgstr ""
 
 msgid "Archives"
 msgstr "アーカイブ"
@@ -120,6 +123,9 @@ msgstr ""
 msgid "Includes"
 msgstr "含む"
 
+msgid "Info"
+msgstr ""
+
 msgid "List"
 msgstr "リスト"
 
@@ -161,6 +167,12 @@ msgstr "ファイルとディレクトリの詳細なリストを出力します
 msgid "Passphrase"
 msgstr "パスフレーズ"
 
+msgid "Post-script"
+msgstr ""
+
+msgid "Pre-script"
+msgstr ""
+
 msgid "Put comma between each directory"
 msgstr "各ディレクトリの間にコンマを入れます"
 
@@ -178,6 +190,9 @@ msgstr ""
 
 msgid "Repo"
 msgstr "リポジトリ"
+
+msgid "Repo info ..."
+msgstr ""
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr ""
@@ -210,6 +225,12 @@ msgstr ""
 
 msgid "Run"
 msgstr "実行"
+
+msgid "Run script from this path after backup."
+msgstr ""
+
+msgid "Run script from this path before backup."
+msgstr ""
 
 msgid "Select a repo ..."
 msgstr "リポジトリを選択 ..."
