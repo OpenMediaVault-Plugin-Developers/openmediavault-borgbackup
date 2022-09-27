@@ -464,7 +464,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs = [];
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'delete';
-        $cmdArgs[] = sprintf('--prefix "%s"', $archive->get('name'));
+        $cmdArgs[] = sprintf('--glob-archives "%s*"', $archive->get('name'));
         if ($repo->get('type') == 'local') {
             $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
                 'uuid' => $repo->get('sharedfolderref')

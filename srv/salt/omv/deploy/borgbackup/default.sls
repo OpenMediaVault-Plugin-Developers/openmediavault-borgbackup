@@ -143,7 +143,7 @@ configure_borg_{{ archive.name }}_cron_file:
 
         borg prune \
           --list \
-          --prefix '{{ archive.name }}-' \
+          --glob-archives '{{ archive.name }}-*' \
           --show-rc \
         {%- if archive.hourly > 0 %}
           --keep-hourly {{ archive.hourly }} \
