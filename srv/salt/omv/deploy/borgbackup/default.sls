@@ -86,6 +86,13 @@ configure_borg_{{ archive.name }}_cron_file:
         {{ pillar['headers']['auto_generated'] }}
         {{ pillar['headers']['warning'] }}
 
+        extra="/etc/default/openmediavault-borgbackup"
+        if [ -f "${extra}" ]; then
+          set -a
+          . ${extra}
+          set +a
+        fi
+
         # Setting this, so the repo does not need to be given on the commandline:
         export BORG_REPO='{{ rpath }}'
 
