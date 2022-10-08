@@ -31,7 +31,7 @@ msgid "Archive"
 msgstr "归档"
 
 msgid "Archive info ..."
-msgstr ""
+msgstr "归档信息 ..."
 
 msgid "Archives"
 msgstr "归档"
@@ -124,7 +124,7 @@ msgid "Includes"
 msgstr "包含"
 
 msgid "Info"
-msgstr ""
+msgstr "信息"
 
 msgid "List"
 msgstr "列表"
@@ -168,10 +168,10 @@ msgid "Passphrase"
 msgstr "密码"
 
 msgid "Post-script"
-msgstr ""
+msgstr "后置脚本"
 
 msgid "Pre-script"
-msgstr ""
+msgstr "前置脚本"
 
 msgid "Put comma between each directory"
 msgstr "在每个目录之间用逗号隔开"
@@ -192,7 +192,7 @@ msgid "Repo"
 msgstr "源"
 
 msgid "Repo info ..."
-msgstr ""
+msgstr "源信息 ..."
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr "源被使用中，删除归档需要首先删除对应源！"
@@ -227,10 +227,10 @@ msgid "Run"
 msgstr "运行"
 
 msgid "Run script from this path after backup."
-msgstr ""
+msgstr "备份后运行脚本。"
 
 msgid "Run script from this path before backup."
-msgstr ""
+msgstr "备份前运行脚本。"
 
 msgid "Select a repo ..."
 msgstr "选择源 ..."

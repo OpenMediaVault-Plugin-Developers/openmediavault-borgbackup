@@ -31,7 +31,7 @@ msgid "Archive"
 msgstr "Archivo"
 
 msgid "Archive info ..."
-msgstr ""
+msgstr "Información del archivo ..."
 
 msgid "Archives"
 msgstr "Archivos"
@@ -130,7 +130,7 @@ msgid "Includes"
 msgstr "Incluye"
 
 msgid "Info"
-msgstr ""
+msgstr "Información"
 
 msgid "List"
 msgstr "Lista"
@@ -176,10 +176,10 @@ msgid "Passphrase"
 msgstr "Contraseña"
 
 msgid "Post-script"
-msgstr ""
+msgstr "Post-script"
 
 msgid "Pre-script"
-msgstr ""
+msgstr "Pre-script"
 
 msgid "Put comma between each directory"
 msgstr "Use la coma, para separar los directorios"
@@ -200,7 +200,7 @@ msgid "Repo"
 msgstr "Repositorio"
 
 msgid "Repo info ..."
-msgstr ""
+msgstr "Información del repositorio ..."
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr "Repo en uso. !Borre archivos asociados a este repo primero!"
@@ -237,10 +237,10 @@ msgid "Run"
 msgstr "Ejecutar"
 
 msgid "Run script from this path after backup."
-msgstr ""
+msgstr "Ejecute el script desde esta ruta después de la copia de seguridad."
 
 msgid "Run script from this path before backup."
-msgstr ""
+msgstr "Ejecute el script desde esta ruta antes de la copia de seguridad."
 
 msgid "Select a repo ..."
 msgstr "Seleccionar un repositorio ..."
