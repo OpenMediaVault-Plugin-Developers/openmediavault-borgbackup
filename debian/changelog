@@ -1,3 +1,11 @@
+openmediavault-borgbackup (6.3) stable; urgency=low
+
+  * Load environment variables from /etc/default/openmediavault-
+    borgbackup
+  * Use glob-archives argument to replace the deprecated prefix argument
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 08 Oct 2022 09:42:29 -0500
+
 openmediavault-borgbackup (6.2) stable; urgency=low
 
   * Add pre and post script fields to be execute before and after the
