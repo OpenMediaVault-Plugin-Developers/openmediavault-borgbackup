@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 18:48-0500\n"
+"POT-Creation-Date: 2022-10-10 17:29-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,6 +74,9 @@ msgstr ""
 msgid "Created archive."
 msgstr ""
 
+msgid "Created environment variable."
+msgstr ""
+
 msgid "Created repo."
 msgstr ""
 
@@ -81,6 +84,9 @@ msgid "Edit"
 msgstr ""
 
 msgid "Edit archive."
+msgstr ""
+
+msgid "Edit environment variable."
 msgstr ""
 
 msgid "Email"
@@ -93,6 +99,9 @@ msgid "Enabled"
 msgstr ""
 
 msgid "Encryption"
+msgstr ""
+
+msgid "Environment Variables"
 msgstr ""
 
 msgid "Excludes"
@@ -246,6 +255,9 @@ msgid "Unmount"
 msgstr ""
 
 msgid "Uses value as prefix for archive name."
+msgstr ""
+
+msgid "Value"
 msgstr ""
 
 msgid "Verify"

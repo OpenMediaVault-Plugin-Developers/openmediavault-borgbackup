@@ -38,6 +38,10 @@ data:
         sortable: true
         cellTemplateName: checkIcon
         flexGrow: 1
+      - name: _("Archives")
+        prop: archiveCount
+        sortable: true
+        flexGrow: 1
     actions:
       - template: create
         execute:
@@ -51,6 +55,14 @@ data:
             method: deleteRepo
             params:
               uuid: "{{ _selected[0].uuid }}"
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            - operator: eq
+              arg0:
+                prop: archiveCount
+              arg1: 0
       - type: menu
         icon: mdi:check-underline
         tooltip: _("Check")

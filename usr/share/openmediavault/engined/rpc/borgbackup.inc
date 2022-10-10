@@ -74,6 +74,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
         $objects = $db->get('conf.service.borgbackup.repo');
+        $archives = $db->get('conf.service.borgbackup.archive');
         // Add additional share informations.
         $objectsAssoc = [];
         foreach ($objects as $objectk => &$objectv) {
@@ -91,6 +92,13 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             $cmd = sprintf('grep -E "^borgfs.*%s.*fuse" /proc/mounts', $objectv->get('name'));
             exec($cmd, $output, $return);
             $objectv->add('mounted', 'boolean', ! $return);
+            $archiveCount = 0;
+            foreach ($archives as $archivek => $archivev) {
+                if ($archivev->get('reporef') == $objectv->get('uuid')) {
+                    $archiveCount++;
+                }
+            }
+            $objectv->add('archiveCount', 'integer', $archiveCount);
             $objectsAssoc[] = $objectv->getAssoc();
         }
         // Filter the result.
@@ -667,10 +675,12 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             // Add the new property 'sharedfoldername'.
             $objectv->add('reponame', 'string', gettext("n/a"));
             // Get the shared folder configuration object.
-            $repoObject = $db->get('conf.service.borgbackup.repo',
-              $objectv->get('reporef'));
-            // Update the 'reponame' property.
-            $objectv->set('reponame', $repoObject->get('name'));
+            try {
+                $repoObject = $db->get('conf.service.borgbackup.repo', $objectv->get('reporef'));
+                // Update the 'reponame' property.
+                $objectv->set('reponame', $repoObject->get('name'));
+            } catch (Exception $e) {
+            }
             $objectsAssoc[] = $objectv->getAssoc();
         }
         // Filter the result.
