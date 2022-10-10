@@ -1,0 +1,47 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-borgbackup-envvar-form-page
+  type: formPage
+  config:
+    request:
+      service: BorgBackup
+      get:
+        method: getEnvVar
+        params:
+          uuid: "{{ _routeParams.uuid }}"
+      post:
+        method: setEnvVar
+    fields:
+      - type: confObjUuid
+      - type: textInput
+        name: envname
+        label: _("Name")
+        validators:
+          required: true
+          patternType: 'shareName'
+      - type: textInput
+        name: envvalue
+        label: _("Value")
+      - type: select
+        name: reporef
+        label: _('Repo')
+        placeholder: _("Select a repo ...")
+        textField: name
+        valueField: uuid
+        store:
+          proxy:
+            service: BorgBackup
+            get:
+              method: enumerateRepoCandidates
+        validators:
+          required: true
+    buttons:
+      - template: submit
+        execute:
+          type: url
+          url: "/services/borgbackup/envvars"
+      - template: cancel
+        execute:
+          type: url
+          url: "/services/borgbackup/envvars"

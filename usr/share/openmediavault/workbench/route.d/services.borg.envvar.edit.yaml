@@ -1,0 +1,8 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/borgbackup/envvar/edit/:uuid"
+  title: _("Edit")
+  editing: true
+  notificationTitle: _("Edit environment variable.")
+  component: omv-services-borgbackup-envvar-form-page

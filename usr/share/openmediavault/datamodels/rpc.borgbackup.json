@@ -171,6 +171,42 @@
   },
   {
     "type": "rpc",
+    "id": "rpc.borgbackup.setenvvar",
+    "params": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "envname": {
+          "type": "string",
+          "required": true
+        },
+        "envvalue": {
+          "type": "string",
+          "required": true
+        },
+        "reporef": {
+          "type": "string",
+          "oneOf": [
+            {
+              "type": "string",
+              "format": "uuidv4"
+            },
+            {
+              "type": "string",
+              "maxLength": 0
+            }
+          ],
+          "required": true
+        }
+      }
+    }
+  },
+  {
+    "type": "rpc",
     "id": "rpc.borgbackup.mountrepo",
     "params": {
       "type": "object",

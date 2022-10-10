@@ -161,6 +161,43 @@
           }
         }
       }
+    },
+    "envvars": {
+      "type": "object",
+      "properties": {
+        "envvar": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "format": "uuidv4"
+              },
+              "envname": {
+                "type": "string"
+              },
+              "envvalue": {
+                "type": "string"
+              },
+              "reporef": {
+                "type": "string",
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "format": "uuidv4"
+                  },
+                  {
+                    "type": "string",
+                    "maxLength": 0
+                  }
+                ],
+                "default": ""
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

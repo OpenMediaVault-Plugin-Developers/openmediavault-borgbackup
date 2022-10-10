@@ -1,0 +1,47 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-borgbackup-envvars-datatable-page
+  type: datatablePage
+  config:
+    autoReload: false
+    hasSearchField: true
+    stateId: 458c6e50-4833-11ed-96bb-93268a55ad91
+    sorters:
+      - dir: asc
+        prop: envname
+    store:
+      proxy:
+        service: BorgBackup
+        get:
+          method: getEnvVarList
+    columns:
+      - name: _("Name")
+        prop: envname
+        flexGrow: 1
+        sortable: true
+      - name: _("Value")
+        prop: envvalue
+        flexGrow: 1
+        sortable: true
+      - name: _("Repo")
+        prop: reponame
+        flexGrow: 1
+        sortable: true
+    actions:
+      - template: create
+        execute:
+          type: url
+          url: "/services/borgbackup/envvar/create"
+      - template: edit
+        execute:
+          type: url
+          url: "/services/borgbackup/envvar/edit/{{ _selected[0].uuid }}"
+      - template: delete
+        execute:
+          type: request
+          request:
+            service: BorgBackup
+            method: deleteEnvVar
+            params:
+              uuid: "{{ _selected[0].uuid }}"

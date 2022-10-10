@@ -1,0 +1,36 @@
+{
+  "type": "config",
+  "id": "conf.service.borgbackup.envvar",
+  "title": "BorgBackup environment variables",
+  "queryinfo": {
+    "xpath": "//services/borgbackup/envvars/envvar",
+    "iterable": true,
+    "idproperty": "uuid"
+  },
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "format": "uuidv4"
+    },
+    "envname": {
+      "type": "string"
+    },
+    "envvalue": {
+      "type": "string"
+    },
+    "reporef": {
+      "type": "string",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uuidv4"
+        },
+        {
+          "type": "string",
+          "maxLength": 0
+        }
+      ],
+      "default": ""
+    }
+  }
+}

@@ -49,6 +49,11 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('enumerateArchives');
         $this->registerMethod('exportArchive');
         $this->registerMethod('extractArchive');
+
+        $this->registerMethod('getEnvVarList');
+        $this->registerMethod('getEnvVar');
+        $this->registerMethod('setEnvVar');
+        $this->registerMethod('deleteEnvVar');
     }
 
     public function enumerateRepoCandidates($params, $context)
@@ -644,4 +649,73 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmd->execute($output);
     }
 
+    public function getEnvVarList($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.common.getlist');
+        // Get the configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        $objects = $db->get('conf.service.borgbackup.envvar');
+        // Add additional environment variable informations.
+        $objectsAssoc = [];
+        foreach ($objects as $objectk => &$objectv) {
+            // Add the new property 'sharedfoldername'.
+            $objectv->add('reponame', 'string', gettext("n/a"));
+            // Get the shared folder configuration object.
+            $repoObject = $db->get('conf.service.borgbackup.repo',
+              $objectv->get('reporef'));
+            // Update the 'reponame' property.
+            $objectv->set('reponame', $repoObject->get('name'));
+            $objectsAssoc[] = $objectv->getAssoc();
+        }
+        // Filter the result.
+        return $this->applyFilter($objectsAssoc, $params['start'], $params['limit'],
+            $params['sortfield'], $params['sortdir']);
+    }
+
+    public function getEnvVar($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.common.objectuuid');
+        // Get the configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        return $db->getAssoc('conf.service.borgbackup.envvar', $params['uuid']);
+    }
+
+    public function setEnvVar($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.borgbackup.setenvvar');
+        // Prepare the configuration object.
+        $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.envvar');
+        // Remove spaces from name
+        $params['envname'] = str_replace(' ', '_', $params['envname']);
+        // Set the configuration object.
+        $object->setAssoc($params);
+        $db = \OMV\Config\Database::getInstance();
+        $db->set($object);
+        // Return the configuration object.
+        return $object->getAssoc();
+    }
+
+    public function deleteEnvVar($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.common.objectuuid');
+        // Get the configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
+        // Delete the configuration object.
+        $db->delete($repo);
+        // Return the deleted configuration object.
+        return $repo->getAssoc();
+    }
 }

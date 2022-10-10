@@ -5,6 +5,7 @@ data:
   type: datatablePage
   config:
     autoReload: false
+    hasSearchField: true
     stateId: bdef0cfa-b0ed-11e7-ba14-1b4b82806d9d
     sorters:
       - dir: asc

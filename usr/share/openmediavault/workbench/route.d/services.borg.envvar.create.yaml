@@ -1,0 +1,7 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/borgbackup/envvar/create"
+  title: _("Create")
+  notificationTitle: _("Created environment variable.")
+  component: omv-services-borgbackup-envvar-form-page
