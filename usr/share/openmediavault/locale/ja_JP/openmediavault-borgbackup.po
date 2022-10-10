@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 18:48-0500\n"
+"POT-Creation-Date: 2022-10-10 18:09-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Toshihiro Kan <kansuke4649@gmail.com>, 2021\n"
 "Language-Team: Japanese (Japan) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/ja_JP/)\n"
@@ -80,6 +80,9 @@ msgstr ""
 msgid "Created archive."
 msgstr ""
 
+msgid "Created environment variable."
+msgstr ""
+
 msgid "Created repo."
 msgstr ""
 
@@ -87,6 +90,9 @@ msgid "Edit"
 msgstr ""
 
 msgid "Edit archive."
+msgstr ""
+
+msgid "Edit environment variable."
 msgstr ""
 
 msgid "Email"
@@ -100,6 +106,9 @@ msgstr "有効化済"
 
 msgid "Encryption"
 msgstr "暗号化"
+
+msgid "Environment Variables"
+msgstr ""
 
 msgid "Excludes"
 msgstr "除く"
@@ -262,6 +271,9 @@ msgstr "アンマウント"
 
 msgid "Uses value as prefix for archive name."
 msgstr "アーカイブ名のプレフィックスとして値を使用します。"
+
+msgid "Value"
+msgstr ""
 
 msgid "Verify"
 msgstr "確認"

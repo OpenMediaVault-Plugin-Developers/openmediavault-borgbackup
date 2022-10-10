@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 18:48-0500\n"
+"POT-Creation-Date: 2022-10-10 18:09-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: songming <by@songming.me>, 2022\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
@@ -80,6 +80,9 @@ msgstr "创建归档 ..."
 msgid "Created archive."
 msgstr "已创建归档。"
 
+msgid "Created environment variable."
+msgstr ""
+
 msgid "Created repo."
 msgstr "已创建源。"
 
@@ -88,6 +91,9 @@ msgstr "编辑"
 
 msgid "Edit archive."
 msgstr "编辑归档"
+
+msgid "Edit environment variable."
+msgstr ""
 
 msgid "Email"
 msgstr "Email"
@@ -100,6 +106,9 @@ msgstr "已启用"
 
 msgid "Encryption"
 msgstr "加密"
+
+msgid "Environment Variables"
+msgstr ""
 
 msgid "Excludes"
 msgstr "扩展参数"
@@ -262,6 +271,9 @@ msgstr "卸载"
 
 msgid "Uses value as prefix for archive name."
 msgstr "使用该值作为归档前缀名称。"
+
+msgid "Value"
+msgstr ""
 
 msgid "Verify"
 msgstr "校验"

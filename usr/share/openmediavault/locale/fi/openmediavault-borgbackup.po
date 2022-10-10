@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 18:48-0500\n"
+"POT-Creation-Date: 2022-10-10 18:09-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Language-Team: Finnish (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -76,6 +76,9 @@ msgstr ""
 msgid "Created archive."
 msgstr ""
 
+msgid "Created environment variable."
+msgstr ""
+
 msgid "Created repo."
 msgstr ""
 
@@ -83,6 +86,9 @@ msgid "Edit"
 msgstr ""
 
 msgid "Edit archive."
+msgstr ""
+
+msgid "Edit environment variable."
 msgstr ""
 
 msgid "Email"
@@ -95,6 +101,9 @@ msgid "Enabled"
 msgstr ""
 
 msgid "Encryption"
+msgstr ""
+
+msgid "Environment Variables"
 msgstr ""
 
 msgid "Excludes"
@@ -257,6 +266,9 @@ msgid "Unmount"
 msgstr ""
 
 msgid "Uses value as prefix for archive name."
+msgstr ""
+
+msgid "Value"
 msgstr ""
 
 msgid "Verify"
