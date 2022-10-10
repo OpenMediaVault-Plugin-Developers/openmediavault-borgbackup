@@ -22,7 +22,7 @@
 class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
 {
     private $getProgram = '/usr/bin/borg';
-    private $envFile = '/etc/default/openmediavault-borgbackup';
+    private $envFile = '/etc/borgbackup/borg-envvar-';
 
     public function getName()
     {
@@ -160,7 +160,10 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($params['passphrase']));
         $cmd->setEnv("BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK", "yes");
-        $cmd->setEnvFromFile($this->envFile);
+        if (!$isNew) {
+            $cmd->setEnvFromFile($this->envFile . $params['uuid']);
+        }
+        $cmd->setEnvFromFile("/etc/default/openmediavault-borgbackup");
         $cmd->setRedirect2to1();
         $cmdLine = $cmd->getCommandLine();
         $cmd->execute($output, $exitStatus);
@@ -205,7 +208,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
-        $cmd->setEnvFromFile($this->envFile);
+        $cmd->setEnvFromFile($this->envFile . $params['uuid']);
         $cmd->execute($output);
         // Return the configuration object.
         return $repo->getAssoc();
@@ -228,7 +231,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = $repoDir;
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
-        $cmd->setEnvFromFile($this->envFile);
+        $cmd->setEnvFromFile($this->envFile . $params['uuid']);
         $cmd->execute($output);
         // Return the configuration object.
         //return $repo->getAssoc();
@@ -273,7 +276,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
         $cmd->setEnv("BORG_DELETE_I_KNOW_WHAT_I_AM_DOING", "YES");
-        $cmd->setEnvFromFile($this->envFile);
+        $cmd->setEnvFromFile($this->envFile . $params['uuid']);
         $cmd->setQuiet(TRUE);
         $cmd->execute($output);
         // Delete the configuration object.
@@ -333,7 +336,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $cmdArgs[] = escapeshellarg($path);
                 $cmd = new \OMV\System\Process($cmdArgs);
                 $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
-                $cmd->setEnvFromFile($this->envFile);
+                $cmd->setEnvFromFile($this->envFile . $params['uuid']);
                 $cmd->setRedirect2to1();
                 $cmdLine = $cmd->getCommandLine();
                 $this->exec($cmdLine, $output, $bgOutputFilename);
@@ -450,7 +453,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 }
                 $cmd = new \OMV\System\Process($cmdArgs);
                 $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
-                $cmd->setEnvFromFile($this->envFile);
+                $cmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
                 $cmd->setRedirect2to1();
                 $cmdLine = $cmd->getCommandLine();
                 $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmdLine));
@@ -487,7 +490,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
-        $cmd->setEnvFromFile($this->envFile);
+        $cmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
         $cmd->setQuiet(TRUE);
         $cmd->execute($output);
         // Delete the configuration object.
@@ -533,7 +536,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $cmdArgs[] = sprintf('"%s::%s"', $path, $archive->get('name'));
                 $cmd = new \OMV\System\Process($cmdArgs);
                 $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
-                $cmd->setEnvFromFile($this->envFile);
+                $cmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
                 $cmd->setRedirect2to1();
                 $cmdLine = $cmd->getCommandLine();
                 $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmdLine));
@@ -568,7 +571,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
-        $cmd->setEnvFromFile($this->envFile);
+        $cmd->setEnvFromFile($this->envFile . $repo->get('uuid'));
         $cmd->execute($output);
         $archives = [];
         foreach ($output as $archive) {
@@ -607,7 +610,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = sprintf('"%s/%s.tar.gz"', $sfpath, $filename);
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
-        $cmd->setEnvFromFile($this->envFile);
+        $cmd->setEnvFromFile($this->envFile . $repo->get('uuid'));
         $cmd->setQuiet(TRUE);
         $cmd->setBackground(TRUE);
         $cmd->execute($output);
@@ -643,7 +646,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = sprintf('"%s::%s"', $path, $params['archive']);
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
-        $cmd->setEnvFromFile($this->envFile);
+        $cmd->setEnvFromFile($this->envFile . $repo->get('uuid'));
         $cmd->setQuiet(TRUE);
         $cmd->setBackground(TRUE);
         $cmd->execute($output);

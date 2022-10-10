@@ -16,9 +16,43 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 {% set config = salt['omv_conf.get']('conf.service.borgbackup') %}
+{% set envVarDir = '/etc/borgbackup' %}
+{% set envVarPrefix = 'borg-envvar-' %}
 {% set logFile = '/var/log/borgbackup.log' %}
 {% set scriptsDir = '/var/lib/openmediavault/borgbackup' %}
 {% set scriptPrefix = 'borgbackup-' %}
+
+configure_borg_envvar_dir:
+  file.directory:
+    - name: "{{ envVarDir }}"
+    - user: root
+    - group: root
+    - mode: 700
+
+remove_envvar_files:
+  module.run:
+    - file.find:
+      - path: "{{ envVarDir }}"
+      - iname: "{{ envVarPrefix }}*"
+      - delete: "f"
+
+{% for repo in config.repos.repo %}
+{% set envVarFile = envVarDir ~ '/' ~ envVarPrefix ~ repo.uuid %}
+
+configure_borg_envvar_{{ repo.uuid }}:
+  file.managed:
+    - name: "{{ envVarFile }}"
+    - source:
+      - salt://{{ tpldir }}/files/etc-borgbackup-borg_envvar.j2
+    - context:
+        config: {{ config | json }}
+        repo: {{ repo | json }}
+    - template: jinja
+    - user: root
+    - group: root
+    - mode: 600
+
+{% endfor %}
 
 {% for dir in ['hourly','daily','weekly','monthly','yearly'] %}
 configure_borg_{{ dir }}_dir:
@@ -77,6 +111,8 @@ configure_borg_crond:
 {% set email = '>> ' ~ logFile ~ ' 2>&1' %}
 {% endif %}
 
+{% set extraEnv = envVarDir ~ '/' ~ envVarPrefix ~ archive.reporef %}
+
 configure_borg_{{ archive.name }}_cron_file:
   file.managed:
     - name: '{{ script }}'
@@ -86,7 +122,7 @@ configure_borg_{{ archive.name }}_cron_file:
         {{ pillar['headers']['auto_generated'] }}
         {{ pillar['headers']['warning'] }}
 
-        extra="/etc/default/openmediavault-borgbackup"
+        extra="{{ extraEnv }}"
         if [ -f "${extra}" ]; then
           set -a
           . ${extra}
