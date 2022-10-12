@@ -189,6 +189,12 @@
                   },
                   {
                     "type": "string",
+                    "enum": [
+                      "creation"
+                    ]
+                  },
+                  {
+                    "type": "string",
                     "maxLength": 0
                   }
                 ],

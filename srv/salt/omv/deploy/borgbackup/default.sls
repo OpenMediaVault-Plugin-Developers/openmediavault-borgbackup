@@ -46,13 +46,27 @@ configure_borg_envvar_{{ repo.uuid }}:
       - salt://{{ tpldir }}/files/etc-borgbackup-borg_envvar.j2
     - context:
         config: {{ config | json }}
-        repo: {{ repo | json }}
+        repouuid: {{ repo.uuid }}
     - template: jinja
     - user: root
     - group: root
     - mode: 600
 
 {% endfor %}
+
+{% set envVarFile = envVarDir ~ '/' ~ envVarPrefix ~ 'creation' %}
+configure_borg_envvar_creation:
+  file.managed:
+    - name: "{{ envVarFile }}"
+    - source:
+      - salt://{{ tpldir }}/files/etc-borgbackup-borg_envvar.j2
+    - context:
+        config: {{ config | json }}
+        repouuid: "creation"
+    - template: jinja
+    - user: root
+    - group: root
+    - mode: 600
 
 {% for dir in ['hourly','daily','weekly','monthly','yearly'] %}
 configure_borg_{{ dir }}_dir:

@@ -1,5 +1,5 @@
 {{ pillar['headers']['auto_generated'] }}
 {{ pillar['headers']['warning'] }}
-{%- for envvar in config.envvars.envvar | selectattr("reporef", "equalto", repo.uuid) %}
+{%- for envvar in config.envvars.envvar | selectattr("reporef", "equalto", repouuid) %}
 {{ envvar.envname }}="{{ envvar.envvalue }}"
 {%- endfor %}

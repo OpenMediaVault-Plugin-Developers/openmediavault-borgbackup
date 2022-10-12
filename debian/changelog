@@ -1,3 +1,9 @@
+openmediavault-borgbackup (6.4.1) stable; urgency=low
+
+  * Allow creation of environment variables for repo creation
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 12 Oct 2022 16:39:43 -0500
+
 openmediavault-borgbackup (6.4) stable; urgency=low
 
   * Add environment variable tab

@@ -62,7 +62,14 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Get configuration data.
         $db = \OMV\Config\Database::getInstance();
-        return $db->getAssoc('conf.service.borgbackup.repo');
+        $repos = $db->getAssoc('conf.service.borgbackup.repo');
+        if ($params['creation'] == true) {
+            $repos[] = [
+                'name' => 'Repo creation',
+                'uuid' => 'creation'
+            ];
+        }
+        return $repos;
     }
 
     public function getRepoList($params, $context)
@@ -171,7 +178,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         if (!$isNew) {
             $cmd->setEnvFromFile($this->envFile . $params['uuid']);
         }
-        $cmd->setEnvFromFile("/etc/default/openmediavault-borgbackup");
+        $cmd->setEnvFromFile($this->envFile . 'creation');
         $cmd->setRedirect2to1();
         $cmdLine = $cmd->getCommandLine();
         $cmd->execute($output, $exitStatus);
@@ -675,11 +682,15 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             // Add the new property 'sharedfoldername'.
             $objectv->add('reponame', 'string', gettext("n/a"));
             // Get the shared folder configuration object.
-            try {
-                $repoObject = $db->get('conf.service.borgbackup.repo', $objectv->get('reporef'));
-                // Update the 'reponame' property.
-                $objectv->set('reponame', $repoObject->get('name'));
-            } catch (Exception $e) {
+            if ($objectv->get('reporef') == 'creation') {
+                $objectv->set('reponame', 'Repo creation');
+            } else {
+                try {
+                    $repoObject = $db->get('conf.service.borgbackup.repo', $objectv->get('reporef'));
+                    // Update the 'reponame' property.
+                    $objectv->set('reponame', $repoObject->get('name'));
+                } catch (Exception $e) {
+                }
             }
             $objectsAssoc[] = $objectv->getAssoc();
         }
