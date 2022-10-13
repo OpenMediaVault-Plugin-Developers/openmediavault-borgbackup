@@ -1,3 +1,9 @@
+openmediavault-borgbackup (6.4.2) stable; urgency=low
+
+  * Fix environment variable delete
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 13 Oct 2022 07:35:26 -0500
+
 openmediavault-borgbackup (6.4.1) stable; urgency=low
 
   * Allow creation of environment variables for repo creation
