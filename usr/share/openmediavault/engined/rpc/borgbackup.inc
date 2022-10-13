@@ -736,10 +736,10 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->validateMethodParams($params, 'rpc.common.objectuuid');
         // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
-        $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
+        $object = $db->get('conf.service.borgbackup.envvar', $params['uuid']);
         // Delete the configuration object.
-        $db->delete($repo);
+        $db->delete($object);
         // Return the deleted configuration object.
-        return $repo->getAssoc();
+        return $object->getAssoc();
     }
 }
