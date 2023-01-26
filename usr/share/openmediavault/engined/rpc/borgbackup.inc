@@ -548,7 +548,12 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 } else {
                     $path = $repo->get('uri');
                 }
-                $cmdArgs[] = sprintf('"%s::%s"', $path, $archive->get('name'));
+                if ($params['command'] == 'info') {
+                    $cmdArgs[] = sprintf('"%s"', $path);
+                    $cmdArgs[] = sprintf('--glob-archives "%s*"', $archive->get('name'));
+                } else {
+                    $cmdArgs[] = sprintf('"%s::%s"', $path, $archive->get('name'));
+                }
                 $cmd = new \OMV\System\Process($cmdArgs);
                 $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
                 $cmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
