@@ -31,7 +31,7 @@ msgid "Archive"
 msgstr "歸檔"
 
 msgid "Archive info ..."
-msgstr ""
+msgstr "歸檔資訊 ..."
 
 msgid "Archives"
 msgstr "歸檔"
@@ -81,7 +81,7 @@ msgid "Created archive."
 msgstr "已建立歸檔。"
 
 msgid "Created environment variable."
-msgstr ""
+msgstr "已建立環境變數。"
 
 msgid "Created repo."
 msgstr "已建立儲存庫。"
@@ -93,7 +93,7 @@ msgid "Edit archive."
 msgstr "編輯歸檔。"
 
 msgid "Edit environment variable."
-msgstr ""
+msgstr "編輯環境變數。"
 
 msgid "Email"
 msgstr "電子郵件"
@@ -108,7 +108,7 @@ msgid "Encryption"
 msgstr "加密"
 
 msgid "Environment Variables"
-msgstr ""
+msgstr "環境變數"
 
 msgid "Excludes"
 msgstr "排除"
@@ -133,7 +133,7 @@ msgid "Includes"
 msgstr "包含"
 
 msgid "Info"
-msgstr ""
+msgstr "資訊"
 
 msgid "List"
 msgstr "列表"
@@ -177,10 +177,10 @@ msgid "Passphrase"
 msgstr "密語"
 
 msgid "Post-script"
-msgstr ""
+msgstr "後置腳本程式"
 
 msgid "Pre-script"
-msgstr ""
+msgstr "前置腳本程式"
 
 msgid "Put comma between each directory"
 msgstr "在每個檔案目錄間放入逗號"
@@ -201,7 +201,7 @@ msgid "Repo"
 msgstr "儲存庫"
 
 msgid "Repo info ..."
-msgstr ""
+msgstr "儲存庫資訊 ..."
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr "儲存庫正被使用中。請先刪除此儲存庫內的歸檔！"
@@ -236,10 +236,10 @@ msgid "Run"
 msgstr "執行"
 
 msgid "Run script from this path after backup."
-msgstr ""
+msgstr "備份完後執行此路徑的腳本程式。"
 
 msgid "Run script from this path before backup."
-msgstr ""
+msgstr "備份前先執行此路徑的腳本程式。"
 
 msgid "Select a repo ..."
 msgstr "選擇一個儲存庫 ..."
@@ -273,7 +273,7 @@ msgid "Uses value as prefix for archive name."
 msgstr "將值當作歸檔名稱的前綴詞。"
 
 msgid "Value"
-msgstr ""
+msgstr "數值"
 
 msgid "Verify"
 msgstr "驗證"

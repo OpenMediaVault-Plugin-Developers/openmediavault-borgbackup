@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Dampflok_HD, 2021
 # Ettore Atalan <atalanttore@googlemail.com>, 2022
+# Dampflok_HD, 2022
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-12 16:40-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2022\n"
+"Last-Translator: Dampflok_HD, 2022\n"
 "Language-Team: German (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +32,7 @@ msgid "Archive"
 msgstr "Archiv"
 
 msgid "Archive info ..."
-msgstr ""
+msgstr "Archivinfo ..."
 
 msgid "Archives"
 msgstr "Archive"
@@ -47,21 +47,23 @@ msgid "Check"
 msgstr "Überprüfen"
 
 msgid "Check all ..."
-msgstr ""
+msgstr "Alles überprüfen ..."
 
 msgid "Check archives only ..."
-msgstr ""
+msgstr "Nur Archive überprüfen ..."
 
 msgid "Check repo ..."
-msgstr ""
+msgstr "Repo überprüfen ..."
 
 msgid "Check repos only ..."
-msgstr ""
+msgstr "Nur Repos überprüfen ..."
 
 msgid ""
 "Checked = send email on error or success.<br/>Unchecked = send email on "
 "error only."
 msgstr ""
+"Angekreuzt = E-Mail bei Fehler oder Erfolg senden, nicht angekreuzt = E-Mail"
+" nur bei Fehler senden."
 
 msgid "Compression"
 msgstr "Kompression"
@@ -70,7 +72,7 @@ msgid "Compression Type"
 msgstr "Kompressionstyp"
 
 msgid "Compression ratio"
-msgstr ""
+msgstr "Kompressionsrate"
 
 msgid "Create"
 msgstr "Erstellen"
@@ -82,10 +84,10 @@ msgid "Created archive."
 msgstr "Archiv erstellt."
 
 msgid "Created environment variable."
-msgstr ""
+msgstr "Umgebungsvariable erstellt."
 
 msgid "Created repo."
-msgstr ""
+msgstr "Repo erstellt."
 
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -94,10 +96,10 @@ msgid "Edit archive."
 msgstr "Archiv bearbeiten."
 
 msgid "Edit environment variable."
-msgstr ""
+msgstr "Umgebungsvariable bearbeiten."
 
 msgid "Email"
-msgstr ""
+msgstr "E-Mail"
 
 msgid "Enable"
 msgstr "Aktivieren"
@@ -109,7 +111,7 @@ msgid "Encryption"
 msgstr "Verschlüsselung"
 
 msgid "Environment Variables"
-msgstr ""
+msgstr "Umgebungsvariablen"
 
 msgid "Excludes"
 msgstr "Ausgenommen"
@@ -131,6 +133,8 @@ msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
 "point."
 msgstr ""
+"Wenn dies aktiviert ist, wird borg keine Dateisystempartitionen innerhalb "
+"eines Sicherungspunktes überlappen."
 
 msgid "Includes"
 msgstr "Einschließlich"
@@ -154,6 +158,8 @@ msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
 "user@hostname&#58;path"
 msgstr ""
+"Sie müssen ssh-Schlüssel eingerichtet haben. Der entfernte Pfad sollte die "
+"Form&#58; user@hostname&#58;path haben"
 
 msgid "Name"
 msgstr "Name"
@@ -171,48 +177,52 @@ msgid "One filesystem only"
 msgstr "Nur ein Dateisystem"
 
 msgid "Original location"
-msgstr ""
+msgstr "Ursprünglicher Ort"
 
 msgid "Output verbose list of files and directories."
-msgstr ""
+msgstr "Ausführliche Liste der Dateien und Verzeichnisse ausgeben."
 
 msgid "Passphrase"
 msgstr "Passphrase"
 
 msgid "Post-script"
-msgstr ""
+msgstr "Post-Skript"
 
 msgid "Pre-script"
-msgstr ""
+msgstr "Prä-Skript"
 
 msgid "Put comma between each directory"
 msgstr "Zwischen jedem Verzeichnis ein Komma setzen"
 
 msgid "Rate limit"
-msgstr ""
+msgstr "Ratengrenze"
 
 msgid "Remote"
-msgstr ""
+msgstr "Entfernt"
 
 msgid "Remote Path"
-msgstr ""
+msgstr "Entfernter Pfad"
 
 msgid "Remote path"
-msgstr ""
+msgstr "Entfernter Pfad"
 
 msgid "Repo"
 msgstr "Repo"
 
 msgid "Repo info ..."
-msgstr ""
+msgstr "Repoinfo ..."
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr ""
+"Repo ist in Gebrauch. Löschen Sie zuerst die mit diesem Repo verbundenen "
+"Archive!"
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
 "as the repo."
 msgstr ""
+"Das Repo wird als Unterordner in den gemeinsamen Ordner mit dem gleichen "
+"Namen wie das Repo eingebunden."
 
 msgid "Repos"
 msgstr "Repos"
@@ -221,28 +231,28 @@ msgid "Repos only"
 msgstr "Nur Repos"
 
 msgid "Retain daily"
-msgstr ""
+msgstr "Täglich beibehalten"
 
 msgid "Retain hourly"
-msgstr ""
+msgstr "Stündlich beibehalten"
 
 msgid "Retain monthly"
-msgstr ""
+msgstr "Monatlich beibehalten"
 
 msgid "Retain weekly"
-msgstr ""
+msgstr "Wöchentlich beibehalten"
 
 msgid "Retain yearly"
-msgstr ""
+msgstr "Jährlich beibehalten"
 
 msgid "Run"
-msgstr ""
+msgstr "Ausführen"
 
 msgid "Run script from this path after backup."
-msgstr ""
+msgstr "Nach der Sicherung das Skript von diesem Pfad ausführen."
 
 msgid "Run script from this path before backup."
-msgstr ""
+msgstr "Vor der Sicherung das Skript von diesem Pfad ausführen."
 
 msgid "Select a repo ..."
 msgstr "Eine Repo auswählen ..."
@@ -253,18 +263,22 @@ msgstr "Ein Archiv auswählen ..."
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
 msgstr ""
+"Setzen Sie das Limit für die Upload-Rate des entfernten Netzwerks in "
+"kiByte/s (Standard&#58; 0=unbegrenzt)."
 
 msgid "Shared Folder"
-msgstr "Freigegebener Ordner"
+msgstr "Gemeinsamer Ordner"
 
 msgid "Shared folder"
-msgstr ""
+msgstr "Gemeinsamer Ordner"
 
 msgid "Skip init"
-msgstr ""
+msgstr "Initialisierung überspringen"
 
 msgid "Skip initialization to import existing repo."
 msgstr ""
+"Überspringen Sie die Initialisierung, um ein bestehendes Projektarchiv zu "
+"importieren."
 
 msgid "Type"
 msgstr "Typ"
@@ -276,22 +290,22 @@ msgid "Uses value as prefix for archive name."
 msgstr "Verwendet den Wert als Präfix für den Archivnamen."
 
 msgid "Value"
-msgstr ""
+msgstr "Wert"
 
 msgid "Verify"
 msgstr "Verifizieren"
 
 msgid "lz4 - super fast / low compression"
-msgstr ""
+msgstr "lz4 - superschnell / niedrige Kompression"
 
 msgid "lzma - even slower / even higher compression"
-msgstr ""
+msgstr "lzma - noch langsamer / noch höhere Kompression"
 
 msgid "n/a"
 msgstr "n/v"
 
 msgid "zlib - less fast / higher compression"
-msgstr ""
+msgstr "zlib - weniger schnell / höhere Kompression"
 
 msgid "zstd - super fast / medium compression"
-msgstr ""
+msgstr "zstd - superschnell / mittlere Kompression"

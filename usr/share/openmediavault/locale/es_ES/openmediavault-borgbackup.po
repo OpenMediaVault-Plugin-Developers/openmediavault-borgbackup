@@ -22,7 +22,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
-msgstr "0 is la compresión más rápida ( y peor) y 9 la más lenta ( y mejor)"
+msgstr "0 es la compresión peor y más rápida  y 9 la mejor y más lenta"
 
 msgid "All"
 msgstr "Todos"
@@ -83,7 +83,7 @@ msgid "Created archive."
 msgstr "Archivo creado."
 
 msgid "Created environment variable."
-msgstr ""
+msgstr "Variable de entorno creada."
 
 msgid "Created repo."
 msgstr "repo creado."
@@ -95,7 +95,7 @@ msgid "Edit archive."
 msgstr "Editar archivo."
 
 msgid "Edit environment variable."
-msgstr ""
+msgstr "Editar variable de entorno."
 
 msgid "Email"
 msgstr "Email"
@@ -110,7 +110,7 @@ msgid "Encryption"
 msgstr "Encriptación"
 
 msgid "Environment Variables"
-msgstr ""
+msgstr "Variables de entorno"
 
 msgid "Excludes"
 msgstr "Excluidos"
@@ -285,7 +285,7 @@ msgid "Uses value as prefix for archive name."
 msgstr "Usa el valor como prefijo del nombre de archivo"
 
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 msgid "Verify"
 msgstr "Verificar"

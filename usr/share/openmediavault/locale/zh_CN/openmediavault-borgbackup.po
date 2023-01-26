@@ -81,7 +81,7 @@ msgid "Created archive."
 msgstr "已创建归档。"
 
 msgid "Created environment variable."
-msgstr ""
+msgstr "已创建环境变量。"
 
 msgid "Created repo."
 msgstr "已创建源。"
@@ -93,7 +93,7 @@ msgid "Edit archive."
 msgstr "编辑归档"
 
 msgid "Edit environment variable."
-msgstr ""
+msgstr "编辑环境变量。"
 
 msgid "Email"
 msgstr "Email"
@@ -108,7 +108,7 @@ msgid "Encryption"
 msgstr "加密"
 
 msgid "Environment Variables"
-msgstr ""
+msgstr "环境变量"
 
 msgid "Excludes"
 msgstr "扩展参数"
@@ -273,7 +273,7 @@ msgid "Uses value as prefix for archive name."
 msgstr "使用该值作为归档前缀名称。"
 
 msgid "Value"
-msgstr ""
+msgstr "值"
 
 msgid "Verify"
 msgstr "校验"
