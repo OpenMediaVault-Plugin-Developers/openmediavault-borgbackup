@@ -1,3 +1,9 @@
+openmediavault-borgbackup (6.4.3) stable; urgency=low
+
+  * Fix archive info command
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 26 Jan 2023 09:54:49 -0600
+
 openmediavault-borgbackup (6.4.2) stable; urgency=low
 
   * Fix environment variable delete
