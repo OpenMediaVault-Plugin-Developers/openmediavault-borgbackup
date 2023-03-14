@@ -232,6 +232,24 @@
   },
   {
     "type": "rpc",
+    "id": "rpc.borgbackup.changepassphrase",
+    "params": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "passphrase": {
+          "type": "string",
+          "required": true
+        }
+      }
+    }
+  },
+  {
+    "type": "rpc",
     "id": "rpc.borgbackup.cmd",
     "params": {
       "type": "object",

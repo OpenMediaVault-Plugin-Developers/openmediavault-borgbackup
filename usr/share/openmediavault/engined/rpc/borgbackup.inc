@@ -39,6 +39,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('repoCommand');
         $this->registerMethod('mountRepo');
         $this->registerMethod('unmountRepo');
+        $this->registerMethod('changePassphrase');
 
         $this->registerMethod('getArchiveList');
         $this->registerMethod('getArchive');
@@ -250,6 +251,43 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmd->execute($output);
         // Return the configuration object.
         //return $repo->getAssoc();
+    }
+
+    public function changePassphrase($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.borgbackup.changepassphrase');
+        // Prepare the configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
+        $repo->remove('skipinit');
+        // change repo passphrase
+        $cmdArgs = [];
+        $cmdArgs[] = $this->getProgram;
+        $cmdArgs[] = 'key';
+        $cmdArgs[] = 'change-passphrase';
+        if ($repo->get('type') == 'local') {
+            $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                'uuid' => $repo->get('sharedfolderref')
+            ], $context);
+        } else {
+            $path = $repo->get('uri');
+        }
+        $cmdArgs[] = $path;
+        $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
+        $cmd->setEnv("BORG_NEW_PASSPHRASE", escapeshellarg($params['passphrase']));
+        $cmd->setEnvFromFile($this->envFile . $params['uuid']);
+        $cmd->execute($output);
+        // update passphrase in database
+        $repo->set('passphrase',$params['passphrase']);
+        $db->set($repo);
+        // Set borgbackup module to dirty
+        $dispatcher = \OMV\Engine\Notify\Dispatcher::getInstance();
+        $dispatcher->notify(OMV_NOTIFY_MODIFY,
+            'org.openmediavault.conf.service.borgbackup');
     }
 
     public function deleteRepo($params, $context)

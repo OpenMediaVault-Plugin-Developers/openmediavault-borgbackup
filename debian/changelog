@@ -1,3 +1,9 @@
+openmediavault-borgbackup (6.4.4) UNRELEASED; urgency=medium
+
+  * Add option to change encrypted repo passphrase
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 14 Mar 2023 18:08:51 -0500
+
 openmediavault-borgbackup (6.4.3) stable; urgency=low
 
   * Fix archive info command

@@ -63,6 +63,36 @@ data:
               arg0:
                 prop: archiveCount
               arg1: 0
+      - type: iconButton
+        tooltip: _("Change passphrase")
+        icon: mdi:lock-reset
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            - operator: truthy
+              arg0:
+                prop: encryption
+        execute:
+          type: formDialog
+          formDialog:
+            title: _('Change passphrase')
+            fields:
+              - type: hidden
+                name: uuid
+                value: "{{ _selected[0].uuid }}"
+              - type: passwordInput
+                name: passphrase
+                label: _("Passphrase")
+                value: ""
+            buttons:
+              submit:
+                text: _('Change')
+                execute:
+                  type: request
+                  request:
+                    service: BorgBackup
+                    method: changePassphrase
       - type: menu
         icon: mdi:check-underline
         tooltip: _("Check")
