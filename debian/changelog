@@ -1,6 +1,7 @@
 openmediavault-borgbackup (6.4.4) UNRELEASED; urgency=medium
 
   * Add option to change encrypted repo passphrase
+  * Run pre and post script when using Run command in Archives tab
 
  -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 14 Mar 2023 18:08:51 -0500
 

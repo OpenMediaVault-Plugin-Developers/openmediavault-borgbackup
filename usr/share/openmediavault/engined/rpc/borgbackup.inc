@@ -468,6 +468,16 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         // Create the background process.
         return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
             use ($archive, $context, $repo) {
+                // prescript
+                $prescript = $archive->get('prescript');
+                if (strlen($prescript) > 1) {
+                    $cmd = new \OMV\System\Process($prescript);
+                    $cmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
+                    $cmd->setRedirect2to1();
+                    $cmdLine = $cmd->getCommandLine();
+                    $this->exec($cmdLine, $output, $bgOutputFilename);
+                }
+                // borg command
                 $cmdArgs = [];
                 $cmdArgs[] = $this->getProgram;
                 $cmdArgs[] = 'create';
@@ -512,6 +522,17 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmdLine));
                 $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
                 $this->exec($cmdLine, $output, $bgOutputFilename);
+                // post script
+                $postscript = $archive->get('postscript');
+                if (strlen($postscript) > 1) {
+                    $cmd = new \OMV\System\Process($postscript);
+                    $cmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
+                    $cmd->setRedirect2to1();
+                    $cmdLine = $cmd->getCommandLine();
+                    $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
+                    $this->exec($cmdLine, $output, $bgOutputFilename);
+                }
+                // return
                 return $output;
             }
         );
