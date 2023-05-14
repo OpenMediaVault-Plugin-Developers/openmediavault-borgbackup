@@ -176,6 +176,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($params['passphrase']));
         $cmd->setEnv("BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK", "yes");
+        if ($params['skipinit'] == true) {
+            $cmd->setEnv("BORG_RELOCATED_REPO_ACCESS_IS_OK", "yes");
+        }
         if (!$isNew) {
             $cmd->setEnvFromFile($this->envFile . $params['uuid']);
         }
