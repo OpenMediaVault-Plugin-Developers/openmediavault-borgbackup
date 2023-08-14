@@ -23,6 +23,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
 {
     private $getProgram = '/usr/bin/borg';
     private $envFile = '/etc/borgbackup/borg-envvar-';
+    private $passPattern = '/BORG_PASSPHRASE=\'\w+\'/';
 
     public function getName()
     {
@@ -187,7 +188,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdLine = $cmd->getCommandLine();
         $cmd->execute($output, $exitStatus);
         if (0 !== $exitStatus) {
-            throw new \OMV\ExecException($cmdLine, $output);
+            $nopass = trim(preg_replace($this->passPattern, '', $cmdLine));
+            throw new \OMV\ExecException($nopass, $output);
         }
         // Remove skipinit parameter
         $object->remove('skipinit');
