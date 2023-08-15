@@ -23,7 +23,6 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
 {
     private $getProgram = '/usr/bin/borg';
     private $envFile = '/etc/borgbackup/borg-envvar-';
-    private $passPattern = '/BORG_PASSPHRASE=\'\w+\'/';
 
     public function getName()
     {
@@ -175,7 +174,6 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($params['passphrase']));
         $cmd->setEnv("BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK", "yes");
         if ($params['skipinit'] == true) {
             $cmd->setEnv("BORG_RELOCATED_REPO_ACCESS_IS_OK", "yes");
@@ -185,11 +183,11 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         $cmd->setEnvFromFile($this->envFile . 'creation');
         $cmd->setRedirect2to1();
+        $cmdLineNoPass = $cmd->getCommandLine();
+        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($params['passphrase']));
         $cmdLine = $cmd->getCommandLine();
-        $cmd->execute($output, $exitStatus);
-        if (0 !== $exitStatus) {
-            $nopass = trim(preg_replace($this->passPattern, '', $cmdLine));
-            throw new \OMV\ExecException($nopass, $output);
+        if (0 !== $this->exec($cmdLine, $output)) {
+            throw new \OMV\ExecException($cmdLineNoPass, $output);
         }
         // Remove skipinit parameter
         $object->remove('skipinit');
@@ -228,9 +226,13 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         mkdir($path, 0775, true);
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
         $cmd->setEnvFromFile($this->envFile . $params['uuid']);
-        $cmd->execute($output);
+        $cmdLineNoPass = $cmd->getCommandLine();
+        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get['passphrase']));
+        $cmdLine = $cmd->getCommandLine();
+        if (0 !== $this->exec($cmdLine, $output)) {
+            throw new \OMV\ExecException($cmdLineNoPass, $output);
+        }
         // Return the configuration object.
         return $repo->getAssoc();
     }
@@ -251,11 +253,13 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = 'umount';
         $cmdArgs[] = $repoDir;
         $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
         $cmd->setEnvFromFile($this->envFile . $params['uuid']);
-        $cmd->execute($output);
-        // Return the configuration object.
-        //return $repo->getAssoc();
+        $cmdLineNoPass = $cmd->getCommandLine();
+        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
+        $cmdLine = $cmd->getCommandLine();
+        if (0 !== $this->exec($cmdLine, $output)) {
+            throw new \OMV\ExecException($cmdLineNoPass, $output);
+        }
     }
 
     public function changePassphrase($params, $context)
@@ -282,10 +286,14 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         $cmdArgs[] = $path;
         $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setEnvFromFile($this->envFile . $params['uuid']);
+        $cmdLineNoPass = $cmd->getCommandLine();
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
         $cmd->setEnv("BORG_NEW_PASSPHRASE", escapeshellarg($params['passphrase']));
-        $cmd->setEnvFromFile($this->envFile . $params['uuid']);
-        $cmd->execute($output);
+        $cmdLine = $cmd->getCommandLine();
+        if (0 !== $this->exec($cmdLine, $output)) {
+            throw new \OMV\ExecException($cmdLineNoPass, $output);
+        }
         // update passphrase in database
         $repo->set('passphrase',$params['passphrase']);
         $db->set($repo);
@@ -332,11 +340,15 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
         $cmd->setEnv("BORG_DELETE_I_KNOW_WHAT_I_AM_DOING", "YES");
         $cmd->setEnvFromFile($this->envFile . $params['uuid']);
         $cmd->setQuiet(TRUE);
-        $cmd->execute($output);
+        $cmdLineNoPass = $cmd->getCommandLine();
+        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
+        $cmdLine = $cmd->getCommandLine();
+        if (0 !== $this->exec($cmdLine, $output)) {
+            throw new \OMV\ExecException($cmdLineNoPass, $output);
+        }
         // Delete the configuration object.
         $db->delete($repo);
         // Return the deleted configuration object.
@@ -393,11 +405,14 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 }
                 $cmdArgs[] = escapeshellarg($path);
                 $cmd = new \OMV\System\Process($cmdArgs);
-                $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
                 $cmd->setEnvFromFile($this->envFile . $params['uuid']);
                 $cmd->setRedirect2to1();
+                $cmdLineNoPass = $cmd->getCommandLine();
+                $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
                 $cmdLine = $cmd->getCommandLine();
-                $this->exec($cmdLine, $output, $bgOutputFilename);
+                if (0 !== $this->exec($cmdLine, $output)) {
+                    throw new \OMV\ExecException($cmdLineNoPass, $output);
+                }
                 return $output;
             }
         );
@@ -520,13 +535,16 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                     $cmdArgs[] = '--noatime';
                 }
                 $cmd = new \OMV\System\Process($cmdArgs);
-                $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
                 $cmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
                 $cmd->setRedirect2to1();
+                $cmdLineNoPass = $cmd->getCommandLine();
+                $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
                 $cmdLine = $cmd->getCommandLine();
-                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmdLine));
+                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmdLineNoPass));
                 $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
-                $this->exec($cmdLine, $output, $bgOutputFilename);
+                if (0 !== $this->exec($cmdLine, $output)) {
+                    throw new \OMV\ExecException($cmdLineNoPass, $output);
+                }
                 // post script
                 $postscript = $archive->get('postscript');
                 if (strlen($postscript) > 1) {
@@ -568,10 +586,14 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
         $cmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
         $cmd->setQuiet(TRUE);
-        $cmd->execute($output);
+        $cmdLineNoPass = $cmd->getCommandLine();
+        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
+        $cmdLine = $cmd->getCommandLine();
+        if (0 !== $this->exec($cmdLine, $output)) {
+            throw new \OMV\ExecException($cmdLineNoPass, $output);
+        }
         // Delete the configuration object.
         $db->delete($archive);
         // Return the deleted configuration object.
@@ -619,13 +641,16 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                     $cmdArgs[] = sprintf('"%s::%s"', $path, $archive->get('name'));
                 }
                 $cmd = new \OMV\System\Process($cmdArgs);
-                $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
                 $cmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
                 $cmd->setRedirect2to1();
+                $cmdLineNoPass = $cmd->getCommandLine();
+                $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
                 $cmdLine = $cmd->getCommandLine();
-                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmdLine));
+                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmdLineNoPass));
                 $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
-                $this->exec($cmdLine, $output, $bgOutputFilename);
+                if (0 !== $this->exec($cmdLine, $output)) {
+                    throw new \OMV\ExecException($cmdLineNoPass, $output);
+                }
                 return $output;
             }
         );
@@ -654,9 +679,13 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
         $cmd->setEnvFromFile($this->envFile . $repo->get('uuid'));
-        $cmd->execute($output);
+        $cmdLineNoPass = $cmd->getCommandLine();
+        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
+        $cmdLine = $cmd->getCommandLine();
+        if (0 !== $this->exec($cmdLine, $output)) {
+            throw new \OMV\ExecException($cmdLineNoPass, $output);
+        }
         $archives = [];
         foreach ($output as $archive) {
             $archives[] = [
@@ -693,11 +722,13 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $filename = str_replace(' ', '_', $params['archive']);
         $cmdArgs[] = sprintf('"%s/%s.tar.gz"', $sfpath, $filename);
         $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
         $cmd->setEnvFromFile($this->envFile . $repo->get('uuid'));
         $cmd->setQuiet(TRUE);
         $cmd->setBackground(TRUE);
-        $cmd->execute($output);
+        $cmdLineNoPass = $cmd->getCommandLine();
+        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
+        $cmdLine = $cmd->getCommandLine();
+        $this->exec($cmdLine, $output);
     }
 
     public function extractArchive($params, $context)
@@ -729,11 +760,15 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         $cmdArgs[] = sprintf('"%s::%s"', $path, $params['archive']);
         $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
         $cmd->setEnvFromFile($this->envFile . $repo->get('uuid'));
         $cmd->setQuiet(TRUE);
         $cmd->setBackground(TRUE);
-        $cmd->execute($output);
+        $cmdLineNoPass = $cmd->getCommandLine();
+        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')));
+        $cmdLine = $cmd->getCommandLine();
+        if (0 !== $this->exec($cmdLine, $output)) {
+            throw new \OMV\ExecException($cmdLineNoPass, $output);
+        }
     }
 
     public function getEnvVarList($params, $context)
