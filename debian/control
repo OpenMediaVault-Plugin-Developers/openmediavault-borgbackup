@@ -3,12 +3,12 @@ Section: net
 XB-Plugin-Section: backup
 Priority: optional
 Maintainer: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
-Build-Depends: debhelper (>= 12)
+Build-Depends: debhelper (>= 13)
 Standards-Version: 4.3.0
 
 Package: openmediavault-borgbackup
 Architecture: all
-Depends: openmediavault (>= 6.6),
+Depends: openmediavault (>= 7),
          python3-llfuse,
          borgbackup (>= 1.1.0)
 Description: borgbackup plugin for OpenMediaVault.
