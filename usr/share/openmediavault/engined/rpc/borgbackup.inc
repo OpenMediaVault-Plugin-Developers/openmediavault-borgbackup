@@ -404,7 +404,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $cmd->setEnvFromFile($this->envFile . $params['uuid']);
                 $cmd->setRedirect2to1();
                 $cmdLine = $cmd->getCommandLine();
-                if (0 !== $this->exec($cmdLine, $output)) {
+                if (0 !== ($exitStatus = $this->exec($cmd, $output, $bgOutputFilename))) {
                     throw new \OMV\ExecException($cmd, $output);
                 }
                 return $output;
@@ -533,7 +533,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $cmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
                 $cmd->setRedirect2to1();
                 $cmdLine = $cmd->getCommandLine();
-                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', implode(' ', $cmd)));
+                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmd));
                 $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
                 if (0 !== $this->exec($cmdLine, $output)) {
                     throw new \OMV\ExecException($cmd, $output);
@@ -637,9 +637,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $cmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
                 $cmd->setRedirect2to1();
                 $cmdLine = $cmd->getCommandLine();
-                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', implode(' ', $cmd)));
+                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmd));
                 $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
-                if (0 !== $this->exec($cmdLine, $output)) {
+                if (0 !== ($exitStatus = $this->exec($cmd, $output, $bgOutputFilename))) {
                     throw new \OMV\ExecException($cmd, $output);
                 }
                 return $output;
