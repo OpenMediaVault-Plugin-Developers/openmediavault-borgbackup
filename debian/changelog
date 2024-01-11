@@ -1,3 +1,9 @@
+openmediavault-borgbackup (7.0.1) UNRELEASED; urgency=medium
+
+  * Add compact option
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 11 Jan 2024 17:49:32 -0600
+
 openmediavault-borgbackup (7.0) stable; urgency=low
 
   * Update for OMV 7.x
