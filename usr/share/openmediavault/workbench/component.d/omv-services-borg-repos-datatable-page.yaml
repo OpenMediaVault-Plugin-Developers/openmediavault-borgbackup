@@ -274,6 +274,27 @@ data:
                 stop:
                   hidden: true
       - type: iconButton
+        tooltip: _("Compact")
+        icon: mdi:arrow-collapse-vertical
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+        execute:
+          type: taskDialog
+          taskDialog:
+            config:
+              title: _("Compact repo ...")
+              startOnInit: true
+              request:
+                service: BorgBackup
+                method: repoCommand
+                params:
+                  command: "compact"
+                  uuid: "{{ _selected[0].uuid }}"
+              buttons:
+                stop:
+                  hidden: true
+      - type: iconButton
         tooltip: _("Info")
         icon: mdi:folder-information-outline
         enabledConstraints:

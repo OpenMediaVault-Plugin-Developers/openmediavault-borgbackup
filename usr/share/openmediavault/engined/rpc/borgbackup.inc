@@ -373,6 +373,14 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                         $cmdArgs[] = 'check';
                         $cmdArgs[] = '--archives-only';
                         break;
+                    case 'compact':
+                        $threshold = \OMV\Environment::getInteger("OMV_BORGBACKUP_COMPACT_THRESHOLD", 10);
+                        $cmdArgs[] = 'compact';
+                        $cmdArgs[] = '--progress';
+                        if ($threshold > 0 && $threshold < 100 && $threshold != 10) {
+                            $cmdArgs[] = sprintf('--threshold %d', $threshold);
+                        }
+                        break;
                     case 'info':
                         $cmdArgs[] = 'info';
                         break;

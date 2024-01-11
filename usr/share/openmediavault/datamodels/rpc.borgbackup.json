@@ -264,6 +264,7 @@
           "enum": [
             "all",
             "archives",
+            "compact",
             "info",
             "list",
             "repo",
