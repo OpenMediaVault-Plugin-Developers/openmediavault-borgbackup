@@ -35,6 +35,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('getRepoList');
         $this->registerMethod('getRepo');
         $this->registerMethod('setRepo');
+        $this->registerMethod('changeRepoPath');
         $this->registerMethod('deleteRepo');
         $this->registerMethod('repoCommand');
         $this->registerMethod('mountRepo');
@@ -194,6 +195,67 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $db->set($object);
         // Return the configuration object.
         return $object->getAssoc();
+    }
+
+    public function changeRepoPath($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        //$this->validateMethodParams($params, 'rpc.borgbackup.changerepo');
+        // get database object
+        $db = \OMV\Config\Database::getInstance();
+        // Clear uri if type is local
+        $local = false;
+        if ($params['type'] == 'local') {
+            $params['uri'] = '';
+            $local = true;
+        }
+        // get password and encryption params
+        $other = $db->get('conf.service.borgbackup.repo', $params['uuid']);
+        $passphrase = $other->get('passphrase');
+        $encryption = $other->get('encryption');
+        $params['passphrase'] = $passphrase;
+        $params['encryption'] = $encryption;
+        // Prepare the configuration object.
+        $repo = new \OMV\Config\ConfigObject("conf.service.borgbackup.repo");
+        $repo->setAssoc($params);
+        // Set the configuration object.
+        // Check uniqueness - Shared folder or uri
+        if ($local) {
+            $db->assertIsUnique($repo, 'sharedfolderref');
+        } else {
+            $db->assertIsUnique($repo, 'uri');
+        }
+        // initialize repo
+        $cmdArgs = [];
+        $cmdArgs[] = $this->getProgram;
+        $cmdArgs[] = 'info';
+        if ($local) {
+            $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                'uuid' => $params['sharedfolderref']
+            ], $context);
+        } else {
+            $path = $params['uri'];
+        }
+        $cmdArgs[] = escapeshellarg($path);
+        $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($passphrase), TRUE);
+        $cmd->setEnv("BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK", "yes");
+        $cmd->setEnv("BORG_RELOCATED_REPO_ACCESS_IS_OK", "yes");
+        $cmd->setEnvFromFile($this->envFile . $params['uuid']);
+        $cmd->setEnvFromFile($this->envFile . 'creation');
+        $cmd->setRedirect2to1();
+        $cmdLine = $cmd->getCommandLine();
+        if (0 !== $this->exec($cmdLine, $output)) {
+            throw new \OMV\ExecException($cmd, $output);
+        }
+        // Remove skipinit parameter
+        $repo->remove('skipinit');
+        // Set the configuration object.
+        $db->set($repo);
+        // Return the configuration object.
+        return $repo->getAssoc();
     }
 
     public function mountRepo($params, $context)

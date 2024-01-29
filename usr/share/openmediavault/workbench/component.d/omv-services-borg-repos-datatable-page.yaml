@@ -20,10 +20,19 @@ data:
         prop: name
         flexGrow: 1
         sortable: true
+      - name: _("Type")
+        prop: type
+        flexGrow: 1
+        sortable: true
       - name: _("Shared Folder")
         prop: sharedfoldername
         flexGrow: 1
         sortable: true
+      - name: _("SharedFolderRef")
+        prop: sharedfolderref
+        flexGrow: 1
+        sortable: true
+        hidden: true
       - name: _("Remote Path")
         prop: uri
         flexGrow: 2
@@ -47,6 +56,76 @@ data:
         execute:
           type: url
           url: "/services/borgbackup/repos/create"
+      - type: iconButton
+        tooltip: _("Change location")
+        icon: edit
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+        execute:
+          type: formDialog
+          formDialog:
+            title: _("Change location")
+            fields:
+              - type: hidden
+                name: uuid
+                value: "{{ _selected[0].uuid }}"
+              - type: hint
+                hintType: info
+                text: _("You must move the repo files before changing the location.")
+              - type: textInput
+                name: name
+                label: _("Name")
+                readonly: true
+                value: "{{ _selected[0].name }}"
+              - type: select
+                name: type
+                label: _("Type")
+                value: "{{ _selected[0].type }}"
+                store:
+                  data:
+                    - ["local", _("Local")]
+                    - ["remote", _("Remote")]
+              - type: sharedFolderSelect
+                name: sharedfolderref
+                label: _("Shared folder")
+                value: "{{ _selected[0].sharedfolderref }}"
+                modifiers:
+                  - type: hidden
+                    constraint:
+                      operator: eq
+                      arg0:
+                        prop: type
+                      arg1: "remote"
+              - type: textInput
+                name: uri
+                label: _("Remote path")
+                value: "{{ _selected[0].uri }}"
+                hint: _("Must have ssh keys setup.  Remote path should be in the form&#58;  user@hostname&#58;path")
+                modifiers:
+                  - type: hidden
+                    constraint:
+                      operator: eq
+                      arg0:
+                        prop: type
+                      arg1: "local"
+                  - type: value
+                    typeConfig: ""
+                    constraint:
+                      operator: eq
+                      arg0:
+                        prop: type
+                      arg1: "local"
+            buttons:
+              submit:
+                text: _("Change")
+                execute:
+                  type: request
+                  request:
+                    service: BorgBackup
+                    method: changeRepoPath
+                    progressMessage: _("Changing repo location ...")
+                    successNotification: _("Repo location has been changed.")
       - template: delete
         execute:
           type: request
@@ -76,7 +155,7 @@ data:
         execute:
           type: formDialog
           formDialog:
-            title: _('Change passphrase')
+            title: _("Change passphrase")
             fields:
               - type: hidden
                 name: uuid
@@ -87,7 +166,7 @@ data:
                 value: ""
             buttons:
               submit:
-                text: _('Change')
+                text: _("Change")
                 execute:
                   type: request
                   request:
@@ -173,7 +252,7 @@ data:
         execute:
           type: formDialog
           formDialog:
-            title: _('Extract archive to tar file')
+            title: _("Extract archive to tar file")
             fields:
               - type: hidden
                 name: uuid
@@ -197,7 +276,7 @@ data:
                 hint: _("Export file will be created in this directory with a filename matching the archive name with an extension of .tar.gz.")
             buttons:
               submit:
-                text: _('Export')
+                text: _("Export")
                 execute:
                   type: request
                   request:
@@ -212,7 +291,7 @@ data:
         execute:
           type: formDialog
           formDialog:
-            title: _('Extract archive to directory')
+            title: _("Extract archive to directory")
             fields:
               - type: hidden
                 name: uuid
@@ -246,7 +325,7 @@ data:
                         prop: original
             buttons:
               submit:
-                text: _('Extract')
+                text: _("Extract")
                 execute:
                   type: request
                   request:
@@ -325,7 +404,7 @@ data:
         execute:
           type: formDialog
           formDialog:
-            title: _('Mount repo')
+            title: _("Mount repo")
             fields:
               - type: hidden
                 name: uuid
@@ -336,7 +415,7 @@ data:
                 hint: _("Repo will be mounted as a subfolder in the shared folder with the same name as the repo.")
             buttons:
               submit:
-                text: _('Mount')
+                text: _("Mount")
                 execute:
                   type: request
                   request:

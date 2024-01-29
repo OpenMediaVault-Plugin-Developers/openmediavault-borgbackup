@@ -53,6 +53,9 @@
               },
               "encryption": {
                 "type": "boolean"
+              },
+              "skipinit": {
+                "type": "boolean"
               }
             }
           }

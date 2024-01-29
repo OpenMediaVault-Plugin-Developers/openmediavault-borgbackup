@@ -49,7 +49,7 @@
         },
         "skipinit": {
           "type": "boolean",
-          "required": true
+          "required": false
         }
       }
     }
