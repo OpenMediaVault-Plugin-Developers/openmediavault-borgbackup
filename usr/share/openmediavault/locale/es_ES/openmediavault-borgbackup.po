@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 16:40-0500\n"
+"POT-Creation-Date: 2024-01-29 16:12-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2022\n"
-"Language-Team: Spanish (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/es/)\n"
+"Language-Team: Spanish (Spain) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/es_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
+"Language: es_ES\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
@@ -42,6 +42,18 @@ msgstr "Solo archivos"
 msgid "BorgBackup"
 msgstr "BorgBackup"
 
+msgid "Change"
+msgstr ""
+
+msgid "Change location"
+msgstr ""
+
+msgid "Change passphrase"
+msgstr ""
+
+msgid "Changing repo location ..."
+msgstr ""
+
 msgid "Check"
 msgstr "Validar"
 
@@ -63,6 +75,12 @@ msgid ""
 msgstr ""
 "Marcado = enviar correo electrónico en caso de error o éxito. Sin marcar = "
 "enviar correo electrónico solo en caso de error."
+
+msgid "Compact"
+msgstr ""
+
+msgid "Compact repo ..."
+msgstr ""
 
 msgid "Compression"
 msgstr "Compresión"
@@ -87,6 +105,9 @@ msgstr "Variable de entorno creada."
 
 msgid "Created repo."
 msgstr "repo creado."
+
+msgid "Docs"
+msgstr ""
 
 msgid "Edit"
 msgstr "Editar"
@@ -128,6 +149,12 @@ msgstr ""
 msgid "Extract"
 msgstr "Extraer"
 
+msgid "Extract archive to directory"
+msgstr ""
+
+msgid "Extract archive to tar file"
+msgstr ""
+
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
 "point."
@@ -149,6 +176,9 @@ msgstr "Local"
 
 msgid "Mount"
 msgstr "Montaje"
+
+msgid "Mount repo"
+msgstr ""
 
 msgid "Mounted"
 msgstr "Montado"
@@ -214,6 +244,9 @@ msgstr "Información del repositorio ..."
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr "Repo en uso. !Borre archivos asociados a este repo primero!"
 
+msgid "Repo location has been changed."
+msgstr ""
+
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
 "as the repo."
@@ -269,6 +302,9 @@ msgstr "Carpeta compartida"
 msgid "Shared folder"
 msgstr "Carpeta compartida"
 
+msgid "SharedFolderRef"
+msgstr ""
+
 msgid "Skip init"
 msgstr "saltar inicio"
 
@@ -290,6 +326,12 @@ msgstr "Valor"
 msgid "Verify"
 msgstr "Verificar"
 
+msgid "You must move the repo files before changing the location."
+msgstr ""
+
+msgid "borgbackup"
+msgstr ""
+
 msgid "lz4 - super fast / low compression"
 msgstr "lz4 - super rápido / baja compresión"
 
@@ -298,6 +340,9 @@ msgstr "lzma - más lento / mayor compresión"
 
 msgid "n/a"
 msgstr "n/d"
+
+msgid "omv-extras wiki"
+msgstr ""
 
 msgid "zlib - less fast / higher compression"
 msgstr "zlib - menos rápido / mayor compresión"

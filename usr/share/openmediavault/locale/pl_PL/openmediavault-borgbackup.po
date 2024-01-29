@@ -3,14 +3,18 @@
 # This file is distributed under the same license as the openmediavault-borgbackup package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Rysiek Jurczy, 2023
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 16:40-0500\n"
+"POT-Creation-Date: 2024-01-29 16:12-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Language-Team: Polish (Poland) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/pl_PL/)\n"
+"Last-Translator: Rysiek Jurczy, 2023\n"
+"Language-Team: Polish (Poland) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/pl_PL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,273 +22,332 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
-msgstr ""
+msgstr "0 to najszybsza kompresja, a 9 to najlepsza kompresja"
 
 msgid "All"
-msgstr ""
+msgstr "Wszystko"
 
 msgid "Archive"
-msgstr ""
+msgstr "Archiwum"
 
 msgid "Archive info ..."
-msgstr ""
+msgstr "Archiwum info ..."
 
 msgid "Archives"
-msgstr ""
+msgstr "Archiwa"
 
 msgid "Archives only"
-msgstr ""
+msgstr "Tylko archiwa"
 
 msgid "BorgBackup"
+msgstr "BorgBackup"
+
+msgid "Change"
+msgstr ""
+
+msgid "Change location"
+msgstr ""
+
+msgid "Change passphrase"
+msgstr ""
+
+msgid "Changing repo location ..."
 msgstr ""
 
 msgid "Check"
-msgstr ""
+msgstr "Sprawdż"
 
 msgid "Check all ..."
-msgstr ""
+msgstr "Sprawdź wszystko ..."
 
 msgid "Check archives only ..."
-msgstr ""
+msgstr "Sprawdź tylko archiwa ..."
 
 msgid "Check repo ..."
-msgstr ""
+msgstr "Sprawdź repozytorium ..."
 
 msgid "Check repos only ..."
-msgstr ""
+msgstr "Sprawdź tylko repozytoria ..."
 
 msgid ""
 "Checked = send email on error or success.<br/>Unchecked = send email on "
 "error only."
 msgstr ""
+"Zaznaczone = wyślij e-mail w przypadku błędu lub "
+"powodzenia.<br/>Niezaznaczone = wysyłaj e-mail tylko w przypadku błędu."
+
+msgid "Compact"
+msgstr ""
+
+msgid "Compact repo ..."
+msgstr ""
 
 msgid "Compression"
-msgstr ""
+msgstr "Kompresja"
 
 msgid "Compression Type"
-msgstr ""
+msgstr "Typ kompresji"
 
 msgid "Compression ratio"
-msgstr ""
+msgstr "Współczynnik kompresji"
 
 msgid "Create"
-msgstr ""
+msgstr "Utwórz"
 
 msgid "Create archive for ..."
-msgstr ""
+msgstr "Utwórz archiwum dla..."
 
 msgid "Created archive."
-msgstr ""
+msgstr "Utworzono archiwum."
 
 msgid "Created environment variable."
-msgstr ""
+msgstr "Utworzono zmienną środowiskową."
 
 msgid "Created repo."
+msgstr "Utworzono repozytorium."
+
+msgid "Docs"
 msgstr ""
 
 msgid "Edit"
-msgstr ""
+msgstr "Edytuj"
 
 msgid "Edit archive."
-msgstr ""
+msgstr "Edytuj archiwum."
 
 msgid "Edit environment variable."
-msgstr ""
+msgstr "Edytuj zmienną środowiskową."
 
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 msgid "Enable"
-msgstr ""
+msgstr "Włącz"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Włączony"
 
 msgid "Encryption"
-msgstr ""
+msgstr "Szyfrowanie"
 
 msgid "Environment Variables"
-msgstr ""
+msgstr "Zmienne środowiskowe"
 
 msgid "Excludes"
-msgstr ""
+msgstr "Wykluczone"
 
 msgid "Export"
-msgstr ""
+msgstr "Eksport"
 
 msgid ""
 "Export file will be created in this directory with a filename matching the "
 "archive name with an extension of .tar.gz."
 msgstr ""
+"W tym katalogu zostanie utworzony plik eksportu o nazwie odpowiadającej "
+"nazwie archiwum i rozszerzeniu .tar.gz."
 
 msgid "Extract"
+msgstr "Wyodrębnij"
+
+msgid "Extract archive to directory"
+msgstr ""
+
+msgid "Extract archive to tar file"
 msgstr ""
 
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
 "point."
 msgstr ""
+"Jeśli ta opcja jest włączona, Borg nie będzie rozciągać się po partycjach "
+"systemu plików w obrębie punktu kopii zapasowej."
 
 msgid "Includes"
-msgstr ""
+msgstr "Zawiera"
 
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 msgid "List"
-msgstr ""
+msgstr "Lista"
 
 msgid "Local"
-msgstr ""
+msgstr "Lokalny"
 
 msgid "Mount"
+msgstr "Montowanie"
+
+msgid "Mount repo"
 msgstr ""
 
 msgid "Mounted"
-msgstr ""
+msgstr "Zamontowane"
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
 "user@hostname&#58;path"
 msgstr ""
+"Musi mieć skonfigurowane klucze ssh. Ścieżka zdalna powinna mieć postać&#58;"
+" użytkownik@nazwahosta&#58;ścieżka"
 
 msgid "Name"
-msgstr ""
+msgstr "Nazwa"
 
 msgid "Name/Prefix"
-msgstr ""
+msgstr "Nazwa / przedrostek"
 
 msgid "No atime"
-msgstr ""
+msgstr "Brak czasu"
 
 msgid "None"
-msgstr ""
+msgstr "Żaden"
 
 msgid "One filesystem only"
-msgstr ""
+msgstr "Tylko jeden system plików"
 
 msgid "Original location"
-msgstr ""
+msgstr "Oryginalna lokalizacja"
 
 msgid "Output verbose list of files and directories."
-msgstr ""
+msgstr "Wyprowadź pełną listę plików i katalogów."
 
 msgid "Passphrase"
-msgstr ""
+msgstr "Hasło"
 
 msgid "Post-script"
-msgstr ""
+msgstr "Post-script"
 
 msgid "Pre-script"
-msgstr ""
+msgstr "Pre-script"
 
 msgid "Put comma between each directory"
-msgstr ""
+msgstr "Umieść przecinek pomiędzy każdym katalogiem"
 
 msgid "Rate limit"
-msgstr ""
+msgstr "Ograniczenie przepustowości"
 
 msgid "Remote"
-msgstr ""
+msgstr "Zdalny"
 
 msgid "Remote Path"
-msgstr ""
+msgstr "Zdalna ścieżka"
 
 msgid "Remote path"
-msgstr ""
+msgstr "Zdalna ścieżka"
 
 msgid "Repo"
-msgstr ""
+msgstr "Repozytorium"
 
 msgid "Repo info ..."
-msgstr ""
+msgstr "O repozytorium ..."
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
+msgstr ""
+"Repozytorium jest w użyciu. Najpierw usuń archiwa powiązane z tym "
+"repozytorium!"
+
+msgid "Repo location has been changed."
 msgstr ""
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
 "as the repo."
 msgstr ""
+"Repozytorium zostanie zamontowane jako podfolder w folderze współdzielonym o"
+" tej samej nazwie co repozytorium."
 
 msgid "Repos"
-msgstr ""
+msgstr "Repozytoria"
 
 msgid "Repos only"
-msgstr ""
+msgstr "Tylko repozytoria"
 
 msgid "Retain daily"
-msgstr ""
+msgstr "Zachowaj dziennie"
 
 msgid "Retain hourly"
-msgstr ""
+msgstr "Zachowaj co godzinę"
 
 msgid "Retain monthly"
-msgstr ""
+msgstr "Zachowaj miesięcznie"
 
 msgid "Retain weekly"
-msgstr ""
+msgstr "Zachowaj tygodniowo"
 
 msgid "Retain yearly"
-msgstr ""
+msgstr "Zachowaj rocznie"
 
 msgid "Run"
-msgstr ""
+msgstr "Uruchom"
 
 msgid "Run script from this path after backup."
-msgstr ""
+msgstr "Uruchom skrypt z tej ścieżki po utworzeniu kopii zapasowej."
 
 msgid "Run script from this path before backup."
-msgstr ""
+msgstr "Uruchom skrypt z tej ścieżki przed utworzeniem kopii zapasowej."
 
 msgid "Select a repo ..."
-msgstr ""
+msgstr "Wybierz repozytorium ..."
 
 msgid "Select an archive ..."
-msgstr ""
+msgstr "Wybierz archiwum ..."
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
 msgstr ""
+"Ustaw limit szybkości zdalnego przesyłania przez sieć w kilobajtach/s "
+"(domyślnie&#58; 0=nieograniczony)."
 
 msgid "Shared Folder"
-msgstr ""
+msgstr "Udostępniony folder"
 
 msgid "Shared folder"
+msgstr "Udostępniony folder"
+
+msgid "SharedFolderRef"
 msgstr ""
 
 msgid "Skip init"
-msgstr ""
+msgstr "Pomiń inicjalizację"
 
 msgid "Skip initialization to import existing repo."
-msgstr ""
+msgstr "Pomiń inicjalizację, aby zaimportować istniejące repozytorium."
 
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 msgid "Unmount"
-msgstr ""
+msgstr "Odmontuj"
 
 msgid "Uses value as prefix for archive name."
-msgstr ""
+msgstr "Używa wartości jako przedrostka nazwy archiwum."
 
 msgid "Value"
-msgstr ""
+msgstr "Wartość"
 
 msgid "Verify"
+msgstr "Weryfikacja"
+
+msgid "You must move the repo files before changing the location."
+msgstr ""
+
+msgid "borgbackup"
 msgstr ""
 
 msgid "lz4 - super fast / low compression"
-msgstr ""
+msgstr "lz4 - superszybka / niska kompresja"
 
 msgid "lzma - even slower / even higher compression"
-msgstr ""
+msgstr "lzma - jeszcze wolniejsza/jeszcze większa kompresja"
 
 msgid "n/a"
+msgstr "n/a"
+
+msgid "omv-extras wiki"
 msgstr ""
 
 msgid "zlib - less fast / higher compression"
-msgstr ""
+msgstr "zlib - mniej szybka/wyższa kompresja"
 
 msgid "zstd - super fast / medium compression"
-msgstr ""
+msgstr "zstd - superszybka / średnia kompresja"

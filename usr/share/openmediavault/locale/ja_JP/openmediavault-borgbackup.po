@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Toshihiro Kan <kansuke4649@gmail.com>, 2021
+# Toshihiro Kan <kansuke4649@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 16:40-0500\n"
+"POT-Creation-Date: 2024-01-29 16:12-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: Toshihiro Kan <kansuke4649@gmail.com>, 2021\n"
-"Language-Team: Japanese (Japan) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/ja_JP/)\n"
+"Last-Translator: Toshihiro Kan <kansuke4649@gmail.com>, 2023\n"
+"Language-Team: Japanese (Japan) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/ja_JP/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +31,7 @@ msgid "Archive"
 msgstr "アーカイブ"
 
 msgid "Archive info ..."
-msgstr ""
+msgstr "アーカイブ情報 ..."
 
 msgid "Archives"
 msgstr "アーカイブ"
@@ -42,24 +42,42 @@ msgstr "アーカイブのみ"
 msgid "BorgBackup"
 msgstr "BorgBackup"
 
+msgid "Change"
+msgstr ""
+
+msgid "Change location"
+msgstr ""
+
+msgid "Change passphrase"
+msgstr ""
+
+msgid "Changing repo location ..."
+msgstr ""
+
 msgid "Check"
 msgstr "チェック"
 
 msgid "Check all ..."
-msgstr ""
+msgstr "すべてをチェック ..."
 
 msgid "Check archives only ..."
-msgstr ""
+msgstr "アーカイブのみチェック ..."
 
 msgid "Check repo ..."
-msgstr ""
+msgstr "レポジトリをチェック ..."
 
 msgid "Check repos only ..."
-msgstr ""
+msgstr "レポジトリのみチェック ..."
 
 msgid ""
 "Checked = send email on error or success.<br/>Unchecked = send email on "
 "error only."
+msgstr "Checked = エラーまたは成功時にメールを送信します。<br/>Unchecked ＝ エラー時のみメールを送信する。"
+
+msgid "Compact"
+msgstr ""
+
+msgid "Compact repo ..."
 msgstr ""
 
 msgid "Compression"
@@ -69,34 +87,37 @@ msgid "Compression Type"
 msgstr "圧縮タイプ"
 
 msgid "Compression ratio"
-msgstr ""
+msgstr "圧縮比率"
 
 msgid "Create"
-msgstr ""
+msgstr "作成"
 
 msgid "Create archive for ..."
-msgstr ""
+msgstr "アーカイブを作成 ..."
 
 msgid "Created archive."
-msgstr ""
+msgstr "作成されたアーカイブ。"
 
 msgid "Created environment variable."
-msgstr ""
+msgstr "環境変数を作成しました。"
 
 msgid "Created repo."
+msgstr "レポジトリを作成しました。"
+
+msgid "Docs"
 msgstr ""
 
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
 msgid "Edit archive."
-msgstr ""
+msgstr "アーカイブの編集。"
 
 msgid "Edit environment variable."
-msgstr ""
+msgstr "環境変数の編集。"
 
 msgid "Email"
-msgstr ""
+msgstr "電子メール"
 
 msgid "Enable"
 msgstr "有効"
@@ -108,7 +129,7 @@ msgid "Encryption"
 msgstr "暗号化"
 
 msgid "Environment Variables"
-msgstr ""
+msgstr "環境変数"
 
 msgid "Excludes"
 msgstr "除く"
@@ -124,16 +145,22 @@ msgstr "エクスポートファイルは、このディレクトリにアーカ
 msgid "Extract"
 msgstr "抽出"
 
+msgid "Extract archive to directory"
+msgstr ""
+
+msgid "Extract archive to tar file"
+msgstr ""
+
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
 "point."
-msgstr ""
+msgstr "これを有効にすると、borgはバックアップポイント内のファイルシステムパーティションにまたがることはありません。"
 
 msgid "Includes"
 msgstr "含む"
 
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 msgid "List"
 msgstr "リスト"
@@ -144,13 +171,16 @@ msgstr "ローカル"
 msgid "Mount"
 msgstr "マウント"
 
+msgid "Mount repo"
+msgstr ""
+
 msgid "Mounted"
 msgstr "マウント済"
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
 "user@hostname&#58;path"
-msgstr ""
+msgstr "sshキーが設定されている必要があります。 リモートパスは、&#58; user@hostname&#58;path の形式です。"
 
 msgid "Name"
 msgstr "名前"
@@ -206,6 +236,9 @@ msgstr ""
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr ""
 
+msgid "Repo location has been changed."
+msgstr ""
+
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
 "as the repo."
@@ -257,6 +290,9 @@ msgstr "共有フォルダ"
 msgid "Shared folder"
 msgstr ""
 
+msgid "SharedFolderRef"
+msgstr ""
+
 msgid "Skip init"
 msgstr "initをスキップ"
 
@@ -278,6 +314,12 @@ msgstr ""
 msgid "Verify"
 msgstr "確認"
 
+msgid "You must move the repo files before changing the location."
+msgstr ""
+
+msgid "borgbackup"
+msgstr ""
+
 msgid "lz4 - super fast / low compression"
 msgstr ""
 
@@ -286,6 +328,9 @@ msgstr ""
 
 msgid "n/a"
 msgstr "n/a"
+
+msgid "omv-extras wiki"
+msgstr ""
 
 msgid "zlib - less fast / higher compression"
 msgstr ""

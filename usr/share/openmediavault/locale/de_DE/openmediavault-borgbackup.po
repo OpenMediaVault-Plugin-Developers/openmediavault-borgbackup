@@ -12,10 +12,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 16:40-0500\n"
+"POT-Creation-Date: 2024-01-29 16:12-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Dampflok_HD, 2022\n"
-"Language-Team: German (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/de/)\n"
+"Language-Team: German (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -43,6 +43,18 @@ msgstr "Nur Archive"
 msgid "BorgBackup"
 msgstr "BorgBackup"
 
+msgid "Change"
+msgstr ""
+
+msgid "Change location"
+msgstr ""
+
+msgid "Change passphrase"
+msgstr ""
+
+msgid "Changing repo location ..."
+msgstr ""
+
 msgid "Check"
 msgstr "Überprüfen"
 
@@ -64,6 +76,12 @@ msgid ""
 msgstr ""
 "Angekreuzt = E-Mail bei Fehler oder Erfolg senden, nicht angekreuzt = E-Mail"
 " nur bei Fehler senden."
+
+msgid "Compact"
+msgstr ""
+
+msgid "Compact repo ..."
+msgstr ""
 
 msgid "Compression"
 msgstr "Kompression"
@@ -88,6 +106,9 @@ msgstr "Umgebungsvariable erstellt."
 
 msgid "Created repo."
 msgstr "Repo erstellt."
+
+msgid "Docs"
+msgstr ""
 
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -129,6 +150,12 @@ msgstr ""
 msgid "Extract"
 msgstr "Extrahieren"
 
+msgid "Extract archive to directory"
+msgstr ""
+
+msgid "Extract archive to tar file"
+msgstr ""
+
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
 "point."
@@ -150,6 +177,9 @@ msgstr "Lokal"
 
 msgid "Mount"
 msgstr "Einhängen"
+
+msgid "Mount repo"
+msgstr ""
 
 msgid "Mounted"
 msgstr "Eingehängt"
@@ -217,6 +247,9 @@ msgstr ""
 "Repo ist in Gebrauch. Löschen Sie zuerst die mit diesem Repo verbundenen "
 "Archive!"
 
+msgid "Repo location has been changed."
+msgstr ""
+
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
 "as the repo."
@@ -272,6 +305,9 @@ msgstr "Gemeinsamer Ordner"
 msgid "Shared folder"
 msgstr "Gemeinsamer Ordner"
 
+msgid "SharedFolderRef"
+msgstr ""
+
 msgid "Skip init"
 msgstr "Initialisierung überspringen"
 
@@ -295,6 +331,12 @@ msgstr "Wert"
 msgid "Verify"
 msgstr "Verifizieren"
 
+msgid "You must move the repo files before changing the location."
+msgstr ""
+
+msgid "borgbackup"
+msgstr ""
+
 msgid "lz4 - super fast / low compression"
 msgstr "lz4 - superschnell / niedrige Kompression"
 
@@ -303,6 +345,9 @@ msgstr "lzma - noch langsamer / noch höhere Kompression"
 
 msgid "n/a"
 msgstr "n/v"
+
+msgid "omv-extras wiki"
+msgstr ""
 
 msgid "zlib - less fast / higher compression"
 msgstr "zlib - weniger schnell / höhere Kompression"

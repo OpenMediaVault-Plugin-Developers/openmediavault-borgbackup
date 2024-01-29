@@ -11,10 +11,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 16:40-0500\n"
+"POT-Creation-Date: 2024-01-29 16:12-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: songming <by@songming.me>, 2022\n"
-"Language-Team: Chinese (China) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
+"Language-Team: Chinese (China) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -42,6 +42,18 @@ msgstr "仅归档"
 msgid "BorgBackup"
 msgstr "BorgBackup"
 
+msgid "Change"
+msgstr ""
+
+msgid "Change location"
+msgstr ""
+
+msgid "Change passphrase"
+msgstr ""
+
+msgid "Changing repo location ..."
+msgstr ""
+
 msgid "Check"
 msgstr "检查"
 
@@ -61,6 +73,12 @@ msgid ""
 "Checked = send email on error or success.<br/>Unchecked = send email on "
 "error only."
 msgstr "已检查 = 发送错误或成功到邮件。<br/>未检查 = 仅发送错误到邮件"
+
+msgid "Compact"
+msgstr ""
+
+msgid "Compact repo ..."
+msgstr ""
 
 msgid "Compression"
 msgstr "压缩"
@@ -85,6 +103,9 @@ msgstr "已创建环境变量。"
 
 msgid "Created repo."
 msgstr "已创建源。"
+
+msgid "Docs"
+msgstr ""
 
 msgid "Edit"
 msgstr "编辑"
@@ -124,6 +145,12 @@ msgstr "将在该目录创建命名的导出文件，文件扩展名为 tar.gz�
 msgid "Extract"
 msgstr "提取"
 
+msgid "Extract archive to directory"
+msgstr ""
+
+msgid "Extract archive to tar file"
+msgstr ""
+
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
 "point."
@@ -143,6 +170,9 @@ msgstr "本地"
 
 msgid "Mount"
 msgstr "挂载"
+
+msgid "Mount repo"
+msgstr ""
 
 msgid "Mounted"
 msgstr "已挂载"
@@ -206,6 +236,9 @@ msgstr "源信息 ..."
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr "源被使用中，删除归档需要首先删除对应源！"
 
+msgid "Repo location has been changed."
+msgstr ""
+
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
 "as the repo."
@@ -257,6 +290,9 @@ msgstr "共享文件夹"
 msgid "Shared folder"
 msgstr "共享文件夹"
 
+msgid "SharedFolderRef"
+msgstr ""
+
 msgid "Skip init"
 msgstr "跳过初始化"
 
@@ -278,6 +314,12 @@ msgstr "值"
 msgid "Verify"
 msgstr "校验"
 
+msgid "You must move the repo files before changing the location."
+msgstr ""
+
+msgid "borgbackup"
+msgstr ""
+
 msgid "lz4 - super fast / low compression"
 msgstr "lz4 - 非常快，压缩率低"
 
@@ -286,6 +328,9 @@ msgstr "lzma - 最慢，最高的压缩率"
 
 msgid "n/a"
 msgstr "n/a"
+
+msgid "omv-extras wiki"
+msgstr ""
 
 msgid "zlib - less fast / higher compression"
 msgstr "zlib - 较快，高压缩率"
