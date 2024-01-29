@@ -1,8 +1,9 @@
-openmediavault-borgbackup (7.0.1) UNRELEASED; urgency=medium
+openmediavault-borgbackup (7.0.1) stable; urgency=low
 
   * Add compact option
+  * Add ability to change repo location
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 11 Jan 2024 17:49:32 -0600
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Mon, 29 Jan 2024 16:15:28 -0600
 
 openmediavault-borgbackup (7.0) stable; urgency=low
 
