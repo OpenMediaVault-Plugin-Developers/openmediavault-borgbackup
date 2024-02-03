@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# kochin <kochinc@outlook.com>, 2022
+# kochin <kochinc@outlook.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-29 16:12-0600\n"
+"POT-Creation-Date: 2024-02-03 16:10-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: kochin <kochinc@outlook.com>, 2022\n"
+"Last-Translator: kochin <kochinc@outlook.com>, 2024\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,20 +39,30 @@ msgstr "歸檔"
 msgid "Archives only"
 msgstr "只針對歸檔"
 
+msgid ""
+"Are you sure you want to delete the repo from the plugin and the repo files?"
+" This will delete all repo files!"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove repo from the plugin? This will not delete "
+"any files!"
+msgstr ""
+
 msgid "BorgBackup"
 msgstr "BorgBackup"
 
 msgid "Change"
-msgstr ""
+msgstr "變更"
 
 msgid "Change location"
-msgstr ""
+msgstr "變更位置"
 
 msgid "Change passphrase"
-msgstr ""
+msgstr "變更密碼"
 
 msgid "Changing repo location ..."
-msgstr ""
+msgstr "變更儲存庫位置中 ..."
 
 msgid "Check"
 msgstr "檢查"
@@ -75,10 +85,10 @@ msgid ""
 msgstr "勾選 = 有錯誤或成功時都送郵件。<br/>不勾選 = 僅在有錯誤時送郵件。"
 
 msgid "Compact"
-msgstr ""
+msgstr "緊密"
 
 msgid "Compact repo ..."
-msgstr ""
+msgstr "緊密儲存庫 ..."
 
 msgid "Compression"
 msgstr "壓縮"
@@ -104,7 +114,13 @@ msgstr "已建立環境變數。"
 msgid "Created repo."
 msgstr "已建立儲存庫。"
 
+msgid "Delete + Files"
+msgstr ""
+
 msgid "Docs"
+msgstr "說明文件"
+
+msgid "Download repo keyfile"
 msgstr ""
 
 msgid "Edit"
@@ -146,10 +162,10 @@ msgid "Extract"
 msgstr "擷取"
 
 msgid "Extract archive to directory"
-msgstr ""
+msgstr "擷取歸檔到檔案目錄"
 
 msgid "Extract archive to tar file"
-msgstr ""
+msgstr "擷取歸檔到 tar 檔案"
 
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
@@ -172,7 +188,7 @@ msgid "Mount"
 msgstr "裝載"
 
 msgid "Mount repo"
-msgstr ""
+msgstr "裝載儲存庫"
 
 msgid "Mounted"
 msgstr "已裝載"
@@ -227,6 +243,9 @@ msgstr "遠端路徑"
 msgid "Remote path"
 msgstr "遠端路徑"
 
+msgid "Remove"
+msgstr ""
+
 msgid "Repo"
 msgstr "儲存庫"
 
@@ -237,7 +256,7 @@ msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr "儲存庫正被使用中。請先刪除此儲存庫內的歸檔！"
 
 msgid "Repo location has been changed."
-msgstr ""
+msgstr "儲存庫位置已變更。"
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
@@ -291,7 +310,7 @@ msgid "Shared folder"
 msgstr "共享檔案夾"
 
 msgid "SharedFolderRef"
-msgstr ""
+msgstr "SharedFolderRef"
 
 msgid "Skip init"
 msgstr "跳過初始化"
@@ -315,10 +334,10 @@ msgid "Verify"
 msgstr "驗證"
 
 msgid "You must move the repo files before changing the location."
-msgstr ""
+msgstr "變更位置之前，你必須先搬移儲存庫檔案。"
 
 msgid "borgbackup"
-msgstr ""
+msgstr "borgbackup"
 
 msgid "lz4 - super fast / low compression"
 msgstr "lz4 - 超快 / 低壓縮"
@@ -330,7 +349,7 @@ msgid "n/a"
 msgstr "不適用"
 
 msgid "omv-extras wiki"
-msgstr ""
+msgstr "omv-extras wiki"
 
 msgid "zlib - less fast / higher compression"
 msgstr "zlib - 沒那麼快 / 高壓縮"

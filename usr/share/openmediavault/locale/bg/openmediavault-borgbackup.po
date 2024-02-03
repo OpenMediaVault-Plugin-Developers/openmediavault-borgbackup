@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-29 16:12-0600\n"
+"POT-Creation-Date: 2024-02-03 16:10-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Language-Team: Bulgarian (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -33,6 +33,16 @@ msgid "Archives"
 msgstr ""
 
 msgid "Archives only"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete the repo from the plugin and the repo files?"
+" This will delete all repo files!"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove repo from the plugin? This will not delete "
+"any files!"
 msgstr ""
 
 msgid "BorgBackup"
@@ -100,7 +110,13 @@ msgstr ""
 msgid "Created repo."
 msgstr ""
 
+msgid "Delete + Files"
+msgstr ""
+
 msgid "Docs"
+msgstr ""
+
+msgid "Download repo keyfile"
 msgstr ""
 
 msgid "Edit"
@@ -221,6 +237,9 @@ msgid "Remote Path"
 msgstr ""
 
 msgid "Remote path"
+msgstr ""
+
+msgid "Remove"
 msgstr ""
 
 msgid "Repo"

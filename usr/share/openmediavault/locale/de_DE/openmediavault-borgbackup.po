@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Ettore Atalan <atalanttore@googlemail.com>, 2022
+# Ettore Atalan <atalanttore@googlemail.com>, 2021
 # Dampflok_HD, 2022
 # 
 #, fuzzy
@@ -12,14 +12,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-29 16:12-0600\n"
+"POT-Creation-Date: 2024-02-03 16:10-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Dampflok_HD, 2022\n"
-"Language-Team: German (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/de/)\n"
+"Language-Team: German (Germany) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/de_DE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
+"Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
@@ -39,6 +39,16 @@ msgstr "Archive"
 
 msgid "Archives only"
 msgstr "Nur Archive"
+
+msgid ""
+"Are you sure you want to delete the repo from the plugin and the repo files?"
+" This will delete all repo files!"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove repo from the plugin? This will not delete "
+"any files!"
+msgstr ""
 
 msgid "BorgBackup"
 msgstr "BorgBackup"
@@ -107,7 +117,13 @@ msgstr "Umgebungsvariable erstellt."
 msgid "Created repo."
 msgstr "Repo erstellt."
 
+msgid "Delete + Files"
+msgstr ""
+
 msgid "Docs"
+msgstr ""
+
+msgid "Download repo keyfile"
 msgstr ""
 
 msgid "Edit"
@@ -135,7 +151,7 @@ msgid "Environment Variables"
 msgstr "Umgebungsvariablen"
 
 msgid "Excludes"
-msgstr "Ausgenommen"
+msgstr "Ausschließlich"
 
 msgid "Export"
 msgstr "Exportieren"
@@ -236,6 +252,9 @@ msgstr "Entfernter Pfad"
 msgid "Remote path"
 msgstr "Entfernter Pfad"
 
+msgid "Remove"
+msgstr ""
+
 msgid "Repo"
 msgstr "Repo"
 
@@ -288,7 +307,7 @@ msgid "Run script from this path before backup."
 msgstr "Vor der Sicherung das Skript von diesem Pfad ausführen."
 
 msgid "Select a repo ..."
-msgstr "Eine Repo auswählen ..."
+msgstr "Ein Repo auswählen ..."
 
 msgid "Select an archive ..."
 msgstr "Ein Archiv auswählen ..."
@@ -300,7 +319,7 @@ msgstr ""
 "kiByte/s (Standard&#58; 0=unbegrenzt)."
 
 msgid "Shared Folder"
-msgstr "Gemeinsamer Ordner"
+msgstr "Freigegebener Ordner"
 
 msgid "Shared folder"
 msgstr "Gemeinsamer Ordner"
