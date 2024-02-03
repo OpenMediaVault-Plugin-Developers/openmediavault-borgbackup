@@ -366,7 +366,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         // Validate the RPC caller context.
         $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Validate the parameters of the RPC service method.
-        $this->validateMethodParams($params, 'rpc.common.objectuuid');
+        $this->validateMethodParams($params, 'rpc.borgbackup.deleterepo');
+        $deleteFiles = $params['deleteFiles'];
+        $uuid = $params['uuid'];
         // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
         // check to see if archive is using repo to be deleted
@@ -374,37 +376,44 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $found = false;
         foreach ($archives as $archive) {
             $reporef = $archive->get('reporef');
-            if ($reporef == $params['uuid']) {
-                $found = true;
-                break;
+            if ($reporef == $uuid) {
+                if ($deleteFiles) {
+                    $found = true;
+                    break;
+                } else {
+                    $delarchive = $db->get('conf.service.borgbackup.archive', $archive->get('uuid'));
+                    $db->delete($delarchive);
+                }
             }
         }
-        if ($found) {
+        if ($found && $deleteFiles) {
             throw new \OMV\ExecException(gettext(
               "Repo is in use. Delete archives associated with this repo first!"
             ));
         }
-        $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
-        // delete repo
-        $cmdArgs = [];
-        $cmdArgs[] = $this->getProgram;
-        $cmdArgs[] = 'delete';
-        if ($repo->get('type') == 'local') {
-            $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
-                'uuid' => $repo->get('sharedfolderref')
-            ], $context);
-        } else {
-            $path = $repo->get('uri');
-        }
-        $cmdArgs[] = escapeshellarg($path);
-        $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
-        $cmd->setEnv("BORG_DELETE_I_KNOW_WHAT_I_AM_DOING", "YES");
-        $cmd->setEnvFromFile($this->envFile . $params['uuid']);
-        $cmd->setQuiet(TRUE);
-        $cmdLine = $cmd->getCommandLine();
-        if (0 !== $this->exec($cmdLine, $output)) {
-            throw new \OMV\ExecException($cmd, $output);
+        $repo = $db->get('conf.service.borgbackup.repo', $uuid);
+        if ($deleteFiles) {
+            // delete repo files
+            $cmdArgs = [];
+            $cmdArgs[] = $this->getProgram;
+            $cmdArgs[] = 'delete';
+            if ($repo->get('type') == 'local') {
+                $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                    'uuid' => $repo->get('sharedfolderref')
+                ], $context);
+            } else {
+                $path = $repo->get('uri');
+            }
+            $cmdArgs[] = escapeshellarg($path);
+            $cmd = new \OMV\System\Process($cmdArgs);
+            $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
+            $cmd->setEnv("BORG_DELETE_I_KNOW_WHAT_I_AM_DOING", "YES");
+            $cmd->setEnvFromFile($this->envFile . $params['uuid']);
+            $cmd->setQuiet(TRUE);
+            $cmdLine = $cmd->getCommandLine();
+            if (0 !== $this->exec($cmdLine, $output)) {
+                throw new \OMV\ExecException($cmd, $output);
+            }
         }
         // Delete the configuration object.
         $db->delete($repo);

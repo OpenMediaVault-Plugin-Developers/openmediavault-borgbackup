@@ -126,7 +126,12 @@ data:
                     method: changeRepoPath
                     progressMessage: _("Changing repo location ...")
                     successNotification: _("Repo location has been changed.")
-      - template: delete
+      - type: iconButton
+        tooltip: _("Remove")
+        icon: mdi:archive-remove-outline
+        confirmationDialogConfig:
+          template: confirmation-danger
+          message: _("Are you sure you want to remove repo from the plugin? This will not delete any files!")
         execute:
           type: request
           request:
@@ -134,6 +139,24 @@ data:
             method: deleteRepo
             params:
               uuid: "{{ _selected[0].uuid }}"
+              deleteFiles: false
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+      - type: iconButton
+        tooltip: _("Delete + Files")
+        icon: mdi:delete-sweep-outline
+        confirmationDialogConfig:
+          template: confirmation-critical
+          message: _("Are you sure you want to delete the repo from the plugin and the repo files? This will delete all repo files!")
+        execute:
+          type: request
+          request:
+            service: BorgBackup
+            method: deleteRepo
+            params:
+              uuid: "{{ _selected[0].uuid }}"
+              deleteFiles: true
         enabledConstraints:
           minSelected: 1
           maxSelected: 1
