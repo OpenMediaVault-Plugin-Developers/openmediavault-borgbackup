@@ -415,6 +415,19 @@ data:
                   command: "info"
                   uuid: "{{ _selected[0].uuid }}"
       - type: iconButton
+        icon: mdi:download
+        tooltip: _("Download repo keyfile")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            - operator: truthy
+              arg0:
+                prop: encryption
+        execute:
+          type: url
+          url: '/download?service=Borgbackup&method=downloadKey&params={"uuid":"{{ _selected[0].uuid }}"}'
+      - type: iconButton
         tooltip: _("Mount")
         icon: mdi:play-outline
         enabledConstraints:

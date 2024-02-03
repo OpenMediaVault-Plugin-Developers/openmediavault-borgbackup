@@ -36,6 +36,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('getRepo');
         $this->registerMethod('setRepo');
         $this->registerMethod('changeRepoPath');
+        $this->registerMethod('downloadKey');
         $this->registerMethod('deleteRepo');
         $this->registerMethod('repoCommand');
         $this->registerMethod('mountRepo');
@@ -359,6 +360,51 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $dispatcher = \OMV\Engine\Notify\Dispatcher::getInstance();
         $dispatcher->notify(OMV_NOTIFY_MODIFY,
             'org.openmediavault.conf.service.borgbackup');
+    }
+
+    public function downloadKey($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        $uuid = $params['uuid'];
+        // Prepare the configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
+        $cmdArgs = [];
+        $cmdArgs[] = $this->getProgram;
+        $cmdArgs[] = 'info';
+        $cmdArgs[] = '--json';
+        if ($repo->get('type') == 'local') {
+            $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+              'uuid' => $repo->get('sharedfolderref')
+            ], $context);
+        } else {
+            $path = $repo->get('uri');
+        }
+        $cmdArgs[] = escapeshellarg($path);
+        $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
+        $cmd->setEnvFromFile($this->envFile . $uuid);
+        $cmd->setRedirect2to1();
+        $cmdLine = $cmd->getCommandLine();
+        if (0 !== ($exitStatus = $this->exec($cmd, $output, $bgOutputFilename))) {
+            throw new \OMV\ExecException($cmd, $output);
+        }
+        $info = trim(implode(PHP_EOL, $output));
+	$key = json_decode($info);
+        $enc = $key->encryption;
+        $keyfile = $enc->keyfile;
+        // Modify the file mode/owner to allow the WebGUI PHP backend to unlink it.
+        $tmpFilePath = tempnam(sys_get_temp_dir(), 'borgkeyfile');
+        copy($keyfile, $tmpFilePath);
+        chmod($tmpFilePath, 0700);
+        chown($tmpFilePath, \OMV\Environment::get('OMV_WEBGUI_FILE_OWNERGROUP_NAME'));
+        // Return values required by generic download RPC implementation.
+        return [
+            'filename' => sprintf('%s.%s', basename($keyfile), 'keyfile'),
+            'filepath' => $tmpFilePath,
+            'unlink' => TRUE
+        ];
     }
 
     public function deleteRepo($params, $context)
