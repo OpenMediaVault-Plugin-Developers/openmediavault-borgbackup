@@ -1,3 +1,11 @@
+openmediavault-borgbackup (7.0.2) stable; urgency=low
+
+  * Add remove repo option
+  * Improve warning messages when removing or deleting a repo
+  * Allow downloading repo encryption keyfile
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 03 Feb 2024 16:11:49 -0600
+
 openmediavault-borgbackup (7.0.1) stable; urgency=low
 
   * Add compact option
