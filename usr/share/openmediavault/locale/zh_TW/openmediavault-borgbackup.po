@@ -42,12 +42,12 @@ msgstr "只針對歸檔"
 msgid ""
 "Are you sure you want to delete the repo from the plugin and the repo files?"
 " This will delete all repo files!"
-msgstr ""
+msgstr "您確定要從此插件刪除儲存庫和儲存的檔案嗎？這將把儲存庫中所有的檔案刪除！"
 
 msgid ""
 "Are you sure you want to remove repo from the plugin? This will not delete "
 "any files!"
-msgstr ""
+msgstr "您確定要從此插件移除儲存庫嗎？這不會把任何檔案刪除！"
 
 msgid "BorgBackup"
 msgstr "BorgBackup"
@@ -115,13 +115,13 @@ msgid "Created repo."
 msgstr "已建立儲存庫。"
 
 msgid "Delete + Files"
-msgstr ""
+msgstr "刪除 + 檔案"
 
 msgid "Docs"
 msgstr "說明文件"
 
 msgid "Download repo keyfile"
-msgstr ""
+msgstr "下載儲存庫金鑰檔案"
 
 msgid "Edit"
 msgstr "編輯"
@@ -244,7 +244,7 @@ msgid "Remote path"
 msgstr "遠端路徑"
 
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 msgid "Repo"
 msgstr "儲存庫"
