@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-03 16:10-0600\n"
+"POT-Creation-Date: 2024-02-09 08:34-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2021\n"
 "Language-Team: Czech (Czech Republic) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/cs_CZ/)\n"
@@ -195,6 +195,9 @@ msgstr ""
 msgid "Mounted"
 msgstr "Připojeno"
 
+msgid "Mounting repo ..."
+msgstr ""
+
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
 "user@hostname&#58;path"
@@ -250,6 +253,12 @@ msgstr ""
 
 msgid "Repo"
 msgstr "Repozitář"
+
+msgid "Repo has been mounted."
+msgstr ""
+
+msgid "Repo has been unmounted."
+msgstr ""
 
 msgid "Repo info ..."
 msgstr ""
@@ -327,6 +336,9 @@ msgstr "Typ"
 
 msgid "Unmount"
 msgstr "Odpojit"
+
+msgid "Unmounting repo ..."
+msgstr ""
 
 msgid "Uses value as prefix for archive name."
 msgstr "Použije hodnotu jako předponu názvu archivu."

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-03 16:10-0600\n"
+"POT-Creation-Date: 2024-02-09 08:34-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2023\n"
 "Language-Team: English (United Kingdom) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/en_GB/)\n"
@@ -199,6 +199,9 @@ msgstr ""
 msgid "Mounted"
 msgstr "Mounted"
 
+msgid "Mounting repo ..."
+msgstr ""
+
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
 "user@hostname&#58;path"
@@ -256,6 +259,12 @@ msgstr ""
 
 msgid "Repo"
 msgstr "Repo"
+
+msgid "Repo has been mounted."
+msgstr ""
+
+msgid "Repo has been unmounted."
+msgstr ""
 
 msgid "Repo info ..."
 msgstr "Repo info ..."
@@ -334,6 +343,9 @@ msgstr "Type"
 
 msgid "Unmount"
 msgstr "Unmount"
+
+msgid "Unmounting repo ..."
+msgstr ""
 
 msgid "Uses value as prefix for archive name."
 msgstr "Uses value as prefix for archive name."

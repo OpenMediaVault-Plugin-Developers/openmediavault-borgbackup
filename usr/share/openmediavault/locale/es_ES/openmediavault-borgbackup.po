@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Raul Fernandez Garcia <raulfg3@gmail.com>, 2022
+# Raul Fernandez Garcia <raulfg3@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-03 16:10-0600\n"
+"POT-Creation-Date: 2024-02-09 08:34-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2022\n"
+"Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2024\n"
 "Language-Team: Spanish (Spain) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/es_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,26 +43,30 @@ msgid ""
 "Are you sure you want to delete the repo from the plugin and the repo files?"
 " This will delete all repo files!"
 msgstr ""
+"¿Está seguro de que desea eliminar el repositorio del plugin y los archivos "
+"del repositorio? ¡Esto eliminará todos los archivos de repositorio!"
 
 msgid ""
 "Are you sure you want to remove repo from the plugin? This will not delete "
 "any files!"
 msgstr ""
+"¿Está seguro de que desea eliminar el repositorio del plugin? ¡Esto no "
+"eliminará ningún archivo!"
 
 msgid "BorgBackup"
 msgstr "BorgBackup"
 
 msgid "Change"
-msgstr ""
+msgstr "Cambio"
 
 msgid "Change location"
-msgstr ""
+msgstr "Cambiar ubicación"
 
 msgid "Change passphrase"
-msgstr ""
+msgstr "Cambiar contraseña"
 
 msgid "Changing repo location ..."
-msgstr ""
+msgstr "Cambiando ubicación del repositorio ..."
 
 msgid "Check"
 msgstr "Validar"
@@ -87,10 +91,10 @@ msgstr ""
 "enviar correo electrónico solo en caso de error."
 
 msgid "Compact"
-msgstr ""
+msgstr "Comprimir"
 
 msgid "Compact repo ..."
-msgstr ""
+msgstr "Comprimiendo repositorio ..."
 
 msgid "Compression"
 msgstr "Compresión"
@@ -117,13 +121,13 @@ msgid "Created repo."
 msgstr "repo creado."
 
 msgid "Delete + Files"
-msgstr ""
+msgstr "Borrando + Archivos"
 
 msgid "Docs"
-msgstr ""
+msgstr "Documentación"
 
 msgid "Download repo keyfile"
-msgstr ""
+msgstr "Descargando la keyfile del repo"
 
 msgid "Edit"
 msgstr "Editar"
@@ -166,10 +170,10 @@ msgid "Extract"
 msgstr "Extraer"
 
 msgid "Extract archive to directory"
-msgstr ""
+msgstr "Extrayendo archivos al directorio"
 
 msgid "Extract archive to tar file"
-msgstr ""
+msgstr "Extrayendo archivos al fichero tar"
 
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
@@ -194,10 +198,13 @@ msgid "Mount"
 msgstr "Montaje"
 
 msgid "Mount repo"
-msgstr ""
+msgstr "Montando el repositorio"
 
 msgid "Mounted"
 msgstr "Montado"
+
+msgid "Mounting repo ..."
+msgstr ""
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
@@ -252,10 +259,16 @@ msgid "Remote path"
 msgstr "Ruta remota"
 
 msgid "Remove"
-msgstr ""
+msgstr "Eliminando"
 
 msgid "Repo"
 msgstr "Repositorio"
+
+msgid "Repo has been mounted."
+msgstr ""
+
+msgid "Repo has been unmounted."
+msgstr ""
 
 msgid "Repo info ..."
 msgstr "Información del repositorio ..."
@@ -264,7 +277,7 @@ msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr "Repo en uso. !Borre archivos asociados a este repo primero!"
 
 msgid "Repo location has been changed."
-msgstr ""
+msgstr "La ubicación del repo ha cambiado."
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
@@ -322,7 +335,7 @@ msgid "Shared folder"
 msgstr "Carpeta compartida"
 
 msgid "SharedFolderRef"
-msgstr ""
+msgstr "SharedFolderRef"
 
 msgid "Skip init"
 msgstr "saltar inicio"
@@ -336,6 +349,9 @@ msgstr "Tipo"
 msgid "Unmount"
 msgstr "Desmontar"
 
+msgid "Unmounting repo ..."
+msgstr ""
+
 msgid "Uses value as prefix for archive name."
 msgstr "Usa el valor como prefijo del nombre de archivo"
 
@@ -347,9 +363,10 @@ msgstr "Verificar"
 
 msgid "You must move the repo files before changing the location."
 msgstr ""
+"Debe mover los archivos del repositorio antes de cambiar la ubicación."
 
 msgid "borgbackup"
-msgstr ""
+msgstr "borgbackup"
 
 msgid "lz4 - super fast / low compression"
 msgstr "lz4 - super rápido / baja compresión"
@@ -361,7 +378,7 @@ msgid "n/a"
 msgstr "n/d"
 
 msgid "omv-extras wiki"
-msgstr ""
+msgstr "omv-extras wiki"
 
 msgid "zlib - less fast / higher compression"
 msgstr "zlib - menos rápido / mayor compresión"
