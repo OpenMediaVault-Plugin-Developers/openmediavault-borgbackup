@@ -295,6 +295,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
         $cmd->setEnvFromFile($this->envFile . $params['uuid']);
+        $cmd->setRedirect2to1();
         $cmdLine = $cmd->getCommandLine();
         if (0 !== $this->exec($cmdLine, $output)) {
             throw new \OMV\ExecException($cmd, $output);
@@ -321,6 +322,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
         $cmd->setEnvFromFile($this->envFile . $params['uuid']);
+        $cmd->setRedirect2to1();
         $cmdLine = $cmd->getCommandLine();
         if (0 !== $this->exec($cmdLine, $output)) {
             throw new \OMV\ExecException($cmd, $output);
