@@ -1,3 +1,9 @@
+openmediavault-borgbackup (7.0.3) stable; urgency=low
+
+  * Fix mounting encrypted repos
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 09 Feb 2024 08:33:40 -0600
+
 openmediavault-borgbackup (7.0.2) stable; urgency=low
 
   * Add remove repo option
