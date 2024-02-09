@@ -457,6 +457,8 @@ data:
                   request:
                     service: BorgBackup
                     method: mountRepo
+                    progressMessage: _("Mounting repo ...")
+                    successNotification: _("Repo has been mounted.")
       - type: iconButton
         tooptip: _("Unmount")
         icon: mdi:eject-outline
@@ -474,8 +476,8 @@ data:
             method: unmountRepo
             params:
               uuid: "{{ _selected[0].uuid }}"
-            task: false
-            successUrl: /services/borgbackup/repos
+            progressMessage: _("Unmounting repo ...")
+            successNotification: _("Repo has been unmounted.")
       - type: menu
         icon: mdi:link
         tooltip: _("Docs")
