@@ -290,7 +290,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $mntpath = sprintf('%s/%s', $mntpath, $repo->get('name'));
         $mntpath = str_replace('//', '/', $mntpath);
         mkdir($mntpath, 0775, true);
-        $cmdArgs[] = escapeshellarg($path);
+        $cmdArgs[] = escapeshellarg($mntpath);
         // execute command
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
