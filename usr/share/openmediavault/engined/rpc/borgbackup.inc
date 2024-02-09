@@ -273,6 +273,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'mount';
         $cmdArgs[] = '-o allow_other';
+        // repo path
         if ($repo->get('type') == 'local') {
             $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
                 'uuid' => $repo->get('sharedfolderref')
@@ -280,15 +281,19 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         } else {
             $path = $repo->get('uri');
         }
+        $path = str_replace('//', '/', $path);
         $cmdArgs[] = escapeshellarg($path);
-        $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+        // mountpoint path
+        $mntpath = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
             'uuid' => $params['sharedfolderref']
         ], $context);
-        $path = sprintf('%s/%s', $path, $repo->get('name'));
-        mkdir($path, 0775, true);
+        $mntpath = sprintf('%s/%s', $mntpath, $repo->get('name'));
+        $mntpath = str_replace('//', '/', $mntpath);
+        mkdir($mntpath, 0775, true);
         $cmdArgs[] = escapeshellarg($path);
+        // execute command
         $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get['passphrase']), TRUE);
+        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
         $cmd->setEnvFromFile($this->envFile . $params['uuid']);
         $cmdLine = $cmd->getCommandLine();
         if (0 !== $this->exec($cmdLine, $output)) {
