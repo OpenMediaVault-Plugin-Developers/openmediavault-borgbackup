@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# songming <by@songming.me>, 2022
+# songming <by@songming.me>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-09 08:34-0600\n"
+"POT-Creation-Date: 2024-03-02 09:39-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: songming <by@songming.me>, 2022\n"
+"Last-Translator: songming <by@songming.me>, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,27 +42,27 @@ msgstr "仅归档"
 msgid ""
 "Are you sure you want to delete the repo from the plugin and the repo files?"
 " This will delete all repo files!"
-msgstr ""
+msgstr "您确定要从插件和源文件删除源吗？这将删除源文件！"
 
 msgid ""
 "Are you sure you want to remove repo from the plugin? This will not delete "
 "any files!"
-msgstr ""
+msgstr "您确定要从插件删除源吗？这将删除全部文件！"
 
 msgid "BorgBackup"
 msgstr "BorgBackup"
 
 msgid "Change"
-msgstr ""
+msgstr "变更"
 
 msgid "Change location"
-msgstr ""
+msgstr "变更位置"
 
 msgid "Change passphrase"
-msgstr ""
+msgstr "变更密码"
 
 msgid "Changing repo location ..."
-msgstr ""
+msgstr "变更源位置中 ..."
 
 msgid "Check"
 msgstr "检查"
@@ -85,10 +85,10 @@ msgid ""
 msgstr "已检查 = 发送错误或成功到邮件。<br/>未检查 = 仅发送错误到邮件"
 
 msgid "Compact"
-msgstr ""
+msgstr "紧密"
 
 msgid "Compact repo ..."
-msgstr ""
+msgstr "紧密源 ..."
 
 msgid "Compression"
 msgstr "压缩"
@@ -115,13 +115,13 @@ msgid "Created repo."
 msgstr "已创建源。"
 
 msgid "Delete + Files"
-msgstr ""
+msgstr "删除+文件"
 
 msgid "Docs"
-msgstr ""
+msgstr "文档"
 
 msgid "Download repo keyfile"
-msgstr ""
+msgstr "下载源关键文件"
 
 msgid "Edit"
 msgstr "编辑"
@@ -162,9 +162,13 @@ msgid "Extract"
 msgstr "提取"
 
 msgid "Extract archive to directory"
-msgstr ""
+msgstr "将归档解压缩到目录"
 
 msgid "Extract archive to tar file"
+msgstr "解压缩归档到 tar 文件"
+
+msgid ""
+"Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
 msgstr ""
 
 msgid ""
@@ -188,13 +192,13 @@ msgid "Mount"
 msgstr "挂载"
 
 msgid "Mount repo"
-msgstr ""
+msgstr "挂载源"
 
 msgid "Mounted"
 msgstr "已挂载"
 
 msgid "Mounting repo ..."
-msgstr ""
+msgstr "挂载源中 ..."
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
@@ -247,16 +251,16 @@ msgid "Remote path"
 msgstr "远程路径"
 
 msgid "Remove"
-msgstr ""
+msgstr "删除"
 
 msgid "Repo"
 msgstr "源"
 
 msgid "Repo has been mounted."
-msgstr ""
+msgstr "源已挂载。"
 
 msgid "Repo has been unmounted."
-msgstr ""
+msgstr "源已卸载。"
 
 msgid "Repo info ..."
 msgstr "源信息 ..."
@@ -265,7 +269,7 @@ msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr "源被使用中，删除归档需要首先删除对应源！"
 
 msgid "Repo location has been changed."
-msgstr ""
+msgstr "源位置已变更。"
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
@@ -319,7 +323,7 @@ msgid "Shared folder"
 msgstr "共享文件夹"
 
 msgid "SharedFolderRef"
-msgstr ""
+msgstr "SharedFolderRef"
 
 msgid "Skip init"
 msgstr "跳过初始化"
@@ -334,7 +338,7 @@ msgid "Unmount"
 msgstr "卸载"
 
 msgid "Unmounting repo ..."
-msgstr ""
+msgstr "卸载源中 ..."
 
 msgid "Uses value as prefix for archive name."
 msgstr "使用该值作为归档前缀名称。"
@@ -345,11 +349,14 @@ msgstr "值"
 msgid "Verify"
 msgstr "校验"
 
-msgid "You must move the repo files before changing the location."
+msgid "Versions"
 msgstr ""
 
+msgid "You must move the repo files before changing the location."
+msgstr "变更位置前必须先移动源文件。"
+
 msgid "borgbackup"
-msgstr ""
+msgstr "borgbackup"
 
 msgid "lz4 - super fast / low compression"
 msgstr "lz4 - 非常快，压缩率低"
@@ -361,7 +368,7 @@ msgid "n/a"
 msgstr "n/a"
 
 msgid "omv-extras wiki"
-msgstr ""
+msgstr "omv-extras wiki"
 
 msgid "zlib - less fast / higher compression"
 msgstr "zlib - 较快，高压缩率"

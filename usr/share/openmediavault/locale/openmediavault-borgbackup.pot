@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-09 08:34-0600\n"
+"POT-Creation-Date: 2024-03-02 09:39-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,6 +153,9 @@ msgid "Extract archive to directory"
 msgstr ""
 
 msgid "Extract archive to tar file"
+msgstr ""
+
+msgid "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
 msgstr ""
 
 msgid "If this is enabled, borg won't span filesystem partitions within a backup point."
@@ -324,6 +327,9 @@ msgid "Value"
 msgstr ""
 
 msgid "Verify"
+msgstr ""
+
+msgid "Versions"
 msgstr ""
 
 msgid "You must move the repo files before changing the location."
