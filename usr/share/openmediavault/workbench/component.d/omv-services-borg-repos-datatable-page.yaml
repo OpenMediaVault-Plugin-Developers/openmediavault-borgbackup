@@ -449,6 +449,11 @@ data:
                 name: sharedfolderref
                 label: _("Shared folder")
                 hint: _("Repo will be mounted as a subfolder in the shared folder with the same name as the repo.")
+              - type: checkbox
+                name: versions
+                label: _("Versions")
+                value: false
+                hint: _("Gives a merged, versioned view of the files in the archives. EXPERIMENTAL")
             buttons:
               submit:
                 text: _("Mount")

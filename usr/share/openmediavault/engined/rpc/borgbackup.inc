@@ -272,7 +272,11 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs = [];
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'mount';
-        $cmdArgs[] = '-o allow_other';
+        $vers = '';
+        if ($params['versions']) {
+            $vers = ',versions';
+        }
+        $cmdArgs[] = sprintf('-o allow_other%s', $vers);
         // repo path
         if ($repo->get('type') == 'local') {
             $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [

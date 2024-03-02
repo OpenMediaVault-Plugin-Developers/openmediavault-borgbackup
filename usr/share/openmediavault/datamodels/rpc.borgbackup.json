@@ -244,6 +244,10 @@
           "type": "string",
           "format": "uuidv4",
           "required": true
+        },
+        "versions": {
+          "type": "boolean",
+          "required": true
         }
       }
     }
