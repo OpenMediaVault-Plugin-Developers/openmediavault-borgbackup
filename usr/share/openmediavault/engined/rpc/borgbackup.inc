@@ -282,10 +282,10 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
                 'uuid' => $repo->get('sharedfolderref')
             ], $context);
+            $path = str_replace('//', '/', $path);
         } else {
             $path = $repo->get('uri');
         }
-        $path = str_replace('//', '/', $path);
         $cmdArgs[] = escapeshellarg($path);
         // mountpoint path
         $mntpath = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
