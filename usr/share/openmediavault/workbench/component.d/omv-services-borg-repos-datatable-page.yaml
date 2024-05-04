@@ -340,7 +340,6 @@ data:
                 name: sharedfolderref
                 label: _("Shared folder")
                 value: ""
-                hint: _("Export file will be created in this directory with a filename matching the archive name with an extension of .tar.gz.")
                 modifiers:
                   - type: visible
                     constraint:
