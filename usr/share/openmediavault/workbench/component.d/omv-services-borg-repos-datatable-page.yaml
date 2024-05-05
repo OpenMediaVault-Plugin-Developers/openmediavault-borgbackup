@@ -465,7 +465,7 @@ data:
                     progressMessage: _("Mounting repo ...")
                     successNotification: _("Repo has been mounted.")
       - type: iconButton
-        tooptip: _("Unmount")
+        tooltip: _("Unmount")
         icon: mdi:eject-outline
         enabledConstraints:
           minSelected: 1
