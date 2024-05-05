@@ -345,10 +345,10 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 throw new \OMV\ExecException($cmd, $output);
             }
             if (!rmdir($repoDir)) {
-                throw new \OMV\ExecException(gettext('Failed to remove ') . $repoDir);
+                throw new \OMV\ExecException(gettext("Failed to remove ") . $repoDir);
             }
         } else {
-            throw new \OMV\ExecException(gettext('Failed to find ') . $repoDir);
+            throw new \OMV\ExecException(gettext("Failed to find ") . $repoDir);
         }
     }
 
