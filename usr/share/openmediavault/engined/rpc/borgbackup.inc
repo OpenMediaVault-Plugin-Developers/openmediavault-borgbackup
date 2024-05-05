@@ -317,19 +317,38 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         // Prepare the configuration object.
         $db = \OMV\Config\Database::getInstance();
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
+        $repoName = $repo->get('name');
+        $len = strlen($repoName);
+        // get repo directory
+        $mounts = file_get_contents('/proc/mounts');
+        $lines = explode(PHP_EOL, $mounts);
+        $repoDir = '';
+        foreach ($lines as $line) {
+            $item = explode(' ', $line);
+            if ($item[0] === 'borgfs' && $item[2] == 'fuse' && substr($item[1], -$len) === $repoName) {
+                $repoDir = $item[1];
+                break;
+            }
+        }
         // unmount repo
-        $repoDir = sprintf('$(grep "^borgfs.*%s.*fuse" /proc/mounts | cut -d" " -f2 | head -n1)', $repo->get('name'));
-        $cmdArgs = [];
-        $cmdArgs[] = $this->getProgram;
-        $cmdArgs[] = 'umount';
-        $cmdArgs[] = $repoDir;
-        $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
-        $cmd->setEnvFromFile($this->envFile . $params['uuid']);
-        $cmd->setRedirect2to1();
-        $cmdLine = $cmd->getCommandLine();
-        if (0 !== $this->exec($cmdLine, $output)) {
-            throw new \OMV\ExecException($cmd, $output);
+        if ($repoDir !== '') {
+            $cmdArgs = [];
+            $cmdArgs[] = $this->getProgram;
+            $cmdArgs[] = 'umount';
+            $cmdArgs[] = $repoDir;
+            $cmd = new \OMV\System\Process($cmdArgs);
+            $cmd->setEnv('BORG_PASSPHRASE', escapeshellarg($repo->get('passphrase')), TRUE);
+            $cmd->setEnvFromFile($this->envFile . $params['uuid']);
+            $cmd->setRedirect2to1();
+            $cmdLine = $cmd->getCommandLine();
+            if (0 !== $this->exec($cmdLine, $output)) {
+                throw new \OMV\ExecException($cmd, $output);
+            }
+            if (!rmdir($repoDir)) {
+                throw new \OMV\ExecException(gettext('Failed to remove ') . $repoDir);
+            }
+        } else {
+            throw new \OMV\ExecException(gettext('Failed to find ') . $repoDir);
         }
     }
 
