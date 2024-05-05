@@ -1,3 +1,14 @@
+openmediavault-borgbackup (7.0.6) stable; urgency=low
+
+  * Recreate directory when deleting a repo and files
+  * Fix typo in Unmount tooltip
+  * Remove temp mount directory when unmounting a repo
+  * Update wiki link
+  * Remove unneeded hint on export form
+  * Fix extract to original location by setting default value
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 05 May 2024 09:01:57 -0500
+
 openmediavault-borgbackup (7.0.5) stable; urgency=low
 
   * Add versions option to repo mount
