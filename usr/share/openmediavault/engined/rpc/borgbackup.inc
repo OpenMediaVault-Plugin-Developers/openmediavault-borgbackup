@@ -477,6 +477,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
                     'uuid' => $repo->get('sharedfolderref')
                 ], $context);
+                $perms = fileperms($path);
+                $owner = fileowner($path);
+                $group = filegroup($path);
             } else {
                 $path = $repo->get('uri');
             }
@@ -493,6 +496,12 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         // Delete the configuration object.
         $db->delete($repo);
+        // recreate the directory that was deleted
+        if ($repo->get('type') == 'local') {
+            mkdir($path, $perms);
+            chown($path, $owner);
+            chgrp($path, $group);
+        }
         // Return the deleted configuration object.
         return $repo->getAssoc();
     }
