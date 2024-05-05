@@ -1,4 +1,4 @@
-openmediavault-borgbackup (7.0.6) stable; urgency=low
+openmediavault-borgbackup (7.0.7) stable; urgency=low
 
   * Recreate directory when deleting a repo and files
   * Fix typo in Unmount tooltip
@@ -8,6 +8,12 @@ openmediavault-borgbackup (7.0.6) stable; urgency=low
   * Fix extract to original location by setting default value
 
  -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 05 May 2024 09:01:57 -0500
+
+openmediavault-borgbackup (7.0.6) stable; urgency=low
+
+  * Fix remote mount
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 27 Mar 2024 11:40:17 -0500
 
 openmediavault-borgbackup (7.0.5) stable; urgency=low
 
