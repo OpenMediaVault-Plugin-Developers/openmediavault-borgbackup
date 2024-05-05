@@ -4,22 +4,22 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Ettore Atalan <atalanttore@googlemail.com>, 2021
 # Dampflok_HD, 2022
+# Ettore Atalan <atalanttore@googlemail.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-05 09:02-0500\n"
+"POT-Creation-Date: 2024-05-05 09:05-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: Dampflok_HD, 2022\n"
-"Language-Team: German (Germany) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/de_DE/)\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2024\n"
+"Language-Team: German (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de_DE\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
@@ -54,13 +54,13 @@ msgid "BorgBackup"
 msgstr "BorgBackup"
 
 msgid "Change"
-msgstr ""
+msgstr "Ändern"
 
 msgid "Change location"
-msgstr ""
+msgstr "Ort ändern"
 
 msgid "Change passphrase"
-msgstr ""
+msgstr "Passphrase ändern"
 
 msgid "Changing repo location ..."
 msgstr ""
@@ -118,10 +118,10 @@ msgid "Created repo."
 msgstr "Repo erstellt."
 
 msgid "Delete + Files"
-msgstr ""
+msgstr "Löschen + Dateien"
 
 msgid "Docs"
-msgstr ""
+msgstr "Doku"
 
 msgid "Download repo keyfile"
 msgstr ""
@@ -151,7 +151,7 @@ msgid "Environment Variables"
 msgstr "Umgebungsvariablen"
 
 msgid "Excludes"
-msgstr "Ausschließlich"
+msgstr "Ausgenommen"
 
 msgid "Export"
 msgstr "Exportieren"
@@ -170,6 +170,12 @@ msgid "Extract archive to directory"
 msgstr ""
 
 msgid "Extract archive to tar file"
+msgstr ""
+
+msgid "Failed to find "
+msgstr ""
+
+msgid "Failed to remove "
 msgstr ""
 
 msgid ""
@@ -260,7 +266,7 @@ msgid "Remote path"
 msgstr "Entfernter Pfad"
 
 msgid "Remove"
-msgstr ""
+msgstr "Entfernen"
 
 msgid "Repo"
 msgstr "Repo"
@@ -320,7 +326,7 @@ msgid "Run script from this path before backup."
 msgstr "Vor der Sicherung das Skript von diesem Pfad ausführen."
 
 msgid "Select a repo ..."
-msgstr "Ein Repo auswählen ..."
+msgstr "Eine Repo auswählen ..."
 
 msgid "Select an archive ..."
 msgstr "Ein Archiv auswählen ..."
@@ -332,7 +338,7 @@ msgstr ""
 "kiByte/s (Standard&#58; 0=unbegrenzt)."
 
 msgid "Shared Folder"
-msgstr "Freigegebener Ordner"
+msgstr "Gemeinsamer Ordner"
 
 msgid "Shared folder"
 msgstr "Gemeinsamer Ordner"
@@ -367,7 +373,7 @@ msgid "Verify"
 msgstr "Verifizieren"
 
 msgid "Versions"
-msgstr ""
+msgstr "Versionen"
 
 msgid "You must move the repo files before changing the location."
 msgstr ""

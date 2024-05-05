@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-05 09:02-0500\n"
+"POT-Creation-Date: 2024-05-05 09:05-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: songming <by@songming.me>, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
@@ -166,6 +166,12 @@ msgstr "将归档解压缩到目录"
 
 msgid "Extract archive to tar file"
 msgstr "解压缩归档到 tar 文件"
+
+msgid "Failed to find "
+msgstr ""
+
+msgid "Failed to remove "
+msgstr ""
 
 msgid ""
 "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"

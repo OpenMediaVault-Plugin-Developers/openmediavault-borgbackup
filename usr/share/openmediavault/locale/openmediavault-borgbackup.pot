@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-05 09:02-0500\n"
+"POT-Creation-Date: 2024-05-05 09:05-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,6 +153,12 @@ msgid "Extract archive to directory"
 msgstr ""
 
 msgid "Extract archive to tar file"
+msgstr ""
+
+msgid "Failed to find "
+msgstr ""
+
+msgid "Failed to remove "
 msgstr ""
 
 msgid "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
