@@ -161,6 +161,11 @@ data:
         label: _("Post-script")
         value: ""
         hint: _("Run script from this path after backup.")
+      - type: textInput
+        name: basedir
+        label: _("Base Dir")
+        hint: _("Base directory to make archive use relative paths. Leave blank to use absolute paths in archive.")
+        value: ""
     buttons:
       - template: submit
         execute:

@@ -183,6 +183,10 @@
         "postscript": {
           "type": "string",
           "required": true
+        },
+        "basedir": {
+          "type": "string",
+          "required": true
         }
       }
     }

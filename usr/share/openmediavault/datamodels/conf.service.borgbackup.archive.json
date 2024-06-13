@@ -97,6 +97,9 @@
     },
     "postscript": {
       "type": "string"
+    },
+    "basedir": {
+      "type": "string"
     }
   }
 }
