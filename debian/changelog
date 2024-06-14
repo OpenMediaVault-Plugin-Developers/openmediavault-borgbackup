@@ -1,3 +1,9 @@
+openmediavault-borgbackup (7.0.8) stable; urgency=low
+
+  * Add optional base directory to make archive paths relative
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 13 Jun 2024 19:00:35 -0500
+
 openmediavault-borgbackup (7.0.7) stable; urgency=low
 
   * Recreate directory when deleting a repo and files
