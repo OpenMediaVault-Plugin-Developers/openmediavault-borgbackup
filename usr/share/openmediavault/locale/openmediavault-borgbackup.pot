@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-05 09:05-0500\n"
+"POT-Creation-Date: 2024-06-13 19:00-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,6 +39,12 @@ msgid "Are you sure you want to delete the repo from the plugin and the repo fil
 msgstr ""
 
 msgid "Are you sure you want to remove repo from the plugin? This will not delete any files!"
+msgstr ""
+
+msgid "Base Dir"
+msgstr ""
+
+msgid "Base directory to make archive use relative paths. Leave blank to use absolute paths in archive."
 msgstr ""
 
 msgid "BorgBackup"
