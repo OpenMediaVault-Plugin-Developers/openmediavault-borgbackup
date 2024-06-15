@@ -160,9 +160,11 @@ configure_borg_{{ archive.name }}_cron_file:
 
         info "Starting backup" {{ email }}
 
+        {%- if archive.basedir | length > 0 %}
         if [ -d "{{ archive.basedir }}" ]; then
           cd "{{ archive.basedir }}"
         fi
+        {%- endif %}
 
         borg create \
           --verbose \
