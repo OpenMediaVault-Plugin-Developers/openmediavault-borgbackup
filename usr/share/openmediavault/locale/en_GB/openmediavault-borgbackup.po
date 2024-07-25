@@ -54,12 +54,14 @@ msgstr ""
 "any files!"
 
 msgid "Base Dir"
-msgstr ""
+msgstr "Base Dir"
 
 msgid ""
 "Base directory to make archive use relative paths. Leave blank to use "
 "absolute paths in archive."
 msgstr ""
+"Base directory to make archive use relative paths. Leave blank to use "
+"absolute paths in archive."
 
 msgid "BorgBackup"
 msgstr "BorgBackup"

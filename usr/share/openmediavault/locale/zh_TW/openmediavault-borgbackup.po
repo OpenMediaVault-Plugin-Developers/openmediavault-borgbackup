@@ -50,12 +50,12 @@ msgid ""
 msgstr "您確定要從此插件移除儲存庫嗎？這不會把任何檔案刪除！"
 
 msgid "Base Dir"
-msgstr ""
+msgstr "基底檔案目錄"
 
 msgid ""
 "Base directory to make archive use relative paths. Leave blank to use "
 "absolute paths in archive."
-msgstr ""
+msgstr "做歸檔使用相對路徑時的基底檔案目錄。保留空白則歸檔時會使用絕對路徑。"
 
 msgid "BorgBackup"
 msgstr "BorgBackup"

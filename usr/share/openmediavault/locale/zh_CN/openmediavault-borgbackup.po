@@ -50,12 +50,12 @@ msgid ""
 msgstr "您确定要从插件删除源吗？这将删除全部文件！"
 
 msgid "Base Dir"
-msgstr ""
+msgstr "基础目录"
 
 msgid ""
 "Base directory to make archive use relative paths. Leave blank to use "
 "absolute paths in archive."
-msgstr ""
+msgstr "存档使用相对路径的基础目录，留空则存档使用绝对路径。"
 
 msgid "BorgBackup"
 msgstr "BorgBackup"

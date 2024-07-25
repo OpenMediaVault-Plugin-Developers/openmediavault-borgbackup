@@ -54,12 +54,14 @@ msgstr ""
 "eliminará ningún archivo!"
 
 msgid "Base Dir"
-msgstr ""
+msgstr "Directorio Base"
 
 msgid ""
 "Base directory to make archive use relative paths. Leave blank to use "
 "absolute paths in archive."
 msgstr ""
+"Directorio base para que el archivo utilice rutas relativas. Déjelo en "
+"blanco para utilizar rutas absolutas en el archivo."
 
 msgid "BorgBackup"
 msgstr "BorgBackup"
@@ -184,10 +186,10 @@ msgid "Extract archive to tar file"
 msgstr "Extrayendo archivos al fichero tar"
 
 msgid "Failed to find "
-msgstr ""
+msgstr "Error al buscar"
 
 msgid "Failed to remove "
-msgstr ""
+msgstr "Error al borrar"
 
 msgid ""
 "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
