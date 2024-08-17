@@ -421,9 +421,19 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             throw new \OMV\ExecException($cmd, $output);
         }
         $info = trim(implode(PHP_EOL, $output));
-	$key = json_decode($info);
-        $enc = $key->encryption;
-        $keyfile = $enc->keyfile;
+        $enc = '';
+        $keyfile = '';
+        if (preg_match('/\{.*\}/s', $info, $matches)) {
+            $json = $matches[0];
+            $key = json_decode($json);
+            $enc = $key->encryption;
+            $keyfile = $enc->keyfile;
+        }
+        if (!file_exists($keyfile)) {
+            throw new \OMV\ExecException(gettext(
+              "Failed to get keyfile!"
+            ));
+        }
         // Modify the file mode/owner to allow the WebGUI PHP backend to unlink it.
         $tmpFilePath = tempnam(sys_get_temp_dir(), 'borgkeyfile');
         copy($keyfile, $tmpFilePath);
