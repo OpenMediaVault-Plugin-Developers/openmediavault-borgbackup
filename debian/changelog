@@ -1,3 +1,9 @@
+openmediavault-borgbackup (7.0.9) UNRELEASED; urgency=medium
+
+  * Improve keyfile download
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 17 Aug 2024 08:59:29 -0500
+
 openmediavault-borgbackup (7.0.8) stable; urgency=low
 
   * Add optional base directory to make archive paths relative
