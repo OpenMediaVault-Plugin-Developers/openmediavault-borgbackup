@@ -177,7 +177,11 @@ configure_borg_{{ archive.name }}_cron_file:
         {%- if archive.onefs %}
           --one-file-system \
         {%- endif %}
+        {%- if archive.compressiontype == 'none' %}
+          --compression {{ archive.compressiontype }} \
+        {%- else %}
           --compression auto,{{ archive.compressiontype }},{{ archive.compressionratio }} \
+        {%- endif %}
         {%- if archive.ratelimit > 0 %}
           --remote-ratelimit {{ archive.ratelimit }} \
         {%- endif %}
