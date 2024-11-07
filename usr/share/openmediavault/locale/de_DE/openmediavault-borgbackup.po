@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-13 19:00-0500\n"
+"POT-Creation-Date: 2024-11-06 18:33-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2024\n"
 "Language-Team: German (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/de/)\n"
@@ -44,19 +44,25 @@ msgid ""
 "Are you sure you want to delete the repo from the plugin and the repo files?"
 " This will delete all repo files!"
 msgstr ""
+"Sind Sie sicher, dass Sie das Repo aus dem Plugin und den Repo-Dateien "
+"löschen möchten? Dies wird alle Repo-Dateien löschen!"
 
 msgid ""
 "Are you sure you want to remove repo from the plugin? This will not delete "
 "any files!"
 msgstr ""
+"Sind Sie sicher, dass Sie das Repo aus dem Plugin entfernen möchten? Dies "
+"wird keine Dateien löschen!"
 
 msgid "Base Dir"
-msgstr ""
+msgstr "Basisverz."
 
 msgid ""
 "Base directory to make archive use relative paths. Leave blank to use "
 "absolute paths in archive."
 msgstr ""
+"Basisverzeichnis, damit das Archiv relative Pfade verwendet. Leer lassen, um"
+" absolute Pfade im Archiv zu verwenden."
 
 msgid "BorgBackup"
 msgstr "BorgBackup"
@@ -71,7 +77,7 @@ msgid "Change passphrase"
 msgstr "Passphrase ändern"
 
 msgid "Changing repo location ..."
-msgstr ""
+msgstr "Speicherort des Repo wird geändert ..."
 
 msgid "Check"
 msgstr "Überprüfen"
@@ -96,7 +102,7 @@ msgstr ""
 " nur bei Fehler senden."
 
 msgid "Compact"
-msgstr ""
+msgstr "Kompakt"
 
 msgid "Compact repo ..."
 msgstr ""
@@ -132,7 +138,7 @@ msgid "Docs"
 msgstr "Doku"
 
 msgid "Download repo keyfile"
-msgstr ""
+msgstr "Repo-Schlüsseldatei herunterladen"
 
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -175,12 +181,15 @@ msgid "Extract"
 msgstr "Extrahieren"
 
 msgid "Extract archive to directory"
-msgstr ""
+msgstr "Archiv in Verzeichnis extrahieren"
 
 msgid "Extract archive to tar file"
-msgstr ""
+msgstr "Archiv in tar-Datei extrahieren"
 
 msgid "Failed to find "
+msgstr ""
+
+msgid "Failed to get keyfile!"
 msgstr ""
 
 msgid "Failed to remove "
@@ -189,6 +198,8 @@ msgstr ""
 msgid ""
 "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
 msgstr ""
+"Liefert eine zusammengefasste, versionierte Ansicht der Dateien in den "
+"Archiven. EXPERIMENTELL"
 
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
@@ -213,13 +224,13 @@ msgid "Mount"
 msgstr "Einhängen"
 
 msgid "Mount repo"
-msgstr ""
+msgstr "Repo einhängen"
 
 msgid "Mounted"
 msgstr "Eingehängt"
 
 msgid "Mounting repo ..."
-msgstr ""
+msgstr "Repo wird eingehängt ..."
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
@@ -280,10 +291,10 @@ msgid "Repo"
 msgstr "Repo"
 
 msgid "Repo has been mounted."
-msgstr ""
+msgstr "Repo wurde eingehängt."
 
 msgid "Repo has been unmounted."
-msgstr ""
+msgstr "Repo wurde ausgehängt."
 
 msgid "Repo info ..."
 msgstr "Repoinfo ..."
@@ -294,7 +305,7 @@ msgstr ""
 "Archive!"
 
 msgid "Repo location has been changed."
-msgstr ""
+msgstr "Speicherort des Repo wurde geändert."
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
@@ -369,7 +380,7 @@ msgid "Unmount"
 msgstr "Aushängen"
 
 msgid "Unmounting repo ..."
-msgstr ""
+msgstr "Repo wird ausgehängt ..."
 
 msgid "Uses value as prefix for archive name."
 msgstr "Verwendet den Wert als Präfix für den Archivnamen."

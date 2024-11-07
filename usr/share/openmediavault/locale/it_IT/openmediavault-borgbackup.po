@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-13 19:00-0500\n"
+"POT-Creation-Date: 2024-11-06 18:33-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Language-Team: Italian (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/it/)\n"
 "MIME-Version: 1.0\n"
@@ -172,6 +172,9 @@ msgid "Extract archive to tar file"
 msgstr ""
 
 msgid "Failed to find "
+msgstr ""
+
+msgid "Failed to get keyfile!"
 msgstr ""
 
 msgid "Failed to remove "
