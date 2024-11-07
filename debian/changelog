@@ -1,8 +1,9 @@
-openmediavault-borgbackup (7.0.9) UNRELEASED; urgency=medium
+openmediavault-borgbackup (7.0.9) stable; urgency=low
 
   * Improve keyfile download
+  * Only set compression flag to none when compression is disabled
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 17 Aug 2024 08:59:29 -0500
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 06 Nov 2024 18:32:27 -0600
 
 openmediavault-borgbackup (7.0.8) stable; urgency=low
 
