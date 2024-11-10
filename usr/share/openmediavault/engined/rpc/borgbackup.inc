@@ -674,9 +674,14 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 }
                 $cmdArgs[] = '--stats';
                 $cmdArgs[] = '--verbose';
-                $cmdArgs[] = sprintf('--compression auto,%s,%s', $archive->get('compressiontype'),
-                    $archive->get('compressionratio')
-                );
+                $ct = $archive->get('compressiontype');
+                if ($ct == 'none') {
+                    $comp = $ct;
+                } else {
+                    $cr = $archive->get('compressionratio');
+                    $comp = sprintf('auto,%s,%s', $ct, $cr);
+                }
+                $cmdArgs[] = sprintf('--compression %s', $comp);
                 if ($repo->get('type') == 'local') {
                     $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
                         'uuid' => $repo->get('sharedfolderref')
