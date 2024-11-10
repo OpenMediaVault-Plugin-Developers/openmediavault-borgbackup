@@ -34,11 +34,11 @@ data:
         flexGrow: 1
         sortable: true
       - name: _("Includes")
-        prop: include
+        prop: includes
         flexGrow: 2
         sortable: true
       - name: _("Excludes")
-        prop: exclude
+        prop: excludes
         flexGrow: 2
         sortable: true
     actions:

@@ -601,6 +601,10 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             $repo = $db->get('conf.service.borgbackup.repo', $objectv->get('reporef'));
             // Add the new property 'reponame'.
             $objectv->add('reponame', 'string', $repo->get('name'));
+            $includes = str_replace(',', '<br />', $objectv->get('include'));
+            $objectv->add('includes', 'string', $includes);
+            $excludes = str_replace(',', '<br />', $objectv->get('exclude'));
+            $objectv->add('excludes', 'string', $excludes);
             $objectsAssoc[] = $objectv->getAssoc();
         }
         // Filter the result.
