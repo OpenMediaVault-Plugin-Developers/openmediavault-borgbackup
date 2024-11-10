@@ -1,3 +1,10 @@
+openmediavault-borgbackup (7.0.10) stable; urgency=low
+
+  * Fix compression string when compression type of none is
+    selected for manual archive creation
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 10 Nov 2024 08:18:18 -0600
+
 openmediavault-borgbackup (7.0.9) stable; urgency=low
 
   * Improve keyfile download
