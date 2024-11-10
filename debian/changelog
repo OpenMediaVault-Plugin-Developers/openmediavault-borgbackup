@@ -1,3 +1,9 @@
+openmediavault-borgbackup (7.0.11) UNRELEASED; urgency=medium
+
+  * Put each path in includes and excludes on new line
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 10 Nov 2024 15:13:40 -0600
+
 openmediavault-borgbackup (7.0.10) stable; urgency=low
 
   * Fix compression string when compression type of none is
