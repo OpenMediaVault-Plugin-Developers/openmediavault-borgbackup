@@ -671,6 +671,15 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 }
                 // borg command
                 $cmdArgs = [];
+                $basedir = $archive->get('basedir');
+                if (strlen($basedir) > 0) {
+                    if (!is_dir($basedir)) {
+                        throw new \OMV\ValueException(
+                            sprintf('%s: %s', gettext("Directory not found"), $basedir)
+                        );
+                    }
+                    $cmdArgs[] = sprintf('cd "%s" && ', escapeshellarg($basedir));
+                }
                 $cmdArgs[] = $this->getProgram;
                 $cmdArgs[] = 'create';
                 if ($archive->get('list') == true) {
