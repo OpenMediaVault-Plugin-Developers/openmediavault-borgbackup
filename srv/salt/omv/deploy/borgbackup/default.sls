@@ -163,6 +163,9 @@ configure_borg_{{ archive.name }}_cron_file:
         {%- if archive.basedir | length > 0 %}
         if [ -d "{{ archive.basedir }}" ]; then
           cd "{{ archive.basedir }}"
+        else
+          info "Directory not found - {{ archive.basedir }}"
+          exit 127
         fi
         {%- endif %}
 
