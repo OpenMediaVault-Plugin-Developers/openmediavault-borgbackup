@@ -651,15 +651,16 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         // Validate the RPC caller context.
         $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         // Validate the parameters of the RPC service method.
-        $this->validateMethodParams($params, 'rpc.common.objectuuid');
+        $this->validateMethodParams($params, 'rpc.borgbackup.createarchive');
         $db = \OMV\Config\Database::getInstance();
         // Get archive configuration object
         $archive = $db->get('conf.service.borgbackup.archive', $params['uuid']);
         // Get repo configuration object
         $repo = $db->get('conf.service.borgbackup.repo', $archive->get('reporef'));
+        $dryrun = $params['dryrun'];
         // Create the background process.
         return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
-            use ($archive, $context, $repo) {
+            use ($archive, $context, $repo, $dryrun) {
                 // prescript
                 $prescript = $archive->get('prescript');
                 if (strlen($prescript) > 1) {
@@ -682,10 +683,15 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 }
                 $cmdArgs[] = $this->getProgram;
                 $cmdArgs[] = 'create';
+                if ($dryrun) {
+                    $cmdArgs[] = '--dry-run';
+                }
                 if ($archive->get('list') == true) {
                     $cmdArgs[] = '--list';
                 }
-                $cmdArgs[] = '--stats';
+                if (!$dryrun) {
+                    $cmdArgs[] = '--stats';
+                }
                 $cmdArgs[] = '--verbose';
                 $ct = $archive->get('compressiontype');
                 if ($ct == 'none') {
@@ -727,7 +733,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $cmdLine = $cmd->getCommandLine();
                 $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmd));
                 $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
-                if (0 !== $this->exec($cmdLine, $output)) {
+                if (0 !== $this->exec($cmdLine, $output, $bgOutputFilename)) {
                     throw new \OMV\ExecException($cmd, $output);
                 }
                 // post script

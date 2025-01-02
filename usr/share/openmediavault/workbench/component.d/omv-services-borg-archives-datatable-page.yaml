@@ -77,6 +77,24 @@ data:
                   command: "info"
                   uuid: "{{ _selected[0].uuid }}"
       - type: iconButton
+        icon: mdi:check
+        tooltip: _("Dry Run")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+        execute:
+          type: taskDialog
+          taskDialog:
+            config:
+              title: _("Create archive for ... (Dry Run)")
+              startOnInit: true
+              request:
+                service: BorgBackup
+                method: createArchive
+                params:
+                  uuid: "{{ _selected[0].uuid }}"
+                  dryrun: true
+      - type: iconButton
         icon: mdi:play-outline
         tooltip: _("Run")
         enabledConstraints:
@@ -93,6 +111,7 @@ data:
                 method: createArchive
                 params:
                   uuid: "{{ _selected[0].uuid }}"
+                  dryrun: false
       - type: menu
         icon: mdi:link
         tooltip: _("Docs")

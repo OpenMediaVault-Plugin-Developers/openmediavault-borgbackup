@@ -350,5 +350,23 @@
         }
       }
     }
+  },
+  {
+    "type": "rpc",
+    "id": "rpc.borgbackup.createarchive",
+    "params": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "dryrun": {
+          "type": "boolean",
+          "required": true
+        }
+      }
+    }
   }
 ]
