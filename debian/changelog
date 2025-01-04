@@ -1,8 +1,10 @@
-openmediavault-borgbackup (7.0.11) UNRELEASED; urgency=medium
+openmediavault-borgbackup (7.0.11) stable; urgency=low
 
   * Put each path in includes and excludes on new line
+  * Fix base directory handling
+  * Add dry run button
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 10 Nov 2024 15:13:40 -0600
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 04 Jan 2025 08:04:41 -0600
 
 openmediavault-borgbackup (7.0.10) stable; urgency=low
 
