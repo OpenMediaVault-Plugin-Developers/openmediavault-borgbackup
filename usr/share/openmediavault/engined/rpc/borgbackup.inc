@@ -679,7 +679,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                             sprintf('%s: %s', gettext("Directory not found"), $basedir)
                         );
                     }
-                    $cmdArgs[] = sprintf('cd "%s" && ', escapeshellarg($basedir));
+                    $cmdArgs[] = sprintf('cd %s && ', escapeshellarg($basedir));
                 }
                 $cmdArgs[] = $this->getProgram;
                 $cmdArgs[] = 'create';
