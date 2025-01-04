@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-06 18:33-0600\n"
+"POT-Creation-Date: 2025-01-02 17:17-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -101,6 +101,9 @@ msgstr ""
 msgid "Create archive for ..."
 msgstr ""
 
+msgid "Create archive for ... (Dry Run)"
+msgstr ""
+
 msgid "Created archive."
 msgstr ""
 
@@ -113,10 +116,16 @@ msgstr ""
 msgid "Delete + Files"
 msgstr ""
 
+msgid "Directory not found"
+msgstr ""
+
 msgid "Docs"
 msgstr ""
 
 msgid "Download repo keyfile"
+msgstr ""
+
+msgid "Dry Run"
 msgstr ""
 
 msgid "Edit"

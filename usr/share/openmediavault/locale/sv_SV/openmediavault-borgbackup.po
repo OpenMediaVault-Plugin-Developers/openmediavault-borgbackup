@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-06 18:33-0600\n"
+"POT-Creation-Date: 2025-01-02 17:17-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Jonatan Nyberg, 2023\n"
 "Language-Team: Swedish (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/sv/)\n"
@@ -113,6 +113,9 @@ msgstr "Skapa"
 msgid "Create archive for ..."
 msgstr "Skapa arkiv för ..."
 
+msgid "Create archive for ... (Dry Run)"
+msgstr ""
+
 msgid "Created archive."
 msgstr "Skapat arkiv."
 
@@ -125,10 +128,16 @@ msgstr "Skapade förråd."
 msgid "Delete + Files"
 msgstr ""
 
+msgid "Directory not found"
+msgstr ""
+
 msgid "Docs"
 msgstr ""
 
 msgid "Download repo keyfile"
+msgstr ""
+
+msgid "Dry Run"
 msgstr ""
 
 msgid "Edit"

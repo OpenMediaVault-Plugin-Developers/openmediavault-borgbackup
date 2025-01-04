@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# kochin <kochinc@outlook.com>, 2024
+# kochin <kochinc@outlook.com>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-06 18:33-0600\n"
+"POT-Creation-Date: 2025-01-02 17:17-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: kochin <kochinc@outlook.com>, 2024\n"
+"Last-Translator: kochin <kochinc@outlook.com>, 2025\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -113,6 +113,9 @@ msgstr "建立"
 msgid "Create archive for ..."
 msgstr "建立歸檔給 ..."
 
+msgid "Create archive for ... (Dry Run)"
+msgstr "建立歸檔給 ... (預試執行)"
+
 msgid "Created archive."
 msgstr "已建立歸檔。"
 
@@ -125,11 +128,17 @@ msgstr "已建立儲存庫。"
 msgid "Delete + Files"
 msgstr "刪除 + 檔案"
 
+msgid "Directory not found"
+msgstr "找不到檔案目錄"
+
 msgid "Docs"
 msgstr "說明文件"
 
 msgid "Download repo keyfile"
 msgstr "下載儲存庫金鑰檔案"
+
+msgid "Dry Run"
+msgstr "預試執行"
 
 msgid "Edit"
 msgstr "編輯"

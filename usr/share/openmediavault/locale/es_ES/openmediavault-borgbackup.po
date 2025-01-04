@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-06 18:33-0600\n"
+"POT-Creation-Date: 2025-01-02 17:17-0600\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2024\n"
 "Language-Team: Spanish (Spain) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/es_ES/)\n"
@@ -121,6 +121,9 @@ msgstr "Crear"
 msgid "Create archive for ..."
 msgstr "Crear archivo para ..."
 
+msgid "Create archive for ... (Dry Run)"
+msgstr ""
+
 msgid "Created archive."
 msgstr "Archivo creado."
 
@@ -133,11 +136,17 @@ msgstr "repo creado."
 msgid "Delete + Files"
 msgstr "Borrando + Archivos"
 
+msgid "Directory not found"
+msgstr ""
+
 msgid "Docs"
 msgstr "Documentación"
 
 msgid "Download repo keyfile"
 msgstr "Descargando la keyfile del repo"
+
+msgid "Dry Run"
+msgstr ""
 
 msgid "Edit"
 msgstr "Editar"
