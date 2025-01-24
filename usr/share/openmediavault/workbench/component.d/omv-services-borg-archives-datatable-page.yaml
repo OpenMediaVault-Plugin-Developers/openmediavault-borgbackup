@@ -94,6 +94,7 @@ data:
                 params:
                   uuid: "{{ _selected[0].uuid }}"
                   dryrun: true
+                  progress: false
       - type: iconButton
         icon: mdi:play-outline
         tooltip: _("Run")
@@ -112,6 +113,26 @@ data:
                 params:
                   uuid: "{{ _selected[0].uuid }}"
                   dryrun: false
+                  progress: false
+      - type: iconButton
+        icon: mdi:play
+        tooltip: _("Run with progress")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+        execute:
+          type: taskDialog
+          taskDialog:
+            config:
+              title: _("Create archive for ...")
+              startOnInit: true
+              request:
+                service: BorgBackup
+                method: createArchive
+                params:
+                  uuid: "{{ _selected[0].uuid }}"
+                  dryrun: false
+                  progress: true
       - type: menu
         icon: mdi:link
         tooltip: _("Docs")

@@ -658,9 +658,10 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         // Get repo configuration object
         $repo = $db->get('conf.service.borgbackup.repo', $archive->get('reporef'));
         $dryrun = $params['dryrun'];
+        $progress = $params['progress'];
         // Create the background process.
         return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
-            use ($archive, $context, $repo, $dryrun) {
+            use ($archive, $context, $repo, $dryrun, $progress) {
                 // prescript
                 $prescript = $archive->get('prescript');
                 if (strlen($prescript) > 1) {
@@ -693,6 +694,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                     $cmdArgs[] = '--stats';
                 }
                 $cmdArgs[] = '--verbose';
+                if ($progress) {
+                    $cmdArgs[] = '--progress';
+                }
                 $ct = $archive->get('compressiontype');
                 if ($ct == 'none') {
                     $comp = $ct;

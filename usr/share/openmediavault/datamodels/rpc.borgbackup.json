@@ -365,6 +365,10 @@
         "dryrun": {
           "type": "boolean",
           "required": true
+        },
+        "progress": {
+          "type": "boolean",
+          "required": true
         }
       }
     }
