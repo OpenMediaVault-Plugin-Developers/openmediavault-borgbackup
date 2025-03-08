@@ -147,7 +147,7 @@ configure_borg_{{ archive.name }}_cron_file:
         export BORG_REPO='{{ rpath }}'
 
         # Setting this, so you won't be asked for your repository passphrase:
-        export BORG_PASSPHRASE='{{ ns.passphrase | replace("'", "'\\''") }}'
+        export BORG_PASSPHRASE=$'{{ ns.passphrase | replace("'", "\\'") }}'
 
         # some helpers and error handling:
         info() { printf "\n%s %s\n\n" "$( date )" "$*"; }
