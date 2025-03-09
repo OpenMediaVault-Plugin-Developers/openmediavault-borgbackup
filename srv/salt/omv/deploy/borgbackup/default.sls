@@ -131,7 +131,7 @@ configure_borg_{{ archive.name }}_cron_file:
   file.managed:
     - name: '{{ script }}'
     - contents: |
-        #!/bin/sh
+        #!/bin/bash
  
         {{ pillar['headers']['auto_generated'] }}
         {{ pillar['headers']['warning'] }}
