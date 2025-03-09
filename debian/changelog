@@ -1,3 +1,15 @@
+openmediavault-borgbackup (7.0.14) stable; urgency=low
+
+  * Escapes single quotes in the Borg passphrase
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 09 Mar 2025 10:39:51 -0500
+
+openmediavault-borgbackup (7.0.13) stable; urgency=low
+
+  * Add 'Run with progress' button to Archives tab
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 25 Jan 2025 13:58:56 -0600
+
 openmediavault-borgbackup (7.0.12) stable; urgency=low
 
   * Remove quotes since the path is already escaped with escapeshellarg
