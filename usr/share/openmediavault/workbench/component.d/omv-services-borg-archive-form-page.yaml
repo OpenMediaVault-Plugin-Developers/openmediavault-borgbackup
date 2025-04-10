@@ -68,17 +68,17 @@ data:
         name: noatime
         label: _("No atime")
         value: false
-      - type: textInput
+      - type: textarea
         name: include
         label: _("Includes")
-        hint: _("Put comma between each directory")
+        hint: _("Put a new line or comma between each directory")
         value: ""
         validators:
           required: true
-      - type: textInput
+      - type: textarea
         name: exclude
         label: _("Excludes")
-        hint: _("Put comma between each directory")
+        hint: _("Put a new line or comma between each directory")
         value: ""
         validators:
           required: false

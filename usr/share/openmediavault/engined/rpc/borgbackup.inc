@@ -601,9 +601,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
             $repo = $db->get('conf.service.borgbackup.repo', $objectv->get('reporef'));
             // Add the new property 'reponame'.
             $objectv->add('reponame', 'string', $repo->get('name'));
-            $includes = str_replace(',', '<br />', $objectv->get('include'));
+            $includes = str_replace([',', PHP_EOL], '<br />', $objectv->get('include'));
             $objectv->add('includes', 'string', $includes);
-            $excludes = str_replace(',', '<br />', $objectv->get('exclude'));
+            $excludes = str_replace([',', PHP_EOL], '<br />', $objectv->get('exclude'));
             $objectv->add('excludes', 'string', $excludes);
             $objectsAssoc[] = $objectv->getAssoc();
         }
@@ -620,7 +620,12 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->validateMethodParams($params, 'rpc.common.objectuuid');
         // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
-        return $db->getAssoc('conf.service.borgbackup.archive', $params['uuid']);
+        $object = $db->get('conf.service.borgbackup.archive', $params['uuid']);
+        $includes = str_replace(',', PHP_EOL, $object->get("include"));
+        $object->set("include", $includes);
+        $excludes = str_replace(',', PHP_EOL, $object->get("exclude"));
+        $object->set("exclude", $excludes);
+        return $object->getAssoc();
     }
 
     public function setArchive($params, $context)
@@ -633,6 +638,19 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.archive');
         // Remove spaces from name
         $params['name'] = str_replace(' ', '_', $params['name']);
+        // format includes and excludes
+        $includes = str_replace(',', PHP_EOL, $params['include']);
+        $excludes = str_replace(',', PHP_EOL, $params['exclude']);
+        $includesa = explode(PHP_EOL, $includes);
+        $excludesa = explode(PHP_EOL, $excludes);
+        $includest = array_map('trim', $includesa);
+        $excludest = array_map('trim', $excludesa);
+        array_filter($includest);
+        array_filter($excludest);
+        $includesu = array_unique($includest);
+        $excludesu = array_unique($excludest);
+        $params['include'] = implode(',', $includesu);
+        $params['exclude'] = implode(',', $excludesu);
         $object->setAssoc($params);
         // Set the configuration object.
         $isNew = $object->isNew();
