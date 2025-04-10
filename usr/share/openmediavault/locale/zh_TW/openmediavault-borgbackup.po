@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-02 17:17-0600\n"
+"POT-Creation-Date: 2025-04-10 08:22-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: kochin <kochinc@outlook.com>, 2025\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_TW/)\n"
@@ -261,6 +261,9 @@ msgstr "後置腳本程式"
 msgid "Pre-script"
 msgstr "前置腳本程式"
 
+msgid "Put a new line or comma between each directory"
+msgstr "在每個檔案目錄之間加入換行或逗號"
+
 msgid "Put comma between each directory"
 msgstr "在每個檔案目錄間放入逗號"
 
@@ -331,6 +334,9 @@ msgstr "備份完後執行此路徑的腳本程式。"
 
 msgid "Run script from this path before backup."
 msgstr "備份前先執行此路徑的腳本程式。"
+
+msgid "Run with progress"
+msgstr "執行時顯示進度"
 
 msgid "Select a repo ..."
 msgstr "選擇一個儲存庫 ..."

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-02 17:17-0600\n"
+"POT-Creation-Date: 2025-04-10 08:22-0500\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2024\n"
 "Language-Team: Spanish (Spain) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/es_ES/)\n"
@@ -277,6 +277,9 @@ msgstr "Post-script"
 msgid "Pre-script"
 msgstr "Pre-script"
 
+msgid "Put a new line or comma between each directory"
+msgstr ""
+
 msgid "Put comma between each directory"
 msgstr "Use la coma, para separar los directorios"
 
@@ -349,6 +352,9 @@ msgstr "Ejecute el script desde esta ruta después de la copia de seguridad."
 
 msgid "Run script from this path before backup."
 msgstr "Ejecute el script desde esta ruta antes de la copia de seguridad."
+
+msgid "Run with progress"
+msgstr ""
 
 msgid "Select a repo ..."
 msgstr "Seleccionar un repositorio ..."
