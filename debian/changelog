@@ -1,3 +1,9 @@
+openmediavault-borgbackup (7.0.15) stable; urgency=low
+
+  * Change archive include and exclude fields to textarea
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 10 Apr 2025 08:21:36 -0500
+
 openmediavault-borgbackup (7.0.14) stable; urgency=low
 
   * Escapes single quotes in the Borg passphrase
