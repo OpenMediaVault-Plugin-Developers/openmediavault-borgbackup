@@ -158,7 +158,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs = [];
         $cmdArgs[] = $this->getProgram;
         if ($params['skipinit'] == true) {
-            $cmdArgs[] = 'info';
+            $cmdArgs[] = 'list';
+            $cmdArgs[] = '--consider-checkpoints';
+            $cmdArgs[] = '--short';
         } else {
             $cmdArgs[] = 'init';
             if ($params['encryption'] == true) {
