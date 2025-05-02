@@ -41,6 +41,7 @@
         },
         "passphrase": {
           "type": "string",
+          "format": "no-multi-line",
           "required": true
         },
         "encryption": {
@@ -269,6 +270,7 @@
         },
         "passphrase": {
           "type": "string",
+          "format": "no-multi-line",
           "required": true
         }
       }
