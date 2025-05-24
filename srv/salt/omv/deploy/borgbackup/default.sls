@@ -190,13 +190,15 @@ configure_borg_{{ archive.name }}_cron_file:
         {%- endif %}
           --exclude-caches \
         {%- if archive.exclude | length > 0 %}
-        {%- for exclude in archive.exclude.split(',') %}
+        {%- set excludes = archive.exclude.split(',') | map('trim') | reject('equalto', '') %}
+        {%- for exclude in excludes %}
           --exclude '{{ exclude }}' \
         {%- endfor %}
         {%- endif %}
           ::"{{ archive.name }}-{now:%Y-%m-%d_%H-%M-%S}" \
         {%- if archive.include | length > 0 %}
-        {%- for include in archive.include.split(',') %}
+        {%- set includes = archive.include.split(',') | map('trim') | reject('equalto', '') %}
+        {%- for include in includes %}
           '{{ include }}' \
         {%- endfor %}
         {%- endif %}
