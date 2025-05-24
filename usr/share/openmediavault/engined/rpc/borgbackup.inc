@@ -641,18 +641,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         // Remove spaces from name
         $params['name'] = str_replace(' ', '_', $params['name']);
         // format includes and excludes
-        $includes = str_replace(',', PHP_EOL, $params['include']);
-        $excludes = str_replace(',', PHP_EOL, $params['exclude']);
-        $includesa = explode(PHP_EOL, $includes);
-        $excludesa = explode(PHP_EOL, $excludes);
-        $includest = array_map('trim', $includesa);
-        $excludest = array_map('trim', $excludesa);
-        array_filter($includest);
-        array_filter($excludest);
-        $includesu = array_unique($includest);
-        $excludesu = array_unique($excludest);
-        $params['include'] = implode(',', $includesu);
-        $params['exclude'] = implode(',', $excludesu);
+        $params['include'] = $this->cleanArray($params['include']);
+        $params['exclude'] = $this->cleanArray($params['exclude']);
         $object->setAssoc($params);
         // Set the configuration object.
         $isNew = $object->isNew();
@@ -664,6 +654,16 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $db->set($object);
         // Return the configuration object.
         return $object->getAssoc();
+    }
+
+    private function cleanArray($csvList): string
+    {
+        $list = str_replace(',', PHP_EOL, $csvList);
+        $list = explode(PHP_EOL, $list);
+        $list = array_map('trim', $list);
+        $list = array_filter($list, 'strlen');
+        $list = array_unique($list);
+        return (implode(',', $list));
     }
 
     public function createArchive($params, $context)
