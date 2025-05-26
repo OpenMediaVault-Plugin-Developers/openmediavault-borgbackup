@@ -1,3 +1,9 @@
+openmediavault-borgbackup (7.0.16) stable; urgency=low
+
+  * Trim and skip empty archive includes and excludes
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Mon, 26 May 2025 08:42:40 -0500
+
 openmediavault-borgbackup (7.0.15) stable; urgency=low
 
   * Change archive include and exclude fields to textarea
