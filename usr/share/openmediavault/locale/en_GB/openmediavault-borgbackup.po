@@ -277,7 +277,7 @@ msgid "Pre-script"
 msgstr "Pre-script"
 
 msgid "Put a new line or comma between each directory"
-msgstr ""
+msgstr "Put a new line or comma between each directory"
 
 msgid "Put comma between each directory"
 msgstr "Put comma between each directory"
@@ -353,7 +353,7 @@ msgid "Run script from this path before backup."
 msgstr "Run script from this path before backup."
 
 msgid "Run with progress"
-msgstr ""
+msgstr "Run with progress"
 
 msgid "Select a repo ..."
 msgstr "Select a repo ..."
