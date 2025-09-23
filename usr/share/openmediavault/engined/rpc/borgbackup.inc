@@ -52,6 +52,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('enumerateArchives');
         $this->registerMethod('exportArchive');
         $this->registerMethod('extractArchive');
+        $this->registerMethod('getLog');
 
         $this->registerMethod('getEnvVarList');
         $this->registerMethod('getEnvVar');
@@ -951,6 +952,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $db = \OMV\Config\Database::getInstance();
         // Get repo configuration object
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
+        $logFile = sprintf("/tmp/omv-borg-extract-%s.log", $params['uuid']);
         $cmdArgs = [];
         if (($params['original'] == false) && (is_uuid($params['sharedfolderref']))) {
             $sfpath = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
@@ -962,6 +964,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs[] = sprintf('cd %s &&', escapeshellarg($sfpath));
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'extract';
+        $cmdArgs[] = '--progress';
         if ($repo->get('type') == 'local') {
             $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
                 'uuid' => $repo->get('sharedfolderref')
@@ -973,12 +976,38 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
         $cmd->setEnvFromFile($this->envFile . $repo->get('uuid'));
-        $cmd->setQuiet(TRUE);
+        $cmd->setRedirect2to1();
+        $cmd->setRedirect1toFile($logFile);
         $cmd->setBackground(TRUE);
         $cmdLine = $cmd->getCommandLine();
         if (0 !== $this->exec($cmdLine, $output)) {
             throw new \OMV\ExecException($cmd, $output);
         }
+    }
+
+    public function getLog($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
+            use ($params) {
+                $logFile = sprintf("/tmp/omv-borg-%s-%s.log", $params['command'], $params['uuid']);
+                $cmdArgs = [];
+                $cmdArgs[] = 'tail';
+                $cmdArgs[] = '-n +1';
+                if ($params['follow']) {
+                    $cmdArgs[] = '-f';
+                }
+                $cmdArgs[] = $logFile;
+                $cmd = new \OMV\System\Process($cmdArgs);
+                $cmd->setQuiet(true);
+                $cmdLine = $cmd->getCommandLine();
+                if (file_exists($logFile)) {
+                    $exitStatus = $this->exec($cmdLine, $output, $bgOutputFilename);
+                }
+                return $output;
+            }
+        );
     }
 
     public function getEnvVarList($params, $context)

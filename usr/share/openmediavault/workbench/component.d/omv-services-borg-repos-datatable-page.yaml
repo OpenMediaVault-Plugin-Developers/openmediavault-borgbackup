@@ -305,55 +305,88 @@ data:
                   request:
                     service: BorgBackup
                     method: exportArchive
-      - type: iconButton
-        tooltip: _("Extract")
+      - type: menu
         icon: mdi:folder-move-outline
+        tooltip: _("Extract")
         enabledConstraints:
           minSelected: 1
           maxSelected: 1
-        execute:
-          type: formDialog
-          formDialog:
-            title: _("Extract archive to directory")
-            fields:
-              - type: hidden
-                name: uuid
-                value: "{{ _selected[0].uuid }}"
-              - type: select
-                name: archive
-                label: _("Archive")
-                placeholder: _("Select an archive ...")
-                valueField: name
-                textField: name
-                store:
-                  proxy:
-                    service: BorgBackup
-                    get:
-                      method: enumerateArchives
-                      params:
-                        uuid: "{{ _selected[0].uuid }}"
-              - type: checkbox
-                name: original
-                label: _("Original location")
-                value: false
-              - type: sharedFolderSelect
-                name: sharedfolderref
-                label: _("Shared folder")
-                value: ""
-                modifiers:
-                  - type: visible
-                    constraint:
-                      operator: falsy
-                      arg0:
-                        prop: original
-            buttons:
-              submit:
-                text: _("Extract")
-                execute:
-                  type: request
+        actions:
+          - text: _("Extract")
+            icon: mdi:folder-move-outline
+            execute:
+              type: formDialog
+              formDialog:
+                title: _("Extract archive to directory")
+                fields:
+                  - type: hidden
+                    name: uuid
+                    value: "{{ _selected[0].uuid }}"
+                  - type: select
+                    name: archive
+                    label: _("Archive")
+                    placeholder: _("Select an archive ...")
+                    valueField: name
+                    textField: name
+                    store:
+                      proxy:
+                        service: BorgBackup
+                        get:
+                          method: enumerateArchives
+                          params:
+                            uuid: "{{ _selected[0].uuid }}"
+                  - type: checkbox
+                    name: original
+                    label: _("Original location")
+                    value: false
+                  - type: sharedFolderSelect
+                    name: sharedfolderref
+                    label: _("Shared folder")
+                    value: ""
+                    modifiers:
+                      - type: visible
+                        constraint:
+                          operator: falsy
+                          arg0:
+                            prop: original
+                buttons:
+                  submit:
+                    text: _("Extract")
+                    execute:
+                      type: request
+                      request:
+                        service: BorgBackup
+                        method: extractArchive
+          - text: _("logs")
+            icon: mdi:file-document-outline
+            execute:
+              type: taskDialog
+              taskDialog:
+                config:
+                  title: _("extract logs ...")
+                  startOnInit: true
                   request:
                     service: BorgBackup
-                    method: extractArchive
+                    method: getLog
+                    params:
+                      uuid: "{{ _selected[0].uuid }}"
+                      command: "extract"
+                      follow: false
+          - text: _("logs - follow")
+            icon: mdi:file-document-refresh-outline
+            execute:
+              type: taskDialog
+              taskDialog:
+                config:
+                  title: _("extract logs - follow ...")
+                  startOnInit: true
+                  request:
+                    service: BorgBackup
+                    method: getLog
+                    params:
+                      uuid: "{{ _selected[0].uuid }}"
+                      command: "extract"
+                      follow: true
       - type: iconButton
         tooltip: _("List")
         icon: mdi:format-list-bulleted-square

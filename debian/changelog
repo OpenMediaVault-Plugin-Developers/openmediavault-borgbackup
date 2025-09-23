@@ -1,3 +1,9 @@
+openmediavault-borgbackup (7.0.17) UNRELEASED; urgency=medium
+
+  * Log extracts and add log viewer with follow option
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 23 Sep 2025 09:02:01 -0500
+
 openmediavault-borgbackup (7.0.16) stable; urgency=low
 
   * Trim and skip empty archive includes and excludes
