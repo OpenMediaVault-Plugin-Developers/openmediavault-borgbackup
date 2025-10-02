@@ -1,8 +1,9 @@
-openmediavault-borgbackup (7.0.17) UNRELEASED; urgency=medium
+openmediavault-borgbackup (8.0) stable; urgency=low
 
+  * Update for omv 8.x
   * Log extracts and add log viewer with follow option
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 23 Sep 2025 09:02:01 -0500
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 02 Oct 2025 15:59:57 -0500
 
 openmediavault-borgbackup (7.0.16) stable; urgency=low
 
