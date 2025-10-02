@@ -8,9 +8,9 @@ Standards-Version: 4.7.2
 
 Package: openmediavault-borgbackup
 Architecture: all
-Depends: openmediavault (>= 7.7.6),
+Depends: openmediavault (>= 8),
          python3-llfuse,
-         borgbackup (>= 1.1.0)
+         borgbackup
 Description: borgbackup plugin for OpenMediaVault.
  BorgBackup is a deduplicating backup program.
  Optionally, it supports compression and authenticated
