@@ -79,6 +79,16 @@
       "minimum": 0,
       "default": 0
     },
+    "compact": {
+      "type": "boolean",
+      "default": false
+    },
+    "cthreshold": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 99,
+      "default": 10
+    },
     "ratelimit": {
       "type": "integer",
       "minimum": 0,

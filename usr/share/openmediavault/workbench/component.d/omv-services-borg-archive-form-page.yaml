@@ -132,6 +132,20 @@ data:
           max: 99
           patternType: integer
           required: true
+      - type: checkbox
+        name: compact
+        label: _("Run compact after backup and prune")
+        value: false
+      - type: numberInput
+        name: cthreshold
+        label: _("Compact threshold")
+        value: 10
+        hint: _("Set minimum threshold for saved space in percent")
+        validators:
+          min: 0
+          max: 99
+          patternType: integer
+          required: true
       - type: numberInput
         name: ratelimit
         label: _("Rate limit")

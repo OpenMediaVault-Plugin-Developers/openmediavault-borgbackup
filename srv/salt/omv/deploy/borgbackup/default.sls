@@ -110,7 +110,8 @@ configure_borg_crond:
 {% set period = 'yearly' %}
 {% endif %}
 
-{% set script = scriptsDir + '/' + period + '.d/' + scriptPrefix + archive.uuid %}
+{% if period %}
+{% set script = scriptsDir ~ '/' ~ period ~ '.d/' ~ scriptPrefix ~ archive.uuid %}
 
 {% set rpath = '' %}
 {% if ns.type == "local" %}
@@ -127,12 +128,12 @@ configure_borg_crond:
 
 {% set extraEnv = envVarDir ~ '/' ~ envVarPrefix ~ archive.reporef %}
 
-configure_borg_{{ archive.name }}_cron_file:
+configure_borg_{{ archive.uuid }}_cron_file:
   file.managed:
     - name: '{{ script }}'
     - contents: |
         #!/bin/bash
- 
+
         {{ pillar['headers']['auto_generated'] }}
         {{ pillar['headers']['warning'] }}
 
@@ -237,19 +238,27 @@ configure_borg_{{ archive.name }}_cron_file:
         prune_exit=$?
 
         # use highest exit code as global exit code
-        global_exit=$(( backup_exit > prune_exit ? backup_exit : prune_exit ))
+        global_exit=$backup_exit
+        (( prune_exit > global_exit )) && global_exit=$prune_exit
+
+        {%- if archive.compact | to_bool %}
+        info "Compacting repository" {{ email }}
+        borg compact --verbose --threshold {{ archive.cthreshold }} ${email}
+        compact_exit=$?
+        (( compact_exit > global_exit )) && global_exit=$compact_exit
+        {% endif %}
 
         if [ ${global_exit} -eq 1 ]; then
-          info "Backup and/or Prune finished with a warning"
+          info "Backup, Prune, and/or Compact finished with a warning"
         fi
 
         if [ ${global_exit} -gt 1 ]; then
-          info "Backup and/or Prune finished with an error"
+          info "Backup, Prune, and/or Compact finished with an error"
         fi
 
         exit ${global_exit}
     - user: root
     - group: root
     - mode: 750
+{% endif %}
 {% endfor %}
-

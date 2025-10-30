@@ -1,3 +1,9 @@
+openmediavault-borgbackup (8.0.1) stable; urgency=low
+
+  * Add compact option to archive
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 30 Oct 2025 22:33:51 +0000
+
 openmediavault-borgbackup (8.0) stable; urgency=low
 
   * Update for omv 8.x
