@@ -51,6 +51,10 @@ data:
         prop: archiveCount
         sortable: true
         flexGrow: 1
+      - name: _("Storage quota")
+        prop: storquota
+        sortable: true
+        flexGrow: 1
     actions:
       - template: create
         execute:
@@ -126,6 +130,50 @@ data:
                     method: changeRepoPath
                     progressMessage: _("Changing repo location ...")
                     successNotification: _("Repo location has been changed.")
+      - type: iconButton
+        tooltip: _("Change quota")
+        icon: mdi:pencil-outline
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            - operator: eq
+              arg0:
+                prop: type
+              arg1: "local"
+        execute:
+          type: formDialog
+          formDialog:
+            title: _("Change quota")
+            fields:
+              - type: hidden
+                name: uuid
+                value: "{{ _selected[0].uuid }}"
+              - type: textInput
+                name: name
+                label: _("Name")
+                readonly: true
+                value: "{{ _selected[0].name }}"
+              - type: textInput
+                name: curquota
+                label: _("Current quota")
+                readonly: true
+                value: "{{ _selected[0].storquota }}"
+                submitValue: false
+              - type: textInput
+                name: newquota
+                label: _("New quota")
+                value: "{{ _selected[0].storquota }}"
+            buttons:
+              submit:
+                text: _("Change")
+                execute:
+                  type: request
+                  request:
+                    service: BorgBackup
+                    method: changeQuota
+                    progressMessage: _("Changing quota ...")
+                    successNotification: _("Quota has been changed.")
       - type: iconButton
         tooltip: _("Remove")
         icon: mdi:archive-remove-outline

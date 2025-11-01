@@ -51,6 +51,10 @@
         "skipinit": {
           "type": "boolean",
           "required": false
+        },
+        "storquota": {
+          "type": "string",
+          "required": true
         }
       }
     }

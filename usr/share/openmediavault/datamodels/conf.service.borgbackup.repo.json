@@ -49,6 +49,10 @@
     },
     "skipinit": {
       "type": "boolean"
+    },
+    "storquota": {
+      "type": "string",
+      "default": ""
     }
   }
 }

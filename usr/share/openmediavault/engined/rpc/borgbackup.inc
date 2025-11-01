@@ -36,6 +36,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('getRepo');
         $this->registerMethod('setRepo');
         $this->registerMethod('changeRepoPath');
+        $this->registerMethod('changeQuota');
         $this->registerMethod('downloadKey');
         $this->registerMethod('deleteRepo');
         $this->registerMethod('repoCommand');
@@ -138,6 +139,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.repo');
         // Remove spaces from name
         $params['name'] = str_replace(' ', '_', $params['name']);
+        $params['storquota'] = trim($params['storquota']);
         // Clear uri if type is local
         if ($params['type'] == 'local') {
             $params['uri'] = '';
@@ -168,6 +170,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $cmdArgs[] = '--encryption=keyfile';
             } else {
                 $cmdArgs[] = '--encryption=none';
+            }
+            if ($params['storquota'] !== '') {
+                $cmdArgs[] = sprintf('--storage-quota %s', $params['storquota']);
             }
         }
         if ($params['type'] == 'local') {
@@ -256,6 +261,42 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         }
         // Remove skipinit parameter
         $repo->remove('skipinit');
+        // Set the configuration object.
+        $db->set($repo);
+        // Return the configuration object.
+        return $repo->getAssoc();
+    }
+
+    public function changeQuota($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        //$this->validateMethodParams($params, 'rpc.borgbackup.changequota');
+        $newquota = $params['newquota'];
+        // get database object
+        $db = \OMV\Config\Database::getInstance();
+        // get password and encryption params
+        $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
+        $passphrase = $repo->get('passphrase');
+        $sfref = $repo->get('sharedfolderref');
+        // change quota for the repo
+        $cmdArgs = [];
+        $cmdArgs[] = $this->getProgram;
+        $cmdArgs[] = 'config';
+        $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', ['uuid' => $sfref], $context);
+        $cmdArgs[] = escapeshellarg($path);
+        $cmdArgs[] = sprintf('storage_quota %s', $newquota);
+        $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($passphrase), TRUE);
+        $cmd->setEnvFromFile($this->envFile . $params['uuid']);
+        $cmd->setRedirect2to1();
+        $cmdLine = $cmd->getCommandLine();
+        if (0 !== $this->exec($cmdLine, $output)) {
+            throw new \OMV\ExecException($cmd, $output);
+        }
+        // update database
+        $repo->set('storquota', $newquota);
         // Set the configuration object.
         $db->set($repo);
         // Return the configuration object.

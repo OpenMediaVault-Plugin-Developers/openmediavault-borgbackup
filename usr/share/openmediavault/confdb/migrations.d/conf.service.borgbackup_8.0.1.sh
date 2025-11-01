@@ -17,4 +17,14 @@ xmlstarlet sel -t -m "${xpath}" -v "uuid" -n ${OMV_CONFIG_FILE} |
         fi
     done;
 
+xpath="/config/services/borgbackup/repos/repo"
+
+xmlstarlet sel -t -m "${xpath}" -v "uuid" -n ${OMV_CONFIG_FILE} |
+    xmlstarlet unesc |
+    while read uuid; do
+        if ! omv_config_exists "${xpath}[uuid='${uuid}']/storquota"; then
+            omv_config_add_key "${xpath}[uuid='${uuid}']" "storquota" ""
+        fi
+    done;
+
 exit 0

@@ -64,6 +64,11 @@ data:
         label: _("Skip init")
         value: false
         hint: _("Skip initialization to import existing repo.")
+      - type: textInput
+        name: storquota
+        label: _("Storage quota")
+        value: ""
+        hint: _("5G, 1.5T as examples. Leave blank for no quota.")
     buttons:
       - template: submit
         execute:
