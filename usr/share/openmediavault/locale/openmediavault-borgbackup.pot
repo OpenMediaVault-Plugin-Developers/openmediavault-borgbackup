@@ -8,16 +8,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-10 08:22-0500\n"
+"POT-Creation-Date: 2025-11-01 14:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
+msgstr ""
+
+msgid "5G, 1.5T as examples. Leave blank for no quota."
 msgstr ""
 
 msgid "All"
@@ -59,6 +62,12 @@ msgstr ""
 msgid "Change passphrase"
 msgstr ""
 
+msgid "Change quota"
+msgstr ""
+
+msgid "Changing quota ..."
+msgstr ""
+
 msgid "Changing repo location ..."
 msgstr ""
 
@@ -86,6 +95,9 @@ msgstr ""
 msgid "Compact repo ..."
 msgstr ""
 
+msgid "Compact threshold"
+msgstr ""
+
 msgid "Compression"
 msgstr ""
 
@@ -111,6 +123,9 @@ msgid "Created environment variable."
 msgstr ""
 
 msgid "Created repo."
+msgstr ""
+
+msgid "Current quota"
 msgstr ""
 
 msgid "Delete + Files"
@@ -218,6 +233,9 @@ msgstr ""
 msgid "Name/Prefix"
 msgstr ""
 
+msgid "New quota"
+msgstr ""
+
 msgid "No atime"
 msgstr ""
 
@@ -245,7 +263,7 @@ msgstr ""
 msgid "Put a new line or comma between each directory"
 msgstr ""
 
-msgid "Put comma between each directory"
+msgid "Quota has been changed."
 msgstr ""
 
 msgid "Rate limit"
@@ -308,6 +326,9 @@ msgstr ""
 msgid "Run"
 msgstr ""
 
+msgid "Run compact after backup and prune"
+msgstr ""
+
 msgid "Run script from this path after backup."
 msgstr ""
 
@@ -321,6 +342,9 @@ msgid "Select a repo ..."
 msgstr ""
 
 msgid "Select an archive ..."
+msgstr ""
+
+msgid "Set minimum threshold for saved space in percent"
 msgstr ""
 
 msgid "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
@@ -339,6 +363,9 @@ msgid "Skip init"
 msgstr ""
 
 msgid "Skip initialization to import existing repo."
+msgstr ""
+
+msgid "Storage quota"
 msgstr ""
 
 msgid "Type"
@@ -366,6 +393,18 @@ msgid "You must move the repo files before changing the location."
 msgstr ""
 
 msgid "borgbackup"
+msgstr ""
+
+msgid "extract logs - follow ..."
+msgstr ""
+
+msgid "extract logs ..."
+msgstr ""
+
+msgid "logs"
+msgstr ""
+
+msgid "logs - follow"
 msgstr ""
 
 msgid "lz4 - super fast / low compression"

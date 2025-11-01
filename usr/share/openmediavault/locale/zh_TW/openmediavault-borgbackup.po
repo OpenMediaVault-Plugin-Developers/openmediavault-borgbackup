@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-10 08:22-0500\n"
+"POT-Creation-Date: 2025-11-01 14:55+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: kochin <kochinc@outlook.com>, 2025\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_TW/)\n"
@@ -23,6 +23,9 @@ msgstr ""
 
 msgid "0 is the fastest compression and 9 is the best compression"
 msgstr "0 為最快速壓縮，9 為最佳壓縮"
+
+msgid "5G, 1.5T as examples. Leave blank for no quota."
+msgstr ""
 
 msgid "All"
 msgstr "全部"
@@ -69,6 +72,12 @@ msgstr "變更位置"
 msgid "Change passphrase"
 msgstr "變更密碼"
 
+msgid "Change quota"
+msgstr ""
+
+msgid "Changing quota ..."
+msgstr ""
+
 msgid "Changing repo location ..."
 msgstr "變更儲存庫位置中 ..."
 
@@ -98,6 +107,9 @@ msgstr "緊密"
 msgid "Compact repo ..."
 msgstr "緊密儲存庫 ..."
 
+msgid "Compact threshold"
+msgstr ""
+
 msgid "Compression"
 msgstr "壓縮"
 
@@ -124,6 +136,9 @@ msgstr "已建立環境變數。"
 
 msgid "Created repo."
 msgstr "已建立儲存庫。"
+
+msgid "Current quota"
+msgstr ""
 
 msgid "Delete + Files"
 msgstr "刪除 + 檔案"
@@ -237,6 +252,9 @@ msgstr "名稱"
 msgid "Name/Prefix"
 msgstr "名稱/前綴詞"
 
+msgid "New quota"
+msgstr ""
+
 msgid "No atime"
 msgstr "無 atime"
 
@@ -264,8 +282,8 @@ msgstr "前置腳本程式"
 msgid "Put a new line or comma between each directory"
 msgstr "在每個檔案目錄之間加入換行或逗號"
 
-msgid "Put comma between each directory"
-msgstr "在每個檔案目錄間放入逗號"
+msgid "Quota has been changed."
+msgstr ""
 
 msgid "Rate limit"
 msgstr "傳輸速率限制"
@@ -329,6 +347,9 @@ msgstr "每年保留"
 msgid "Run"
 msgstr "執行"
 
+msgid "Run compact after backup and prune"
+msgstr ""
+
 msgid "Run script from this path after backup."
 msgstr "備份完後執行此路徑的腳本程式。"
 
@@ -343,6 +364,9 @@ msgstr "選擇一個儲存庫 ..."
 
 msgid "Select an archive ..."
 msgstr "選擇一個歸檔 ..."
+
+msgid "Set minimum threshold for saved space in percent"
+msgstr ""
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
@@ -362,6 +386,9 @@ msgstr "跳過初始化"
 
 msgid "Skip initialization to import existing repo."
 msgstr "跳過初始化以輸入現存儲存庫。"
+
+msgid "Storage quota"
+msgstr ""
 
 msgid "Type"
 msgstr "方式"
@@ -389,6 +416,18 @@ msgstr "變更位置之前，你必須先搬移儲存庫檔案。"
 
 msgid "borgbackup"
 msgstr "borgbackup"
+
+msgid "extract logs - follow ..."
+msgstr "擷取日誌 - 追隨 ..."
+
+msgid "extract logs ..."
+msgstr "擷取日誌 ..."
+
+msgid "logs"
+msgstr "日誌"
+
+msgid "logs - follow"
+msgstr "日誌 - 追隨"
 
 msgid "lz4 - super fast / low compression"
 msgstr "lz4 - 超快 / 低壓縮"

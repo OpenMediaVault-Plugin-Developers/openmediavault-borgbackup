@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-10 08:22-0500\n"
+"POT-Creation-Date: 2025-11-01 14:55+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Giovanni Scafora <scafora.giovanni@gmail.com>, 2025\n"
 "Language-Team: Italian (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/it/)\n"
@@ -23,6 +23,9 @@ msgstr ""
 
 msgid "0 is the fastest compression and 9 is the best compression"
 msgstr "0 è la compressione più veloce e 9 quella migliore"
+
+msgid "5G, 1.5T as examples. Leave blank for no quota."
+msgstr ""
 
 msgid "All"
 msgstr "Tutto"
@@ -75,6 +78,12 @@ msgstr "Modifica posizione"
 msgid "Change passphrase"
 msgstr "Modifica password"
 
+msgid "Change quota"
+msgstr ""
+
+msgid "Changing quota ..."
+msgstr ""
+
 msgid "Changing repo location ..."
 msgstr "Sto modificando la posizione del repo ..."
 
@@ -106,6 +115,9 @@ msgstr "Compatta"
 msgid "Compact repo ..."
 msgstr "Compatta il repo ..."
 
+msgid "Compact threshold"
+msgstr ""
+
 msgid "Compression"
 msgstr "Compressione"
 
@@ -132,6 +144,9 @@ msgstr "La variabile d'ambiente è stata creata."
 
 msgid "Created repo."
 msgstr "Il repo è stato creato."
+
+msgid "Current quota"
+msgstr ""
 
 msgid "Delete + Files"
 msgstr "Elimina + file"
@@ -253,6 +268,9 @@ msgstr "Nome"
 msgid "Name/Prefix"
 msgstr "Nome/Prefisso"
 
+msgid "New quota"
+msgstr ""
+
 msgid "No atime"
 msgstr "Disattiva atime"
 
@@ -280,8 +298,8 @@ msgstr "Pre-script"
 msgid "Put a new line or comma between each directory"
 msgstr "Inserisci una nuova riga o una virgola tra ogni cartella"
 
-msgid "Put comma between each directory"
-msgstr "Inserisci una virgola tra ogni cartella"
+msgid "Quota has been changed."
+msgstr ""
 
 msgid "Rate limit"
 msgstr "Velocità massima"
@@ -347,6 +365,9 @@ msgstr "Archivia ogni anno"
 msgid "Run"
 msgstr "Esegui"
 
+msgid "Run compact after backup and prune"
+msgstr ""
+
 msgid "Run script from this path after backup."
 msgstr "Esegui lo script da questo percorso dopo il backup."
 
@@ -361,6 +382,9 @@ msgstr "Seleziona un repo ..."
 
 msgid "Select an archive ..."
 msgstr "Seleziona un archivio ..."
+
+msgid "Set minimum threshold for saved space in percent"
+msgstr ""
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
@@ -382,6 +406,9 @@ msgstr "Salta l'inizializzazione"
 
 msgid "Skip initialization to import existing repo."
 msgstr "Salta l'inizializzazione per importare un repo esistente."
+
+msgid "Storage quota"
+msgstr ""
 
 msgid "Type"
 msgstr "Tipo"
@@ -410,6 +437,18 @@ msgstr ""
 
 msgid "borgbackup"
 msgstr "borgbackup"
+
+msgid "extract logs - follow ..."
+msgstr ""
+
+msgid "extract logs ..."
+msgstr ""
+
+msgid "logs"
+msgstr "log"
+
+msgid "logs - follow"
+msgstr ""
 
 msgid "lz4 - super fast / low compression"
 msgstr "lz4 - super veloce / bassa compressione"

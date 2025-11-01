@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# songming <by@songming.me>, 2024
+# songming <by@songming.me>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-10 08:22-0500\n"
+"POT-Creation-Date: 2025-11-01 14:55+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: songming <by@songming.me>, 2024\n"
+"Last-Translator: songming <by@songming.me>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,6 +23,9 @@ msgstr ""
 
 msgid "0 is the fastest compression and 9 is the best compression"
 msgstr "0表示最快的压缩，9表示做高的压缩率"
+
+msgid "5G, 1.5T as examples. Leave blank for no quota."
+msgstr ""
 
 msgid "All"
 msgstr "所有"
@@ -69,6 +72,12 @@ msgstr "变更位置"
 msgid "Change passphrase"
 msgstr "变更密码"
 
+msgid "Change quota"
+msgstr ""
+
+msgid "Changing quota ..."
+msgstr ""
+
 msgid "Changing repo location ..."
 msgstr "变更源位置中 ..."
 
@@ -98,6 +107,9 @@ msgstr "紧密"
 msgid "Compact repo ..."
 msgstr "紧密源 ..."
 
+msgid "Compact threshold"
+msgstr ""
+
 msgid "Compression"
 msgstr "压缩"
 
@@ -114,7 +126,7 @@ msgid "Create archive for ..."
 msgstr "创建归档 ..."
 
 msgid "Create archive for ... (Dry Run)"
-msgstr ""
+msgstr "创建归档 ... (Dry Run)"
 
 msgid "Created archive."
 msgstr "已创建归档。"
@@ -125,11 +137,14 @@ msgstr "已创建环境变量。"
 msgid "Created repo."
 msgstr "已创建源。"
 
+msgid "Current quota"
+msgstr ""
+
 msgid "Delete + Files"
 msgstr "删除+文件"
 
 msgid "Directory not found"
-msgstr ""
+msgstr "目录未找到"
 
 msgid "Docs"
 msgstr "文档"
@@ -138,7 +153,7 @@ msgid "Download repo keyfile"
 msgstr "下载源关键文件"
 
 msgid "Dry Run"
-msgstr ""
+msgstr "Dry Run"
 
 msgid "Edit"
 msgstr "编辑"
@@ -237,6 +252,9 @@ msgstr "名称"
 msgid "Name/Prefix"
 msgstr "名称/前缀"
 
+msgid "New quota"
+msgstr ""
+
 msgid "No atime"
 msgstr "无时间"
 
@@ -262,10 +280,10 @@ msgid "Pre-script"
 msgstr "前置脚本"
 
 msgid "Put a new line or comma between each directory"
-msgstr ""
+msgstr "每个目录间使用换行或逗号分隔"
 
-msgid "Put comma between each directory"
-msgstr "在每个目录之间用逗号隔开"
+msgid "Quota has been changed."
+msgstr ""
 
 msgid "Rate limit"
 msgstr "限制速率"
@@ -329,6 +347,9 @@ msgstr "每年保留"
 msgid "Run"
 msgstr "运行"
 
+msgid "Run compact after backup and prune"
+msgstr ""
+
 msgid "Run script from this path after backup."
 msgstr "备份后运行脚本。"
 
@@ -336,13 +357,16 @@ msgid "Run script from this path before backup."
 msgstr "备份前运行脚本。"
 
 msgid "Run with progress"
-msgstr ""
+msgstr "持续运行"
 
 msgid "Select a repo ..."
 msgstr "选择源 ..."
 
 msgid "Select an archive ..."
 msgstr "选择归档 ..."
+
+msgid "Set minimum threshold for saved space in percent"
+msgstr ""
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
@@ -362,6 +386,9 @@ msgstr "跳过初始化"
 
 msgid "Skip initialization to import existing repo."
 msgstr "跳过初始化以导入现有源。"
+
+msgid "Storage quota"
+msgstr ""
 
 msgid "Type"
 msgstr "类型"
@@ -389,6 +416,18 @@ msgstr "变更位置前必须先移动源文件。"
 
 msgid "borgbackup"
 msgstr "borgbackup"
+
+msgid "extract logs - follow ..."
+msgstr "提取日志 - 按照 ..."
+
+msgid "extract logs ..."
+msgstr "提取日志 ..."
+
+msgid "logs"
+msgstr "日志"
+
+msgid "logs - follow"
+msgstr "日志 - 按照"
 
 msgid "lz4 - super fast / low compression"
 msgstr "lz4 - 非常快，压缩率低"

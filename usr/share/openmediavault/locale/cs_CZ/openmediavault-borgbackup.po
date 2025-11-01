@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-10 08:22-0500\n"
+"POT-Creation-Date: 2025-11-01 14:55+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2021\n"
 "Language-Team: Czech (Czech Republic) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/cs_CZ/)\n"
@@ -23,6 +23,9 @@ msgstr ""
 
 msgid "0 is the fastest compression and 9 is the best compression"
 msgstr "0 (nula) je nejrychlejší komprese a 9 ta nejlepší"
+
+msgid "5G, 1.5T as examples. Leave blank for no quota."
+msgstr ""
 
 msgid "All"
 msgstr "Vše"
@@ -69,6 +72,12 @@ msgstr ""
 msgid "Change passphrase"
 msgstr ""
 
+msgid "Change quota"
+msgstr ""
+
+msgid "Changing quota ..."
+msgstr ""
+
 msgid "Changing repo location ..."
 msgstr ""
 
@@ -98,6 +107,9 @@ msgstr ""
 msgid "Compact repo ..."
 msgstr ""
 
+msgid "Compact threshold"
+msgstr ""
+
 msgid "Compression"
 msgstr "Komprese"
 
@@ -123,6 +135,9 @@ msgid "Created environment variable."
 msgstr ""
 
 msgid "Created repo."
+msgstr ""
+
+msgid "Current quota"
 msgstr ""
 
 msgid "Delete + Files"
@@ -239,6 +254,9 @@ msgstr "Název"
 msgid "Name/Prefix"
 msgstr "Název/předpona"
 
+msgid "New quota"
+msgstr ""
+
 msgid "No atime"
 msgstr "Bez atime"
 
@@ -266,8 +284,8 @@ msgstr ""
 msgid "Put a new line or comma between each directory"
 msgstr ""
 
-msgid "Put comma between each directory"
-msgstr "Jednotlivé složky oddělujte čárkou"
+msgid "Quota has been changed."
+msgstr ""
 
 msgid "Rate limit"
 msgstr "Omezení rychlosti"
@@ -333,6 +351,9 @@ msgstr ""
 msgid "Run"
 msgstr "Spustit"
 
+msgid "Run compact after backup and prune"
+msgstr ""
+
 msgid "Run script from this path after backup."
 msgstr ""
 
@@ -347,6 +368,9 @@ msgstr "Vybrat repozitář…"
 
 msgid "Select an archive ..."
 msgstr "Vybrat archiv…"
+
+msgid "Set minimum threshold for saved space in percent"
+msgstr ""
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
@@ -366,6 +390,9 @@ msgstr "Přeskočit inicializaci"
 
 msgid "Skip initialization to import existing repo."
 msgstr "Přeskočit inicializaci pro import existujícího repozitáře."
+
+msgid "Storage quota"
+msgstr ""
 
 msgid "Type"
 msgstr "Typ"
@@ -392,6 +419,18 @@ msgid "You must move the repo files before changing the location."
 msgstr ""
 
 msgid "borgbackup"
+msgstr ""
+
+msgid "extract logs - follow ..."
+msgstr ""
+
+msgid "extract logs ..."
+msgstr ""
+
+msgid "logs"
+msgstr ""
+
+msgid "logs - follow"
 msgstr ""
 
 msgid "lz4 - super fast / low compression"
