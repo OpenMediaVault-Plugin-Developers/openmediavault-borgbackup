@@ -1,6 +1,6 @@
 {%- set scriptsDir = '/var/lib/openmediavault/borgbackup' -%}
 {%- set startHour = salt['pillar.get']('default:OMV_BORGBACKUP_STARTING_HOUR', 2) | int -%}
-{%- set startHour2 = startHour + 1 -%}
+{%- set startHour = salt['pillar.get']('default:OMV_BORGBACKUP_STARTING_HOUR', 2) | int -%}
 {{ pillar['headers']['multiline'] }}
 # This is the cron file for openmediavault-borgbackup.
 # m h   dom mon dow     user    command
