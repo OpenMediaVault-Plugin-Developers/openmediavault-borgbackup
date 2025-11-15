@@ -3,6 +3,9 @@
 # This file is distributed under the same license as the openmediavault-borgbackup package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Daniel, 2023
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,33 +13,34 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 14:55+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Language-Team: Dutch (Belgium) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/nl_BE/)\n"
+"Last-Translator: Daniel, 2023\n"
+"Language-Team: Swedish (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nl_BE\n"
+"Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
-msgstr ""
+msgstr "0 är den snabbaste kompressionen och 9 är den bästa kompressionen"
 
 msgid "5G, 1.5T as examples. Leave blank for no quota."
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "Alla"
 
 msgid "Archive"
-msgstr ""
+msgstr "Arkiv"
 
 msgid "Archive info ..."
-msgstr ""
+msgstr "Arkivinformation ..."
 
 msgid "Archives"
-msgstr ""
+msgstr "Arkiv"
 
 msgid "Archives only"
-msgstr ""
+msgstr "Endast arkiv"
 
 msgid ""
 "Are you sure you want to delete the repo from the plugin and the repo files?"
@@ -57,7 +61,7 @@ msgid ""
 msgstr ""
 
 msgid "BorgBackup"
-msgstr ""
+msgstr "BorgBackup"
 
 msgid "Change"
 msgstr ""
@@ -78,7 +82,7 @@ msgid "Changing repo location ..."
 msgstr ""
 
 msgid "Check"
-msgstr ""
+msgstr "Kontrollera"
 
 msgid "Check all ..."
 msgstr ""
@@ -107,31 +111,31 @@ msgid "Compact threshold"
 msgstr ""
 
 msgid "Compression"
-msgstr ""
+msgstr "Kompression"
 
 msgid "Compression Type"
-msgstr ""
+msgstr "Kompressionstyp"
 
 msgid "Compression ratio"
-msgstr ""
+msgstr "Kompressionskvot"
 
 msgid "Create"
-msgstr ""
+msgstr "Skapa"
 
 msgid "Create archive for ..."
-msgstr ""
+msgstr "Skapa arkiv för ..."
 
 msgid "Create archive for ... (Dry Run)"
 msgstr ""
 
 msgid "Created archive."
-msgstr ""
+msgstr "Skapat arkiv."
 
 msgid "Created environment variable."
-msgstr ""
+msgstr "Skapat miljövariabel."
 
 msgid "Created repo."
-msgstr ""
+msgstr "Skapade förråd."
 
 msgid "Current quota"
 msgstr ""
@@ -152,42 +156,44 @@ msgid "Dry Run"
 msgstr ""
 
 msgid "Edit"
-msgstr ""
+msgstr "Redigera"
 
 msgid "Edit archive."
-msgstr ""
+msgstr "Redigera arkiv."
 
 msgid "Edit environment variable."
-msgstr ""
+msgstr "Redigera miljövariabel."
 
 msgid "Email"
-msgstr ""
+msgstr "E-post"
 
 msgid "Enable"
-msgstr ""
+msgstr "Aktivera"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Aktiverad"
 
 msgid "Encryption"
-msgstr ""
+msgstr "Kryptering"
 
 msgid "Environment Variables"
-msgstr ""
+msgstr "Miljövariabler"
 
 msgid "Excludes"
-msgstr ""
+msgstr "Utesluter"
 
 msgid "Export"
-msgstr ""
+msgstr "Exportera"
 
 msgid ""
 "Export file will be created in this directory with a filename matching the "
 "archive name with an extension of .tar.gz."
 msgstr ""
+"Exportfil skapas i den här mappen med ett filnamn som matchar arkivnamnet "
+"med ett tillägg av .tar.gz."
 
 msgid "Extract"
-msgstr ""
+msgstr "Packa upp"
 
 msgid "Extract archive to directory"
 msgstr ""
@@ -212,27 +218,29 @@ msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
 "point."
 msgstr ""
+"Om detta är aktiverat kommer borg inte att sträcka sig över "
+"filsystempartitioner inom en säkerhetskopia."
 
 msgid "Includes"
-msgstr ""
+msgstr "Inkluderar"
 
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 msgid "List"
-msgstr ""
+msgstr "Lista"
 
 msgid "Local"
-msgstr ""
+msgstr "Lokal"
 
 msgid "Mount"
-msgstr ""
+msgstr "Montera"
 
 msgid "Mount repo"
 msgstr ""
 
 msgid "Mounted"
-msgstr ""
+msgstr "Monterad"
 
 msgid "Mounting repo ..."
 msgstr ""
@@ -241,33 +249,35 @@ msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
 "user@hostname&#58;path"
 msgstr ""
+"Måste ha ssh-nycklar inställda. Fjärrsökväg ska vara i formen&#58; "
+"användare@värdnamn&#58;sökväg"
 
 msgid "Name"
-msgstr ""
+msgstr "Namn"
 
 msgid "Name/Prefix"
-msgstr ""
+msgstr "Namn/prefix"
 
 msgid "New quota"
 msgstr ""
 
 msgid "No atime"
-msgstr ""
+msgstr "Ingen atime"
 
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 msgid "One filesystem only"
-msgstr ""
+msgstr "Endast ett filsystem"
 
 msgid "Original location"
-msgstr ""
+msgstr "Ursprunglig plats"
 
 msgid "Output verbose list of files and directories."
-msgstr ""
+msgstr "Mata ut en detaljerad lista över filer och mappar."
 
 msgid "Passphrase"
-msgstr ""
+msgstr "Lösenord"
 
 msgid "Post-script"
 msgstr ""
@@ -282,22 +292,22 @@ msgid "Quota has been changed."
 msgstr ""
 
 msgid "Rate limit"
-msgstr ""
+msgstr "Hastighetsgräns"
 
 msgid "Remote"
-msgstr ""
+msgstr "Fjärr"
 
 msgid "Remote Path"
-msgstr ""
+msgstr "Fjärrsökväg"
 
 msgid "Remote path"
-msgstr ""
+msgstr "Fjärrsökväg"
 
 msgid "Remove"
 msgstr ""
 
 msgid "Repo"
-msgstr ""
+msgstr "Förråd"
 
 msgid "Repo has been mounted."
 msgstr ""
@@ -310,6 +320,7 @@ msgstr ""
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr ""
+"Förrådet används. Ta bort arkiv som är associerade med detta förråd först!"
 
 msgid "Repo location has been changed."
 msgstr ""
@@ -318,12 +329,14 @@ msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
 "as the repo."
 msgstr ""
+"Förrådet kommer att monteras som en undermapp i den delade mappen med samma "
+"namn som förrådet."
 
 msgid "Repos"
-msgstr ""
+msgstr "Förråd"
 
 msgid "Repos only"
-msgstr ""
+msgstr "Endast förråd"
 
 msgid "Retain daily"
 msgstr ""
@@ -341,25 +354,25 @@ msgid "Retain yearly"
 msgstr ""
 
 msgid "Run"
-msgstr ""
+msgstr "Kör"
 
 msgid "Run compact after backup and prune"
 msgstr ""
 
 msgid "Run script from this path after backup."
-msgstr ""
+msgstr "Kör skript från denna sökväg efter säkerhetskopiering."
 
 msgid "Run script from this path before backup."
-msgstr ""
+msgstr "Kör skript från denna sökväg före säkerhetskopiering."
 
 msgid "Run with progress"
 msgstr ""
 
 msgid "Select a repo ..."
-msgstr ""
+msgstr "Välj ett förråd ..."
 
 msgid "Select an archive ..."
-msgstr ""
+msgstr "Välj ett arkiv ..."
 
 msgid "Set minimum threshold for saved space in percent"
 msgstr ""
@@ -367,42 +380,44 @@ msgstr ""
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
 msgstr ""
+"Ställ in gräns för sändningshastighet för fjärrnätverk i kiByte/s "
+"(standard&#58; 0=obegränsad)."
 
 msgid "Shared Folder"
-msgstr ""
+msgstr "Delad mapp"
 
 msgid "Shared folder"
-msgstr ""
+msgstr "Delad mapp"
 
 msgid "SharedFolderRef"
 msgstr ""
 
 msgid "Skip init"
-msgstr ""
+msgstr "Hoppa över init"
 
 msgid "Skip initialization to import existing repo."
-msgstr ""
+msgstr "Hoppa över initialisering för att importera befintligt förråd."
 
 msgid "Storage quota"
 msgstr ""
 
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 msgid "Unmount"
-msgstr ""
+msgstr "Avmontera"
 
 msgid "Unmounting repo ..."
 msgstr ""
 
 msgid "Uses value as prefix for archive name."
-msgstr ""
+msgstr "Använder värde som prefix för arkivnamn."
 
 msgid "Value"
-msgstr ""
+msgstr "Värde"
 
 msgid "Verify"
-msgstr ""
+msgstr "Verifiera"
 
 msgid "Versions"
 msgstr ""
@@ -426,19 +441,19 @@ msgid "logs - follow"
 msgstr ""
 
 msgid "lz4 - super fast / low compression"
-msgstr ""
+msgstr "lz4 - supersnabb / låg komprimering"
 
 msgid "lzma - even slower / even higher compression"
-msgstr ""
+msgstr "lzma - ännu långsammare / ännu högre komprimering"
 
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
 
 msgid "omv-extras wiki"
 msgstr ""
 
 msgid "zlib - less fast / higher compression"
-msgstr ""
+msgstr "zlib - mindre snabb / högre komprimering"
 
 msgid "zstd - super fast / medium compression"
-msgstr ""
+msgstr "zstd - supersnabb / medelhög komprimering"

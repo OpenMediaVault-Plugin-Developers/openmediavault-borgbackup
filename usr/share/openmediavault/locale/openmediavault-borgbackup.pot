@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-10 08:22-0500\n"
+"POT-Creation-Date: 2025-09-23 09:02-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -245,9 +245,6 @@ msgstr ""
 msgid "Put a new line or comma between each directory"
 msgstr ""
 
-msgid "Put comma between each directory"
-msgstr ""
-
 msgid "Rate limit"
 msgstr ""
 
@@ -366,6 +363,18 @@ msgid "You must move the repo files before changing the location."
 msgstr ""
 
 msgid "borgbackup"
+msgstr ""
+
+msgid "extract logs - follow ..."
+msgstr ""
+
+msgid "extract logs ..."
+msgstr ""
+
+msgid "logs"
+msgstr ""
+
+msgid "logs - follow"
 msgstr ""
 
 msgid "lz4 - super fast / low compression"

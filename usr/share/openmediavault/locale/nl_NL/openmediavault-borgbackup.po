@@ -3,13 +3,17 @@
 # This file is distributed under the same license as the openmediavault-borgbackup package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Stephan Paternotte <stephan@paternottes.net>, 2025
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-10 08:22-0500\n"
+"POT-Creation-Date: 2025-11-15 14:05+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
+"Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2025\n"
 "Language-Team: Dutch (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,388 +22,449 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
-msgstr ""
+msgstr "0 is de snelste compressie en 9 is de beste compressie"
+
+msgid "5G, 1.5T as examples. Leave blank for no quota."
+msgstr "5G, 1.5T als voorbeelden. Leeg laten voor geen quota."
 
 msgid "All"
-msgstr ""
+msgstr "Alles"
 
 msgid "Archive"
-msgstr ""
+msgstr "Archief"
 
 msgid "Archive info ..."
-msgstr ""
+msgstr "Archiefinfo…"
 
 msgid "Archives"
-msgstr ""
+msgstr "Archieven"
 
 msgid "Archives only"
-msgstr ""
+msgstr "Alleen archieven"
 
 msgid ""
 "Are you sure you want to delete the repo from the plugin and the repo files?"
 " This will delete all repo files!"
 msgstr ""
+"Weet u zeker dat u de repo uit de plugin en de repo bestanden wilt "
+"verwijderen? Hierdoor worden alle repo-bestanden verwijderd!"
 
 msgid ""
 "Are you sure you want to remove repo from the plugin? This will not delete "
 "any files!"
 msgstr ""
+"Weet u zeker dat u repo uit de plugin wilt verwijderen? Hierdoor worden geen"
+" bestanden verwijderd!"
 
 msgid "Base Dir"
-msgstr ""
+msgstr "Basismap"
 
 msgid ""
 "Base directory to make archive use relative paths. Leave blank to use "
 "absolute paths in archive."
 msgstr ""
+"Basismap om archief relatieve paden te laten gebruiken. Laat leeg om "
+"absolute paden in archief te gebruiken."
 
 msgid "BorgBackup"
-msgstr ""
+msgstr "BorgBackup"
 
 msgid "Change"
-msgstr ""
+msgstr "Wijzigen"
 
 msgid "Change location"
-msgstr ""
+msgstr "Locatie wijzigen"
 
 msgid "Change passphrase"
-msgstr ""
+msgstr "Wachtwoordzin wijzigen"
+
+msgid "Change quota"
+msgstr "Quota wijzigen"
+
+msgid "Changing quota ..."
+msgstr "Quota wijzigen…"
 
 msgid "Changing repo location ..."
-msgstr ""
+msgstr "Locatie van de repo wijzigen…"
 
 msgid "Check"
-msgstr ""
+msgstr "Controleren"
 
 msgid "Check all ..."
-msgstr ""
+msgstr "Alles controleren…"
 
 msgid "Check archives only ..."
-msgstr ""
+msgstr "Alleen archieven controleren…"
 
 msgid "Check repo ..."
-msgstr ""
+msgstr "Repo controleren…"
 
 msgid "Check repos only ..."
-msgstr ""
+msgstr "Alleen repo's controleren…"
 
 msgid ""
 "Checked = send email on error or success.<br/>Unchecked = send email on "
 "error only."
 msgstr ""
+"Aangevinkt = e-mail sturen bij fout of succes.Niet aangevinkt = alleen "
+"e-mail sturen bij fout."
 
 msgid "Compact"
-msgstr ""
+msgstr "Compact"
 
 msgid "Compact repo ..."
-msgstr ""
+msgstr "Repo compact maken…"
+
+msgid "Compact threshold"
+msgstr "Compact-drempel"
 
 msgid "Compression"
-msgstr ""
+msgstr "Compressie"
 
 msgid "Compression Type"
-msgstr ""
+msgstr "Compressietype"
 
 msgid "Compression ratio"
-msgstr ""
+msgstr "Compressieratio"
 
 msgid "Create"
-msgstr ""
+msgstr "Aanmaken"
 
 msgid "Create archive for ..."
-msgstr ""
+msgstr "Archief aanmaken voor…"
 
 msgid "Create archive for ... (Dry Run)"
-msgstr ""
+msgstr "Archief aanmaken voor… (proef)"
 
 msgid "Created archive."
-msgstr ""
+msgstr "Archief aangemaakt."
 
 msgid "Created environment variable."
-msgstr ""
+msgstr "Omgevingsvariabele aangemaakt."
 
 msgid "Created repo."
-msgstr ""
+msgstr "Repo aangemaakt."
+
+msgid "Current quota"
+msgstr "Huidige quota"
 
 msgid "Delete + Files"
-msgstr ""
+msgstr "Verwijderen + Bestanden"
 
 msgid "Directory not found"
-msgstr ""
+msgstr "Map niet gevonden"
 
 msgid "Docs"
-msgstr ""
+msgstr "Docs"
 
 msgid "Download repo keyfile"
-msgstr ""
+msgstr "Repo-sleutelbestand downloaden"
 
 msgid "Dry Run"
-msgstr ""
+msgstr "Proef"
 
 msgid "Edit"
-msgstr ""
+msgstr "Bewerken"
 
 msgid "Edit archive."
-msgstr ""
+msgstr "Archief bewerken."
 
 msgid "Edit environment variable."
-msgstr ""
+msgstr "Omgevingsvariabele bewerken."
 
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 msgid "Enable"
-msgstr ""
+msgstr "Inschakelen"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Ingeschakeld"
 
 msgid "Encryption"
-msgstr ""
+msgstr "Versleuteling"
 
 msgid "Environment Variables"
-msgstr ""
+msgstr "Omgevingsvariabelen"
 
 msgid "Excludes"
-msgstr ""
+msgstr "Uitsluitingen"
 
 msgid "Export"
-msgstr ""
+msgstr "Exporteren"
 
 msgid ""
 "Export file will be created in this directory with a filename matching the "
 "archive name with an extension of .tar.gz."
 msgstr ""
+"Exportbestand zal in deze map worden aangemaakt met een bestandsnaam die "
+"overeenkomt met de archiefnaam en een extensie .tar.gz."
 
 msgid "Extract"
-msgstr ""
+msgstr "Uitpakken"
 
 msgid "Extract archive to directory"
-msgstr ""
+msgstr "Archief uitpakken naar map"
 
 msgid "Extract archive to tar file"
-msgstr ""
+msgstr "Archief uitpakken naar tar-bestand"
 
 msgid "Failed to find "
-msgstr ""
+msgstr "Niet gevonden"
 
 msgid "Failed to get keyfile!"
-msgstr ""
+msgstr "Sleutelbestand niet kunnen verkrijgen!"
 
 msgid "Failed to remove "
-msgstr ""
+msgstr "Verwijderen mislukt"
 
 msgid ""
 "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
 msgstr ""
+"Geeft een samengevoegde, versieweergave van de bestanden in de archieven. "
+"EXPERIMENTEEL"
 
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
 "point."
 msgstr ""
+"Als dit is ingeschakeld, zal borg geen bestandssysteempartities binnen een "
+"back-uppunt overspannen."
 
 msgid "Includes"
-msgstr ""
+msgstr "Inclusief"
 
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 msgid "List"
-msgstr ""
+msgstr "Lijst"
 
 msgid "Local"
-msgstr ""
+msgstr "Lokaal"
 
 msgid "Mount"
-msgstr ""
+msgstr "Aankoppelen"
 
 msgid "Mount repo"
-msgstr ""
+msgstr "Repo aankoppelen"
 
 msgid "Mounted"
-msgstr ""
+msgstr "Aangekoppeld"
 
 msgid "Mounting repo ..."
-msgstr ""
+msgstr "Repo aankoppelen…"
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
 "user@hostname&#58;path"
 msgstr ""
+"Moet ssh-sleutels setup hebben. Het pad op afstand moet de vorm &#58;  "
+"user@hostname&#58;path hebben"
 
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 msgid "Name/Prefix"
-msgstr ""
+msgstr "Naam/voorvoegsel"
+
+msgid "New quota"
+msgstr "Nieuwe quota"
 
 msgid "No atime"
-msgstr ""
+msgstr "Geen atime"
 
 msgid "None"
-msgstr ""
+msgstr "Geen"
 
 msgid "One filesystem only"
-msgstr ""
+msgstr "Slechts één bestandssysteem"
 
 msgid "Original location"
-msgstr ""
+msgstr "Oorspronkelijke locatie"
 
 msgid "Output verbose list of files and directories."
-msgstr ""
+msgstr "Uitgebreide lijst met bestanden en mappen uitvoeren."
 
 msgid "Passphrase"
-msgstr ""
+msgstr "Wachtwoordzin"
 
 msgid "Post-script"
-msgstr ""
+msgstr "Post-script"
 
 msgid "Pre-script"
-msgstr ""
+msgstr "Pre-script"
 
 msgid "Put a new line or comma between each directory"
-msgstr ""
+msgstr "Plaats een nieuwe regel of komma tussen elke map"
 
-msgid "Put comma between each directory"
-msgstr ""
+msgid "Quota has been changed."
+msgstr "Quota zijn gewijzigd."
 
 msgid "Rate limit"
-msgstr ""
+msgstr "Snelheidslimiet"
 
 msgid "Remote"
-msgstr ""
+msgstr "Op afstand"
 
 msgid "Remote Path"
-msgstr ""
+msgstr "Pad op afstand"
 
 msgid "Remote path"
-msgstr ""
+msgstr "Pad op afstand"
 
 msgid "Remove"
-msgstr ""
+msgstr "Verwijderen"
 
 msgid "Repo"
-msgstr ""
+msgstr "Repo"
 
 msgid "Repo has been mounted."
-msgstr ""
+msgstr "Repo is aangekoppeld."
 
 msgid "Repo has been unmounted."
-msgstr ""
+msgstr "Repo is losgekoppeld"
 
 msgid "Repo info ..."
-msgstr ""
+msgstr "Repo info…"
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr ""
+"Repo is in gebruik. Verwijder eerst archieven die aan deze repo zijn "
+"gekoppeld!"
 
 msgid "Repo location has been changed."
-msgstr ""
+msgstr "Repo-locatie is gewijzigd."
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
 "as the repo."
 msgstr ""
+"Repo wordt aangekoppeld als submap in de gedeelde map met dezelfde naam als "
+"de repo."
 
 msgid "Repos"
-msgstr ""
+msgstr "Repo's"
 
 msgid "Repos only"
-msgstr ""
+msgstr "Alleen repo's"
 
 msgid "Retain daily"
-msgstr ""
+msgstr "Dagelijks bewaren"
 
 msgid "Retain hourly"
-msgstr ""
+msgstr "Ieder uur bewaren"
 
 msgid "Retain monthly"
-msgstr ""
+msgstr "Maandelijks bewaren"
 
 msgid "Retain weekly"
-msgstr ""
+msgstr "Wekelijks bewaren"
 
 msgid "Retain yearly"
-msgstr ""
+msgstr "Jaarlijks bewaren"
 
 msgid "Run"
-msgstr ""
+msgstr "Uitvoeren"
+
+msgid "Run compact after backup and prune"
+msgstr "Compact uitvoeren na back-up en snoeien"
 
 msgid "Run script from this path after backup."
-msgstr ""
+msgstr "Script uitvoeren vanaf dit pad na back-up."
 
 msgid "Run script from this path before backup."
-msgstr ""
+msgstr "Script uitvoeren vanaf dit pad voor back-up."
 
 msgid "Run with progress"
-msgstr ""
+msgstr "Uitvoeren met voortgang"
 
 msgid "Select a repo ..."
-msgstr ""
+msgstr "Selecteer een repo…"
 
 msgid "Select an archive ..."
-msgstr ""
+msgstr "Selecteer een archief…"
+
+msgid "Set minimum threshold for saved space in percent"
+msgstr "Minimumdrempel voor opgeslagen ruimte in procenten instellen"
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
 msgstr ""
+"Stel de limiet voor de uploadsnelheid van externe netwerken in kiByte/s in "
+"(standaard&#58; 0=onbeperkt)."
 
 msgid "Shared Folder"
-msgstr ""
+msgstr "Gedeelde map"
 
 msgid "Shared folder"
-msgstr ""
+msgstr "Gedeelde map"
 
 msgid "SharedFolderRef"
-msgstr ""
+msgstr "SharedFolderRef"
 
 msgid "Skip init"
-msgstr ""
+msgstr "Init overslaan"
 
 msgid "Skip initialization to import existing repo."
-msgstr ""
+msgstr "Initialisatie overslaan om bestaande repo te importeren."
+
+msgid "Storage quota"
+msgstr "Opslagquota"
 
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 msgid "Unmount"
-msgstr ""
+msgstr "Loskoppelen"
 
 msgid "Unmounting repo ..."
-msgstr ""
+msgstr "Repo loskoppelen…"
 
 msgid "Uses value as prefix for archive name."
-msgstr ""
+msgstr "Gebruikt waarde als voorvoegsel voor archiefnaam."
 
 msgid "Value"
-msgstr ""
+msgstr "Waarde"
 
 msgid "Verify"
-msgstr ""
+msgstr "Verifiëren"
 
 msgid "Versions"
-msgstr ""
+msgstr "Versies"
 
 msgid "You must move the repo files before changing the location."
-msgstr ""
+msgstr "U moet de repo-bestanden verplaatsen voordat u de locatie wijzigt."
 
 msgid "borgbackup"
-msgstr ""
+msgstr "borgbackup"
+
+msgid "extract logs - follow ..."
+msgstr "logboeken extraheren - volgen…"
+
+msgid "extract logs ..."
+msgstr "logboeken extraheren…"
+
+msgid "logs"
+msgstr "logboeken"
+
+msgid "logs - follow"
+msgstr "logboeken - volgen"
 
 msgid "lz4 - super fast / low compression"
-msgstr ""
+msgstr "lz4 - supersnel / weinig compressie"
 
 msgid "lzma - even slower / even higher compression"
-msgstr ""
+msgstr "lzma - nog trager / nog hogere compressie"
 
 msgid "n/a"
-msgstr ""
+msgstr "n.v.t."
 
 msgid "omv-extras wiki"
-msgstr ""
+msgstr "omv-extras wiki"
 
 msgid "zlib - less fast / higher compression"
-msgstr ""
+msgstr "zlib - minder snel / hogere compressie"
 
 msgid "zstd - super fast / medium compression"
-msgstr ""
+msgstr "zstd - supersnel / medium compressie"
