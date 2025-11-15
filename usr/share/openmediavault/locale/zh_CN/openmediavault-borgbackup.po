@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-01 14:55+0000\n"
+"POT-Creation-Date: 2025-11-15 14:05+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: songming <by@songming.me>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
@@ -25,7 +25,7 @@ msgid "0 is the fastest compression and 9 is the best compression"
 msgstr "0表示最快的压缩，9表示做高的压缩率"
 
 msgid "5G, 1.5T as examples. Leave blank for no quota."
-msgstr ""
+msgstr "例如 5G，1.5T。留空则表示不设置配额。"
 
 msgid "All"
 msgstr "所有"
@@ -73,10 +73,10 @@ msgid "Change passphrase"
 msgstr "变更密码"
 
 msgid "Change quota"
-msgstr ""
+msgstr "改变配额"
 
 msgid "Changing quota ..."
-msgstr ""
+msgstr "改变配额中 ..."
 
 msgid "Changing repo location ..."
 msgstr "变更源位置中 ..."
@@ -108,7 +108,7 @@ msgid "Compact repo ..."
 msgstr "紧密源 ..."
 
 msgid "Compact threshold"
-msgstr ""
+msgstr "压缩阈值"
 
 msgid "Compression"
 msgstr "压缩"
@@ -138,7 +138,7 @@ msgid "Created repo."
 msgstr "已创建源。"
 
 msgid "Current quota"
-msgstr ""
+msgstr "当前配额"
 
 msgid "Delete + Files"
 msgstr "删除+文件"
@@ -253,7 +253,7 @@ msgid "Name/Prefix"
 msgstr "名称/前缀"
 
 msgid "New quota"
-msgstr ""
+msgstr "新配额"
 
 msgid "No atime"
 msgstr "无时间"
@@ -283,7 +283,7 @@ msgid "Put a new line or comma between each directory"
 msgstr "每个目录间使用换行或逗号分隔"
 
 msgid "Quota has been changed."
-msgstr ""
+msgstr "配额已改变。"
 
 msgid "Rate limit"
 msgstr "限制速率"
@@ -348,7 +348,7 @@ msgid "Run"
 msgstr "运行"
 
 msgid "Run compact after backup and prune"
-msgstr ""
+msgstr "在备份和清理后运行压缩"
 
 msgid "Run script from this path after backup."
 msgstr "备份后运行脚本。"
@@ -366,7 +366,7 @@ msgid "Select an archive ..."
 msgstr "选择归档 ..."
 
 msgid "Set minimum threshold for saved space in percent"
-msgstr ""
+msgstr "用已用空间的百分比来设置最小阈值"
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
@@ -388,7 +388,7 @@ msgid "Skip initialization to import existing repo."
 msgstr "跳过初始化以导入现有源。"
 
 msgid "Storage quota"
-msgstr ""
+msgstr "存储配额"
 
 msgid "Type"
 msgstr "类型"

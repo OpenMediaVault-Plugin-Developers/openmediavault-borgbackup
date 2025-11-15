@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-01 14:55+0000\n"
+"POT-Creation-Date: 2025-11-15 14:05+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2025\n"
 "Language-Team: Dutch (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/nl/)\n"
@@ -25,7 +25,7 @@ msgid "0 is the fastest compression and 9 is the best compression"
 msgstr "0 is de snelste compressie en 9 is de beste compressie"
 
 msgid "5G, 1.5T as examples. Leave blank for no quota."
-msgstr ""
+msgstr "5G, 1.5T als voorbeelden. Leeg laten voor geen quota."
 
 msgid "All"
 msgstr "Alles"
@@ -79,10 +79,10 @@ msgid "Change passphrase"
 msgstr "Wachtwoordzin wijzigen"
 
 msgid "Change quota"
-msgstr ""
+msgstr "Quota wijzigen"
 
 msgid "Changing quota ..."
-msgstr ""
+msgstr "Quota wijzigen…"
 
 msgid "Changing repo location ..."
 msgstr "Locatie van de repo wijzigen…"
@@ -116,7 +116,7 @@ msgid "Compact repo ..."
 msgstr "Repo compact maken…"
 
 msgid "Compact threshold"
-msgstr ""
+msgstr "Compact-drempel"
 
 msgid "Compression"
 msgstr "Compressie"
@@ -146,7 +146,7 @@ msgid "Created repo."
 msgstr "Repo aangemaakt."
 
 msgid "Current quota"
-msgstr ""
+msgstr "Huidige quota"
 
 msgid "Delete + Files"
 msgstr "Verwijderen + Bestanden"
@@ -269,7 +269,7 @@ msgid "Name/Prefix"
 msgstr "Naam/voorvoegsel"
 
 msgid "New quota"
-msgstr ""
+msgstr "Nieuwe quota"
 
 msgid "No atime"
 msgstr "Geen atime"
@@ -299,7 +299,7 @@ msgid "Put a new line or comma between each directory"
 msgstr "Plaats een nieuwe regel of komma tussen elke map"
 
 msgid "Quota has been changed."
-msgstr ""
+msgstr "Quota zijn gewijzigd."
 
 msgid "Rate limit"
 msgstr "Snelheidslimiet"
@@ -368,7 +368,7 @@ msgid "Run"
 msgstr "Uitvoeren"
 
 msgid "Run compact after backup and prune"
-msgstr ""
+msgstr "Compact uitvoeren na back-up en snoeien"
 
 msgid "Run script from this path after backup."
 msgstr "Script uitvoeren vanaf dit pad na back-up."
@@ -386,7 +386,7 @@ msgid "Select an archive ..."
 msgstr "Selecteer een archief…"
 
 msgid "Set minimum threshold for saved space in percent"
-msgstr ""
+msgstr "Minimumdrempel voor opgeslagen ruimte in procenten instellen"
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
@@ -410,7 +410,7 @@ msgid "Skip initialization to import existing repo."
 msgstr "Initialisatie overslaan om bestaande repo te importeren."
 
 msgid "Storage quota"
-msgstr ""
+msgstr "Opslagquota"
 
 msgid "Type"
 msgstr "Type"
