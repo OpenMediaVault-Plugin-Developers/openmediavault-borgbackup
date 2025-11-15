@@ -1,3 +1,9 @@
+openmediavault-borgbackup (8.0.2) stable; urgency=low
+
+  * Make sure to set second hour to 0 if first hour is 23
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 15 Nov 2025 14:04:12 +0000
+
 openmediavault-borgbackup (8.0.1) stable; urgency=low
 
   * Add compact option to archive
