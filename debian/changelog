@@ -1,3 +1,9 @@
+openmediavault-borgbackup (8.1) UNRELEASED; urgency=medium
+
+  * Allow setting run time of scheduled archive runs
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 08 Feb 2026 02:30:13 +0000
+
 openmediavault-borgbackup (8.0.2) stable; urgency=low
 
   * Make sure to set second hour to 0 if first hour is 23

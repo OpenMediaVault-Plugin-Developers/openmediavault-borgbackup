@@ -83,7 +83,7 @@ data:
         validators:
           required: false
       - type: container
-        fields:
+        modifiers:
           - type: numberInput
             name: hourly
             label: _("Retain hourly")
@@ -105,7 +105,7 @@ data:
               patternType: integer
               required: true
       - type: container
-        fields:
+        modifiers:
           - type: numberInput
             name: daily
             label: _("Retain daily")
@@ -137,7 +137,7 @@ data:
               patternType: integer
               required: true
       - type: container
-        fields:
+        modifiers:
           - type: numberInput
             name: weekly
             label: _("Retain weekly")
@@ -169,7 +169,7 @@ data:
               patternType: integer
               required: true
       - type: container
-        fields:
+        modifiers:
           - type: numberInput
             name: monthly
             label: _("Retain monthly")
@@ -201,7 +201,7 @@ data:
               patternType: integer
               required: true
       - type: container
-        fields:
+        modifiers:
           - type: numberInput
             name: yearly
             label: _("Retain yearly")

@@ -81,6 +81,10 @@ configure_borg_crond:
     - name: "/etc/cron.d/openmediavault-borgbackup"
     - source:
       - salt://{{ tpldir }}/files/etc-cron_d-openmediavault-borgbackup.j2
+    - context:
+        config: {{ config | json }}
+        scriptsDir: {{ scriptsDir }}
+        scriptPrefix: {{ scriptPrefix }}
     - template: jinja
     - user: root
     - group: root

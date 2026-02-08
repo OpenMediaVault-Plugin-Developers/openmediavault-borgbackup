@@ -1,11 +1,24 @@
-{%- set scriptsDir = '/var/lib/openmediavault/borgbackup' -%}
-{%- set startHour = salt['pillar.get']('default:OMV_BORGBACKUP_STARTING_HOUR', 2) | int -%}
-{%- set startHour2 = (startHour + 1) if (startHour + 1) <= 23 else 0 -%}
 {{ pillar['headers']['multiline'] }}
 # This is the cron file for openmediavault-borgbackup.
 # m h   dom mon dow     user    command
-5 *     * * *           root    run-parts {{ scriptsDir }}/hourly.d/
-30 {{ startHour2 }}    * * *           root    run-parts {{ scriptsDir }}/daily.d/
-0  {{ startHour2 }}    * * 1           root    run-parts {{ scriptsDir }}/weekly.d/
-30 {{ startHour }}    1 * *           root    run-parts {{ scriptsDir }}/monthly.d/
-00 {{ startHour }}    1 1 *           root    run-parts {{ scriptsDir }}/yearly.d/
+{%- set base = scriptsDir ~ '/' %}
+{%- for archive in config.archives.archive | selectattr('enable') %}
+{%- set name = scriptPrefix ~ archive.uuid %}
+
+# {{ archive.name }}
+{%- if archive.hourly > 0 %}
+{{ archive.hourlymin }} * * * *  root  {{ base ~ 'hourly.d/' ~ name }}
+{%- endif %}
+{%- if archive.daily > 0 %}
+{{ archive.dailymin }} {{ archive.dailyhour }} * * *  root  {{ base ~ 'daily.d/' ~ name }}
+{%- endif %}
+{%- if archive.weekly > 0 %}
+{{ archive.weeklymin }} {{ archive.weeklyhour }} * * 1  root  {{ base ~ 'weekly.d/' ~ name }}
+{%- endif %}
+{%- if archive.monthly > 0 %}
+{{ archive.monthlymin }} {{ archive.monthlyhour }} 1 * *  root  {{ base ~ 'monthly.d/' ~ name }}
+{%- endif %}
+{%- if archive.yearly > 0 %}
+{{ archive.yearlymin }} {{ archive.yearlyhour }} 1 1 *  root  {{ base ~ 'yearly.d/' ~ name }}
+{%- endif %}
+{%- endfor %}

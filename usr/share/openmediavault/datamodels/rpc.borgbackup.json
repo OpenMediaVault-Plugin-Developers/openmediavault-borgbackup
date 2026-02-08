@@ -148,9 +148,27 @@
           "minimum": 0,
           "required": true
         },
+        "hourlymin": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 59,
+          "required": true
+        },
         "daily": {
           "type": "integer",
           "minimum": 0,
+          "required": true
+        },
+        "dailyhour": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 23,
+          "required": true
+        },
+        "dailymin": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 59,
           "required": true
         },
         "weekly": {
@@ -158,14 +176,50 @@
           "minimum": 0,
           "required": true
         },
+        "weeklyhour": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 23,
+          "required": true
+        },
+        "weeklymin": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 59,
+          "required": true
+        },
         "monthly": {
           "type": "integer",
           "minimum": 0,
           "required": true
         },
+        "monthlyhour": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 23,
+          "required": true
+        },
+        "monthlymin": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 59,
+          "required": true
+        },
         "yearly": {
           "type": "integer",
           "minimum": 0,
+          "required": true
+        },
+        "yearlyhour": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 23,
+          "required": true
+        },
+        "yearlymin": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 59,
           "required": true
         },
         "compact": {
