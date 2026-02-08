@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Stephan Paternotte <stephan@paternottes.net>, 2025
+# Stephan Paternotte <stephan@paternottes.net>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-15 14:05+0000\n"
+"POT-Creation-Date: 2026-02-08 02:53+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2025\n"
+"Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2026\n"
 "Language-Team: Dutch (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,6 +55,9 @@ msgid ""
 msgstr ""
 "Weet u zeker dat u repo uit de plugin wilt verwijderen? Hierdoor worden geen"
 " bestanden verwijderd!"
+
+msgid "Backup Options"
+msgstr "Backup-opties"
 
 msgid "Base Dir"
 msgstr "Basismap"
@@ -218,11 +221,29 @@ msgstr "Sleutelbestand niet kunnen verkrijgen!"
 msgid "Failed to remove "
 msgstr "Verwijderen mislukt"
 
+msgid "General"
+msgstr "Algemeen"
+
 msgid ""
 "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
 msgstr ""
 "Geeft een samengevoegde, versieweergave van de bestanden in de archieven. "
 "EXPERIMENTEEL"
+
+msgid "Hooks / Advanced"
+msgstr "Hooks / Geavanceerd"
+
+msgid "Hour of the day that daily backups run."
+msgstr "Uur van de dag dat dagelijkse backups worden uitgevoerd."
+
+msgid "Hour of the day that monthly backups run."
+msgstr "Uur van de dag dat maandelijkse backups worden uitgevoerd."
+
+msgid "Hour of the day that weekly backups run."
+msgstr "Uur van de dag dat wekelijkse backups worden uitgevoerd."
+
+msgid "Hour of the day that yearly backups run."
+msgstr "Uur van de dag dat jaarlijkse backups worden uitgevoerd."
 
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
@@ -242,6 +263,24 @@ msgstr "Lijst"
 
 msgid "Local"
 msgstr "Lokaal"
+
+msgid "Maintenance"
+msgstr "Onderhoud"
+
+msgid "Minute after the hour that daily backups run."
+msgstr "Minuten na het uur dat dagelijkse backups worden uitgevoerd."
+
+msgid "Minute after the hour that hourly backups run."
+msgstr "Minuten na het uur dat uurlijke backups worden uitgevoerd."
+
+msgid "Minute after the hour that monthly backups run."
+msgstr "Minuten na het uur dat maandelijkse backups worden uitgevoerd."
+
+msgid "Minute after the hour that weekly backups run."
+msgstr "Minuten na het uur dat wekelijkse backups worden uitgevoerd."
+
+msgid "Minute after the hour that yearly backups run."
+msgstr "Minuten na het uur dat jaarlijkse backups worden uitgevoerd."
 
 msgid "Mount"
 msgstr "Aankoppelen"
@@ -276,6 +315,21 @@ msgstr "Geen atime"
 
 msgid "None"
 msgstr "Geen"
+
+msgid "Number of daily backups to keep."
+msgstr "Aantal dagelijkse backups om te behouden."
+
+msgid "Number of hourly backups to keep."
+msgstr "Aantal backups om elk uur te behouden."
+
+msgid "Number of monthly backups to keep."
+msgstr "Aantal maandelijkse backups om te behouden."
+
+msgid "Number of weekly backups to keep."
+msgstr "Aantal wekelijkse backups om te behouden."
+
+msgid "Number of yearly backups to keep."
+msgstr "Aantal jaarlijkse backups om te behouden."
 
 msgid "One filesystem only"
 msgstr "Slechts één bestandssysteem"
@@ -364,6 +418,9 @@ msgstr "Wekelijks bewaren"
 msgid "Retain yearly"
 msgstr "Jaarlijks bewaren"
 
+msgid "Retention and Schedule"
+msgstr "Behoud en Planning"
+
 msgid "Run"
 msgstr "Uitvoeren"
 
@@ -378,6 +435,9 @@ msgstr "Script uitvoeren vanaf dit pad voor back-up."
 
 msgid "Run with progress"
 msgstr "Uitvoeren met voortgang"
+
+msgid "Runtime / Output"
+msgstr "Looptijd / Uitvoer"
 
 msgid "Select a repo ..."
 msgstr "Selecteer een repo…"
@@ -439,11 +499,20 @@ msgstr "U moet de repo-bestanden verplaatsen voordat u de locatie wijzigt."
 msgid "borgbackup"
 msgstr "borgbackup"
 
+msgid "daily hour"
+msgstr "dagelijks uur"
+
+msgid "daily minute"
+msgstr "dagelijks minuut"
+
 msgid "extract logs - follow ..."
 msgstr "logboeken extraheren - volgen…"
 
 msgid "extract logs ..."
 msgstr "logboeken extraheren…"
+
+msgid "hourly minute"
+msgstr "elk uur minuut"
 
 msgid "logs"
 msgstr "logboeken"
@@ -457,11 +526,29 @@ msgstr "lz4 - supersnel / weinig compressie"
 msgid "lzma - even slower / even higher compression"
 msgstr "lzma - nog trager / nog hogere compressie"
 
+msgid "monthly hour"
+msgstr "maandelijks uur"
+
+msgid "monthly minute"
+msgstr "maandelijks minuut"
+
 msgid "n/a"
 msgstr "n.v.t."
 
 msgid "omv-extras wiki"
 msgstr "omv-extras wiki"
+
+msgid "weekly hour"
+msgstr "wekelijks uur"
+
+msgid "weekly minute"
+msgstr "wekelijks minuut"
+
+msgid "yearly hour"
+msgstr "jaarlijks uur"
+
+msgid "yearly minute"
+msgstr "jaarlijks minuut"
 
 msgid "zlib - less fast / higher compression"
 msgstr "zlib - minder snel / hogere compressie"

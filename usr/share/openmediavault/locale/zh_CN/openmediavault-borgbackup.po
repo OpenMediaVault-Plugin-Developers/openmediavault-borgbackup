@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-15 14:05+0000\n"
+"POT-Creation-Date: 2026-02-08 02:53+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: songming <by@songming.me>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
@@ -51,6 +51,9 @@ msgid ""
 "Are you sure you want to remove repo from the plugin? This will not delete "
 "any files!"
 msgstr "您确定要从插件删除源吗？这将删除全部文件！"
+
+msgid "Backup Options"
+msgstr ""
 
 msgid "Base Dir"
 msgstr "基础目录"
@@ -208,9 +211,27 @@ msgstr "获取密钥文件失败！"
 msgid "Failed to remove "
 msgstr "删除失败"
 
+msgid "General"
+msgstr ""
+
 msgid ""
 "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
 msgstr "合并视图，归档文件不同版本视图，实验性"
+
+msgid "Hooks / Advanced"
+msgstr ""
+
+msgid "Hour of the day that daily backups run."
+msgstr ""
+
+msgid "Hour of the day that monthly backups run."
+msgstr ""
+
+msgid "Hour of the day that weekly backups run."
+msgstr ""
+
+msgid "Hour of the day that yearly backups run."
+msgstr ""
 
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
@@ -228,6 +249,24 @@ msgstr "列表"
 
 msgid "Local"
 msgstr "本地"
+
+msgid "Maintenance"
+msgstr ""
+
+msgid "Minute after the hour that daily backups run."
+msgstr ""
+
+msgid "Minute after the hour that hourly backups run."
+msgstr ""
+
+msgid "Minute after the hour that monthly backups run."
+msgstr ""
+
+msgid "Minute after the hour that weekly backups run."
+msgstr ""
+
+msgid "Minute after the hour that yearly backups run."
+msgstr ""
 
 msgid "Mount"
 msgstr "挂载"
@@ -260,6 +299,21 @@ msgstr "无时间"
 
 msgid "None"
 msgstr "无"
+
+msgid "Number of daily backups to keep."
+msgstr ""
+
+msgid "Number of hourly backups to keep."
+msgstr ""
+
+msgid "Number of monthly backups to keep."
+msgstr ""
+
+msgid "Number of weekly backups to keep."
+msgstr ""
+
+msgid "Number of yearly backups to keep."
+msgstr ""
 
 msgid "One filesystem only"
 msgstr "一个文件系统"
@@ -344,6 +398,9 @@ msgstr "每周保留"
 msgid "Retain yearly"
 msgstr "每年保留"
 
+msgid "Retention and Schedule"
+msgstr ""
+
 msgid "Run"
 msgstr "运行"
 
@@ -358,6 +415,9 @@ msgstr "备份前运行脚本。"
 
 msgid "Run with progress"
 msgstr "持续运行"
+
+msgid "Runtime / Output"
+msgstr ""
 
 msgid "Select a repo ..."
 msgstr "选择源 ..."
@@ -417,11 +477,20 @@ msgstr "变更位置前必须先移动源文件。"
 msgid "borgbackup"
 msgstr "borgbackup"
 
+msgid "daily hour"
+msgstr ""
+
+msgid "daily minute"
+msgstr ""
+
 msgid "extract logs - follow ..."
 msgstr "提取日志 - 按照 ..."
 
 msgid "extract logs ..."
 msgstr "提取日志 ..."
+
+msgid "hourly minute"
+msgstr ""
 
 msgid "logs"
 msgstr "日志"
@@ -435,11 +504,29 @@ msgstr "lz4 - 非常快，压缩率低"
 msgid "lzma - even slower / even higher compression"
 msgstr "lzma - 最慢，最高的压缩率"
 
+msgid "monthly hour"
+msgstr ""
+
+msgid "monthly minute"
+msgstr ""
+
 msgid "n/a"
 msgstr "n/a"
 
 msgid "omv-extras wiki"
 msgstr "omv-extras wiki"
+
+msgid "weekly hour"
+msgstr ""
+
+msgid "weekly minute"
+msgstr ""
+
+msgid "yearly hour"
+msgstr ""
+
+msgid "yearly minute"
+msgstr ""
 
 msgid "zlib - less fast / higher compression"
 msgstr "zlib - 较快，高压缩率"

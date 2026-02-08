@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-01 14:55+0000\n"
+"POT-Creation-Date: 2026-02-08 02:53+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Giovanni Scafora <scafora.giovanni@gmail.com>, 2025\n"
 "Language-Team: Italian (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/it/)\n"
@@ -25,7 +25,7 @@ msgid "0 is the fastest compression and 9 is the best compression"
 msgstr "0 è la compressione più veloce e 9 quella migliore"
 
 msgid "5G, 1.5T as examples. Leave blank for no quota."
-msgstr ""
+msgstr "5G, 1.5T sono esempi. Lasciare vuoto per non impostare una quota."
 
 msgid "All"
 msgstr "Tutto"
@@ -56,6 +56,9 @@ msgstr ""
 "Sei sicuro di voler rimuovere la repo dal plugin? Questa operazione non "
 "cancellerà alcun file!"
 
+msgid "Backup Options"
+msgstr ""
+
 msgid "Base Dir"
 msgstr "Cartella di riferimento"
 
@@ -79,10 +82,10 @@ msgid "Change passphrase"
 msgstr "Modifica password"
 
 msgid "Change quota"
-msgstr ""
+msgstr "Modifica quota"
 
 msgid "Changing quota ..."
-msgstr ""
+msgstr "Modifica della quota in corso..."
 
 msgid "Changing repo location ..."
 msgstr "Sto modificando la posizione del repo ..."
@@ -116,7 +119,7 @@ msgid "Compact repo ..."
 msgstr "Compatta il repo ..."
 
 msgid "Compact threshold"
-msgstr ""
+msgstr "Soglia di compattazione"
 
 msgid "Compression"
 msgstr "Compressione"
@@ -146,7 +149,7 @@ msgid "Created repo."
 msgstr "Il repo è stato creato."
 
 msgid "Current quota"
-msgstr ""
+msgstr "Quota attuale"
 
 msgid "Delete + Files"
 msgstr "Elimina + file"
@@ -218,11 +221,29 @@ msgstr "Impossibile ottenere il keyfile!"
 msgid "Failed to remove "
 msgstr "Impossibile rimuovere"
 
+msgid "General"
+msgstr ""
+
 msgid ""
 "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
 msgstr ""
 "Fornisce una vista unificata e con versioni dei file negli archivi. "
 "SPERIMENTALE"
+
+msgid "Hooks / Advanced"
+msgstr ""
+
+msgid "Hour of the day that daily backups run."
+msgstr ""
+
+msgid "Hour of the day that monthly backups run."
+msgstr ""
+
+msgid "Hour of the day that weekly backups run."
+msgstr ""
+
+msgid "Hour of the day that yearly backups run."
+msgstr ""
 
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
@@ -242,6 +263,24 @@ msgstr "Elenco"
 
 msgid "Local"
 msgstr "Locale"
+
+msgid "Maintenance"
+msgstr ""
+
+msgid "Minute after the hour that daily backups run."
+msgstr ""
+
+msgid "Minute after the hour that hourly backups run."
+msgstr ""
+
+msgid "Minute after the hour that monthly backups run."
+msgstr ""
+
+msgid "Minute after the hour that weekly backups run."
+msgstr ""
+
+msgid "Minute after the hour that yearly backups run."
+msgstr ""
 
 msgid "Mount"
 msgstr "Monta"
@@ -269,13 +308,28 @@ msgid "Name/Prefix"
 msgstr "Nome/Prefisso"
 
 msgid "New quota"
-msgstr ""
+msgstr "Nuova quota"
 
 msgid "No atime"
 msgstr "Disattiva atime"
 
 msgid "None"
 msgstr "Nessuno"
+
+msgid "Number of daily backups to keep."
+msgstr ""
+
+msgid "Number of hourly backups to keep."
+msgstr ""
+
+msgid "Number of monthly backups to keep."
+msgstr ""
+
+msgid "Number of weekly backups to keep."
+msgstr ""
+
+msgid "Number of yearly backups to keep."
+msgstr ""
 
 msgid "One filesystem only"
 msgstr "Solo un filesystem"
@@ -299,7 +353,7 @@ msgid "Put a new line or comma between each directory"
 msgstr "Inserisci una nuova riga o una virgola tra ogni cartella"
 
 msgid "Quota has been changed."
-msgstr ""
+msgstr "La quota è stata modificata."
 
 msgid "Rate limit"
 msgstr "Velocità massima"
@@ -362,11 +416,14 @@ msgstr "Archivia ogni settimana"
 msgid "Retain yearly"
 msgstr "Archivia ogni anno"
 
+msgid "Retention and Schedule"
+msgstr ""
+
 msgid "Run"
 msgstr "Esegui"
 
 msgid "Run compact after backup and prune"
-msgstr ""
+msgstr "Esegui la compattazione dopo il backup e la pulizia"
 
 msgid "Run script from this path after backup."
 msgstr "Esegui lo script da questo percorso dopo il backup."
@@ -377,6 +434,9 @@ msgstr "Esegui lo script da questo percorso prima del backup."
 msgid "Run with progress"
 msgstr "Esegui con il progresso"
 
+msgid "Runtime / Output"
+msgstr ""
+
 msgid "Select a repo ..."
 msgstr "Seleziona un repo ..."
 
@@ -384,7 +444,7 @@ msgid "Select an archive ..."
 msgstr "Seleziona un archivio ..."
 
 msgid "Set minimum threshold for saved space in percent"
-msgstr ""
+msgstr "Imposta la soglia minima di spazio risparmiato in percentuale"
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
@@ -408,7 +468,7 @@ msgid "Skip initialization to import existing repo."
 msgstr "Salta l'inizializzazione per importare un repo esistente."
 
 msgid "Storage quota"
-msgstr ""
+msgstr "Quota di archiviazione"
 
 msgid "Type"
 msgstr "Tipo"
@@ -438,17 +498,26 @@ msgstr ""
 msgid "borgbackup"
 msgstr "borgbackup"
 
-msgid "extract logs - follow ..."
+msgid "daily hour"
 msgstr ""
 
+msgid "daily minute"
+msgstr ""
+
+msgid "extract logs - follow ..."
+msgstr "estrai log - segui..."
+
 msgid "extract logs ..."
+msgstr "estrai log..."
+
+msgid "hourly minute"
 msgstr ""
 
 msgid "logs"
 msgstr "log"
 
 msgid "logs - follow"
-msgstr ""
+msgstr "log - segui"
 
 msgid "lz4 - super fast / low compression"
 msgstr "lz4 - super veloce / bassa compressione"
@@ -456,11 +525,29 @@ msgstr "lz4 - super veloce / bassa compressione"
 msgid "lzma - even slower / even higher compression"
 msgstr "lzma - ancora più lento / compressione ancora più elevata"
 
+msgid "monthly hour"
+msgstr ""
+
+msgid "monthly minute"
+msgstr ""
+
 msgid "n/a"
 msgstr "non disponibile"
 
 msgid "omv-extras wiki"
 msgstr "wiki di omv-extras"
+
+msgid "weekly hour"
+msgstr ""
+
+msgid "weekly minute"
+msgstr ""
+
+msgid "yearly hour"
+msgstr ""
+
+msgid "yearly minute"
+msgstr ""
 
 msgid "zlib - less fast / higher compression"
 msgstr "zlib - meno veloce / maggiore compressione"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-01 14:55+0000\n"
+"POT-Creation-Date: 2026-02-08 02:53+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Language-Team: Norwegian (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/no/)\n"
 "MIME-Version: 1.0\n"
@@ -46,6 +46,9 @@ msgstr ""
 msgid ""
 "Are you sure you want to remove repo from the plugin? This will not delete "
 "any files!"
+msgstr ""
+
+msgid "Backup Options"
 msgstr ""
 
 msgid "Base Dir"
@@ -204,8 +207,26 @@ msgstr ""
 msgid "Failed to remove "
 msgstr ""
 
+msgid "General"
+msgstr ""
+
 msgid ""
 "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
+msgstr ""
+
+msgid "Hooks / Advanced"
+msgstr ""
+
+msgid "Hour of the day that daily backups run."
+msgstr ""
+
+msgid "Hour of the day that monthly backups run."
+msgstr ""
+
+msgid "Hour of the day that weekly backups run."
+msgstr ""
+
+msgid "Hour of the day that yearly backups run."
 msgstr ""
 
 msgid ""
@@ -223,6 +244,24 @@ msgid "List"
 msgstr ""
 
 msgid "Local"
+msgstr ""
+
+msgid "Maintenance"
+msgstr ""
+
+msgid "Minute after the hour that daily backups run."
+msgstr ""
+
+msgid "Minute after the hour that hourly backups run."
+msgstr ""
+
+msgid "Minute after the hour that monthly backups run."
+msgstr ""
+
+msgid "Minute after the hour that weekly backups run."
+msgstr ""
+
+msgid "Minute after the hour that yearly backups run."
 msgstr ""
 
 msgid "Mount"
@@ -255,6 +294,21 @@ msgid "No atime"
 msgstr ""
 
 msgid "None"
+msgstr ""
+
+msgid "Number of daily backups to keep."
+msgstr ""
+
+msgid "Number of hourly backups to keep."
+msgstr ""
+
+msgid "Number of monthly backups to keep."
+msgstr ""
+
+msgid "Number of weekly backups to keep."
+msgstr ""
+
+msgid "Number of yearly backups to keep."
 msgstr ""
 
 msgid "One filesystem only"
@@ -340,6 +394,9 @@ msgstr ""
 msgid "Retain yearly"
 msgstr ""
 
+msgid "Retention and Schedule"
+msgstr ""
+
 msgid "Run"
 msgstr ""
 
@@ -353,6 +410,9 @@ msgid "Run script from this path before backup."
 msgstr ""
 
 msgid "Run with progress"
+msgstr ""
+
+msgid "Runtime / Output"
 msgstr ""
 
 msgid "Select a repo ..."
@@ -413,10 +473,19 @@ msgstr ""
 msgid "borgbackup"
 msgstr ""
 
+msgid "daily hour"
+msgstr ""
+
+msgid "daily minute"
+msgstr ""
+
 msgid "extract logs - follow ..."
 msgstr ""
 
 msgid "extract logs ..."
+msgstr ""
+
+msgid "hourly minute"
 msgstr ""
 
 msgid "logs"
@@ -431,10 +500,28 @@ msgstr ""
 msgid "lzma - even slower / even higher compression"
 msgstr ""
 
+msgid "monthly hour"
+msgstr ""
+
+msgid "monthly minute"
+msgstr ""
+
 msgid "n/a"
 msgstr ""
 
 msgid "omv-extras wiki"
+msgstr ""
+
+msgid "weekly hour"
+msgstr ""
+
+msgid "weekly minute"
+msgstr ""
+
+msgid "yearly hour"
+msgstr ""
+
+msgid "yearly minute"
 msgstr ""
 
 msgid "zlib - less fast / higher compression"
