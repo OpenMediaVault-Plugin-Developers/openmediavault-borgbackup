@@ -148,6 +148,10 @@
           "minimum": 0,
           "required": true
         },
+        "hourlyenable": {
+          "type": "boolean",
+          "required": true
+        },
         "hourlymin": {
           "type": "integer",
           "minimum": 0,
@@ -157,6 +161,10 @@
         "daily": {
           "type": "integer",
           "minimum": 0,
+          "required": true
+        },
+        "dailyenable": {
+          "type": "boolean",
           "required": true
         },
         "dailyhour": {
@@ -176,6 +184,10 @@
           "minimum": 0,
           "required": true
         },
+        "weeklyenable": {
+          "type": "boolean",
+          "required": true
+        },
         "weeklyhour": {
           "type": "integer",
           "minimum": 0,
@@ -193,6 +205,10 @@
           "minimum": 0,
           "required": true
         },
+        "monthlyenable": {
+          "type": "boolean",
+          "required": true
+        },
         "monthlyhour": {
           "type": "integer",
           "minimum": 0,
@@ -208,6 +224,10 @@
         "yearly": {
           "type": "integer",
           "minimum": 0,
+          "required": true
+        },
+        "yearlyenable": {
+          "type": "boolean",
           "required": true
         },
         "yearlyhour": {

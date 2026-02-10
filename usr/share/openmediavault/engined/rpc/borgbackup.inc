@@ -680,6 +680,26 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->validateMethodParams($params, 'rpc.borgbackup.setarchive');
         // Prepare the configuration object.
         $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.archive');
+        // Map periods in order of most frequent → least frequent
+        $periods = ['hourly', 'daily', 'weekly', 'monthly', 'yearly'];
+        // Determine if any enable flag is already true
+        $anyEnabled = false;
+        foreach ($periods as $period) {
+            if (!empty($params["{$period}enable"])) {
+                $anyEnabled = true;
+                break;
+            }
+        }
+        // If none enabled, enable most frequent period with value > 0
+        if (!$anyEnabled) {
+            foreach ($periods as $period) {
+                $value = (int)($params[$period] ?? 0);
+                if ($value > 0) {
+                    $params["{$period}enable"] = true;
+                    break;
+                }
+            }
+        }
         // Remove spaces from name
         $params['name'] = str_replace(' ', '_', $params['name']);
         // format includes and excludes

@@ -3,22 +3,22 @@
 # m h   dom mon dow     user    command
 {%- set base = scriptsDir ~ '/' %}
 {%- for archive in config.archives.archive | selectattr('enable') %}
-{%- set name = scriptPrefix ~ archive.uuid %}
+{%- set scriptPath = base ~ scriptPrefix ~ archive.uuid %}
 
 # {{ archive.name }}
-{%- if archive.hourly > 0 %}
-{{ archive.hourlymin }} * * * *  root  {{ base ~ 'hourly.d/' ~ name }}
+{%- if archive.hourly > 0 and archive.hourlyenable | to_bool %}
+{{ archive.hourlymin }} * * * *  root  {{ scriptPath }}
 {%- endif %}
-{%- if archive.daily > 0 %}
-{{ archive.dailymin }} {{ archive.dailyhour }} * * *  root  {{ base ~ 'daily.d/' ~ name }}
+{%- if archive.daily > 0 and archive.dailyenable | to_bool %}
+{{ archive.dailymin }} {{ archive.dailyhour }} * * *  root  {{ scriptPath }}
 {%- endif %}
-{%- if archive.weekly > 0 %}
-{{ archive.weeklymin }} {{ archive.weeklyhour }} * * 1  root  {{ base ~ 'weekly.d/' ~ name }}
+{%- if archive.weekly > 0 and archive.weeklyenable | to_bool %}
+{{ archive.weeklymin }} {{ archive.weeklyhour }} * * 1  root  {{ scriptPath }}
 {%- endif %}
-{%- if archive.monthly > 0 %}
-{{ archive.monthlymin }} {{ archive.monthlyhour }} 1 * *  root  {{ base ~ 'monthly.d/' ~ name }}
+{%- if archive.monthly > 0 and archive.monthlyenable | to_bool %}
+{{ archive.monthlymin }} {{ archive.monthlyhour }} 1 * *  root  {{ scriptPath }}
 {%- endif %}
-{%- if archive.yearly > 0 %}
-{{ archive.yearlymin }} {{ archive.yearlyhour }} 1 1 *  root  {{ base ~ 'yearly.d/' ~ name }}
+{%- if archive.yearly > 0 and archive.yearlyenable | to_bool %}
+{{ archive.yearlymin }} {{ archive.yearlyhour }} 1 1 *  root  {{ scriptPath }}
 {%- endif %}
 {%- endfor %}

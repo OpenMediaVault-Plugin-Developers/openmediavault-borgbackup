@@ -22,6 +22,12 @@
 {% set scriptsDir = '/var/lib/openmediavault/borgbackup' %}
 {% set scriptPrefix = 'borgbackup-' %}
 
+configure_borg_scripts_dir:
+  file.directory:
+    - name: "{{ scriptsDir }}"
+    - makedirs: True
+    - clean: True
+
 configure_borg_envvar_dir:
   file.directory:
     - name: "{{ envVarDir }}"
@@ -68,14 +74,6 @@ configure_borg_envvar_creation:
     - group: root
     - mode: 600
 
-{% for dir in ['hourly','daily','weekly','monthly','yearly'] %}
-configure_borg_{{ dir }}_dir:
-  file.directory:
-    - name: "/var/lib/openmediavault/borgbackup/{{ dir }}.d"
-    - makedirs: True
-    - clean: True
-{% endfor %}
-
 configure_borg_crond:
   file.managed:
     - name: "/etc/cron.d/openmediavault-borgbackup"
@@ -101,21 +99,7 @@ configure_borg_crond:
 {% set ns.passphrase = repo.passphrase %}
 {% endfor %}
 
-{% set period = '' %}
-{% if archive.hourly > 0 %}
-{% set period = 'hourly' %}
-{% elif archive.daily > 0 %}
-{% set period = 'daily' %}
-{% elif archive.weekly > 0 %}
-{% set period = 'weekly' %}
-{% elif archive.monthly > 0 %}
-{% set period = 'monthly' %}
-{% elif archive.yearly > 0 %}
-{% set period = 'yearly' %}
-{% endif %}
-
-{% if period %}
-{% set script = scriptsDir ~ '/' ~ period ~ '.d/' ~ scriptPrefix ~ archive.uuid %}
+{% set script = scriptsDir ~ '/' ~ scriptPrefix ~ archive.uuid %}
 
 {% set rpath = '' %}
 {% if ns.type == "local" %}
@@ -264,5 +248,4 @@ configure_borg_{{ archive.uuid }}_cron_file:
     - user: root
     - group: root
     - mode: 750
-{% endif %}
 {% endfor %}

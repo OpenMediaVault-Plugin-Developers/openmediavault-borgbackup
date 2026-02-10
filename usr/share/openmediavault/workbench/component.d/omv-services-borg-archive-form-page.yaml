@@ -100,6 +100,18 @@ data:
               max: 999
               patternType: integer
               required: true
+          - type: checkbox
+            name: hourlyenable
+            label: _("Enable")
+            value: false
+            hint: _("Run hourly cron job.")
+            modifiers:
+              - type: visible
+                constraint:
+                  operator: ne
+                  arg0:
+                    prop: hourly
+                  arg1: 0
           - type: hidden
             name: empty
             value: false
@@ -117,10 +129,16 @@ data:
             modifiers:
               - type: visible
                 constraint:
-                  operator: ne
+                  operator: and
                   arg0:
-                    prop: hourly
-                  arg1: 0
+                    operator: truthy
+                    arg0:
+                      prop: hourlyenable
+                  arg1:
+                    operator: ne
+                    arg0:
+                      prop: hourly
+                    arg1: 0
       - type: container
         fields:
           - type: numberInput
@@ -133,6 +151,18 @@ data:
               max: 999
               patternType: integer
               required: true
+          - type: checkbox
+            name: dailyenable
+            label: _("Enable")
+            value: true
+            hint: _("Run daily cron job.")
+            modifiers:
+              - type: visible
+                constraint:
+                  operator: ne
+                  arg0:
+                    prop: daily
+                  arg1: 0
           - type: numberInput
             name: dailyhour
             label: _("daily hour")
@@ -146,10 +176,16 @@ data:
             modifiers:
               - type: visible
                 constraint:
-                  operator: ne
+                  operator: and
                   arg0:
-                    prop: daily
-                  arg1: 0
+                    operator: truthy
+                    arg0:
+                      prop: dailyenable
+                  arg1:
+                    operator: ne
+                    arg0:
+                      prop: daily
+                    arg1: 0
           - type: numberInput
             name: dailymin
             label: _("daily minute")
@@ -163,10 +199,16 @@ data:
             modifiers:
               - type: visible
                 constraint:
-                  operator: ne
+                  operator: and
                   arg0:
-                    prop: daily
-                  arg1: 0
+                    operator: truthy
+                    arg0:
+                      prop: dailyenable
+                  arg1:
+                    operator: ne
+                    arg0:
+                      prop: daily
+                    arg1: 0
       - type: container
         fields:
           - type: numberInput
@@ -179,6 +221,18 @@ data:
               max: 999
               patternType: integer
               required: true
+          - type: checkbox
+            name: weeklyenable
+            label: _("Enable")
+            value: false
+            hint: _("Run weekly cron job.")
+            modifiers:
+              - type: visible
+                constraint:
+                  operator: ne
+                  arg0:
+                    prop: weekly
+                  arg1: 0
           - type: numberInput
             name: weeklyhour
             label: _("weekly hour")
@@ -192,10 +246,16 @@ data:
             modifiers:
               - type: visible
                 constraint:
-                  operator: ne
+                  operator: and
                   arg0:
-                    prop: weekly
-                  arg1: 0
+                    operator: truthy
+                    arg0:
+                      prop: weeklyenable
+                  arg1:
+                    operator: ne
+                    arg0:
+                      prop: weekly
+                    arg1: 0
           - type: numberInput
             name: weeklymin
             label: _("weekly minute")
@@ -209,10 +269,16 @@ data:
             modifiers:
               - type: visible
                 constraint:
-                  operator: ne
+                  operator: and
                   arg0:
-                    prop: weekly
-                  arg1: 0
+                    operator: truthy
+                    arg0:
+                      prop: weeklyenable
+                  arg1:
+                    operator: ne
+                    arg0:
+                      prop: weekly
+                    arg1: 0
       - type: container
         fields:
           - type: numberInput
@@ -225,6 +291,18 @@ data:
               max: 999
               patternType: integer
               required: true
+          - type: checkbox
+            name: monthlyenable
+            label: _("Enable")
+            value: false
+            hint: _("Run monthly cron job.")
+            modifiers:
+              - type: visible
+                constraint:
+                  operator: ne
+                  arg0:
+                    prop: monthly
+                  arg1: 0
           - type: numberInput
             name: monthlyhour
             label: _("monthly hour")
@@ -238,10 +316,16 @@ data:
             modifiers:
               - type: visible
                 constraint:
-                  operator: ne
+                  operator: and
                   arg0:
-                    prop: monthly
-                  arg1: 0
+                    operator: truthy
+                    arg0:
+                      prop: monthlyenable
+                  arg1:
+                    operator: ne
+                    arg0:
+                      prop: monthly
+                    arg1: 0
           - type: numberInput
             name: monthlymin
             label: _("monthly minute")
@@ -255,10 +339,16 @@ data:
             modifiers:
               - type: visible
                 constraint:
-                  operator: ne
+                  operator: and
                   arg0:
-                    prop: monthly
-                  arg1: 0
+                    operator: truthy
+                    arg0:
+                      prop: monthlyenable
+                  arg1:
+                    operator: ne
+                    arg0:
+                      prop: monthly
+                    arg1: 0
       - type: container
         fields:
           - type: numberInput
@@ -271,6 +361,18 @@ data:
               max: 99
               patternType: integer
               required: true
+          - type: checkbox
+            name: yearlyenable
+            label: _("Enable")
+            value: false
+            hint: _("Run yearly cron job.")
+            modifiers:
+              - type: visible
+                constraint:
+                  operator: ne
+                  arg0:
+                    prop: yearly
+                  arg1: 0
           - type: numberInput
             name: yearlyhour
             label: _("yearly hour")
@@ -284,10 +386,16 @@ data:
             modifiers:
               - type: visible
                 constraint:
-                  operator: ne
+                  operator: and
                   arg0:
-                    prop: yearly
-                  arg1: 0
+                    operator: truthy
+                    arg0:
+                      prop: yearlyenable
+                  arg1:
+                    operator: ne
+                    arg0:
+                      prop: yearly
+                    arg1: 0
           - type: numberInput
             name: yearlymin
             label: _("yearly minute")
@@ -301,10 +409,16 @@ data:
             modifiers:
               - type: visible
                 constraint:
-                  operator: ne
+                  operator: and
                   arg0:
-                    prop: yearly
-                  arg1: 0
+                    operator: truthy
+                    arg0:
+                      prop: yearlyenable
+                  arg1:
+                    operator: ne
+                    arg0:
+                      prop: yearly
+                    arg1: 0
       - type: divider
         title: _("Maintenance")
       - type: checkbox
