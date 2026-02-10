@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-08 02:53+0000\n"
+"POT-Creation-Date: 2026-02-10 00:28+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2025\n"
 "Language-Team: English (United Kingdom) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/en_GB/)\n"
@@ -424,14 +424,29 @@ msgstr "Run"
 msgid "Run compact after backup and prune"
 msgstr "Run compact after backup and prune"
 
+msgid "Run daily cron job."
+msgstr ""
+
+msgid "Run hourly cron job."
+msgstr ""
+
+msgid "Run monthly cron job."
+msgstr ""
+
 msgid "Run script from this path after backup."
 msgstr "Run script from this path after backup."
 
 msgid "Run script from this path before backup."
 msgstr "Run script from this path before backup."
 
+msgid "Run weekly cron job."
+msgstr ""
+
 msgid "Run with progress"
 msgstr "Run with progress"
+
+msgid "Run yearly cron job."
+msgstr ""
 
 msgid "Runtime / Output"
 msgstr ""
