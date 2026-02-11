@@ -1,3 +1,17 @@
+openmediavault-borgbackup (8.1.3) stable; urgency=low
+
+  * Set BORG_LOCK_WAIT to 1 hour by default to prevent conflicts when
+    multiple archives target the same repository. Can be overridden
+    per repo in Environment Variables tab.
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 11 Feb 2026 17:34:27 +0000
+
+openmediavault-borgbackup (8.1.2) stable; urgency=low
+
+  * Update
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 10 Feb 2026 00:40:53 +0000
+
 openmediavault-borgbackup (8.1.1) stable; urgency=low
 
   * Allow enabling cron jobs per retention period while preserving

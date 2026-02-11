@@ -138,6 +138,9 @@ configure_borg_{{ archive.uuid }}_cron_file:
         # Setting this, so you won't be asked for your repository passphrase:
         export BORG_PASSPHRASE=$'{{ ns.passphrase | replace("'", "\\'") }}'
 
+        # Wait up to 1 hour for repository/cache lock
+        export BORG_LOCK_WAIT="${BORG_LOCK_WAIT:-3600}"
+
         # some helpers and error handling:
         info() { printf "\n%s %s\n\n" "$( date )" "$*"; }
         trap 'echo $( date ) Backup interrupted >&2; exit 2' INT TERM
