@@ -428,13 +428,13 @@ msgid "Run compact after backup and prune"
 msgstr "Compact uitvoeren na back-up en snoeien"
 
 msgid "Run daily cron job."
-msgstr ""
+msgstr "Dagelijkse cron-taak uitvoeren."
 
 msgid "Run hourly cron job."
-msgstr ""
+msgstr "Elk uur cron-taak uitvoeren."
 
 msgid "Run monthly cron job."
-msgstr ""
+msgstr "Maandelijkse cron-taak uitvoeren."
 
 msgid "Run script from this path after backup."
 msgstr "Script uitvoeren vanaf dit pad na back-up."
@@ -443,13 +443,13 @@ msgid "Run script from this path before backup."
 msgstr "Script uitvoeren vanaf dit pad voor back-up."
 
 msgid "Run weekly cron job."
-msgstr ""
+msgstr "Wekelijkse cron-taak uitvoeren."
 
 msgid "Run with progress"
 msgstr "Uitvoeren met voortgang"
 
 msgid "Run yearly cron job."
-msgstr ""
+msgstr "Jaarlijkse cron-taak uitvoeren."
 
 msgid "Runtime / Output"
 msgstr "Looptijd / Uitvoer"
