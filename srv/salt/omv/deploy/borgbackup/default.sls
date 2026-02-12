@@ -141,6 +141,20 @@ configure_borg_{{ archive.uuid }}_cron_file:
         # Wait up to 1 hour for repository/cache lock
         export BORG_LOCK_WAIT="${BORG_LOCK_WAIT:-3600}"
 
+        # Serialize all operations per repo to avoid lock.exclusive contention
+        lock_id="$(echo -n "${BORG_REPO}" | sha256sum | awk '{print $1}')"
+        lockfile="/run/lock/omv-borg-${lock_id}.lock"
+
+        mkdir -p /run/lock
+        exec 9>"${lockfile}"
+
+        echo "Waiting for repo lock (${BORG_LOCK_WAIT}s): ${lockfile}" {{ email }}
+        if ! flock -w "${BORG_LOCK_WAIT}" 9; then
+          echo "Failed to acquire outer repo lock after ${BORG_LOCK_WAIT}s: ${BORG_REPO}" {{ email }}
+          exit 99
+        fi
+        echo "Acquired outer repo lock: ${BORG_REPO}" {{ email }}
+
         # some helpers and error handling:
         info() { printf "\n%s %s\n\n" "$( date )" "$*"; }
         trap 'echo $( date ) Backup interrupted >&2; exit 2' INT TERM
