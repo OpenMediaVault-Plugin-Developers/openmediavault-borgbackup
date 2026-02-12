@@ -641,14 +641,44 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $objects = $db->get('conf.service.borgbackup.archive');
         // Add additional share informations.
         $objectsAssoc = [];
+        $labels = [
+            'hourly'  => gettext("hourly"),
+            'daily'   => gettext("daily"),
+            'weekly'  => gettext("weekly"),
+            'monthly' => gettext("monthly"),
+            'yearly'  => gettext("yearly"),
+        ];
+        $periods = [
+            'hourly'  => ['hour' => null,          'min' => 'hourlymin'],
+            'daily'   => ['hour' => 'dailyhour',   'min' => 'dailymin'],
+            'weekly'  => ['hour' => 'weeklyhour',  'min' => 'weeklymin'],
+            'monthly' => ['hour' => 'monthlyhour', 'min' => 'monthlymin'],
+            'yearly'  => ['hour' => 'yearlyhour',  'min' => 'yearlymin'],
+        ];
         foreach ($objects as $objectk => &$objectv) {
             $repo = $db->get('conf.service.borgbackup.repo', $objectv->get('reporef'));
-            // Add the new property 'reponame'.
+            // Add the new property - reponame
             $objectv->add('reponame', 'string', $repo->get('name'));
             $includes = str_replace([',', PHP_EOL], '<br />', $objectv->get('include'));
+            // Add the new properties - includes and excludes
             $objectv->add('includes', 'string', $includes);
             $excludes = str_replace([',', PHP_EOL], '<br />', $objectv->get('exclude'));
             $objectv->add('excludes', 'string', $excludes);
+            // Add the new property - crontimes
+            $crontimes = [];
+            foreach ($periods as $name => $fields) {
+                if (!$objectv->get("{$name}enable")) {
+                    continue;
+                }
+                if ($fields['hour']) {
+                    $hour = sprintf('%02d', (int)$objectv->get($fields['hour']));
+                } else {
+                    $hour = '*';
+                }
+                $min = sprintf('%02d', (int)$objectv->get($fields['min']));
+                $crontimes[] = sprintf('%s %s:%s', $labels[$name], $hour, $min);
+            }
+            $objectv->add('crontimes', 'string', implode('<br />', $crontimes));
             $objectsAssoc[] = $objectv->getAssoc();
         }
         // Filter the result.

@@ -41,6 +41,10 @@ data:
         prop: excludes
         flexGrow: 2
         sortable: true
+      - name: _("Run times")
+        prop: crontimes
+        flexGrow: 1
+        sortable: true
     actions:
       - template: create
         execute:
