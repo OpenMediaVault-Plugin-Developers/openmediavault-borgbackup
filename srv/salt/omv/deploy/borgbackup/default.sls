@@ -26,7 +26,9 @@ configure_borg_scripts_dir:
   file.directory:
     - name: "{{ scriptsDir }}"
     - makedirs: True
-    - clean: True
+    - user: root
+    - group: root
+    - mode: 755
 
 configure_borg_envvar_dir:
   file.directory:
@@ -34,13 +36,6 @@ configure_borg_envvar_dir:
     - user: root
     - group: root
     - mode: 700
-
-remove_envvar_files:
-  module.run:
-    - file.find:
-      - path: "{{ envVarDir }}"
-      - iname: "{{ envVarPrefix }}*"
-      - delete: "f"
 
 {% for repo in config.repos.repo %}
 {% set envVarFile = envVarDir ~ '/' ~ envVarPrefix ~ repo.uuid %}
@@ -266,3 +261,40 @@ configure_borg_{{ archive.uuid }}_cron_file:
     - group: root
     - mode: 750
 {% endfor %}
+
+
+{% set keep_env = [] %}
+{% for repo in config.repos.repo %}
+{% do keep_env.append(envVarPrefix ~ repo.uuid) %}
+{% endfor %}
+{% do keep_env.append(envVarPrefix ~ 'creation') %}
+
+purge_stale_borg_envvars:
+  file.tidied:
+    - name: "{{ envVarDir }}"
+    - matches:
+      - "{{ envVarPrefix }}.*"
+    - exclude:
+{%- for f in keep_env %}
+      - "{{ f }}"
+{%- endfor %}
+    - rmdirs: False
+    - rmlinks: True
+
+
+{% set keep_scripts = [] %}
+{% for archive in config.archives.archive | selectattr('enable') %}
+{% do keep_scripts.append(scriptPrefix ~ archive.uuid) %}
+{% endfor %}
+
+purge_stale_borg_scripts:
+  file.tidied:
+    - name: "{{ scriptsDir }}"
+    - matches:
+      - "{{ scriptPrefix }}.*"
+    - exclude:
+{%- for f in keep_scripts %}
+      - "{{ f }}"
+{%- endfor %}
+    - rmdirs: False
+    - rmlinks: True
