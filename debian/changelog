@@ -1,3 +1,10 @@
+openmediavault-borgbackup (8.1.4) stable; urgency=low
+
+  * Improve locking
+  * Add cron times to archives datatable
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 12 Feb 2026 13:04:48 +0000
+
 openmediavault-borgbackup (8.1.3) stable; urgency=low
 
   * Set BORG_LOCK_WAIT to 1 hour by default to prevent conflicts when
