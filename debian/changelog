@@ -1,3 +1,9 @@
+openmediavault-borgbackup (8.1.5) stable; urgency=low
+
+  * Optimize saltstack to not delete all cron scripts every run
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 12 Feb 2026 23:40:42 +0000
+
 openmediavault-borgbackup (8.1.4) stable; urgency=low
 
   * Improve locking
