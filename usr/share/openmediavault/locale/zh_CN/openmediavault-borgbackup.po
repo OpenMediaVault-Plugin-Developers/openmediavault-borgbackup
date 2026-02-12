@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-10 00:28+0000\n"
+"POT-Creation-Date: 2026-02-12 23:41+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: songming <by@songming.me>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
@@ -422,6 +422,9 @@ msgstr "备份后运行脚本。"
 msgid "Run script from this path before backup."
 msgstr "备份前运行脚本。"
 
+msgid "Run times"
+msgstr ""
+
 msgid "Run weekly cron job."
 msgstr ""
 
@@ -492,6 +495,9 @@ msgstr "变更位置前必须先移动源文件。"
 msgid "borgbackup"
 msgstr "borgbackup"
 
+msgid "daily"
+msgstr ""
+
 msgid "daily hour"
 msgstr ""
 
@@ -503,6 +509,9 @@ msgstr "提取日志 - 按照 ..."
 
 msgid "extract logs ..."
 msgstr "提取日志 ..."
+
+msgid "hourly"
+msgstr ""
 
 msgid "hourly minute"
 msgstr ""
@@ -519,6 +528,9 @@ msgstr "lz4 - 非常快，压缩率低"
 msgid "lzma - even slower / even higher compression"
 msgstr "lzma - 最慢，最高的压缩率"
 
+msgid "monthly"
+msgstr ""
+
 msgid "monthly hour"
 msgstr ""
 
@@ -531,10 +543,16 @@ msgstr "n/a"
 msgid "omv-extras wiki"
 msgstr "omv-extras wiki"
 
+msgid "weekly"
+msgstr ""
+
 msgid "weekly hour"
 msgstr ""
 
 msgid "weekly minute"
+msgstr ""
+
+msgid "yearly"
 msgstr ""
 
 msgid "yearly hour"

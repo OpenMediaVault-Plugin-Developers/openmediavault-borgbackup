@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-10 00:28+0000\n"
+"POT-Creation-Date: 2026-02-12 23:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -401,6 +401,9 @@ msgstr ""
 msgid "Run script from this path before backup."
 msgstr ""
 
+msgid "Run times"
+msgstr ""
+
 msgid "Run weekly cron job."
 msgstr ""
 
@@ -470,6 +473,9 @@ msgstr ""
 msgid "borgbackup"
 msgstr ""
 
+msgid "daily"
+msgstr ""
+
 msgid "daily hour"
 msgstr ""
 
@@ -480,6 +486,9 @@ msgid "extract logs - follow ..."
 msgstr ""
 
 msgid "extract logs ..."
+msgstr ""
+
+msgid "hourly"
 msgstr ""
 
 msgid "hourly minute"
@@ -497,6 +506,9 @@ msgstr ""
 msgid "lzma - even slower / even higher compression"
 msgstr ""
 
+msgid "monthly"
+msgstr ""
+
 msgid "monthly hour"
 msgstr ""
 
@@ -509,10 +521,16 @@ msgstr ""
 msgid "omv-extras wiki"
 msgstr ""
 
+msgid "weekly"
+msgstr ""
+
 msgid "weekly hour"
 msgstr ""
 
 msgid "weekly minute"
+msgstr ""
+
+msgid "yearly"
 msgstr ""
 
 msgid "yearly hour"

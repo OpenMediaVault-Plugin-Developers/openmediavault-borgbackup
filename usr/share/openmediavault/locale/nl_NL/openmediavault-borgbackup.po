@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-10 00:28+0000\n"
+"POT-Creation-Date: 2026-02-12 23:41+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2026\n"
 "Language-Team: Dutch (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/nl/)\n"
@@ -442,6 +442,9 @@ msgstr "Script uitvoeren vanaf dit pad na back-up."
 msgid "Run script from this path before backup."
 msgstr "Script uitvoeren vanaf dit pad voor back-up."
 
+msgid "Run times"
+msgstr ""
+
 msgid "Run weekly cron job."
 msgstr "Wekelijkse cron-taak uitvoeren."
 
@@ -514,6 +517,9 @@ msgstr "U moet de repo-bestanden verplaatsen voordat u de locatie wijzigt."
 msgid "borgbackup"
 msgstr "borgbackup"
 
+msgid "daily"
+msgstr ""
+
 msgid "daily hour"
 msgstr "dagelijks uur"
 
@@ -525,6 +531,9 @@ msgstr "logboeken extraheren - volgen…"
 
 msgid "extract logs ..."
 msgstr "logboeken extraheren…"
+
+msgid "hourly"
+msgstr ""
 
 msgid "hourly minute"
 msgstr "elk uur minuut"
@@ -541,6 +550,9 @@ msgstr "lz4 - supersnel / weinig compressie"
 msgid "lzma - even slower / even higher compression"
 msgstr "lzma - nog trager / nog hogere compressie"
 
+msgid "monthly"
+msgstr ""
+
 msgid "monthly hour"
 msgstr "maandelijks uur"
 
@@ -553,11 +565,17 @@ msgstr "n.v.t."
 msgid "omv-extras wiki"
 msgstr "omv-extras wiki"
 
+msgid "weekly"
+msgstr ""
+
 msgid "weekly hour"
 msgstr "wekelijks uur"
 
 msgid "weekly minute"
 msgstr "wekelijks minuut"
+
+msgid "yearly"
+msgstr ""
 
 msgid "yearly hour"
 msgstr "jaarlijks uur"

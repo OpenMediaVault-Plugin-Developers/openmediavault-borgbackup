@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-10 00:28+0000\n"
+"POT-Creation-Date: 2026-02-12 23:41+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Giovanni Scafora <scafora.giovanni@gmail.com>, 2025\n"
 "Language-Team: Italian (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/it/)\n"
@@ -440,6 +440,9 @@ msgstr "Esegui lo script da questo percorso dopo il backup."
 msgid "Run script from this path before backup."
 msgstr "Esegui lo script da questo percorso prima del backup."
 
+msgid "Run times"
+msgstr ""
+
 msgid "Run weekly cron job."
 msgstr ""
 
@@ -513,6 +516,9 @@ msgstr ""
 msgid "borgbackup"
 msgstr "borgbackup"
 
+msgid "daily"
+msgstr ""
+
 msgid "daily hour"
 msgstr ""
 
@@ -524,6 +530,9 @@ msgstr "estrai log - segui..."
 
 msgid "extract logs ..."
 msgstr "estrai log..."
+
+msgid "hourly"
+msgstr ""
 
 msgid "hourly minute"
 msgstr ""
@@ -540,6 +549,9 @@ msgstr "lz4 - super veloce / bassa compressione"
 msgid "lzma - even slower / even higher compression"
 msgstr "lzma - ancora più lento / compressione ancora più elevata"
 
+msgid "monthly"
+msgstr ""
+
 msgid "monthly hour"
 msgstr ""
 
@@ -552,10 +564,16 @@ msgstr "non disponibile"
 msgid "omv-extras wiki"
 msgstr "wiki di omv-extras"
 
+msgid "weekly"
+msgstr ""
+
 msgid "weekly hour"
 msgstr ""
 
 msgid "weekly minute"
+msgstr ""
+
+msgid "yearly"
 msgstr ""
 
 msgid "yearly hour"
