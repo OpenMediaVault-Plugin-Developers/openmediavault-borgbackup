@@ -110,10 +110,6 @@
                 "type": "boolean",
                 "default": false
               },
-              "noatime": {
-                "type": "boolean",
-                "default": false
-              },
               "include": {
                 "type": "string"
               },

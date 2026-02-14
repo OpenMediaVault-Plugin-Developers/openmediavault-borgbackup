@@ -122,10 +122,6 @@
           "type": "boolean",
           "required": true
         },
-        "noatime": {
-          "type": "boolean",
-          "required": true
-        },
         "include": {
           "type": "string",
           "required": true

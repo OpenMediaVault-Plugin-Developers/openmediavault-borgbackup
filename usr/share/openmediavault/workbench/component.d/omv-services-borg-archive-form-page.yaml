@@ -68,10 +68,6 @@ data:
         label: _("One filesystem only")
         value: false
         hint: _("If this is enabled, borg won't span filesystem partitions within a backup point.")
-      - type: checkbox
-        name: noatime
-        label: _("No atime")
-        value: false
       - type: textarea
         name: include
         label: _("Includes")

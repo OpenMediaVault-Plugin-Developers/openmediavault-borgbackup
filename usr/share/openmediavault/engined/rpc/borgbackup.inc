@@ -839,9 +839,6 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 if ($archive->get('onefs') == true) {
                     $cmdArgs[] = '--one-file-system';
                 }
-                if ($archive->get('noatime') == true) {
-                    $cmdArgs[] = '--noatime';
-                }
                 $cmd = new \OMV\System\Process($cmdArgs);
                 $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
                 $cmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
