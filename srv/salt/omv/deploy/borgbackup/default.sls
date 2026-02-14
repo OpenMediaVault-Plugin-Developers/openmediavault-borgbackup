@@ -187,7 +187,7 @@ configure_borg_{{ archive.uuid }}_cron_file:
           --compression auto,{{ archive.compressiontype }},{{ archive.compressionratio }} \
         {%- endif %}
         {%- if archive.ratelimit > 0 %}
-          --remote-ratelimit {{ archive.ratelimit }} \
+          --upload-ratelimit {{ archive.ratelimit }} \
         {%- endif %}
           --exclude-caches \
         {%- if archive.exclude | length > 0 %}

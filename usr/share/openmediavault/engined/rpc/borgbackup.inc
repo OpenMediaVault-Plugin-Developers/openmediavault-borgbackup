@@ -823,7 +823,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                     ], $context);
                 } else {
                     if ($archive->get('ratelimit') > 0) {
-                        $cmdArgs[] = '--remote-ratelimit ' . $archive->get('ratelimit');
+                        $cmdArgs[] = '--upload-ratelimit ' . $archive->get('ratelimit');
                     }
                     $path = $repo->get('uri');
                 }
