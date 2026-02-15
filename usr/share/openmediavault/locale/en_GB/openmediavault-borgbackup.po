@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-12 23:41+0000\n"
+"POT-Creation-Date: 2026-02-14 23:10+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2025\n"
 "Language-Team: English (United Kingdom) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/en_GB/)\n"
@@ -308,9 +308,6 @@ msgstr "Name/Prefix"
 
 msgid "New quota"
 msgstr "New quota"
-
-msgid "No atime"
-msgstr "No atime"
 
 msgid "None"
 msgstr "None"

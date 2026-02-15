@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-12 23:41+0000\n"
+"POT-Creation-Date: 2026-02-14 23:10+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2024\n"
 "Language-Team: Spanish (Spain) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/es_ES/)\n"
@@ -309,9 +309,6 @@ msgstr "Nombre/Prefijo"
 
 msgid "New quota"
 msgstr ""
-
-msgid "No atime"
-msgstr "Sin atime"
 
 msgid "None"
 msgstr "Ninguno"

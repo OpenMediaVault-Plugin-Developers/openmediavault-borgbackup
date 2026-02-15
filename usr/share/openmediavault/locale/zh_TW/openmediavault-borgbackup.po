@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# kochin <kochinc@outlook.com>, 2025
+# kochin <kochinc@outlook.com>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-12 23:41+0000\n"
+"POT-Creation-Date: 2026-02-14 23:10+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: kochin <kochinc@outlook.com>, 2025\n"
+"Last-Translator: kochin <kochinc@outlook.com>, 2026\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +53,7 @@ msgid ""
 msgstr "您確定要從此插件移除儲存庫嗎？這不會把任何檔案刪除！"
 
 msgid "Backup Options"
-msgstr ""
+msgstr "備份選項"
 
 msgid "Base Dir"
 msgstr "基底檔案目錄"
@@ -212,7 +212,7 @@ msgid "Failed to remove "
 msgstr "移除失敗"
 
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 msgid ""
 "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
@@ -293,9 +293,6 @@ msgstr "名稱/前綴詞"
 
 msgid "New quota"
 msgstr "新設配額"
-
-msgid "No atime"
-msgstr "無 atime"
 
 msgid "None"
 msgstr "無"
