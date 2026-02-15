@@ -249,6 +249,17 @@ configure_borg_{{ archive.uuid }}_cron_file:
 
         prune_exit=$?
 
+        {%- if archive.compact | to_bool %}
+        info "Compacting repository" {{ email }}
+        borg compact --verbose --threshold {{ archive.cthreshold }} {{email}}
+        compact_exit=$?
+        {%- else %}
+        compact_exit=0
+        {%- endif %}
+
+        status_msgs=()
+        overall=ok
+
         borg_rc_class() {
           local rc="${1}"
           if (( rc == 0 )); then
@@ -276,9 +287,6 @@ configure_borg_{{ archive.uuid }}_cron_file:
           esac
         }
 
-        status_msgs=()
-        overall=ok
-
         add_phase_status() {
           local phase="${1}"
           local rc="${2}"
@@ -298,14 +306,6 @@ configure_borg_{{ archive.uuid }}_cron_file:
               ;;
           esac
         }
-
-        {%- if archive.compact | to_bool %}
-        info "Compacting repository" {{ email }}
-        borg compact --verbose --threshold {{ archive.cthreshold }} {{email}}
-        compact_exit=$?
-        {%- else %}
-        compact_exit=0
-        {%- endif %}
 
         add_phase_status "backup" "${backup_exit}"
         add_phase_status "prune" "${prune_exit}"
