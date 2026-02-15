@@ -136,6 +136,19 @@ configure_borg_{{ archive.uuid }}_cron_file:
         # Wait up to 1 hour for repository/cache lock
         export BORG_LOCK_WAIT="${BORG_LOCK_WAIT:-3600}"
 
+        # Use modern borg exit codes
+        export BORG_EXIT_CODES=modern
+
+        # some helpers
+        log() {
+          local level="${1}"
+          shift
+          printf '[%(%Y-%m-%d %H:%M:%S%z)T] %s: %s\n' -1 "${level}" "$*"
+        }
+        info()  { log INFO  "$@"; }
+        warn()  { log WARN  "$@"; }
+        error() { log ERROR "$@"; }
+
         # Serialize all operations per repo to avoid lock.exclusive contention
         lock_id="$(echo -n "${BORG_REPO}" | sha256sum | awk '{print $1}')"
         lockfile="/run/lock/omv-borg-${lock_id}.lock"
@@ -143,15 +156,14 @@ configure_borg_{{ archive.uuid }}_cron_file:
         mkdir -p /run/lock
         exec 9>"${lockfile}"
 
-        echo "Waiting for repo lock (${BORG_LOCK_WAIT}s): ${lockfile}" {{ email }}
+        info "Waiting for repo lock (${BORG_LOCK_WAIT}s): ${lockfile}" {{ email }}
         if ! flock -w "${BORG_LOCK_WAIT}" 9; then
-          echo "Failed to acquire outer repo lock after ${BORG_LOCK_WAIT}s: ${BORG_REPO}" {{ email }}
+          error "Failed to acquire outer repo lock after ${BORG_LOCK_WAIT}s: ${BORG_REPO}" {{ email }}
           exit 99
         fi
-        echo "Acquired outer repo lock: ${BORG_REPO}" {{ email }}
+        info "Acquired outer repo lock: ${BORG_REPO}" {{ email }}
 
-        # some helpers and error handling:
-        info() { printf "\n%s %s\n\n" "$( date )" "$*"; }
+        # error handling
         trap 'echo $( date ) Backup interrupted >&2; exit 2' INT TERM
 
         {%- if archive.prescript | length > 1 %}
@@ -237,23 +249,80 @@ configure_borg_{{ archive.uuid }}_cron_file:
 
         prune_exit=$?
 
-        # use highest exit code as global exit code
-        global_exit=$backup_exit
-        (( prune_exit > global_exit )) && global_exit=$prune_exit
+        borg_rc_class() {
+          local rc="${1}"
+          if (( rc == 0 )); then
+            echo ok
+          elif (( rc == 1 )); then
+            echo warn
+          elif (( rc >= 2 && rc <= 99 )); then
+            echo err
+          elif (( rc >= 100 && rc <= 127 )); then
+            echo warn
+          elif (( rc >= 128 )); then
+            echo sig
+          else
+            echo err
+          fi
+        }
+
+        borg_rc_label() {
+          local rc="${1}"
+          case "$(borg_rc_class "${rc}")" in
+            ok)   echo "ok" ;;
+            warn) echo "warning(${rc})" ;;
+            err)  echo "error(${rc})" ;;
+            sig)  echo "terminated(${rc})" ;;
+          esac
+        }
+
+        status_msgs=()
+        overall=ok
+
+        add_phase_status() {
+          local phase="${1}"
+          local rc="${2}"
+          local cls
+          cls="$(borg_rc_class "${rc}")"
+          case "${cls}" in
+            ok)
+              return 0
+              ;;
+            warn)
+              status_msgs+=( "${phase}=$(borg_rc_label "${rc}")" )
+              [[ "${overall}" == "ok" ]] && overall=warn
+              ;;
+            err|sig)
+              status_msgs+=( "${phase}=$(borg_rc_label "${rc}")" )
+              overall=err
+              ;;
+          esac
+        }
 
         {%- if archive.compact | to_bool %}
         info "Compacting repository" {{ email }}
-        borg compact --verbose --threshold {{ archive.cthreshold }} ${email}
+        borg compact --verbose --threshold {{ archive.cthreshold }} {{email}}
         compact_exit=$?
-        (( compact_exit > global_exit )) && global_exit=$compact_exit
-        {% endif %}
+        {%- else %}
+        compact_exit=0
+        {%- endif %}
 
-        if [ ${global_exit} -eq 1 ]; then
-          info "Backup, Prune, and/or Compact finished with a warning"
-        fi
+        add_phase_status "backup" "${backup_exit}"
+        add_phase_status "prune" "${prune_exit}"
+        add_phase_status "compact" "${compact_exit}"
 
-        if [ ${global_exit} -gt 1 ]; then
-          info "Backup, Prune, and/or Compact finished with an error"
+        case "${overall}" in
+          ok)   global_exit=0 ;;
+          warn) global_exit=1 ;;
+          err)  global_exit=2 ;;
+        esac
+
+        if [[ "${overall}" == "ok" ]]; then
+          info "Borg finished successfully" {{ email }}
+        elif [[ "${overall}" == "warn" ]]; then
+          warn "Borg finished with warnings: ${status_msgs[*]}" {{ email }}
+        else
+          error "Borg finished with errors: ${status_msgs[*]}" {{ email }}
         fi
 
         exit ${global_exit}
