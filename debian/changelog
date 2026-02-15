@@ -1,11 +1,11 @@
-openmediavault-borgbackup (8.1.6) UNRELEASED; urgency=medium
+openmediavault-borgbackup (8.1.6) stable; urgency=low
 
   * Use modern borgbackup exit codes
   * Remove noatime option since noatime is the default and wasn't
     being included in cron job anyway
   * Use --upload-ratelimit since --remote-ratelimit is deprecated
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 14 Feb 2026 23:32:08 +0000
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 15 Feb 2026 17:30:33 +0000
 
 openmediavault-borgbackup (8.1.5) stable; urgency=low
 
