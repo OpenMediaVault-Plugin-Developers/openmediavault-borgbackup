@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Giovanni Scafora <scafora.giovanni@gmail.com>, 2025
+# Giovanni Scafora <scafora.giovanni@gmail.com>, 2026
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-14 23:10+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: Giovanni Scafora <scafora.giovanni@gmail.com>, 2025\n"
+"Last-Translator: Giovanni Scafora <scafora.giovanni@gmail.com>, 2026\n"
 "Language-Team: Italian (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,7 +57,7 @@ msgstr ""
 "cancellerà alcun file!"
 
 msgid "Backup Options"
-msgstr ""
+msgstr "Opzioni di backup"
 
 msgid "Base Dir"
 msgstr "Cartella di riferimento"
@@ -222,7 +222,7 @@ msgid "Failed to remove "
 msgstr "Impossibile rimuovere"
 
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 msgid ""
 "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
@@ -231,19 +231,19 @@ msgstr ""
 "SPERIMENTALE"
 
 msgid "Hooks / Advanced"
-msgstr ""
+msgstr "Hook / Opzioni avanzate"
 
 msgid "Hour of the day that daily backups run."
-msgstr ""
+msgstr "Ora del giorno in cui vengono eseguiti i backup giornalieri."
 
 msgid "Hour of the day that monthly backups run."
-msgstr ""
+msgstr "Ora del giorno in cui vengono eseguiti i backup mensili."
 
 msgid "Hour of the day that weekly backups run."
-msgstr ""
+msgstr "Ora del giorno in cui vengono eseguiti i backup settimanali."
 
 msgid "Hour of the day that yearly backups run."
-msgstr ""
+msgstr "Ora del giorno in cui vengono eseguiti i backup annuali."
 
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
@@ -265,22 +265,22 @@ msgid "Local"
 msgstr "Locale"
 
 msgid "Maintenance"
-msgstr ""
+msgstr "Manutenzione"
 
 msgid "Minute after the hour that daily backups run."
-msgstr ""
+msgstr "Minuto dell’ora in cui vengono eseguiti i backup giornalieri."
 
 msgid "Minute after the hour that hourly backups run."
-msgstr ""
+msgstr "Minuto dell’ora in cui vengono eseguiti i backup orari."
 
 msgid "Minute after the hour that monthly backups run."
-msgstr ""
+msgstr "Minuto dell’ora in cui vengono eseguiti i backup mensili."
 
 msgid "Minute after the hour that weekly backups run."
-msgstr ""
+msgstr "Minuto dell’ora in cui vengono eseguiti i backup settimanali."
 
 msgid "Minute after the hour that yearly backups run."
-msgstr ""
+msgstr "Minuto dell’ora in cui vengono eseguiti i backup annuali."
 
 msgid "Mount"
 msgstr "Monta"
@@ -314,19 +314,19 @@ msgid "None"
 msgstr "Nessuno"
 
 msgid "Number of daily backups to keep."
-msgstr ""
+msgstr "Numero di backup giornalieri da conservare."
 
 msgid "Number of hourly backups to keep."
-msgstr ""
+msgstr "Numero di backup orari da conservare."
 
 msgid "Number of monthly backups to keep."
-msgstr ""
+msgstr "Numero di backup mensili da conservare."
 
 msgid "Number of weekly backups to keep."
-msgstr ""
+msgstr "Numero di backup settimanali da conservare."
 
 msgid "Number of yearly backups to keep."
-msgstr ""
+msgstr "Numero di backup annuali da conservare."
 
 msgid "One filesystem only"
 msgstr "Solo un filesystem"
@@ -414,7 +414,7 @@ msgid "Retain yearly"
 msgstr "Archivia ogni anno"
 
 msgid "Retention and Schedule"
-msgstr ""
+msgstr "Conservazione e pianificazione"
 
 msgid "Run"
 msgstr "Esegui"
@@ -423,13 +423,13 @@ msgid "Run compact after backup and prune"
 msgstr "Esegui la compattazione dopo il backup e la pulizia"
 
 msgid "Run daily cron job."
-msgstr ""
+msgstr "Esegui il job giornaliero di cron."
 
 msgid "Run hourly cron job."
-msgstr ""
+msgstr "Esegui il job orario di cron."
 
 msgid "Run monthly cron job."
-msgstr ""
+msgstr "Esegui il job mensile di cron."
 
 msgid "Run script from this path after backup."
 msgstr "Esegui lo script da questo percorso dopo il backup."
@@ -438,19 +438,19 @@ msgid "Run script from this path before backup."
 msgstr "Esegui lo script da questo percorso prima del backup."
 
 msgid "Run times"
-msgstr ""
+msgstr "Orari di esecuzione"
 
 msgid "Run weekly cron job."
-msgstr ""
+msgstr "Esegui il job settimanale di cron."
 
 msgid "Run with progress"
 msgstr "Esegui con il progresso"
 
 msgid "Run yearly cron job."
-msgstr ""
+msgstr "Esegui il job annuale di cron."
 
 msgid "Runtime / Output"
-msgstr ""
+msgstr "Durata / Output"
 
 msgid "Select a repo ..."
 msgstr "Seleziona un repo ..."
@@ -514,13 +514,13 @@ msgid "borgbackup"
 msgstr "borgbackup"
 
 msgid "daily"
-msgstr ""
+msgstr "giornaliero"
 
 msgid "daily hour"
-msgstr ""
+msgstr "ora giornaliera"
 
 msgid "daily minute"
-msgstr ""
+msgstr "minuto giornaliero"
 
 msgid "extract logs - follow ..."
 msgstr "estrai log - segui..."
@@ -529,10 +529,10 @@ msgid "extract logs ..."
 msgstr "estrai log..."
 
 msgid "hourly"
-msgstr ""
+msgstr "orario"
 
 msgid "hourly minute"
-msgstr ""
+msgstr "minuto orario"
 
 msgid "logs"
 msgstr "log"
@@ -547,13 +547,13 @@ msgid "lzma - even slower / even higher compression"
 msgstr "lzma - ancora più lento / compressione ancora più elevata"
 
 msgid "monthly"
-msgstr ""
+msgstr "mensile"
 
 msgid "monthly hour"
-msgstr ""
+msgstr "ora mensile"
 
 msgid "monthly minute"
-msgstr ""
+msgstr "minuto mensile"
 
 msgid "n/a"
 msgstr "non disponibile"
@@ -562,22 +562,22 @@ msgid "omv-extras wiki"
 msgstr "wiki di omv-extras"
 
 msgid "weekly"
-msgstr ""
+msgstr "settimanale"
 
 msgid "weekly hour"
-msgstr ""
+msgstr "ora settimanale"
 
 msgid "weekly minute"
-msgstr ""
+msgstr "minuto settimanale"
 
 msgid "yearly"
-msgstr ""
+msgstr "annuale"
 
 msgid "yearly hour"
-msgstr ""
+msgstr "ora annuale"
 
 msgid "yearly minute"
-msgstr ""
+msgstr "minuto annuale"
 
 msgid "zlib - less fast / higher compression"
 msgstr "zlib - meno veloce / maggiore compressione"

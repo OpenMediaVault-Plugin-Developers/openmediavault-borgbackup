@@ -219,19 +219,19 @@ msgid ""
 msgstr "提供歸檔內檔案之一個合併及版本的檢視。實驗性質"
 
 msgid "Hooks / Advanced"
-msgstr ""
+msgstr "指令掛鉤 / 進階"
 
 msgid "Hour of the day that daily backups run."
-msgstr ""
+msgstr "當日幾時執行每日備份。"
 
 msgid "Hour of the day that monthly backups run."
-msgstr ""
+msgstr "當日幾時執行每月備份。"
 
 msgid "Hour of the day that weekly backups run."
-msgstr ""
+msgstr "當日幾時執行每週備份。"
 
 msgid "Hour of the day that yearly backups run."
-msgstr ""
+msgstr "當日幾時執行每年備份。"
 
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
@@ -251,22 +251,22 @@ msgid "Local"
 msgstr "本地"
 
 msgid "Maintenance"
-msgstr ""
+msgstr "維護"
 
 msgid "Minute after the hour that daily backups run."
-msgstr ""
+msgstr "正點過後幾分鐘執行每日備份。"
 
 msgid "Minute after the hour that hourly backups run."
-msgstr ""
+msgstr "正點過後幾分鐘執行每小時備份。"
 
 msgid "Minute after the hour that monthly backups run."
-msgstr ""
+msgstr "正點過後幾分鐘執行每月備份。"
 
 msgid "Minute after the hour that weekly backups run."
-msgstr ""
+msgstr "正點過後幾分鐘執行每週備份。"
 
 msgid "Minute after the hour that yearly backups run."
-msgstr ""
+msgstr "正點過後幾分鐘執行每年備份。"
 
 msgid "Mount"
 msgstr "裝載"
@@ -298,19 +298,19 @@ msgid "None"
 msgstr "無"
 
 msgid "Number of daily backups to keep."
-msgstr ""
+msgstr "所要保存的每日備份數目。"
 
 msgid "Number of hourly backups to keep."
-msgstr ""
+msgstr "所要保存的每小時備份數目。"
 
 msgid "Number of monthly backups to keep."
-msgstr ""
+msgstr "所要保存的每月備份數目。"
 
 msgid "Number of weekly backups to keep."
-msgstr ""
+msgstr "所要保存的每週備份數目。"
 
 msgid "Number of yearly backups to keep."
-msgstr ""
+msgstr "所要保存的每年備份數目。"
 
 msgid "One filesystem only"
 msgstr "單一檔案系統"
@@ -396,7 +396,7 @@ msgid "Retain yearly"
 msgstr "每年保留"
 
 msgid "Retention and Schedule"
-msgstr ""
+msgstr "保留與執行時程"
 
 msgid "Run"
 msgstr "執行"
@@ -405,13 +405,13 @@ msgid "Run compact after backup and prune"
 msgstr "於備份和修剪後執行緊密"
 
 msgid "Run daily cron job."
-msgstr ""
+msgstr "執行每日 cron 工作。"
 
 msgid "Run hourly cron job."
-msgstr ""
+msgstr "執行每小時 cron 工作。"
 
 msgid "Run monthly cron job."
-msgstr ""
+msgstr "執行每月 cron 工作。"
 
 msgid "Run script from this path after backup."
 msgstr "備份完後執行此路徑的腳本程式。"
@@ -420,19 +420,19 @@ msgid "Run script from this path before backup."
 msgstr "備份前先執行此路徑的腳本程式。"
 
 msgid "Run times"
-msgstr ""
+msgstr "運行時程"
 
 msgid "Run weekly cron job."
-msgstr ""
+msgstr "執行每週 cron 工作。"
 
 msgid "Run with progress"
 msgstr "執行時顯示進度"
 
 msgid "Run yearly cron job."
-msgstr ""
+msgstr "執行每年 cron 工作。"
 
 msgid "Runtime / Output"
-msgstr ""
+msgstr "運行時間 / 輸出"
 
 msgid "Select a repo ..."
 msgstr "選擇一個儲存庫 ..."
@@ -493,13 +493,13 @@ msgid "borgbackup"
 msgstr "borgbackup"
 
 msgid "daily"
-msgstr ""
+msgstr "每日"
 
 msgid "daily hour"
-msgstr ""
+msgstr "每日幾時"
 
 msgid "daily minute"
-msgstr ""
+msgstr "每日幾分"
 
 msgid "extract logs - follow ..."
 msgstr "擷取日誌 - 追隨 ..."
@@ -508,10 +508,10 @@ msgid "extract logs ..."
 msgstr "擷取日誌 ..."
 
 msgid "hourly"
-msgstr ""
+msgstr "每小時"
 
 msgid "hourly minute"
-msgstr ""
+msgstr "每小時幾分"
 
 msgid "logs"
 msgstr "日誌"
@@ -526,13 +526,13 @@ msgid "lzma - even slower / even higher compression"
 msgstr "lzma - 更慢 / 更高壓縮"
 
 msgid "monthly"
-msgstr ""
+msgstr "每月"
 
 msgid "monthly hour"
-msgstr ""
+msgstr "每月幾時"
 
 msgid "monthly minute"
-msgstr ""
+msgstr "每月幾分"
 
 msgid "n/a"
 msgstr "不適用"
@@ -541,22 +541,22 @@ msgid "omv-extras wiki"
 msgstr "omv-extras wiki"
 
 msgid "weekly"
-msgstr ""
+msgstr "每週"
 
 msgid "weekly hour"
-msgstr ""
+msgstr "每週幾時"
 
 msgid "weekly minute"
-msgstr ""
+msgstr "每週幾分"
 
 msgid "yearly"
-msgstr ""
+msgstr "每年"
 
 msgid "yearly hour"
-msgstr ""
+msgstr "每年幾時"
 
 msgid "yearly minute"
-msgstr ""
+msgstr "每年幾分"
 
 msgid "zlib - less fast / higher compression"
 msgstr "zlib - 沒那麼快 / 高壓縮"

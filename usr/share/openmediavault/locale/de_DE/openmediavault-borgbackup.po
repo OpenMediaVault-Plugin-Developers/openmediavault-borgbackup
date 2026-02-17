@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# Ettore Atalan <atalanttore@googlemail.com>, 2021
 # Dampflok_HD, 2022
-# Ettore Atalan <atalanttore@googlemail.com>, 2024
 # 
 #, fuzzy
 msgid ""
@@ -14,12 +14,12 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-14 23:10+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2024\n"
-"Language-Team: German (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/de/)\n"
+"Last-Translator: Dampflok_HD, 2022\n"
+"Language-Team: German (Germany) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/de_DE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
+"Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
@@ -47,40 +47,34 @@ msgid ""
 "Are you sure you want to delete the repo from the plugin and the repo files?"
 " This will delete all repo files!"
 msgstr ""
-"Sind Sie sicher, dass Sie das Repo aus dem Plugin und den Repo-Dateien "
-"löschen möchten? Dies wird alle Repo-Dateien löschen!"
 
 msgid ""
 "Are you sure you want to remove repo from the plugin? This will not delete "
 "any files!"
 msgstr ""
-"Sind Sie sicher, dass Sie das Repo aus dem Plugin entfernen möchten? Dies "
-"wird keine Dateien löschen!"
 
 msgid "Backup Options"
 msgstr ""
 
 msgid "Base Dir"
-msgstr "Basisverz."
+msgstr ""
 
 msgid ""
 "Base directory to make archive use relative paths. Leave blank to use "
 "absolute paths in archive."
 msgstr ""
-"Basisverzeichnis, damit das Archiv relative Pfade verwendet. Leer lassen, um"
-" absolute Pfade im Archiv zu verwenden."
 
 msgid "BorgBackup"
 msgstr "BorgBackup"
 
 msgid "Change"
-msgstr "Ändern"
+msgstr ""
 
 msgid "Change location"
-msgstr "Ort ändern"
+msgstr ""
 
 msgid "Change passphrase"
-msgstr "Passphrase ändern"
+msgstr ""
 
 msgid "Change quota"
 msgstr ""
@@ -89,7 +83,7 @@ msgid "Changing quota ..."
 msgstr ""
 
 msgid "Changing repo location ..."
-msgstr "Speicherort des Repo wird geändert ..."
+msgstr ""
 
 msgid "Check"
 msgstr "Überprüfen"
@@ -114,7 +108,7 @@ msgstr ""
 " nur bei Fehler senden."
 
 msgid "Compact"
-msgstr "Kompakt"
+msgstr ""
 
 msgid "Compact repo ..."
 msgstr ""
@@ -153,16 +147,16 @@ msgid "Current quota"
 msgstr ""
 
 msgid "Delete + Files"
-msgstr "Löschen + Dateien"
+msgstr ""
 
 msgid "Directory not found"
 msgstr ""
 
 msgid "Docs"
-msgstr "Doku"
+msgstr ""
 
 msgid "Download repo keyfile"
-msgstr "Repo-Schlüsseldatei herunterladen"
+msgstr ""
 
 msgid "Dry Run"
 msgstr ""
@@ -192,7 +186,7 @@ msgid "Environment Variables"
 msgstr "Umgebungsvariablen"
 
 msgid "Excludes"
-msgstr "Ausgenommen"
+msgstr "Ausschließlich"
 
 msgid "Export"
 msgstr "Exportieren"
@@ -208,10 +202,10 @@ msgid "Extract"
 msgstr "Extrahieren"
 
 msgid "Extract archive to directory"
-msgstr "Archiv in Verzeichnis extrahieren"
+msgstr ""
 
 msgid "Extract archive to tar file"
-msgstr "Archiv in tar-Datei extrahieren"
+msgstr ""
 
 msgid "Failed to find "
 msgstr ""
@@ -228,8 +222,6 @@ msgstr ""
 msgid ""
 "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
 msgstr ""
-"Liefert eine zusammengefasste, versionierte Ansicht der Dateien in den "
-"Archiven. EXPERIMENTELL"
 
 msgid "Hooks / Advanced"
 msgstr ""
@@ -287,13 +279,13 @@ msgid "Mount"
 msgstr "Einhängen"
 
 msgid "Mount repo"
-msgstr "Repo einhängen"
+msgstr ""
 
 msgid "Mounted"
 msgstr "Eingehängt"
 
 msgid "Mounting repo ..."
-msgstr "Repo wird eingehängt ..."
+msgstr ""
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
@@ -366,16 +358,16 @@ msgid "Remote path"
 msgstr "Entfernter Pfad"
 
 msgid "Remove"
-msgstr "Entfernen"
+msgstr ""
 
 msgid "Repo"
 msgstr "Repo"
 
 msgid "Repo has been mounted."
-msgstr "Repo wurde eingehängt."
+msgstr ""
 
 msgid "Repo has been unmounted."
-msgstr "Repo wurde ausgehängt."
+msgstr ""
 
 msgid "Repo info ..."
 msgstr "Repoinfo ..."
@@ -386,7 +378,7 @@ msgstr ""
 "Archive!"
 
 msgid "Repo location has been changed."
-msgstr "Speicherort des Repo wurde geändert."
+msgstr ""
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
@@ -456,7 +448,7 @@ msgid "Runtime / Output"
 msgstr ""
 
 msgid "Select a repo ..."
-msgstr "Eine Repo auswählen ..."
+msgstr "Ein Repo auswählen ..."
 
 msgid "Select an archive ..."
 msgstr "Ein Archiv auswählen ..."
@@ -471,7 +463,7 @@ msgstr ""
 "kiByte/s (Standard&#58; 0=unbegrenzt)."
 
 msgid "Shared Folder"
-msgstr "Gemeinsamer Ordner"
+msgstr "Freigegebener Ordner"
 
 msgid "Shared folder"
 msgstr "Gemeinsamer Ordner"
@@ -497,7 +489,7 @@ msgid "Unmount"
 msgstr "Aushängen"
 
 msgid "Unmounting repo ..."
-msgstr "Repo wird ausgehängt ..."
+msgstr ""
 
 msgid "Uses value as prefix for archive name."
 msgstr "Verwendet den Wert als Präfix für den Archivnamen."
@@ -509,7 +501,7 @@ msgid "Verify"
 msgstr "Verifizieren"
 
 msgid "Versions"
-msgstr "Versionen"
+msgstr ""
 
 msgid "You must move the repo files before changing the location."
 msgstr ""
