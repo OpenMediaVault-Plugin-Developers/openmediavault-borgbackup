@@ -854,10 +854,50 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $cmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
                 $cmd->setRedirect2to1();
                 $cmdLine = $cmd->getCommandLine();
+                // Wrap in a bash pipeline to cap output at 128MB, protecting tmpfs (/tmp).
+                // head -c consumes the first 128MB; the trailing cat drains the rest so
+                // borg never receives SIGPIPE. set -o pipefail propagates borg's exit code.
+                $cmdLine = sprintf('bash -c %s',
+                    escapeshellarg(sprintf(
+                        'set -o pipefail; %s | { head -c 134217728; cat >/dev/null; }',
+                        $cmdLine
+                    )));
                 $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmd));
                 $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
                 if (0 !== $this->exec($cmdLine, $output, $bgOutputFilename)) {
                     throw new \OMV\ExecException($cmd, $output);
+                }
+                // If borg stats are not present at the end of the output (e.g. because
+                // the output was truncated at 128MB), append borg info --last 1 so the
+                // final stats are always visible. Check the last 4KB for 'This archive:'
+                // which is a reliable marker in borg create --stats output.
+                if (!$dryrun) {
+                    clearstatcache(true, $bgOutputFilename);
+                    $fsize = filesize($bgOutputFilename);
+                    $checkLen = min($fsize, 4096);
+                    $statsFound = false;
+                    if ($checkLen > 0) {
+                        $fp = fopen($bgOutputFilename, 'r');
+                        fseek($fp, -$checkLen, SEEK_END);
+                        $tail = fread($fp, $checkLen);
+                        fclose($fp);
+                        $statsFound = strpos($tail, 'This archive:') !== false;
+                    }
+                    if (!$statsFound) {
+                        $infoArgs = [];
+                        $infoArgs[] = $this->getProgram;
+                        $infoArgs[] = 'info';
+                        $infoArgs[] = '--last 1';
+                        $infoArgs[] = sprintf('"%s"', $path);
+                        $infoCmd = new \OMV\System\Process($infoArgs);
+                        $infoCmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
+                        $infoCmd->setEnv("BORG_EXIT_CODES", "modern");
+                        $infoCmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
+                        $infoCmd->setRedirect2to1();
+                        $this->writeBgProcOutput($bgOutputFilename, PHP_EOL . PHP_EOL .
+                            '[Stats not found in output; appending borg info --last 1:]' . PHP_EOL);
+                        $this->exec($infoCmd->getCommandLine(), $infoOutput, $bgOutputFilename);
+                    }
                 }
                 // post script
                 $postscript = $archive->get('postscript');
