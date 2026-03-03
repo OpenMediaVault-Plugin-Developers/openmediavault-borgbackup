@@ -21,6 +21,7 @@
 {% set logFile = '/var/log/borgbackup.log' %}
 {% set scriptsDir = '/var/lib/openmediavault/borgbackup' %}
 {% set scriptPrefix = 'borgbackup-' %}
+{% set compactPrefix = 'borgcompact-' %}
 
 configure_borg_scripts_dir:
   file.directory:
@@ -78,6 +79,7 @@ configure_borg_crond:
         config: {{ config | json }}
         scriptsDir: {{ scriptsDir }}
         scriptPrefix: {{ scriptPrefix }}
+        compactPrefix: {{ compactPrefix }}
     - template: jinja
     - user: root
     - group: root
@@ -363,6 +365,125 @@ purge_stale_borg_scripts:
       - "{{ scriptPrefix }}.*"
     - exclude:
 {%- for f in keep_scripts %}
+      - "{{ f }}"
+{%- endfor %}
+    - rmdirs: False
+    - rmlinks: True
+
+
+{% set ns2 = namespace(type='',sharedfolderref='',uri='',passphrase='') %}
+
+{% for compact in config.compacts.compactsched | selectattr('enable') %}
+
+{% for repo in config.repos.repo | selectattr("uuid", "equalto", compact.reporef) %}
+{% set ns2.type = repo.type %}
+{% set ns2.sharedfolderref = repo.sharedfolderref %}
+{% set ns2.uri = repo.uri %}
+{% set ns2.passphrase = repo.passphrase %}
+{% endfor %}
+
+{% set compactScript = scriptsDir ~ '/' ~ compactPrefix ~ compact.uuid %}
+
+{% set crpath = '' %}
+{% if ns2.type == "local" %}
+{% set crpath = salt['omv_conf.get_sharedfolder_path'](ns2.sharedfolderref) %}
+{% else %}
+{% set crpath = ns2.uri %}
+{% endif %}
+
+{% if compact.email %}
+{% set cemail = '2>&1 | tee -a ' ~ logFile %}
+{% else %}
+{% set cemail = '>> ' ~ logFile ~ ' 2>&1' %}
+{% endif %}
+
+{% set cExtraEnv = envVarDir ~ '/' ~ envVarPrefix ~ compact.reporef %}
+
+configure_borg_{{ compact.uuid }}_compact_file:
+  file.managed:
+    - name: '{{ compactScript }}'
+    - contents: |
+        #!/bin/bash
+
+        {{ pillar['headers']['auto_generated'] }}
+        {{ pillar['headers']['warning'] }}
+
+        extra="{{ cExtraEnv }}"
+        if [ -f "${extra}" ]; then
+          set -a
+          . ${extra}
+          set +a
+        fi
+
+        # Setting this, so the repo does not need to be given on the commandline:
+        export BORG_REPO='{{ crpath }}'
+
+        # Setting this, so you won't be asked for your repository passphrase:
+        export BORG_PASSPHRASE=$'{{ ns2.passphrase | replace("'", "\\'") }}'
+
+        # Wait up to 1 hour for repository/cache lock
+        export BORG_LOCK_WAIT="${BORG_LOCK_WAIT:-3600}"
+
+        # Use modern borg exit codes
+        export BORG_EXIT_CODES=modern
+
+        # some helpers
+        log() {
+          local level="${1}"
+          shift
+          printf '[%(%Y-%m-%d %H:%M:%S%z)T] %s: %s\n' -1 "${level}" "$*"
+        }
+        info()  { log INFO  "$@"; }
+        warn()  { log WARN  "$@"; }
+        error() { log ERROR "$@"; }
+
+        # Serialize all operations per repo to avoid lock.exclusive contention
+        lock_id="$(echo -n "${BORG_REPO}" | sha256sum | awk '{print $1}')"
+        lockfile="/run/lock/omv-borg-${lock_id}.lock"
+
+        mkdir -p /run/lock
+        exec 9>"${lockfile}"
+
+        info "Waiting for repo lock (${BORG_LOCK_WAIT}s): ${lockfile}" {{ cemail }}
+        if ! flock -w "${BORG_LOCK_WAIT}" 9; then
+          error "Failed to acquire outer repo lock after ${BORG_LOCK_WAIT}s: ${BORG_REPO}" {{ cemail }}
+          exit 99
+        fi
+        info "Acquired outer repo lock: ${BORG_REPO}" {{ cemail }}
+
+        trap 'echo $( date ) Compact interrupted >&2; exit 2' INT TERM
+
+        info "Compacting repository" {{ cemail }}
+        borg compact --verbose --threshold {{ compact.cthreshold }} {{ cemail }}
+        compact_exit=$?
+
+        if (( compact_exit == 0 )); then
+          info "Borg compact finished successfully" {{ cemail }}
+        elif (( compact_exit == 1 )); then
+          warn "Borg compact finished with warnings" {{ cemail }}
+        else
+          error "Borg compact finished with errors (rc=${compact_exit})" {{ cemail }}
+        fi
+
+        exit ${compact_exit}
+    - user: root
+    - group: root
+    - mode: 750
+{% endfor %}
+
+
+{% set keep_compact = [] %}
+{% for compact in config.compacts.compactsched | selectattr('enable') %}
+{% do keep_compact.append(compactPrefix ~ compact.uuid) %}
+{% endfor %}
+
+purge_stale_borg_compact_scripts:
+  file.tidied:
+    - name: "{{ scriptsDir }}"
+    - matches:
+      - "{{ compactPrefix }}.*"
+    - exclude:
+{%- for f in keep_compact %}
       - "{{ f }}"
 {%- endfor %}
     - rmdirs: False

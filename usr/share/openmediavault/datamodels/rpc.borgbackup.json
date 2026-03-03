@@ -278,6 +278,99 @@
   },
   {
     "type": "rpc",
+    "id": "rpc.borgbackup.setcompact",
+    "params": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "enable": {
+          "type": "boolean",
+          "required": true
+        },
+        "reporef": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "cthreshold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99,
+          "required": true
+        },
+        "email": {
+          "type": "boolean",
+          "required": true
+        },
+        "dailyenable": {
+          "type": "boolean",
+          "required": true
+        },
+        "dailyhour": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 23,
+          "required": true
+        },
+        "dailymin": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 59,
+          "required": true
+        },
+        "weeklyenable": {
+          "type": "boolean",
+          "required": true
+        },
+        "weeklyhour": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 23,
+          "required": true
+        },
+        "weeklymin": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 59,
+          "required": true
+        },
+        "weeklyday": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6,
+          "required": true
+        },
+        "monthlyenable": {
+          "type": "boolean",
+          "required": true
+        },
+        "monthlyhour": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 23,
+          "required": true
+        },
+        "monthlymin": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 59,
+          "required": true
+        },
+        "monthlyday": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 31,
+          "required": true
+        }
+      }
+    }
+  },
+  {
+    "type": "rpc",
     "id": "rpc.borgbackup.setenvvar",
     "params": {
       "type": "object",

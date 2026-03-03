@@ -294,6 +294,101 @@
           }
         }
       }
+    },
+    "compacts": {
+      "type": "object",
+      "properties": {
+        "compactsched": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "format": "uuidv4"
+              },
+              "enable": {
+                "type": "boolean",
+                "default": true
+              },
+              "reporef": {
+                "type": "string",
+                "format": "uuidv4"
+              },
+              "cthreshold": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 99,
+                "default": 10
+              },
+              "email": {
+                "type": "boolean",
+                "default": true
+              },
+              "dailyenable": {
+                "type": "boolean",
+                "default": false
+              },
+              "dailyhour": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 23,
+                "default": 4
+              },
+              "dailymin": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59,
+                "default": 0
+              },
+              "weeklyenable": {
+                "type": "boolean",
+                "default": false
+              },
+              "weeklyhour": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 23,
+                "default": 4
+              },
+              "weeklymin": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59,
+                "default": 0
+              },
+              "weeklyday": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 6,
+                "default": 1
+              },
+              "monthlyenable": {
+                "type": "boolean",
+                "default": false
+              },
+              "monthlyhour": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 23,
+                "default": 4
+              },
+              "monthlymin": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59,
+                "default": 0
+              },
+              "monthlyday": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 31,
+                "default": 1
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

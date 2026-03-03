@@ -1,0 +1,8 @@
+version: "1.0"
+type: navigation-item
+data:
+  path: "services.borgbackup.compacts"
+  text: _("Compact")
+  position: 15
+  icon: mdi:arrow-collapse-vertical
+  url: "/services/borgbackup/compacts"

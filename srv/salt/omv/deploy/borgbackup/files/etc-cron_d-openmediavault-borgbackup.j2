@@ -22,3 +22,18 @@
 {{ archive.yearlymin }} {{ archive.yearlyhour }} 1 1 *  root  {{ scriptPath }}
 {%- endif %}
 {%- endfor %}
+{%- set compactBase = base ~ compactPrefix %}
+{%- for compact in config.compacts.compactsched | selectattr('enable') %}
+{%- set compactPath = compactBase ~ compact.uuid %}
+
+# compact: {{ compact.uuid }}
+{%- if compact.dailyenable | to_bool %}
+{{ compact.dailymin }} {{ compact.dailyhour }} * * *  root  {{ compactPath }}
+{%- endif %}
+{%- if compact.weeklyenable | to_bool %}
+{{ compact.weeklymin }} {{ compact.weeklyhour }} * * {{ compact.weeklyday }}  root  {{ compactPath }}
+{%- endif %}
+{%- if compact.monthlyenable | to_bool %}
+{{ compact.monthlymin }} {{ compact.monthlyhour }} {{ compact.monthlyday }} * *  root  {{ compactPath }}
+{%- endif %}
+{%- endfor %}

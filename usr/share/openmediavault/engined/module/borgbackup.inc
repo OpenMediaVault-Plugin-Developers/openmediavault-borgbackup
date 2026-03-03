@@ -44,5 +44,10 @@ class OMVModuleBorgBackup extends \OMV\Engine\Module\ServiceAbstract
             "org.openmediavault.conf.service.borgbackup.envvar",
             [ $this, "setDirty" ]
         );
+        $dispatcher->addListener(
+            OMV_NOTIFY_CREATE | OMV_NOTIFY_MODIFY | OMV_NOTIFY_DELETE,
+            "org.openmediavault.conf.service.borgbackup.compact",
+            [ $this, "setDirty" ]
+        );
     }
 }

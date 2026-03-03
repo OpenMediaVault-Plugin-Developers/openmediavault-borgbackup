@@ -1,0 +1,6 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/borgbackup/compacts"
+  title: _("Compact")
+  component: omv-services-borgbackup-compacts-datatable-page

@@ -36,4 +36,8 @@ if ! omv_config_exists "${SERVICE_XPATH}/envvars"; then
     omv_config_add_node "${SERVICE_XPATH}" "envvars" ""
 fi
 
+if ! omv_config_exists "${SERVICE_XPATH}/compacts"; then
+    omv_config_add_node "${SERVICE_XPATH}" "compacts" ""
+fi
+
 exit 0

@@ -59,6 +59,12 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('getEnvVar');
         $this->registerMethod('setEnvVar');
         $this->registerMethod('deleteEnvVar');
+
+        $this->registerMethod('getCompactList');
+        $this->registerMethod('getCompact');
+        $this->registerMethod('setCompact');
+        $this->registerMethod('deleteCompact');
+        $this->registerMethod('runCompact');
     }
 
     public function enumerateRepoCandidates($params, $context)
@@ -1227,5 +1233,144 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $db->delete($object);
         // Return the deleted configuration object.
         return $object->getAssoc();
+    }
+
+    public function getCompactList($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.common.getlist');
+        // Get the configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        $objects = $db->get('conf.service.borgbackup.compact');
+        $objectsAssoc = [];
+        foreach ($objects as $objectk => &$objectv) {
+            $objectv->add('reponame', 'string', gettext("n/a"));
+            try {
+                $repoObject = $db->get('conf.service.borgbackup.repo', $objectv->get('reporef'));
+                $objectv->set('reponame', $repoObject->get('name'));
+            } catch (Exception $e) {
+            }
+            $labels = [
+                'daily'   => gettext("daily"),
+                'weekly'  => gettext("weekly"),
+                'monthly' => gettext("monthly"),
+            ];
+            $periods = [
+                'daily'   => ['hour' => 'dailyhour',   'min' => 'dailymin'],
+                'weekly'  => ['hour' => 'weeklyhour',  'min' => 'weeklymin'],
+                'monthly' => ['hour' => 'monthlyhour', 'min' => 'monthlymin'],
+            ];
+            $dayNames = [
+                gettext("Sun"), gettext("Mon"), gettext("Tue"),
+                gettext("Wed"), gettext("Thu"), gettext("Fri"), gettext("Sat"),
+            ];
+            $crontimes = [];
+            foreach ($periods as $name => $fields) {
+                if (!$objectv->get("{$name}enable")) {
+                    continue;
+                }
+                $hour = sprintf('%02d', (int)$objectv->get($fields['hour']));
+                $min  = sprintf('%02d', (int)$objectv->get($fields['min']));
+                if ($name === 'weekly') {
+                    $day = $dayNames[(int)$objectv->get('weeklyday')] ?? $dayNames[1];
+                    $crontimes[] = sprintf('%s (%s) %s:%s', $labels[$name], $day, $hour, $min);
+                } elseif ($name === 'monthly') {
+                    $dom = (int)$objectv->get('monthlyday');
+                    $crontimes[] = sprintf('%s (day %d) %s:%s', $labels[$name], $dom, $hour, $min);
+                } else {
+                    $crontimes[] = sprintf('%s %s:%s', $labels[$name], $hour, $min);
+                }
+            }
+            $objectv->add('crontimes', 'string', implode('<br />', $crontimes));
+            $objectsAssoc[] = $objectv->getAssoc();
+        }
+        // Filter the result.
+        return $this->applyFilter($objectsAssoc, $params['start'], $params['limit'],
+            $params['sortfield'], $params['sortdir']);
+    }
+
+    public function getCompact($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.common.objectuuid');
+        // Get the configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        return $db->getAssoc('conf.service.borgbackup.compact', $params['uuid']);
+    }
+
+    public function setCompact($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.borgbackup.setcompact');
+        // Prepare the configuration object.
+        $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.compact');
+        $object->setAssoc($params);
+        $db = \OMV\Config\Database::getInstance();
+        $db->set($object);
+        // Return the configuration object.
+        return $object->getAssoc();
+    }
+
+    public function deleteCompact($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.common.objectuuid');
+        // Get the configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        $object = $db->get('conf.service.borgbackup.compact', $params['uuid']);
+        // Delete the configuration object.
+        $db->delete($object);
+        // Return the deleted configuration object.
+        return $object->getAssoc();
+    }
+
+    public function runCompact($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.common.objectuuid');
+        $db = \OMV\Config\Database::getInstance();
+        // Get compact configuration object.
+        $compact = $db->get('conf.service.borgbackup.compact', $params['uuid']);
+        // Get repo configuration object.
+        $repo = $db->get('conf.service.borgbackup.repo', $compact->get('reporef'));
+        // Create the background process.
+        return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
+            use ($compact, $context, $repo) {
+                $cmdArgs = [];
+                $cmdArgs[] = $this->getProgram;
+                $cmdArgs[] = 'compact';
+                $cmdArgs[] = '--verbose';
+                $cmdArgs[] = sprintf('--threshold %d', $compact->get('cthreshold'));
+                if ($repo->get('type') == 'local') {
+                    $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                        'uuid' => $repo->get('sharedfolderref')
+                    ], $context);
+                } else {
+                    $path = $repo->get('uri');
+                }
+                $cmdArgs[] = escapeshellarg($path);
+                $cmd = new \OMV\System\Process($cmdArgs);
+                $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
+                $cmd->setEnv("BORG_EXIT_CODES", "modern");
+                $cmd->setEnvFromFile($this->envFile . $compact->get('reporef'));
+                $cmd->setRedirect2to1();
+                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmd));
+                $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
+                if (0 !== ($exitStatus = $this->exec($cmd, $output, $bgOutputFilename))) {
+                    throw new \OMV\ExecException($cmd, $output);
+                }
+                return $output;
+            }
+        );
     }
 }

@@ -1,0 +1,214 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-borgbackup-compact-form-page
+  type: formPage
+  config:
+    request:
+      service: BorgBackup
+      get:
+        method: getCompact
+        params:
+          uuid: "{{ _routeParams.uuid }}"
+      post:
+        method: setCompact
+    fields:
+      - type: confObjUuid
+      - type: divider
+        title: _("General")
+      - type: checkbox
+        name: enable
+        label: _("Enable")
+        value: true
+      - type: select
+        name: reporef
+        label: _("Repo")
+        placeholder: _("Select a repo ...")
+        textField: name
+        valueField: uuid
+        store:
+          proxy:
+            service: BorgBackup
+            get:
+              method: enumerateRepoCandidates
+        validators:
+          required: true
+      - type: numberInput
+        name: cthreshold
+        label: _("Compact threshold")
+        value: 10
+        hint: _("Set minimum threshold for saved space in percent.")
+        validators:
+          min: 0
+          max: 99
+          patternType: integer
+          required: true
+      - type: checkbox
+        name: email
+        label: _("Email")
+        value: true
+        hint: _("Checked = send email on error or success.<br/>Unchecked = send email on error only.")
+      - type: divider
+        title: _("Schedule")
+      - type: container
+        fields:
+          - type: checkbox
+            name: dailyenable
+            label: _("Daily")
+            value: false
+            hint: _("Run compact daily.")
+          - type: numberInput
+            name: dailyhour
+            label: _("daily hour")
+            value: 4
+            hint: _("Hour of the day that daily compact runs.")
+            validators:
+              min: 0
+              max: 23
+              patternType: integer
+              required: true
+            modifiers:
+              - type: visible
+                constraint:
+                  operator: truthy
+                  arg0:
+                    prop: dailyenable
+          - type: numberInput
+            name: dailymin
+            label: _("daily minute")
+            value: 0
+            hint: _("Minute after the hour that daily compact runs.")
+            validators:
+              min: 0
+              max: 59
+              patternType: integer
+              required: true
+            modifiers:
+              - type: visible
+                constraint:
+                  operator: truthy
+                  arg0:
+                    prop: dailyenable
+      - type: container
+        fields:
+          - type: checkbox
+            name: weeklyenable
+            label: _("Weekly")
+            value: false
+            hint: _("Run compact weekly.")
+          - type: numberInput
+            name: weeklyhour
+            label: _("weekly hour")
+            value: 4
+            hint: _("Hour of the day that weekly compact runs.")
+            validators:
+              min: 0
+              max: 23
+              patternType: integer
+              required: true
+            modifiers:
+              - type: visible
+                constraint:
+                  operator: truthy
+                  arg0:
+                    prop: weeklyenable
+          - type: numberInput
+            name: weeklymin
+            label: _("weekly minute")
+            value: 0
+            hint: _("Minute after the hour that weekly compact runs.")
+            validators:
+              min: 0
+              max: 59
+              patternType: integer
+              required: true
+            modifiers:
+              - type: visible
+                constraint:
+                  operator: truthy
+                  arg0:
+                    prop: weeklyenable
+          - type: select
+            name: weeklyday
+            label: _("weekly day")
+            value: 1
+            hint: _("Day of the week that weekly compact runs.")
+            store:
+              data:
+                - [0, _("Sunday")]
+                - [1, _("Monday")]
+                - [2, _("Tuesday")]
+                - [3, _("Wednesday")]
+                - [4, _("Thursday")]
+                - [5, _("Friday")]
+                - [6, _("Saturday")]
+            modifiers:
+              - type: visible
+                constraint:
+                  operator: truthy
+                  arg0:
+                    prop: weeklyenable
+      - type: container
+        fields:
+          - type: checkbox
+            name: monthlyenable
+            label: _("Monthly")
+            value: false
+            hint: _("Run compact monthly.")
+          - type: numberInput
+            name: monthlyhour
+            label: _("monthly hour")
+            value: 4
+            hint: _("Hour of the day that monthly compact runs.")
+            validators:
+              min: 0
+              max: 23
+              patternType: integer
+              required: true
+            modifiers:
+              - type: visible
+                constraint:
+                  operator: truthy
+                  arg0:
+                    prop: monthlyenable
+          - type: numberInput
+            name: monthlymin
+            label: _("monthly minute")
+            value: 0
+            hint: _("Minute after the hour that monthly compact runs.")
+            validators:
+              min: 0
+              max: 59
+              patternType: integer
+              required: true
+            modifiers:
+              - type: visible
+                constraint:
+                  operator: truthy
+                  arg0:
+                    prop: monthlyenable
+          - type: numberInput
+            name: monthlyday
+            label: _("monthly day")
+            value: 1
+            hint: _("Day of the month that monthly compact runs (1-31).")
+            validators:
+              min: 1
+              max: 31
+              patternType: integer
+              required: true
+            modifiers:
+              - type: visible
+                constraint:
+                  operator: truthy
+                  arg0:
+                    prop: monthlyenable
+    buttons:
+      - template: submit
+        execute:
+          type: url
+          url: "/services/borgbackup/compacts"
+      - template: cancel
+        execute:
+          type: url
+          url: "/services/borgbackup/compacts"

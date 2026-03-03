@@ -1,0 +1,70 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-borgbackup-compacts-datatable-page
+  type: datatablePage
+  config:
+    autoReload: false
+    hasSearchField: true
+    stateId: c3b2d1e0-f1a2-11ef-b3c4-1234567890ab
+    sorters:
+      - dir: asc
+        prop: reponame
+    store:
+      proxy:
+        service: BorgBackup
+        get:
+          method: getCompactList
+    columns:
+      - name: _("Enabled")
+        prop: enable
+        sortable: true
+        cellTemplateName: checkIcon
+        flexGrow: 1
+      - name: _("Repo")
+        prop: reponame
+        flexGrow: 2
+        sortable: true
+      - name: _("Threshold")
+        prop: cthreshold
+        flexGrow: 1
+        sortable: true
+      - name: _("Schedule")
+        prop: crontimes
+        flexGrow: 2
+        sortable: true
+        cellTemplateName: htmlContent
+    actions:
+      - template: create
+        execute:
+          type: url
+          url: "/services/borgbackup/compacts/create"
+      - template: edit
+        execute:
+          type: url
+          url: "/services/borgbackup/compacts/edit/{{ _selected[0].uuid }}"
+      - template: delete
+        execute:
+          type: request
+          request:
+            service: BorgBackup
+            method: deleteCompact
+            params:
+              uuid: "{{ _selected[0].uuid }}"
+      - type: iconButton
+        icon: mdi:play-outline
+        tooltip: _("Run")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+        execute:
+          type: taskDialog
+          taskDialog:
+            config:
+              title: _("Run compact for ...")
+              startOnInit: true
+              request:
+                service: BorgBackup
+                method: runCompact
+                params:
+                  uuid: "{{ _selected[0].uuid }}"

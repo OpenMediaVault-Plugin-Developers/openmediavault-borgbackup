@@ -1,0 +1,8 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/borgbackup/compacts/edit/:uuid"
+  title: _("Edit")
+  editing: true
+  notificationTitle: _("Updated compact schedule.")
+  component: omv-services-borgbackup-compact-form-page
