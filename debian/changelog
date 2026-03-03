@@ -1,3 +1,10 @@
+openmediavault-borgbackup (8.1.7) stable; urgency=low
+
+  * Add Compact tab for scheduling standalone borg compact runs per repo (daily, weekly, monthly)
+  * Allow selecting day of week for weekly compact and day of month for monthly compact
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 03 Mar 2026 00:21:28 +0000
+
 openmediavault-borgbackup (8.1.6) stable; urgency=low
 
   * Use modern borgbackup exit codes
