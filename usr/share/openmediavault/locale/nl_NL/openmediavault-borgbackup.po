@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-14 23:10+0000\n"
+"POT-Creation-Date: 2026-03-03 00:22+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2026\n"
 "Language-Team: Dutch (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/nl/)\n"
@@ -142,6 +142,9 @@ msgstr "Archief aanmaken voor… (proef)"
 msgid "Created archive."
 msgstr "Archief aangemaakt."
 
+msgid "Created compact schedule."
+msgstr ""
+
 msgid "Created environment variable."
 msgstr "Omgevingsvariabele aangemaakt."
 
@@ -150,6 +153,15 @@ msgstr "Repo aangemaakt."
 
 msgid "Current quota"
 msgstr "Huidige quota"
+
+msgid "Daily"
+msgstr ""
+
+msgid "Day of the month that monthly compact runs (1-31)."
+msgstr ""
+
+msgid "Day of the week that weekly compact runs."
+msgstr ""
 
 msgid "Delete + Files"
 msgstr "Verwijderen + Bestanden"
@@ -221,6 +233,12 @@ msgstr "Sleutelbestand niet kunnen verkrijgen!"
 msgid "Failed to remove "
 msgstr "Verwijderen mislukt"
 
+msgid "Fri"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
 msgid "General"
 msgstr "Algemeen"
 
@@ -236,11 +254,20 @@ msgstr "Hooks / Geavanceerd"
 msgid "Hour of the day that daily backups run."
 msgstr "Uur van de dag dat dagelijkse backups worden uitgevoerd."
 
+msgid "Hour of the day that daily compact runs."
+msgstr ""
+
 msgid "Hour of the day that monthly backups run."
 msgstr "Uur van de dag dat maandelijkse backups worden uitgevoerd."
 
+msgid "Hour of the day that monthly compact runs."
+msgstr ""
+
 msgid "Hour of the day that weekly backups run."
 msgstr "Uur van de dag dat wekelijkse backups worden uitgevoerd."
+
+msgid "Hour of the day that weekly compact runs."
+msgstr ""
 
 msgid "Hour of the day that yearly backups run."
 msgstr "Uur van de dag dat jaarlijkse backups worden uitgevoerd."
@@ -270,17 +297,35 @@ msgstr "Onderhoud"
 msgid "Minute after the hour that daily backups run."
 msgstr "Minuten na het uur dat dagelijkse backups worden uitgevoerd."
 
+msgid "Minute after the hour that daily compact runs."
+msgstr ""
+
 msgid "Minute after the hour that hourly backups run."
 msgstr "Minuten na het uur dat uurlijke backups worden uitgevoerd."
 
 msgid "Minute after the hour that monthly backups run."
 msgstr "Minuten na het uur dat maandelijkse backups worden uitgevoerd."
 
+msgid "Minute after the hour that monthly compact runs."
+msgstr ""
+
 msgid "Minute after the hour that weekly backups run."
 msgstr "Minuten na het uur dat wekelijkse backups worden uitgevoerd."
 
+msgid "Minute after the hour that weekly compact runs."
+msgstr ""
+
 msgid "Minute after the hour that yearly backups run."
 msgstr "Minuten na het uur dat jaarlijkse backups worden uitgevoerd."
+
+msgid "Mon"
+msgstr ""
+
+msgid "Monday"
+msgstr ""
+
+msgid "Monthly"
+msgstr ""
 
 msgid "Mount"
 msgstr "Aankoppelen"
@@ -424,6 +469,18 @@ msgstr "Uitvoeren"
 msgid "Run compact after backup and prune"
 msgstr "Compact uitvoeren na back-up en snoeien"
 
+msgid "Run compact daily."
+msgstr ""
+
+msgid "Run compact for ..."
+msgstr ""
+
+msgid "Run compact monthly."
+msgstr ""
+
+msgid "Run compact weekly."
+msgstr ""
+
 msgid "Run daily cron job."
 msgstr "Dagelijkse cron-taak uitvoeren."
 
@@ -454,6 +511,15 @@ msgstr "Jaarlijkse cron-taak uitvoeren."
 msgid "Runtime / Output"
 msgstr "Looptijd / Uitvoer"
 
+msgid "Sat"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Schedule"
+msgstr ""
+
 msgid "Select a repo ..."
 msgstr "Selecteer een repo…"
 
@@ -462,6 +528,9 @@ msgstr "Selecteer een archief…"
 
 msgid "Set minimum threshold for saved space in percent"
 msgstr "Minimumdrempel voor opgeslagen ruimte in procenten instellen"
+
+msgid "Set minimum threshold for saved space in percent."
+msgstr ""
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
@@ -487,6 +556,27 @@ msgstr "Initialisatie overslaan om bestaande repo te importeren."
 msgid "Storage quota"
 msgstr "Opslagquota"
 
+msgid "Sun"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "Threshold"
+msgstr ""
+
+msgid "Thu"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Tue"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
 msgid "Type"
 msgstr "Type"
 
@@ -495,6 +585,9 @@ msgstr "Loskoppelen"
 
 msgid "Unmounting repo ..."
 msgstr "Repo loskoppelen…"
+
+msgid "Updated compact schedule."
+msgstr ""
 
 msgid "Uses value as prefix for archive name."
 msgstr "Gebruikt waarde als voorvoegsel voor archiefnaam."
@@ -507,6 +600,15 @@ msgstr "Verifiëren"
 
 msgid "Versions"
 msgstr "Versies"
+
+msgid "Wed"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "Weekly"
+msgstr ""
 
 msgid "You must move the repo files before changing the location."
 msgstr "U moet de repo-bestanden verplaatsen voordat u de locatie wijzigt."
@@ -550,6 +652,9 @@ msgstr "lzma - nog trager / nog hogere compressie"
 msgid "monthly"
 msgstr "maandelijks"
 
+msgid "monthly day"
+msgstr ""
+
 msgid "monthly hour"
 msgstr "maandelijks uur"
 
@@ -564,6 +669,9 @@ msgstr "omv-extras wiki"
 
 msgid "weekly"
 msgstr "wekelijks"
+
+msgid "weekly day"
+msgstr ""
 
 msgid "weekly hour"
 msgstr "wekelijks uur"

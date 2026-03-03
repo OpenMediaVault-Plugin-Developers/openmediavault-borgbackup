@@ -4,22 +4,22 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Ettore Atalan <atalanttore@googlemail.com>, 2021
 # Dampflok_HD, 2022
+# Ettore Atalan <atalanttore@googlemail.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-14 23:10+0000\n"
+"POT-Creation-Date: 2026-03-03 00:22+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: Dampflok_HD, 2022\n"
-"Language-Team: German (Germany) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/de_DE/)\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2024\n"
+"Language-Team: German (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de_DE\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
@@ -47,34 +47,40 @@ msgid ""
 "Are you sure you want to delete the repo from the plugin and the repo files?"
 " This will delete all repo files!"
 msgstr ""
+"Sind Sie sicher, dass Sie das Repo aus dem Plugin und den Repo-Dateien "
+"löschen möchten? Dies wird alle Repo-Dateien löschen!"
 
 msgid ""
 "Are you sure you want to remove repo from the plugin? This will not delete "
 "any files!"
 msgstr ""
+"Sind Sie sicher, dass Sie das Repo aus dem Plugin entfernen möchten? Dies "
+"wird keine Dateien löschen!"
 
 msgid "Backup Options"
 msgstr ""
 
 msgid "Base Dir"
-msgstr ""
+msgstr "Basisverz."
 
 msgid ""
 "Base directory to make archive use relative paths. Leave blank to use "
 "absolute paths in archive."
 msgstr ""
+"Basisverzeichnis, damit das Archiv relative Pfade verwendet. Leer lassen, um"
+" absolute Pfade im Archiv zu verwenden."
 
 msgid "BorgBackup"
 msgstr "BorgBackup"
 
 msgid "Change"
-msgstr ""
+msgstr "Ändern"
 
 msgid "Change location"
-msgstr ""
+msgstr "Ort ändern"
 
 msgid "Change passphrase"
-msgstr ""
+msgstr "Passphrase ändern"
 
 msgid "Change quota"
 msgstr ""
@@ -83,7 +89,7 @@ msgid "Changing quota ..."
 msgstr ""
 
 msgid "Changing repo location ..."
-msgstr ""
+msgstr "Speicherort des Repo wird geändert ..."
 
 msgid "Check"
 msgstr "Überprüfen"
@@ -108,7 +114,7 @@ msgstr ""
 " nur bei Fehler senden."
 
 msgid "Compact"
-msgstr ""
+msgstr "Kompakt"
 
 msgid "Compact repo ..."
 msgstr ""
@@ -137,6 +143,9 @@ msgstr ""
 msgid "Created archive."
 msgstr "Archiv erstellt."
 
+msgid "Created compact schedule."
+msgstr ""
+
 msgid "Created environment variable."
 msgstr "Umgebungsvariable erstellt."
 
@@ -146,17 +155,26 @@ msgstr "Repo erstellt."
 msgid "Current quota"
 msgstr ""
 
-msgid "Delete + Files"
+msgid "Daily"
 msgstr ""
+
+msgid "Day of the month that monthly compact runs (1-31)."
+msgstr ""
+
+msgid "Day of the week that weekly compact runs."
+msgstr ""
+
+msgid "Delete + Files"
+msgstr "Löschen + Dateien"
 
 msgid "Directory not found"
 msgstr ""
 
 msgid "Docs"
-msgstr ""
+msgstr "Doku"
 
 msgid "Download repo keyfile"
-msgstr ""
+msgstr "Repo-Schlüsseldatei herunterladen"
 
 msgid "Dry Run"
 msgstr ""
@@ -186,7 +204,7 @@ msgid "Environment Variables"
 msgstr "Umgebungsvariablen"
 
 msgid "Excludes"
-msgstr "Ausschließlich"
+msgstr "Ausgenommen"
 
 msgid "Export"
 msgstr "Exportieren"
@@ -202,10 +220,10 @@ msgid "Extract"
 msgstr "Extrahieren"
 
 msgid "Extract archive to directory"
-msgstr ""
+msgstr "Archiv in Verzeichnis extrahieren"
 
 msgid "Extract archive to tar file"
-msgstr ""
+msgstr "Archiv in tar-Datei extrahieren"
 
 msgid "Failed to find "
 msgstr ""
@@ -216,12 +234,20 @@ msgstr ""
 msgid "Failed to remove "
 msgstr ""
 
+msgid "Fri"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
 msgid "General"
 msgstr ""
 
 msgid ""
 "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
 msgstr ""
+"Liefert eine zusammengefasste, versionierte Ansicht der Dateien in den "
+"Archiven. EXPERIMENTELL"
 
 msgid "Hooks / Advanced"
 msgstr ""
@@ -229,10 +255,19 @@ msgstr ""
 msgid "Hour of the day that daily backups run."
 msgstr ""
 
+msgid "Hour of the day that daily compact runs."
+msgstr ""
+
 msgid "Hour of the day that monthly backups run."
 msgstr ""
 
+msgid "Hour of the day that monthly compact runs."
+msgstr ""
+
 msgid "Hour of the day that weekly backups run."
+msgstr ""
+
+msgid "Hour of the day that weekly compact runs."
 msgstr ""
 
 msgid "Hour of the day that yearly backups run."
@@ -263,29 +298,47 @@ msgstr ""
 msgid "Minute after the hour that daily backups run."
 msgstr ""
 
+msgid "Minute after the hour that daily compact runs."
+msgstr ""
+
 msgid "Minute after the hour that hourly backups run."
 msgstr ""
 
 msgid "Minute after the hour that monthly backups run."
 msgstr ""
 
+msgid "Minute after the hour that monthly compact runs."
+msgstr ""
+
 msgid "Minute after the hour that weekly backups run."
 msgstr ""
 
+msgid "Minute after the hour that weekly compact runs."
+msgstr ""
+
 msgid "Minute after the hour that yearly backups run."
+msgstr ""
+
+msgid "Mon"
+msgstr ""
+
+msgid "Monday"
+msgstr ""
+
+msgid "Monthly"
 msgstr ""
 
 msgid "Mount"
 msgstr "Einhängen"
 
 msgid "Mount repo"
-msgstr ""
+msgstr "Repo einhängen"
 
 msgid "Mounted"
 msgstr "Eingehängt"
 
 msgid "Mounting repo ..."
-msgstr ""
+msgstr "Repo wird eingehängt ..."
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
@@ -358,16 +411,16 @@ msgid "Remote path"
 msgstr "Entfernter Pfad"
 
 msgid "Remove"
-msgstr ""
+msgstr "Entfernen"
 
 msgid "Repo"
 msgstr "Repo"
 
 msgid "Repo has been mounted."
-msgstr ""
+msgstr "Repo wurde eingehängt."
 
 msgid "Repo has been unmounted."
-msgstr ""
+msgstr "Repo wurde ausgehängt."
 
 msgid "Repo info ..."
 msgstr "Repoinfo ..."
@@ -378,7 +431,7 @@ msgstr ""
 "Archive!"
 
 msgid "Repo location has been changed."
-msgstr ""
+msgstr "Speicherort des Repo wurde geändert."
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
@@ -417,6 +470,18 @@ msgstr "Ausführen"
 msgid "Run compact after backup and prune"
 msgstr ""
 
+msgid "Run compact daily."
+msgstr ""
+
+msgid "Run compact for ..."
+msgstr ""
+
+msgid "Run compact monthly."
+msgstr ""
+
+msgid "Run compact weekly."
+msgstr ""
+
 msgid "Run daily cron job."
 msgstr ""
 
@@ -447,13 +512,25 @@ msgstr ""
 msgid "Runtime / Output"
 msgstr ""
 
+msgid "Sat"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Schedule"
+msgstr ""
+
 msgid "Select a repo ..."
-msgstr "Ein Repo auswählen ..."
+msgstr "Eine Repo auswählen ..."
 
 msgid "Select an archive ..."
 msgstr "Ein Archiv auswählen ..."
 
 msgid "Set minimum threshold for saved space in percent"
+msgstr ""
+
+msgid "Set minimum threshold for saved space in percent."
 msgstr ""
 
 msgid ""
@@ -463,7 +540,7 @@ msgstr ""
 "kiByte/s (Standard&#58; 0=unbegrenzt)."
 
 msgid "Shared Folder"
-msgstr "Freigegebener Ordner"
+msgstr "Gemeinsamer Ordner"
 
 msgid "Shared folder"
 msgstr "Gemeinsamer Ordner"
@@ -482,6 +559,27 @@ msgstr ""
 msgid "Storage quota"
 msgstr ""
 
+msgid "Sun"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "Threshold"
+msgstr ""
+
+msgid "Thu"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Tue"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
 msgid "Type"
 msgstr "Typ"
 
@@ -489,6 +587,9 @@ msgid "Unmount"
 msgstr "Aushängen"
 
 msgid "Unmounting repo ..."
+msgstr "Repo wird ausgehängt ..."
+
+msgid "Updated compact schedule."
 msgstr ""
 
 msgid "Uses value as prefix for archive name."
@@ -501,6 +602,15 @@ msgid "Verify"
 msgstr "Verifizieren"
 
 msgid "Versions"
+msgstr "Versionen"
+
+msgid "Wed"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "Weekly"
 msgstr ""
 
 msgid "You must move the repo files before changing the location."
@@ -545,6 +655,9 @@ msgstr "lzma - noch langsamer / noch höhere Kompression"
 msgid "monthly"
 msgstr ""
 
+msgid "monthly day"
+msgstr ""
+
 msgid "monthly hour"
 msgstr ""
 
@@ -558,6 +671,9 @@ msgid "omv-extras wiki"
 msgstr ""
 
 msgid "weekly"
+msgstr ""
+
+msgid "weekly day"
 msgstr ""
 
 msgid "weekly hour"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-14 23:10+0000\n"
+"POT-Creation-Date: 2026-03-03 00:22+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2021\n"
 "Language-Team: Czech (Czech Republic) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/cs_CZ/)\n"
@@ -134,6 +134,9 @@ msgstr ""
 msgid "Created archive."
 msgstr ""
 
+msgid "Created compact schedule."
+msgstr ""
+
 msgid "Created environment variable."
 msgstr ""
 
@@ -141,6 +144,15 @@ msgid "Created repo."
 msgstr ""
 
 msgid "Current quota"
+msgstr ""
+
+msgid "Daily"
+msgstr ""
+
+msgid "Day of the month that monthly compact runs (1-31)."
+msgstr ""
+
+msgid "Day of the week that weekly compact runs."
 msgstr ""
 
 msgid "Delete + Files"
@@ -213,6 +225,12 @@ msgstr ""
 msgid "Failed to remove "
 msgstr ""
 
+msgid "Fri"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
 msgid "General"
 msgstr ""
 
@@ -226,10 +244,19 @@ msgstr ""
 msgid "Hour of the day that daily backups run."
 msgstr ""
 
+msgid "Hour of the day that daily compact runs."
+msgstr ""
+
 msgid "Hour of the day that monthly backups run."
 msgstr ""
 
+msgid "Hour of the day that monthly compact runs."
+msgstr ""
+
 msgid "Hour of the day that weekly backups run."
+msgstr ""
+
+msgid "Hour of the day that weekly compact runs."
 msgstr ""
 
 msgid "Hour of the day that yearly backups run."
@@ -258,16 +285,34 @@ msgstr ""
 msgid "Minute after the hour that daily backups run."
 msgstr ""
 
+msgid "Minute after the hour that daily compact runs."
+msgstr ""
+
 msgid "Minute after the hour that hourly backups run."
 msgstr ""
 
 msgid "Minute after the hour that monthly backups run."
 msgstr ""
 
+msgid "Minute after the hour that monthly compact runs."
+msgstr ""
+
 msgid "Minute after the hour that weekly backups run."
 msgstr ""
 
+msgid "Minute after the hour that weekly compact runs."
+msgstr ""
+
 msgid "Minute after the hour that yearly backups run."
+msgstr ""
+
+msgid "Mon"
+msgstr ""
+
+msgid "Monday"
+msgstr ""
+
+msgid "Monthly"
 msgstr ""
 
 msgid "Mount"
@@ -408,6 +453,18 @@ msgstr "Spustit"
 msgid "Run compact after backup and prune"
 msgstr ""
 
+msgid "Run compact daily."
+msgstr ""
+
+msgid "Run compact for ..."
+msgstr ""
+
+msgid "Run compact monthly."
+msgstr ""
+
+msgid "Run compact weekly."
+msgstr ""
+
 msgid "Run daily cron job."
 msgstr ""
 
@@ -438,6 +495,15 @@ msgstr ""
 msgid "Runtime / Output"
 msgstr ""
 
+msgid "Sat"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Schedule"
+msgstr ""
+
 msgid "Select a repo ..."
 msgstr "Vybrat repozitář…"
 
@@ -445,6 +511,9 @@ msgid "Select an archive ..."
 msgstr "Vybrat archiv…"
 
 msgid "Set minimum threshold for saved space in percent"
+msgstr ""
+
+msgid "Set minimum threshold for saved space in percent."
 msgstr ""
 
 msgid ""
@@ -469,6 +538,27 @@ msgstr "Přeskočit inicializaci pro import existujícího repozitáře."
 msgid "Storage quota"
 msgstr ""
 
+msgid "Sun"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "Threshold"
+msgstr ""
+
+msgid "Thu"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Tue"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
 msgid "Type"
 msgstr "Typ"
 
@@ -476,6 +566,9 @@ msgid "Unmount"
 msgstr "Odpojit"
 
 msgid "Unmounting repo ..."
+msgstr ""
+
+msgid "Updated compact schedule."
 msgstr ""
 
 msgid "Uses value as prefix for archive name."
@@ -488,6 +581,15 @@ msgid "Verify"
 msgstr "Ověřit"
 
 msgid "Versions"
+msgstr ""
+
+msgid "Wed"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "Weekly"
 msgstr ""
 
 msgid "You must move the repo files before changing the location."
@@ -532,6 +634,9 @@ msgstr ""
 msgid "monthly"
 msgstr ""
 
+msgid "monthly day"
+msgstr ""
+
 msgid "monthly hour"
 msgstr ""
 
@@ -545,6 +650,9 @@ msgid "omv-extras wiki"
 msgstr ""
 
 msgid "weekly"
+msgstr ""
+
+msgid "weekly day"
 msgstr ""
 
 msgid "weekly hour"
