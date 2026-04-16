@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-03 00:22+0000\n"
+"POT-Creation-Date: 2026-04-16 15:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,6 +30,9 @@ msgid "Archive"
 msgstr ""
 
 msgid "Archive info ..."
+msgstr ""
+
+msgid "Archive log ..."
 msgstr ""
 
 msgid "Archives"
@@ -555,6 +558,9 @@ msgid "Verify"
 msgstr ""
 
 msgid "Versions"
+msgstr ""
+
+msgid "View Log"
 msgstr ""
 
 msgid "Wed"

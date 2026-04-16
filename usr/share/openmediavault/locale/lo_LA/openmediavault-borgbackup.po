@@ -3,13 +3,17 @@
 # This file is distributed under the same license as the openmediavault-borgbackup package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# bounkirdni_2025, 2026
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-03 00:22+0000\n"
+"POT-Creation-Date: 2026-04-16 15:38+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
+"Last-Translator: bounkirdni_2025, 2026\n"
 "Language-Team: Lao (Laos) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/lo_LA/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,652 +22,676 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
-msgstr ""
+msgstr "0 ແມ່ນການບີບອັດໄວທີ່ສຸດ ແລະ 9 ແມ່ນການບີບອັດດີທີ່ສຸດ"
 
 msgid "5G, 1.5T as examples. Leave blank for no quota."
-msgstr ""
+msgstr "ຕົວຢ່າງ: 5G, 1.5T. ປະຫວ່າງໄວ້ຫາກບໍ່ຕ້ອງການກຳນົດໂຄຕ້າ."
 
 msgid "All"
-msgstr ""
+msgstr "ທັງໝົດ"
 
 msgid "Archive"
-msgstr ""
+msgstr "ບົດເກັບມ້ຽນ"
 
 msgid "Archive info ..."
+msgstr "ຂໍ້ມູນບົດເກັບມ້ຽນ ..."
+
+msgid "Archive log ..."
 msgstr ""
 
 msgid "Archives"
-msgstr ""
+msgstr "ບົດເກັບມ້ຽນທັງໝົດ"
 
 msgid "Archives only"
-msgstr ""
+msgstr "ສະເພາະບົດເກັບມ້ຽນ"
 
 msgid ""
 "Are you sure you want to delete the repo from the plugin and the repo files?"
 " This will delete all repo files!"
 msgstr ""
+"ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບຄັງເກັບ (repo) ຈາກປລັກອິນ ແລະ ໄຟລ໌ຄັງເກັບ? "
+"ການດຳເນີນການນີ້ຈະລຶບໄຟລ໌ຄັງເກັບທັງໝົດ!"
 
 msgid ""
 "Are you sure you want to remove repo from the plugin? This will not delete "
 "any files!"
 msgstr ""
+"ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການເອົາຄັງເກັບອອກຈາກປລັກອິນ? "
+"ການດຳເນີນການນີ້ຈະບໍ່ລຶບໄຟລ໌ໃດໆ!"
 
 msgid "Backup Options"
-msgstr ""
+msgstr "ຕົວເລືອກການສຳຮອງຂໍ້ມູນ"
 
 msgid "Base Dir"
-msgstr ""
+msgstr "ໂຟນເດີຫຼັກ"
 
 msgid ""
 "Base directory to make archive use relative paths. Leave blank to use "
 "absolute paths in archive."
 msgstr ""
+"ໂຟນເດີຫຼັກເພື່ອໃຫ້ບົດເກັບມ້ຽນໃຊ້ເສັ້ນທາງແບບສຳພັດ (relative paths). "
+"ປະຫວ່າງໄວ້ເພື່ອໃຊ້ເສັ້ນທາງແບບເຕັມ (absolute paths)."
 
 msgid "BorgBackup"
-msgstr ""
+msgstr "BorgBackup"
 
 msgid "Change"
-msgstr ""
+msgstr "ປ່ຽນແປງ"
 
 msgid "Change location"
-msgstr ""
+msgstr "ປ່ຽນບ່ອນຈັດເກັບ"
 
 msgid "Change passphrase"
-msgstr ""
+msgstr "ປ່ຽນລະຫັດຜ່ານ (passphrase)"
 
 msgid "Change quota"
-msgstr ""
+msgstr "ປ່ຽນໂຄຕ້າ"
 
 msgid "Changing quota ..."
-msgstr ""
+msgstr "ກຳລັງປ່ຽນໂຄຕ້າ ..."
 
 msgid "Changing repo location ..."
-msgstr ""
+msgstr "ກຳລັງປ່ຽນບ່ອນຈັດເກັບຄັງເກັບ ..."
 
 msgid "Check"
-msgstr ""
+msgstr "ກວດສອບ"
 
 msgid "Check all ..."
-msgstr ""
+msgstr "ກວດສອບທັງໝົດ ..."
 
 msgid "Check archives only ..."
-msgstr ""
+msgstr "ກວດສອບສະເພາະບົດເກັບມ້ຽນ ..."
 
 msgid "Check repo ..."
-msgstr ""
+msgstr "ກວດສອບຄັງເກັບ ..."
 
 msgid "Check repos only ..."
-msgstr ""
+msgstr "ກວດສອບສະເພາະຄັງເກັບ ..."
 
 msgid ""
 "Checked = send email on error or success.<br/>Unchecked = send email on "
 "error only."
 msgstr ""
+"ເລືອກ = ສົ່ງອີເມວເມື່ອມີຂໍ້ຜິດພາດ ຫຼື ສຳເລັດ.<br/>ບໍ່ເລືອກ = "
+"ສົ່ງອີເມວສະເພາະເມື່ອມີຂໍ້ຜິດພາດເທົັ້ນັ້ນ."
 
 msgid "Compact"
-msgstr ""
+msgstr "ບີບອັດຂໍ້ມູນ"
 
 msgid "Compact repo ..."
-msgstr ""
+msgstr "ບີບອັດຄັງເກັບ ..."
 
 msgid "Compact threshold"
-msgstr ""
+msgstr "ເກນການບີບອັດ"
 
 msgid "Compression"
-msgstr ""
+msgstr "ການບີບອັດ"
 
 msgid "Compression Type"
-msgstr ""
+msgstr "ປະເພດການບີບອັດ"
 
 msgid "Compression ratio"
-msgstr ""
+msgstr "ອັດຕາການບີບອັດ"
 
 msgid "Create"
-msgstr ""
+msgstr "ສ້າງ"
 
 msgid "Create archive for ..."
-msgstr ""
+msgstr "ສ້າງບົດເກັບມ້ຽນສຳລັບ ..."
 
 msgid "Create archive for ... (Dry Run)"
-msgstr ""
+msgstr "ສ້າງບົດເກັບມ້ຽນສຳລັບ ... (ທົດລອງແລ່ນ)"
 
 msgid "Created archive."
-msgstr ""
+msgstr "ສ້າງບົດເກັບມ້ຽນສຳເລັດແລ້ວ."
 
 msgid "Created compact schedule."
-msgstr ""
+msgstr "ສ້າງຕາຕະລາງການບີບອັດສຳເລັດແລ້ວ."
 
 msgid "Created environment variable."
-msgstr ""
+msgstr "ສ້າງຕົວປ່ຽນສະພາບແວດລ້ອມສຳເລັດແລ້ວ."
 
 msgid "Created repo."
-msgstr ""
+msgstr "ສ້າງຄັງເກັບສຳເລັດແລ້ວ."
 
 msgid "Current quota"
-msgstr ""
+msgstr "ໂຄຕ້າປັດຈຸບັນ"
 
 msgid "Daily"
-msgstr ""
+msgstr "ທຸກມື້"
 
 msgid "Day of the month that monthly compact runs (1-31)."
-msgstr ""
+msgstr "ວັນທີຂອງເດືອນທີ່ຈະໃຫ້ການບີບອັດປະຈຳເດືອນເຮັດວຽກ (1-31)."
 
 msgid "Day of the week that weekly compact runs."
-msgstr ""
+msgstr "ວັນຂອງອາທິດທີ່ຈະໃຫ້ການບີບອັດປະຈຳອາທິດເຮັດວຽກ."
 
 msgid "Delete + Files"
-msgstr ""
+msgstr "ລຶບ + ໄຟລ໌"
 
 msgid "Directory not found"
-msgstr ""
+msgstr "ບໍ່ພົບໂຟນເດີ"
 
 msgid "Docs"
-msgstr ""
+msgstr "ເອກະສານ"
 
 msgid "Download repo keyfile"
-msgstr ""
+msgstr "ດາວໂຫຼດໄຟລ໌ຄີ (keyfile) ຂອງຄັງເກັບ"
 
 msgid "Dry Run"
-msgstr ""
+msgstr "ທົດລອງແລ່ນ"
 
 msgid "Edit"
-msgstr ""
+msgstr "ແກ້ໄຂ"
 
 msgid "Edit archive."
-msgstr ""
+msgstr "ແກ້ໄຂບົດເກັບມ້ຽນ."
 
 msgid "Edit environment variable."
-msgstr ""
+msgstr "ແກ້ໄຂຕົວປ່ຽນສະພາບແວດລ້ອມ."
 
 msgid "Email"
-msgstr ""
+msgstr "ອີເມວ"
 
 msgid "Enable"
-msgstr ""
+msgstr "ເປີດໃຊ້ງານ"
 
 msgid "Enabled"
-msgstr ""
+msgstr "ເປີດໃຊ້ງານແລ້ວ"
 
 msgid "Encryption"
-msgstr ""
+msgstr "ການເຂົ້າລະຫັດ"
 
 msgid "Environment Variables"
-msgstr ""
+msgstr "ຕົວປ່ຽນສະພາບແວດລ້ອມ"
 
 msgid "Excludes"
-msgstr ""
+msgstr "ສິ່ງທີ່ບໍ່ລວມເອົາ"
 
 msgid "Export"
-msgstr ""
+msgstr "ສົ່ງອອກ"
 
 msgid ""
 "Export file will be created in this directory with a filename matching the "
 "archive name with an extension of .tar.gz."
 msgstr ""
+"ໄຟລ໌ສົ່ງອອກຈະຖືກສ້າງຂຶ້ນໃນໂຟນເດີນີ້ ໂດຍມີຊື່ໄຟລ໌ກົງກັບຊື່ບົດເກັບມ້ຽນ ແລະ "
+"ມີນາມສະກຸນ .tar.gz."
 
 msgid "Extract"
-msgstr ""
+msgstr "ແຍກໄຟລ໌"
 
 msgid "Extract archive to directory"
-msgstr ""
+msgstr "ແຍກບົດເກັບມ້ຽນໄປຍັງໂຟນເດີ"
 
 msgid "Extract archive to tar file"
-msgstr ""
+msgstr "ແຍກບົດເກັບມ້ຽນເປັນໄຟລ໌ tar"
 
 msgid "Failed to find "
-msgstr ""
+msgstr "ຊອກຫາບໍ່ເຫັນ "
 
 msgid "Failed to get keyfile!"
-msgstr ""
+msgstr "ດຶງຂໍ້ມູນໄຟລ໌ຄີບໍ່ສຳເລັດ!"
 
 msgid "Failed to remove "
-msgstr ""
+msgstr "ເອົາອອກບໍ່ສຳເລັດ "
 
 msgid "Fri"
-msgstr ""
+msgstr "ສຸກ"
 
 msgid "Friday"
-msgstr ""
+msgstr "ວັນສຸກ"
 
 msgid "General"
-msgstr ""
+msgstr "ທົ່ວໄປ"
 
 msgid ""
 "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
-msgstr ""
+msgstr "ສະແດງມຸມມອງໄຟລ໌ໃນບົດເກັບມ້ຽນແບບລວມ ແລະ ແຍກເວີຊັນ. (ຂັ້ນຕອນທົດລອງ)"
 
 msgid "Hooks / Advanced"
-msgstr ""
+msgstr "ຮຸກ (Hooks) / ຂັ້ນສູງ"
 
 msgid "Hour of the day that daily backups run."
-msgstr ""
+msgstr "ຊົ່ວໂມງຂອງມື້ທີ່ຈະໃຫ້ການສຳຮອງຂໍ້ມູນປະຈຳມື້ເຮັດວຽກ."
 
 msgid "Hour of the day that daily compact runs."
-msgstr ""
+msgstr "ຊົ່ວໂມງຂອງມື້ທີ່ຈະໃຫ້ການບີບອັດປະຈຳມື້ເຮັດວຽກ."
 
 msgid "Hour of the day that monthly backups run."
-msgstr ""
+msgstr "ຊົ່ວໂມງຂອງມື້ທີ່ຈະໃຫ້ການສຳຮອງຂໍ້ມູນປະຈຳເດືອນເຮັດວຽກ."
 
 msgid "Hour of the day that monthly compact runs."
-msgstr ""
+msgstr "ຊົ່ວໂມງຂອງມື້ທີ່ຈະໃຫ້ການບີບອັດປະຈຳເດືອນເຮັດວຽກ."
 
 msgid "Hour of the day that weekly backups run."
-msgstr ""
+msgstr "ຊົ່ວໂມງຂອງມື້ທີ່ຈະໃຫ້ການສຳຮອງຂໍ້ມູນປະຈຳອາທິດເຮັດວຽກ."
 
 msgid "Hour of the day that weekly compact runs."
-msgstr ""
+msgstr "ຊົ່ວໂມງຂອງມື້ທີ່ຈະໃຫ້ການບີບອັດປະຈຳອາທິດເຮັດວຽກ."
 
 msgid "Hour of the day that yearly backups run."
-msgstr ""
+msgstr "ຊົ່ວໂມງຂອງມື້ທີ່ຈະໃຫ້ການສຳຮອງຂໍ້ມູນປະຈຳປີເຮັດວຽກ."
 
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
 "point."
 msgstr ""
+"ຫາກເປີດໃຊ້ງານ, borg ຈະບໍ່ສຳຮອງຂໍ້ມູນຂ້າມພາກສ່ວນຂອງລະບົບໄຟລ໌ (partition)."
 
 msgid "Includes"
-msgstr ""
+msgstr "ສິ່ງທີ່ລວມເອົາ"
 
 msgid "Info"
-msgstr ""
+msgstr "ຂໍ້ມູນ"
 
 msgid "List"
-msgstr ""
+msgstr "ລາຍການ"
 
 msgid "Local"
-msgstr ""
+msgstr "ພາຍໃນເຄື່ອງ"
 
 msgid "Maintenance"
-msgstr ""
+msgstr "ການບຳລຸງຮັກສາ"
 
 msgid "Minute after the hour that daily backups run."
-msgstr ""
+msgstr "ນາທີຫຼັງຊົ່ວໂມງທີ່ຈະໃຫ້ການສຳຮອງຂໍ້ມູນປະຈຳມື້ເຮັດວຽກ."
 
 msgid "Minute after the hour that daily compact runs."
-msgstr ""
+msgstr "ນາທີຫຼັງຊົ່ວໂມງທີ່ຈະໃຫ້ການບີບອັດປະຈຳມື້ເຮັດວຽກ."
 
 msgid "Minute after the hour that hourly backups run."
-msgstr ""
+msgstr "ນາທີຫຼັງຊົ່ວໂມງທີ່ຈະໃຫ້ການສຳຮອງຂໍ້ມູນປະຈຳຊົ່ວໂມງເຮັດວຽກ."
 
 msgid "Minute after the hour that monthly backups run."
-msgstr ""
+msgstr "ນາທີຫຼັງຊົ່ວໂມງທີ່ຈະໃຫ້ການສຳຮອງຂໍ້ມູນປະຈຳເດືອນເຮັດວຽກ."
 
 msgid "Minute after the hour that monthly compact runs."
-msgstr ""
+msgstr "ນາທີຫຼັງຊົ່ວໂມງທີ່ຈະໃຫ້ການບີບອັດປະຈຳເດືອນເຮັດວຽກ."
 
 msgid "Minute after the hour that weekly backups run."
-msgstr ""
+msgstr "ນາທີຫຼັງຊົ່ວໂມງທີ່ຈະໃຫ້ການສຳຮອງຂໍ້ມູນປະຈຳອາທິດເຮັດວຽກ."
 
 msgid "Minute after the hour that weekly compact runs."
-msgstr ""
+msgstr "ນາທີຫຼັງຊົ່ວໂມງທີ່ຈະໃຫ້ການບີບອັດປະຈຳອາທິດເຮັດວຽກ."
 
 msgid "Minute after the hour that yearly backups run."
-msgstr ""
+msgstr "ນາທີຫຼັງຊົ່ວໂມງທີ່ຈະໃຫ້ການສຳຮອງຂໍ້ມູນປະຈຳປີເຮັດວຽກ."
 
 msgid "Mon"
-msgstr ""
+msgstr "ຈັນ"
 
 msgid "Monday"
-msgstr ""
+msgstr "ວັນຈັນ"
 
 msgid "Monthly"
-msgstr ""
+msgstr "ທຸກເດືອນ"
 
 msgid "Mount"
-msgstr ""
+msgstr "ເຊື່ອມຕໍ່ (Mount)"
 
 msgid "Mount repo"
-msgstr ""
+msgstr "ເຊື່ອມຕໍ່ຄັງເກັບ"
 
 msgid "Mounted"
-msgstr ""
+msgstr "ເຊື່ອມຕໍ່ແລ້ວ"
 
 msgid "Mounting repo ..."
-msgstr ""
+msgstr "ກຳລັງເຊື່ອມຕໍ່ຄັງເກັບ ..."
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
 "user@hostname&#58;path"
 msgstr ""
+"ຕ້ອງມີການຕັ້ງຄ່າ SSH keys. ເສັ້ນທາງປາຍທາງຄວນຢູ່ໃນຮູບແບບ&#58; "
+"user@hostname&#58;path"
 
 msgid "Name"
-msgstr ""
+msgstr "ຊື່"
 
 msgid "Name/Prefix"
-msgstr ""
+msgstr "ຊື່/ຄຳນຳໜ້າ"
 
 msgid "New quota"
-msgstr ""
+msgstr "ໂຄຕ້າໃໝ່"
 
 msgid "None"
-msgstr ""
+msgstr "ບໍ່ມີ"
 
 msgid "Number of daily backups to keep."
-msgstr ""
+msgstr "ຈຳນວນການສຳຮອງຂໍ້ມູນປະຈຳມື້ທີ່ຈະເກັບໄວ້."
 
 msgid "Number of hourly backups to keep."
-msgstr ""
+msgstr "ຈຳນວນການສຳຮອງຂໍ້ມູນປະຈຳຊົ່ວໂມງທີ່ຈະເກັບໄວ້."
 
 msgid "Number of monthly backups to keep."
-msgstr ""
+msgstr "ຈຳນວນການສຳຮອງຂໍ້ມູນປະຈຳເດືອນທີ່ຈະເກັບໄວ້."
 
 msgid "Number of weekly backups to keep."
-msgstr ""
+msgstr "ຈຳນວນການສຳຮອງຂໍ້ມູນປະຈຳອາທິດທີ່ຈະເກັບໄວ້."
 
 msgid "Number of yearly backups to keep."
-msgstr ""
+msgstr "ຈຳນວນການສຳຮອງຂໍ້ມູນປະຈຳປີທີ່ຈະເກັບໄວ້."
 
 msgid "One filesystem only"
-msgstr ""
+msgstr "ສະເພາະລະບົບໄຟລ໌ດຽວ"
 
 msgid "Original location"
-msgstr ""
+msgstr "ບ່ອນຈັດເກັບເດີມ"
 
 msgid "Output verbose list of files and directories."
-msgstr ""
+msgstr "ສະແດງລາຍການໄຟລ໌ ແລະ ໂຟນເດີແບບລະອຽດ."
 
 msgid "Passphrase"
-msgstr ""
+msgstr "ລະຫັດຜ່ານ (Passphrase)"
 
 msgid "Post-script"
-msgstr ""
+msgstr "ສະຄຣິບຫຼັງເຮັດວຽກ"
 
 msgid "Pre-script"
-msgstr ""
+msgstr "ສະຄຣິບກ່ອນເຮັດວຽກ"
 
 msgid "Put a new line or comma between each directory"
-msgstr ""
+msgstr "ຂຶ້ນແຖວໃໝ່ ຫຼື ໃຊ້ຈຸດຂັ້ນລະຫວ່າງແຕ່ລະໂຟນເດີ"
 
 msgid "Quota has been changed."
-msgstr ""
+msgstr "ປ່ຽນໂຄຕ້າສຳເລັດແລ້ວ."
 
 msgid "Rate limit"
-msgstr ""
+msgstr "ຈຳກັດຄວາມໄວ"
 
 msgid "Remote"
-msgstr ""
+msgstr "ທາງໄກ (Remote)"
 
 msgid "Remote Path"
-msgstr ""
+msgstr "ເສັ້ນທາງປາຍທາງ"
 
 msgid "Remote path"
-msgstr ""
+msgstr "ເສັ້ນທາງປາຍທາງ"
 
 msgid "Remove"
-msgstr ""
+msgstr "ເອົາອອກ"
 
 msgid "Repo"
-msgstr ""
+msgstr "ຄັງເກັບ"
 
 msgid "Repo has been mounted."
-msgstr ""
+msgstr "ເຊື່ອມຕໍ່ຄັງເກັບສຳເລັດແລ້ວ."
 
 msgid "Repo has been unmounted."
-msgstr ""
+msgstr "ຍົກເລີກການເຊື່ອມຕໍ່ຄັງເກັບສຳເລັດແລ້ວ."
 
 msgid "Repo info ..."
-msgstr ""
+msgstr "ຂໍ້ມູນຄັງເກັບ ..."
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr ""
+"ຄັງເກັບກຳລັງຖືກໃຊ້ງານ. ກະລຸນາລຶບບົດເກັບມ້ຽນທີ່ກ່ຽວຂ້ອງກັບຄັງເກັບນີ້ກ່ອນ!"
 
 msgid "Repo location has been changed."
-msgstr ""
+msgstr "ປ່ຽນບ່ອນຈັດເກັບຄັງເກັບສຳເລັດແລ້ວ."
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
 "as the repo."
 msgstr ""
+"ຄັງເກັບຈະຖືກເຊື່ອມຕໍ່ເປັນໂຟນເດີຍ່ອຍໃນໂຟນເດີແບ່ງປັນ "
+"ໂດຍໃຊ້ຊື່ດຽວກັນກັບຄັງເກັບ."
 
 msgid "Repos"
-msgstr ""
+msgstr "ຄັງເກັບທັງໝົດ"
 
 msgid "Repos only"
-msgstr ""
+msgstr "ສະເພາະຄັງເກັບ"
 
 msgid "Retain daily"
-msgstr ""
+msgstr "ເກັບຮັກສາປະຈຳມື້"
 
 msgid "Retain hourly"
-msgstr ""
+msgstr "ເກັບຮັກສາປະຈຳຊົ່ວໂມງ"
 
 msgid "Retain monthly"
-msgstr ""
+msgstr "ເກັບຮັກສາປະຈຳເດືອນ"
 
 msgid "Retain weekly"
-msgstr ""
+msgstr "ເກັບຮັກສາປະຈຳອາທິດ"
 
 msgid "Retain yearly"
-msgstr ""
+msgstr "ເກັບຮັກສາປະຈຳປີ"
 
 msgid "Retention and Schedule"
-msgstr ""
+msgstr "ການເກັບຮັກສາ ແລະ ຕາຕະລາງເວລາ"
 
 msgid "Run"
-msgstr ""
+msgstr "ແລ່ນ"
 
 msgid "Run compact after backup and prune"
-msgstr ""
+msgstr "ບີບອັດຂໍ້ມູນຫຼັງຈາກສຳຮອງ ແລະ ລຶບຂໍ້ມູນເກົ່າ (prune)"
 
 msgid "Run compact daily."
-msgstr ""
+msgstr "ບີບອັດຂໍ້ມູນທຸກມື້."
 
 msgid "Run compact for ..."
-msgstr ""
+msgstr "ບີບອັດຂໍ້ມູນສຳລັບ ..."
 
 msgid "Run compact monthly."
-msgstr ""
+msgstr "ບີບອັດຂໍ້ມູນທຸກເດືອນ."
 
 msgid "Run compact weekly."
-msgstr ""
+msgstr "ບີບອັດຂໍ້ມູນທຸກອາທິດ."
 
 msgid "Run daily cron job."
-msgstr ""
+msgstr "ເຮັດວຽກຕາມຕາຕະລາງທຸກມື້."
 
 msgid "Run hourly cron job."
-msgstr ""
+msgstr "ເຮັດວຽກຕາມຕາຕະລາງທຸກຊົ່ວໂມງ."
 
 msgid "Run monthly cron job."
-msgstr ""
+msgstr "ເຮັດວຽກຕາມຕາຕະລາງທຸກເດືອນ."
 
 msgid "Run script from this path after backup."
-msgstr ""
+msgstr "ແລ່ນສະຄຣິບຈາກເສັ້ນທາງນີ້ຫຼັງການສຳຮອງຂໍ້ມູນ."
 
 msgid "Run script from this path before backup."
-msgstr ""
+msgstr "ແລ່ນສະຄຣິບຈາກເສັ້ນທາງນີ້ກ່ອນການສຳຮອງຂໍ້ມູນ."
 
 msgid "Run times"
-msgstr ""
+msgstr "ເວລາເຮັດວຽກ"
 
 msgid "Run weekly cron job."
-msgstr ""
+msgstr "ເຮັດວຽກຕາມຕາຕະລາງທຸກອາທິດ."
 
 msgid "Run with progress"
-msgstr ""
+msgstr "ແລ່ນພ້ອມສະແດງຄວາມຄືບໜ້າ"
 
 msgid "Run yearly cron job."
-msgstr ""
+msgstr "ເຮັດວຽກຕາມຕາຕະລາງທຸກປີ."
 
 msgid "Runtime / Output"
-msgstr ""
+msgstr "ເວລາເຮັດວຽກ / ຜົນການເຮັດວຽກ"
 
 msgid "Sat"
-msgstr ""
+msgstr "ເສົາ"
 
 msgid "Saturday"
-msgstr ""
+msgstr "ວັນເສົາ"
 
 msgid "Schedule"
-msgstr ""
+msgstr "ຕາຕະລາງເວລາ"
 
 msgid "Select a repo ..."
-msgstr ""
+msgstr "ເລືອກຄັງເກັບ ..."
 
 msgid "Select an archive ..."
-msgstr ""
+msgstr "ເລືອກບົດເກັບມ້ຽນ ..."
 
 msgid "Set minimum threshold for saved space in percent"
-msgstr ""
+msgstr "ກຳນົດເກນຕ່ຳສຸດສຳລັບພື້ນທີ່ທີ່ປະຢັດໄດ້ເປັນເປີເຊັນ"
 
 msgid "Set minimum threshold for saved space in percent."
-msgstr ""
+msgstr "ກຳນົດເກນຕ່ຳສຸດສຳລັບພື້ນທີ່ທີ່ປະຢັດໄດ້ເປັນເປີເຊັນ."
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
 msgstr ""
+"ກຳນົດຂີດຈຳກັດຄວາມໄວໃນການອັບໂຫຼດເຄືອຂ່າຍທາງໄກເປັນ kiByte/s (ຄ່າເລີ່ມຕົ້ນ&#58;"
+" 0=ບໍ່ຈຳກັດ)."
 
 msgid "Shared Folder"
-msgstr ""
+msgstr "ໂຟນເດີແບ່ງປັນ"
 
 msgid "Shared folder"
-msgstr ""
+msgstr "ໂຟນເດີແບ່ງປັນ"
 
 msgid "SharedFolderRef"
-msgstr ""
+msgstr "ອ້າງອີງໂຟນເດີແບ່ງປັນ"
 
 msgid "Skip init"
-msgstr ""
+msgstr "ຂ້າມການເລີ່ມຕົ້ນ"
 
 msgid "Skip initialization to import existing repo."
-msgstr ""
+msgstr "ຂ້າມການຕັ້ງຄ່າເລີ່ມຕົ້ນເພື່ອດຶງຄັງເກັບທີ່ມີຢູ່ແລ້ວເຂົ້າມາ."
 
 msgid "Storage quota"
-msgstr ""
+msgstr "ໂຄຕ້າບ່ອນຈັດເກັບ"
 
 msgid "Sun"
-msgstr ""
+msgstr "ອາທິດ"
 
 msgid "Sunday"
-msgstr ""
+msgstr "ວັນອາທິດ"
 
 msgid "Threshold"
-msgstr ""
+msgstr "ເກນ"
 
 msgid "Thu"
-msgstr ""
+msgstr "ພະຫັດ"
 
 msgid "Thursday"
-msgstr ""
+msgstr "ວັນພະຫັດ"
 
 msgid "Tue"
-msgstr ""
+msgstr "ອັງຄານ"
 
 msgid "Tuesday"
-msgstr ""
+msgstr "ວັນອັງຄານ"
 
 msgid "Type"
-msgstr ""
+msgstr "ປະເພດ"
 
 msgid "Unmount"
-msgstr ""
+msgstr "ຍົກເລີກການເຊື່ອມຕໍ່"
 
 msgid "Unmounting repo ..."
-msgstr ""
+msgstr "ກຳລັງຍົກເລີກການເຊື່ອມຕໍ່ຄັງເກັບ ..."
 
 msgid "Updated compact schedule."
-msgstr ""
+msgstr "ອັບເດດຕາຕະລາງການບີບອັດສຳເລັດແລ້ວ."
 
 msgid "Uses value as prefix for archive name."
-msgstr ""
+msgstr "ໃຊ້ຄ່ານີ້ເປັນຄຳນຳໜ້າຊື່ບົດເກັບມ້ຽນ."
 
 msgid "Value"
-msgstr ""
+msgstr "ຄ່າ"
 
 msgid "Verify"
-msgstr ""
+msgstr "ກວດສອບຄວາມຖືກຕ້ອງ"
 
 msgid "Versions"
+msgstr "ເວີຊັນ"
+
+msgid "View Log"
 msgstr ""
 
 msgid "Wed"
-msgstr ""
+msgstr "ພຸດ"
 
 msgid "Wednesday"
-msgstr ""
+msgstr "ວັນພຸດ"
 
 msgid "Weekly"
-msgstr ""
+msgstr "ທຸກອາທິດ"
 
 msgid "You must move the repo files before changing the location."
-msgstr ""
+msgstr "ທ່ານຕ້ອງຍ້າຍໄຟລ໌ຄັງເກັບກ່ອນທີ່ຈະປ່ຽນບ່ອນຈັດເກັບ."
 
 msgid "borgbackup"
-msgstr ""
+msgstr "borgbackup"
 
 msgid "daily"
-msgstr ""
+msgstr "ປະຈຳມື້"
 
 msgid "daily hour"
-msgstr ""
+msgstr "ຊົ່ວໂມງປະຈຳມື້"
 
 msgid "daily minute"
-msgstr ""
+msgstr "ນາທີປະຈຳມື້"
 
 msgid "extract logs - follow ..."
-msgstr ""
+msgstr "ແຍກບັນທຶກເຫດການ - ຕິດຕາມ ..."
 
 msgid "extract logs ..."
-msgstr ""
+msgstr "ແຍກບັນທຶກເຫດການ ..."
 
 msgid "hourly"
-msgstr ""
+msgstr "ປະຈຳຊົ່ວໂມງ"
 
 msgid "hourly minute"
-msgstr ""
+msgstr "ນາທີປະຈຳຊົ່ວໂມງ"
 
 msgid "logs"
-msgstr ""
+msgstr "ບັນທຶກເຫດການ (logs)"
 
 msgid "logs - follow"
-msgstr ""
+msgstr "ບັນທຶກເຫດການ - ຕິດຕາມ"
 
 msgid "lz4 - super fast / low compression"
-msgstr ""
+msgstr "lz4 - ໄວຫຼາຍ / ບີບອັດໄດ້ໜ້ອຍ"
 
 msgid "lzma - even slower / even higher compression"
-msgstr ""
+msgstr "lzma - ຊ້າກວ່າ / ບີບອັດໄດ້ສູງກວ່າ"
 
 msgid "monthly"
-msgstr ""
+msgstr "ປະຈຳເດືອນ"
 
 msgid "monthly day"
-msgstr ""
+msgstr "ວັນປະຈຳເດືອນ"
 
 msgid "monthly hour"
-msgstr ""
+msgstr "ຊົ່ວໂມງປະຈຳເດືອນ"
 
 msgid "monthly minute"
-msgstr ""
+msgstr "ນາທີປະຈຳເດືອນ"
 
 msgid "n/a"
-msgstr ""
+msgstr "ບໍ່ມີຂໍ້ມູນ"
 
 msgid "omv-extras wiki"
-msgstr ""
+msgstr "ວິກິ omv-extras"
 
 msgid "weekly"
-msgstr ""
+msgstr "ປະຈຳອາທິດ"
 
 msgid "weekly day"
-msgstr ""
+msgstr "ວັນປະຈຳອາທິດ"
 
 msgid "weekly hour"
-msgstr ""
+msgstr "ຊົ່ວໂມງປະຈຳອາທິດ"
 
 msgid "weekly minute"
-msgstr ""
+msgstr "ນາທີປະຈຳອາທິດ"
 
 msgid "yearly"
-msgstr ""
+msgstr "ປະຈຳປີ"
 
 msgid "yearly hour"
-msgstr ""
+msgstr "ຊົ່ວໂມງປະຈຳປີ"
 
 msgid "yearly minute"
-msgstr ""
+msgstr "ນາທີປະຈຳປີ"
 
 msgid "zlib - less fast / higher compression"
-msgstr ""
+msgstr "zlib - ໄວໜ້ອຍກວ່າ / ບີບອັດໄດ້ສູງກວ່າ"
 
 msgid "zstd - super fast / medium compression"
-msgstr ""
+msgstr "zstd - ໄວຫຼາຍ / ບີບອັດໄດ້ປານກາງ"

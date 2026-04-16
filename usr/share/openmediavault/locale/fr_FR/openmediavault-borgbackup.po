@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-03 00:22+0000\n"
+"POT-Creation-Date: 2026-04-16 15:38+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Axel Cantenys, 2020\n"
 "Language-Team: French (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/fr/)\n"
@@ -34,6 +34,9 @@ msgid "Archive"
 msgstr "Archive"
 
 msgid "Archive info ..."
+msgstr ""
+
+msgid "Archive log ..."
 msgstr ""
 
 msgid "Archives"
@@ -581,6 +584,9 @@ msgid "Verify"
 msgstr "Vérifier"
 
 msgid "Versions"
+msgstr ""
+
+msgid "View Log"
 msgstr ""
 
 msgid "Wed"

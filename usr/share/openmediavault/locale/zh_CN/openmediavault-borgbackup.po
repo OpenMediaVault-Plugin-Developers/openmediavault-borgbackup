@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-03 00:22+0000\n"
+"POT-Creation-Date: 2026-04-16 15:38+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: songming <by@songming.me>, 2026\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
@@ -35,6 +35,9 @@ msgstr "归档"
 
 msgid "Archive info ..."
 msgstr "归档信息 ..."
+
+msgid "Archive log ..."
+msgstr ""
 
 msgid "Archives"
 msgstr "归档"
@@ -578,6 +581,9 @@ msgstr "校验"
 
 msgid "Versions"
 msgstr "版本"
+
+msgid "View Log"
+msgstr ""
 
 msgid "Wed"
 msgstr ""

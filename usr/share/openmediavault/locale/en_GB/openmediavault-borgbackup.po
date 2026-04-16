@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-03 00:22+0000\n"
+"POT-Creation-Date: 2026-04-16 15:38+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2026\n"
 "Language-Team: English (United Kingdom) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/en_GB/)\n"
@@ -35,6 +35,9 @@ msgstr "Archive"
 
 msgid "Archive info ..."
 msgstr "Archive info ..."
+
+msgid "Archive log ..."
+msgstr ""
 
 msgid "Archives"
 msgstr "Archives"
@@ -143,7 +146,7 @@ msgid "Created archive."
 msgstr "Created archive."
 
 msgid "Created compact schedule."
-msgstr ""
+msgstr "Created compact schedule."
 
 msgid "Created environment variable."
 msgstr "Created environment variable."
@@ -155,13 +158,13 @@ msgid "Current quota"
 msgstr "Current quota"
 
 msgid "Daily"
-msgstr ""
+msgstr "Daily"
 
 msgid "Day of the month that monthly compact runs (1-31)."
-msgstr ""
+msgstr "Day of the month that monthly compact runs (1-31)."
 
 msgid "Day of the week that weekly compact runs."
-msgstr ""
+msgstr "Day of the week that weekly compact runs."
 
 msgid "Delete + Files"
 msgstr "Delete + Files"
@@ -234,10 +237,10 @@ msgid "Failed to remove "
 msgstr "Failed to remove "
 
 msgid "Fri"
-msgstr ""
+msgstr "Fri"
 
 msgid "Friday"
-msgstr ""
+msgstr "Friday"
 
 msgid "General"
 msgstr "General"
@@ -254,19 +257,19 @@ msgid "Hour of the day that daily backups run."
 msgstr "Hour of the day that daily backups run."
 
 msgid "Hour of the day that daily compact runs."
-msgstr ""
+msgstr "Hour of the day that daily compact runs."
 
 msgid "Hour of the day that monthly backups run."
 msgstr "Hour of the day that monthly backups run."
 
 msgid "Hour of the day that monthly compact runs."
-msgstr ""
+msgstr "Hour of the day that monthly compact runs."
 
 msgid "Hour of the day that weekly backups run."
 msgstr "Hour of the day that weekly backups run."
 
 msgid "Hour of the day that weekly compact runs."
-msgstr ""
+msgstr "Hour of the day that weekly compact runs."
 
 msgid "Hour of the day that yearly backups run."
 msgstr "Hour of the day that yearly backups run."
@@ -297,7 +300,7 @@ msgid "Minute after the hour that daily backups run."
 msgstr "Minute after the hour that daily backups run."
 
 msgid "Minute after the hour that daily compact runs."
-msgstr ""
+msgstr "Minute after the hour that daily compact runs."
 
 msgid "Minute after the hour that hourly backups run."
 msgstr "Minute after the hour that hourly backups run."
@@ -306,25 +309,25 @@ msgid "Minute after the hour that monthly backups run."
 msgstr "Minute after the hour that monthly backups run."
 
 msgid "Minute after the hour that monthly compact runs."
-msgstr ""
+msgstr "Minute after the hour that monthly compact runs."
 
 msgid "Minute after the hour that weekly backups run."
 msgstr "Minute after the hour that weekly backups run."
 
 msgid "Minute after the hour that weekly compact runs."
-msgstr ""
+msgstr "Minute after the hour that weekly compact runs."
 
 msgid "Minute after the hour that yearly backups run."
 msgstr "Minute after the hour that yearly backups run."
 
 msgid "Mon"
-msgstr ""
+msgstr "Mon"
 
 msgid "Monday"
-msgstr ""
+msgstr "Monday"
 
 msgid "Monthly"
-msgstr ""
+msgstr "Monthly"
 
 msgid "Mount"
 msgstr "Mount"
@@ -467,16 +470,16 @@ msgid "Run compact after backup and prune"
 msgstr "Run compact after backup and prune"
 
 msgid "Run compact daily."
-msgstr ""
+msgstr "Run compact daily."
 
 msgid "Run compact for ..."
-msgstr ""
+msgstr "Run compact for ..."
 
 msgid "Run compact monthly."
-msgstr ""
+msgstr "Run compact monthly."
 
 msgid "Run compact weekly."
-msgstr ""
+msgstr "Run compact weekly."
 
 msgid "Run daily cron job."
 msgstr "Run daily cron job."
@@ -509,13 +512,13 @@ msgid "Runtime / Output"
 msgstr "Runtime / Output"
 
 msgid "Sat"
-msgstr ""
+msgstr "Sat"
 
 msgid "Saturday"
-msgstr ""
+msgstr "Saturday"
 
 msgid "Schedule"
-msgstr ""
+msgstr "Schedule"
 
 msgid "Select a repo ..."
 msgstr "Select a repo ..."
@@ -527,7 +530,7 @@ msgid "Set minimum threshold for saved space in percent"
 msgstr "Set minimum threshold for saved space in percent"
 
 msgid "Set minimum threshold for saved space in percent."
-msgstr ""
+msgstr "Set minimum threshold for saved space in percent."
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
@@ -553,25 +556,25 @@ msgid "Storage quota"
 msgstr "Storage quota"
 
 msgid "Sun"
-msgstr ""
+msgstr "Sun"
 
 msgid "Sunday"
-msgstr ""
+msgstr "Sunday"
 
 msgid "Threshold"
-msgstr ""
+msgstr "Threshold"
 
 msgid "Thu"
-msgstr ""
+msgstr "Thu"
 
 msgid "Thursday"
-msgstr ""
+msgstr "Thursday"
 
 msgid "Tue"
-msgstr ""
+msgstr "Tue"
 
 msgid "Tuesday"
-msgstr ""
+msgstr "Tuesday"
 
 msgid "Type"
 msgstr "Type"
@@ -583,7 +586,7 @@ msgid "Unmounting repo ..."
 msgstr "Unmounting repo ..."
 
 msgid "Updated compact schedule."
-msgstr ""
+msgstr "Updated compact schedule."
 
 msgid "Uses value as prefix for archive name."
 msgstr "Uses value as prefix for archive name."
@@ -597,14 +600,17 @@ msgstr "Verify"
 msgid "Versions"
 msgstr "Versions"
 
-msgid "Wed"
+msgid "View Log"
 msgstr ""
+
+msgid "Wed"
+msgstr "Wed"
 
 msgid "Wednesday"
-msgstr ""
+msgstr "Wednesday"
 
 msgid "Weekly"
-msgstr ""
+msgstr "Weekly"
 
 msgid "You must move the repo files before changing the location."
 msgstr "You must move the repo files before changing the location."
@@ -649,7 +655,7 @@ msgid "monthly"
 msgstr "monthly"
 
 msgid "monthly day"
-msgstr ""
+msgstr "monthly day"
 
 msgid "monthly hour"
 msgstr "monthly hour"
@@ -667,7 +673,7 @@ msgid "weekly"
 msgstr "weekly"
 
 msgid "weekly day"
-msgstr ""
+msgstr "weekly day"
 
 msgid "weekly hour"
 msgstr "weekly hour"

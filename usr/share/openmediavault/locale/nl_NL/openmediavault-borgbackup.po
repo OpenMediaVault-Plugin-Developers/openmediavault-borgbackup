@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-03 00:22+0000\n"
+"POT-Creation-Date: 2026-04-16 15:38+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2026\n"
 "Language-Team: Dutch (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/nl/)\n"
@@ -35,6 +35,9 @@ msgstr "Archief"
 
 msgid "Archive info ..."
 msgstr "Archiefinfo…"
+
+msgid "Archive log ..."
+msgstr ""
 
 msgid "Archives"
 msgstr "Archieven"
@@ -143,7 +146,7 @@ msgid "Created archive."
 msgstr "Archief aangemaakt."
 
 msgid "Created compact schedule."
-msgstr ""
+msgstr "Compacte planning aangemaakt."
 
 msgid "Created environment variable."
 msgstr "Omgevingsvariabele aangemaakt."
@@ -155,13 +158,13 @@ msgid "Current quota"
 msgstr "Huidige quota"
 
 msgid "Daily"
-msgstr ""
+msgstr "Dagelijks"
 
 msgid "Day of the month that monthly compact runs (1-31)."
-msgstr ""
+msgstr "Dag van de maand waarop de maandelijkse compact loopt (1-31)."
 
 msgid "Day of the week that weekly compact runs."
-msgstr ""
+msgstr "Dag van de week dat wekelijkse compact loopt."
 
 msgid "Delete + Files"
 msgstr "Verwijderen + Bestanden"
@@ -234,10 +237,10 @@ msgid "Failed to remove "
 msgstr "Verwijderen mislukt"
 
 msgid "Fri"
-msgstr ""
+msgstr "Vr"
 
 msgid "Friday"
-msgstr ""
+msgstr "Vrijdag"
 
 msgid "General"
 msgstr "Algemeen"
@@ -255,19 +258,19 @@ msgid "Hour of the day that daily backups run."
 msgstr "Uur van de dag dat dagelijkse backups worden uitgevoerd."
 
 msgid "Hour of the day that daily compact runs."
-msgstr ""
+msgstr "Uur van de dag dat dagelijkse compact loopt."
 
 msgid "Hour of the day that monthly backups run."
 msgstr "Uur van de dag dat maandelijkse backups worden uitgevoerd."
 
 msgid "Hour of the day that monthly compact runs."
-msgstr ""
+msgstr "Uur van de dag dat maandelijkse compact loopt."
 
 msgid "Hour of the day that weekly backups run."
 msgstr "Uur van de dag dat wekelijkse backups worden uitgevoerd."
 
 msgid "Hour of the day that weekly compact runs."
-msgstr ""
+msgstr "Uur van de dag dat wekelijkse compact loopt."
 
 msgid "Hour of the day that yearly backups run."
 msgstr "Uur van de dag dat jaarlijkse backups worden uitgevoerd."
@@ -298,7 +301,7 @@ msgid "Minute after the hour that daily backups run."
 msgstr "Minuten na het uur dat dagelijkse backups worden uitgevoerd."
 
 msgid "Minute after the hour that daily compact runs."
-msgstr ""
+msgstr "Minuut na het uur dat de dagelijkse compact loopt."
 
 msgid "Minute after the hour that hourly backups run."
 msgstr "Minuten na het uur dat uurlijke backups worden uitgevoerd."
@@ -307,25 +310,25 @@ msgid "Minute after the hour that monthly backups run."
 msgstr "Minuten na het uur dat maandelijkse backups worden uitgevoerd."
 
 msgid "Minute after the hour that monthly compact runs."
-msgstr ""
+msgstr "Minuut na het uur dat de maandelijkse compact loopt."
 
 msgid "Minute after the hour that weekly backups run."
 msgstr "Minuten na het uur dat wekelijkse backups worden uitgevoerd."
 
 msgid "Minute after the hour that weekly compact runs."
-msgstr ""
+msgstr "Minuut na het uur dat de wekelijkse compact loopt."
 
 msgid "Minute after the hour that yearly backups run."
 msgstr "Minuten na het uur dat jaarlijkse backups worden uitgevoerd."
 
 msgid "Mon"
-msgstr ""
+msgstr "Ma"
 
 msgid "Monday"
-msgstr ""
+msgstr "Maandag"
 
 msgid "Monthly"
-msgstr ""
+msgstr "Maandelijks"
 
 msgid "Mount"
 msgstr "Aankoppelen"
@@ -470,16 +473,16 @@ msgid "Run compact after backup and prune"
 msgstr "Compact uitvoeren na back-up en snoeien"
 
 msgid "Run compact daily."
-msgstr ""
+msgstr "Dagelijkse compact uitvoeren."
 
 msgid "Run compact for ..."
-msgstr ""
+msgstr "Compact uitvoeren voor…"
 
 msgid "Run compact monthly."
-msgstr ""
+msgstr "Maandelijkse compact uitvoeren."
 
 msgid "Run compact weekly."
-msgstr ""
+msgstr "Wekelijkse compact uitvoeren."
 
 msgid "Run daily cron job."
 msgstr "Dagelijkse cron-taak uitvoeren."
@@ -512,13 +515,13 @@ msgid "Runtime / Output"
 msgstr "Looptijd / Uitvoer"
 
 msgid "Sat"
-msgstr ""
+msgstr "Za"
 
 msgid "Saturday"
-msgstr ""
+msgstr "Zaterdag"
 
 msgid "Schedule"
-msgstr ""
+msgstr "Planning"
 
 msgid "Select a repo ..."
 msgstr "Selecteer een repo…"
@@ -530,7 +533,7 @@ msgid "Set minimum threshold for saved space in percent"
 msgstr "Minimumdrempel voor opgeslagen ruimte in procenten instellen"
 
 msgid "Set minimum threshold for saved space in percent."
-msgstr ""
+msgstr "Minimumdrempel voor bespaarde ruimte in procenten instellen."
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
@@ -557,25 +560,25 @@ msgid "Storage quota"
 msgstr "Opslagquota"
 
 msgid "Sun"
-msgstr ""
+msgstr "Zo"
 
 msgid "Sunday"
-msgstr ""
+msgstr "Zondag"
 
 msgid "Threshold"
-msgstr ""
+msgstr "Drempel"
 
 msgid "Thu"
-msgstr ""
+msgstr "Do"
 
 msgid "Thursday"
-msgstr ""
+msgstr "Donderdag"
 
 msgid "Tue"
-msgstr ""
+msgstr "Di"
 
 msgid "Tuesday"
-msgstr ""
+msgstr "Dinsdag"
 
 msgid "Type"
 msgstr "Type"
@@ -587,7 +590,7 @@ msgid "Unmounting repo ..."
 msgstr "Repo loskoppelen…"
 
 msgid "Updated compact schedule."
-msgstr ""
+msgstr "Compacte planning bijgewerkt."
 
 msgid "Uses value as prefix for archive name."
 msgstr "Gebruikt waarde als voorvoegsel voor archiefnaam."
@@ -601,14 +604,17 @@ msgstr "Verifiëren"
 msgid "Versions"
 msgstr "Versies"
 
-msgid "Wed"
+msgid "View Log"
 msgstr ""
+
+msgid "Wed"
+msgstr "Wo"
 
 msgid "Wednesday"
-msgstr ""
+msgstr "Woensdag"
 
 msgid "Weekly"
-msgstr ""
+msgstr "Wekelijks"
 
 msgid "You must move the repo files before changing the location."
 msgstr "U moet de repo-bestanden verplaatsen voordat u de locatie wijzigt."
@@ -653,7 +659,7 @@ msgid "monthly"
 msgstr "maandelijks"
 
 msgid "monthly day"
-msgstr ""
+msgstr "maandelijkse dag"
 
 msgid "monthly hour"
 msgstr "maandelijks uur"
@@ -671,7 +677,7 @@ msgid "weekly"
 msgstr "wekelijks"
 
 msgid "weekly day"
-msgstr ""
+msgstr "wekelijkse dag"
 
 msgid "weekly hour"
 msgstr "wekelijks uur"
