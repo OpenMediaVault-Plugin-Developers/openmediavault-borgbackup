@@ -1,0 +1,13 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-borgbackup-archive-log-text-page
+  type: textPage
+  config:
+    hasReloadButton: true
+    request:
+      service: BorgBackup
+      get:
+        method: getArchiveLog
+        params:
+          name: "{{ _routeParams.name }}"

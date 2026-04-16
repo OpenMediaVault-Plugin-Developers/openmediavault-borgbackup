@@ -536,9 +536,8 @@
     "params": {
       "type": "object",
       "properties": {
-        "uuid": {
+        "name": {
           "type": "string",
-          "format": "uuidv4",
           "required": true
         }
       }

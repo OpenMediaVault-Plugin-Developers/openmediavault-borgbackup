@@ -144,16 +144,8 @@ data:
           minSelected: 1
           maxSelected: 1
         execute:
-          type: taskDialog
-          taskDialog:
-            config:
-              title: _("Archive log ...")
-              startOnInit: true
-              request:
-                service: BorgBackup
-                method: getArchiveLog
-                params:
-                  uuid: "{{ _selected[0].uuid }}"
+          type: url
+          url: "/services/borgbackup/archives/log/{{ _selected[0].name }}"
       - type: menu
         icon: mdi:link
         tooltip: _("Docs")

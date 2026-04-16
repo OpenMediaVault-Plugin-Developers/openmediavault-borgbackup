@@ -1170,25 +1170,11 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
     {
         $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
         $this->validateMethodParams($params, 'rpc.borgbackup.getarchivelog');
-        $db = \OMV\Config\Database::getInstance();
-        $archive = $db->get('conf.service.borgbackup.archive', $params['uuid']);
-        $name = $archive->get('name');
-        return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
-            use ($name) {
-                $logFile = sprintf("/var/log/borgbackup/%s.log", $name);
-                $cmdArgs = [];
-                $cmdArgs[] = 'tail';
-                $cmdArgs[] = '-n +1';
-                $cmdArgs[] = $logFile;
-                $cmd = new \OMV\System\Process($cmdArgs);
-                $cmd->setQuiet(true);
-                $cmdLine = $cmd->getCommandLine();
-                if (file_exists($logFile)) {
-                    $exitStatus = $this->exec($cmdLine, $output, $bgOutputFilename);
-                }
-                return $output;
-            }
-        );
+        $logFile = sprintf("/var/log/borgbackup/%s.log", $params['name']);
+        if (!file_exists($logFile)) {
+            return sprintf("No log file found for archive '%s'.", $params['name']);
+        }
+        return file_get_contents($logFile);
     }
 
     public function getEnvVarList($params, $context)

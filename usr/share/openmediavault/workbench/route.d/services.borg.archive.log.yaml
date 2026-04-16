@@ -1,0 +1,7 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/borgbackup/archives/log/:name"
+  title: _("Archive log")
+  editing: true
+  component: omv-services-borgbackup-archive-log-text-page
