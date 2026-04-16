@@ -1,3 +1,14 @@
+openmediavault-borgbackup (8.1.8) stable; urgency=low
+
+  * Log to per-archive files in /var/log/borgbackup/{name}.log instead of
+    a single shared borgbackup.log to prevent interleaved output
+  * Compact scheduled jobs log to /var/log/borgbackup/compact-{repo}.log
+  * Update logrotate to rotate all files under /var/log/borgbackup/
+  * Add View Log button on Archives tab to display the archive's log
+  * Log manual run output to the archive log file
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 16 Apr 2026 15:58:30 +0000
+
 openmediavault-borgbackup (8.1.7) stable; urgency=low
 
   * Add Compact tab for scheduling standalone borg compact runs per repo (daily, weekly, monthly)
