@@ -18,10 +18,18 @@
 {% set config = salt['omv_conf.get']('conf.service.borgbackup') %}
 {% set envVarDir = '/etc/borgbackup' %}
 {% set envVarPrefix = 'borg-envvar-' %}
-{% set logFile = '/var/log/borgbackup.log' %}
+{% set logDir = '/var/log/borgbackup' %}
 {% set scriptsDir = '/var/lib/openmediavault/borgbackup' %}
 {% set scriptPrefix = 'borgbackup-' %}
 {% set compactPrefix = 'borgcompact-' %}
+
+configure_borg_log_dir:
+  file.directory:
+    - name: "{{ logDir }}"
+    - makedirs: True
+    - user: root
+    - group: adm
+    - mode: 750
 
 configure_borg_scripts_dir:
   file.directory:
@@ -105,10 +113,11 @@ configure_borg_crond:
 {% set rpath = ns.uri %}
 {% endif %}
 
+{% set archiveLogFile = logDir ~ '/' ~ archive.name ~ '.log' %}
 {% if archive.email %}
-{% set email = '2>&1 | tee -a ' ~ logFile %}
+{% set email = '2>&1 | tee -a ' ~ archiveLogFile %}
 {% else %}
-{% set email = '>> ' ~ logFile ~ ' 2>&1' %}
+{% set email = '>> ' ~ archiveLogFile ~ ' 2>&1' %}
 {% endif %}
 
 {% set extraEnv = envVarDir ~ '/' ~ envVarPrefix ~ archive.reporef %}
@@ -371,7 +380,7 @@ purge_stale_borg_scripts:
     - rmlinks: True
 
 
-{% set ns2 = namespace(type='',sharedfolderref='',uri='',passphrase='') %}
+{% set ns2 = namespace(type='',sharedfolderref='',uri='',passphrase='',name='') %}
 
 {% for compact in config.compacts.compactsched | selectattr('enable') %}
 
@@ -380,6 +389,7 @@ purge_stale_borg_scripts:
 {% set ns2.sharedfolderref = repo.sharedfolderref %}
 {% set ns2.uri = repo.uri %}
 {% set ns2.passphrase = repo.passphrase %}
+{% set ns2.name = repo.name %}
 {% endfor %}
 
 {% set compactScript = scriptsDir ~ '/' ~ compactPrefix ~ compact.uuid %}
@@ -391,10 +401,11 @@ purge_stale_borg_scripts:
 {% set crpath = ns2.uri %}
 {% endif %}
 
+{% set compactLogFile = logDir ~ '/compact-' ~ ns2.name ~ '.log' %}
 {% if compact.email %}
-{% set cemail = '2>&1 | tee -a ' ~ logFile %}
+{% set cemail = '2>&1 | tee -a ' ~ compactLogFile %}
 {% else %}
-{% set cemail = '>> ' ~ logFile ~ ' 2>&1' %}
+{% set cemail = '>> ' ~ compactLogFile ~ ' 2>&1' %}
 {% endif %}
 
 {% set cExtraEnv = envVarDir ~ '/' ~ envVarPrefix ~ compact.reporef %}

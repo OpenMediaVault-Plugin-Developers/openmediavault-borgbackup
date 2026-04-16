@@ -532,6 +532,20 @@
   },
   {
     "type": "rpc",
+    "id": "rpc.borgbackup.getarchivelog",
+    "params": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        }
+      }
+    }
+  },
+  {
+    "type": "rpc",
     "id": "rpc.borgbackup.createarchive",
     "params": {
       "type": "object",

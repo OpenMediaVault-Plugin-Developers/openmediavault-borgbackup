@@ -54,6 +54,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('exportArchive');
         $this->registerMethod('extractArchive');
         $this->registerMethod('getLog');
+        $this->registerMethod('getArchiveLog');
 
         $this->registerMethod('getEnvVarList');
         $this->registerMethod('getEnvVar');
@@ -915,6 +916,12 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                     $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
                     $this->exec($cmdLine, $output, $bgOutputFilename);
                 }
+                // Append this run's output to the persistent archive log
+                $logFile = sprintf("/var/log/borgbackup/%s.log", $archive->get('name'));
+                $content = file_get_contents($bgOutputFilename);
+                if ($content !== false) {
+                    file_put_contents($logFile, $content, FILE_APPEND);
+                }
                 // return
                 return $output;
             }
@@ -1147,6 +1154,31 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 if ($params['follow']) {
                     $cmdArgs[] = '-f';
                 }
+                $cmdArgs[] = $logFile;
+                $cmd = new \OMV\System\Process($cmdArgs);
+                $cmd->setQuiet(true);
+                $cmdLine = $cmd->getCommandLine();
+                if (file_exists($logFile)) {
+                    $exitStatus = $this->exec($cmdLine, $output, $bgOutputFilename);
+                }
+                return $output;
+            }
+        );
+    }
+
+    public function getArchiveLog($params, $context)
+    {
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        $this->validateMethodParams($params, 'rpc.borgbackup.getarchivelog');
+        $db = \OMV\Config\Database::getInstance();
+        $archive = $db->get('conf.service.borgbackup.archive', $params['uuid']);
+        $name = $archive->get('name');
+        return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
+            use ($name) {
+                $logFile = sprintf("/var/log/borgbackup/%s.log", $name);
+                $cmdArgs = [];
+                $cmdArgs[] = 'tail';
+                $cmdArgs[] = '-n +1';
                 $cmdArgs[] = $logFile;
                 $cmd = new \OMV\System\Process($cmdArgs);
                 $cmd->setQuiet(true);
