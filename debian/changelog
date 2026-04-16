@@ -1,3 +1,9 @@
+openmediavault-borgbackup (8.1.9) stable; urgency=low
+
+  * Improve log viewer
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 16 Apr 2026 21:28:13 +0000
+
 openmediavault-borgbackup (8.1.8) stable; urgency=low
 
   * Log to per-archive files in /var/log/borgbackup/{name}.log instead of
