@@ -1,3 +1,10 @@
+openmediavault-borgbackup (8.1.10) stable; urgency=low
+
+  * Add BORG_EXTRA_CREATE_ARGS environment variable to let users add
+    borg create extra options
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 08 May 2026 16:25:16 +0000
+
 openmediavault-borgbackup (8.1.9) stable; urgency=low
 
   * Improve log viewer
