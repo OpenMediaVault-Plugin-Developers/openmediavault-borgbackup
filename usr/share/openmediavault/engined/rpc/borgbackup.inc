@@ -843,6 +843,17 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                     }
                     $path = $repo->get('uri');
                 }
+                $envFilePath = $this->envFile . $archive->get('reporef');
+                if (file_exists($envFilePath)) {
+                    $envContents = file_get_contents($envFilePath);
+                    if (preg_match('/^BORG_EXTRA_CREATE_ARGS="([^"]*)"/m', $envContents, $matches)) {
+                        foreach (preg_split('/\s+/', trim($matches[1])) as $arg) {
+                            if ($arg !== '') {
+                                $cmdArgs[] = $arg;
+                            }
+                        }
+                    }
+                }
                 $cmdArgs[] = sprintf('"%s::%s-{now:%%Y-%%m-%%d_%%H-%%M-%%S}"', $path, $archive->get('name'));
                 $includes = explode(',', $archive->get('include'));
                 foreach ($includes as $dirs) {

@@ -219,6 +219,7 @@ configure_borg_{{ archive.uuid }}_cron_file:
           --exclude '{{ exclude }}' \
         {%- endfor %}
         {%- endif %}
+          ${BORG_EXTRA_CREATE_ARGS} \
           ::"{{ archive.name }}-{now:%Y-%m-%d_%H-%M-%S}" \
         {%- if archive.include | length > 0 %}
         {%- set includes = archive.include.split(',') | map('trim') | reject('equalto', '') %}
