@@ -37,7 +37,7 @@ msgid "Archive info ..."
 msgstr "Archiefinfo…"
 
 msgid "Archive log"
-msgstr ""
+msgstr "Logboek archiveren"
 
 msgid "Archives"
 msgstr "Archieven"

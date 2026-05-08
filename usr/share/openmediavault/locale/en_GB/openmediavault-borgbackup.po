@@ -37,7 +37,7 @@ msgid "Archive info ..."
 msgstr "Archive info ..."
 
 msgid "Archive log"
-msgstr ""
+msgstr "Archive log"
 
 msgid "Archives"
 msgstr "Archives"
@@ -601,7 +601,7 @@ msgid "Versions"
 msgstr "Versions"
 
 msgid "View Log"
-msgstr ""
+msgstr "View Log"
 
 msgid "Wed"
 msgstr "Wed"

@@ -37,13 +37,13 @@ msgid "Archive info ..."
 msgstr "歸檔資訊 ..."
 
 msgid "Archive log"
-msgstr ""
+msgstr "歸檔日誌"
 
 msgid "Archives"
 msgstr "歸檔"
 
 msgid "Archives only"
-msgstr "只針對歸檔"
+msgstr "僅對歸檔"
 
 msgid ""
 "Are you sure you want to delete the repo from the plugin and the repo files?"
@@ -583,7 +583,7 @@ msgid "Versions"
 msgstr "版本"
 
 msgid "View Log"
-msgstr ""
+msgstr "檢視日誌"
 
 msgid "Wed"
 msgstr "三"
