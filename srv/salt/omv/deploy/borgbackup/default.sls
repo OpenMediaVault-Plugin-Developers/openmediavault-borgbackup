@@ -29,7 +29,7 @@ configure_borg_log_dir:
     - makedirs: True
     - user: root
     - group: adm
-    - mode: 750
+    - mode: '0750'
 
 configure_borg_scripts_dir:
   file.directory:
@@ -37,14 +37,14 @@ configure_borg_scripts_dir:
     - makedirs: True
     - user: root
     - group: root
-    - mode: 755
+    - mode: '0755'
 
 configure_borg_envvar_dir:
   file.directory:
     - name: "{{ envVarDir }}"
     - user: root
     - group: root
-    - mode: 700
+    - mode: '0700'
 
 {% for repo in config.repos.repo %}
 {% set envVarFile = envVarDir ~ '/' ~ envVarPrefix ~ repo.uuid %}
@@ -60,7 +60,7 @@ configure_borg_envvar_{{ repo.uuid }}:
     - template: jinja
     - user: root
     - group: root
-    - mode: 600
+    - mode: '0600'
 
 {% endfor %}
 
@@ -76,7 +76,7 @@ configure_borg_envvar_creation:
     - template: jinja
     - user: root
     - group: root
-    - mode: 600
+    - mode: '0600'
 
 configure_borg_crond:
   file.managed:
@@ -91,7 +91,7 @@ configure_borg_crond:
     - template: jinja
     - user: root
     - group: root
-    - mode: 644
+    - mode: '0644'
 
 {% set ns = namespace(type='',sharedfolderref='',uri='',passphrase='') %}
 
@@ -340,7 +340,7 @@ configure_borg_{{ archive.uuid }}_cron_file:
         exit ${global_exit}
     - user: root
     - group: root
-    - mode: 750
+    - mode: '0750'
 {% endfor %}
 
 
@@ -480,7 +480,7 @@ configure_borg_{{ compact.uuid }}_compact_file:
         exit ${compact_exit}
     - user: root
     - group: root
-    - mode: 750
+    - mode: '0750'
 {% endfor %}
 
 
