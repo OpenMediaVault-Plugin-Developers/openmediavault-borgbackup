@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 00:56+0000\n"
+"POT-Creation-Date: 2026-06-04 00:34+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2024\n"
-"Language-Team: Spanish (Spain) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/es_ES/)\n"
+"Language-Team: Spanish (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es_ES\n"
+"Language: es\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "0 is the fastest compression and 9 is the best compression"
@@ -218,6 +218,9 @@ msgstr ""
 "El archivo a exportar, será creado en este directorio con un nombre con la "
 "extensión .tar.gz."
 
+msgid "Exporting archive ..."
+msgstr ""
+
 msgid "Extract"
 msgstr "Extraer"
 
@@ -227,11 +230,14 @@ msgstr "Extrayendo archivos al directorio"
 msgid "Extract archive to tar file"
 msgstr "Extrayendo archivos al fichero tar"
 
+msgid "Extracting archive ..."
+msgstr ""
+
 msgid "Failed to find "
 msgstr "Error al buscar"
 
 msgid "Failed to get keyfile!"
-msgstr "Error al cargar la keyFile."
+msgstr "¡error al cargar la keyfile!"
 
 msgid "Failed to remove "
 msgstr "Error al borrar"
@@ -630,9 +636,6 @@ msgstr ""
 msgid "daily minute"
 msgstr ""
 
-msgid "extract logs - follow ..."
-msgstr ""
-
 msgid "extract logs ..."
 msgstr ""
 
@@ -643,9 +646,6 @@ msgid "hourly minute"
 msgstr ""
 
 msgid "logs"
-msgstr ""
-
-msgid "logs - follow"
 msgstr ""
 
 msgid "lz4 - super fast / low compression"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 00:56+0000\n"
+"POT-Creation-Date: 2026-06-04 00:34+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: kochin <kochinc@outlook.com>, 2026\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_TW/)\n"
@@ -208,6 +208,9 @@ msgid ""
 "archive name with an extension of .tar.gz."
 msgstr "輸出檔案將會建立在這個目錄裡，檔名會與歸檔名稱相符但有 .tar.gz 延伸檔名。"
 
+msgid "Exporting archive ..."
+msgstr ""
+
 msgid "Extract"
 msgstr "擷取"
 
@@ -216,6 +219,9 @@ msgstr "擷取歸檔到檔案目錄"
 
 msgid "Extract archive to tar file"
 msgstr "擷取歸檔到 tar 檔案"
+
+msgid "Extracting archive ..."
+msgstr ""
 
 msgid "Failed to find "
 msgstr "無法找到"
@@ -609,9 +615,6 @@ msgstr "每日幾時"
 msgid "daily minute"
 msgstr "每日幾分"
 
-msgid "extract logs - follow ..."
-msgstr "擷取日誌 - 追隨 ..."
-
 msgid "extract logs ..."
 msgstr "擷取日誌 ..."
 
@@ -623,9 +626,6 @@ msgstr "每小時幾分"
 
 msgid "logs"
 msgstr "日誌"
-
-msgid "logs - follow"
-msgstr "日誌 - 追隨"
 
 msgid "lz4 - super fast / low compression"
 msgstr "lz4 - 超快 / 低壓縮"

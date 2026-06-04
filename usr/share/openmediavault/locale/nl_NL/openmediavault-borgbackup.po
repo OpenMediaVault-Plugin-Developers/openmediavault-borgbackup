@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 00:56+0000\n"
+"POT-Creation-Date: 2026-06-04 00:34+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2026\n"
 "Language-Team: Dutch (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/nl/)\n"
@@ -218,6 +218,9 @@ msgstr ""
 "Exportbestand zal in deze map worden aangemaakt met een bestandsnaam die "
 "overeenkomt met de archiefnaam en een extensie .tar.gz."
 
+msgid "Exporting archive ..."
+msgstr ""
+
 msgid "Extract"
 msgstr "Uitpakken"
 
@@ -226,6 +229,9 @@ msgstr "Archief uitpakken naar map"
 
 msgid "Extract archive to tar file"
 msgstr "Archief uitpakken naar tar-bestand"
+
+msgid "Extracting archive ..."
+msgstr ""
 
 msgid "Failed to find "
 msgstr "Niet gevonden"
@@ -631,9 +637,6 @@ msgstr "dagelijks uur"
 msgid "daily minute"
 msgstr "dagelijks minuut"
 
-msgid "extract logs - follow ..."
-msgstr "logboeken extraheren - volgen…"
-
 msgid "extract logs ..."
 msgstr "logboeken extraheren…"
 
@@ -645,9 +648,6 @@ msgstr "elk uur minuut"
 
 msgid "logs"
 msgstr "logboeken"
-
-msgid "logs - follow"
-msgstr "logboeken - volgen"
 
 msgid "lz4 - super fast / low compression"
 msgstr "lz4 - supersnel / weinig compressie"

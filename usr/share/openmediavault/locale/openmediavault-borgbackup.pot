@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 01:19+0000\n"
+"POT-Creation-Date: 2026-06-04 00:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -194,6 +194,9 @@ msgstr ""
 msgid "Export file will be created in this directory with a filename matching the archive name with an extension of .tar.gz."
 msgstr ""
 
+msgid "Exporting archive ..."
+msgstr ""
+
 msgid "Extract"
 msgstr ""
 
@@ -201,6 +204,9 @@ msgid "Extract archive to directory"
 msgstr ""
 
 msgid "Extract archive to tar file"
+msgstr ""
+
+msgid "Extracting archive ..."
 msgstr ""
 
 msgid "Failed to find "
@@ -587,9 +593,6 @@ msgstr ""
 msgid "daily minute"
 msgstr ""
 
-msgid "extract logs - follow ..."
-msgstr ""
-
 msgid "extract logs ..."
 msgstr ""
 
@@ -600,9 +603,6 @@ msgid "hourly minute"
 msgstr ""
 
 msgid "logs"
-msgstr ""
-
-msgid "logs - follow"
 msgstr ""
 
 msgid "lz4 - super fast / low compression"

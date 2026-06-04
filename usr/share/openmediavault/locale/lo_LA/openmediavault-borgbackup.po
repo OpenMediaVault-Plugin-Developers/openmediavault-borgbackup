@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 00:56+0000\n"
+"POT-Creation-Date: 2026-06-04 00:34+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: BoneNI, 2026\n"
 "Language-Team: Lao (Laos) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/lo_LA/)\n"
@@ -218,6 +218,9 @@ msgstr ""
 "ໄຟລ໌ສົ່ງອອກຈະຖືກສ້າງຂຶ້ນໃນໂຟນເດີນີ້ ໂດຍມີຊື່ໄຟລ໌ກົງກັບຊື່ບົດເກັບມ້ຽນ ແລະ "
 "ມີນາມສະກຸນ .tar.gz."
 
+msgid "Exporting archive ..."
+msgstr ""
+
 msgid "Extract"
 msgstr "ແຍກໄຟລ໌"
 
@@ -226,6 +229,9 @@ msgstr "ແຍກບົດເກັບມ້ຽນໄປຍັງໂຟນເດ
 
 msgid "Extract archive to tar file"
 msgstr "ແຍກບົດເກັບມ້ຽນເປັນໄຟລ໌ tar"
+
+msgid "Extracting archive ..."
+msgstr ""
 
 msgid "Failed to find "
 msgstr "ຊອກຫາບໍ່ເຫັນ "
@@ -627,9 +633,6 @@ msgstr "ຊົ່ວໂມງປະຈຳມື້"
 msgid "daily minute"
 msgstr "ນາທີປະຈຳມື້"
 
-msgid "extract logs - follow ..."
-msgstr "ແຍກບັນທຶກເຫດການ - ຕິດຕາມ ..."
-
 msgid "extract logs ..."
 msgstr "ແຍກບັນທຶກເຫດການ ..."
 
@@ -641,9 +644,6 @@ msgstr "ນາທີປະຈຳຊົ່ວໂມງ"
 
 msgid "logs"
 msgstr "ບັນທຶກເຫດການ (logs)"
-
-msgid "logs - follow"
-msgstr "ບັນທຶກເຫດການ - ຕິດຕາມ"
 
 msgid "lz4 - super fast / low compression"
 msgstr "lz4 - ໄວຫຼາຍ / ບີບອັດໄດ້ໜ້ອຍ"
