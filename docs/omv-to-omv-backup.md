@@ -39,6 +39,7 @@ You can reuse an existing user, but a dedicated one is cleaner.
 1. Go to **Users → Users → Create**.
 2. Name it something like `borgserve`.
 3. Give it a password (it won't be used for backups, but OMV requires one).
+2. Ensure the user is in the `_ssh` group.
 4. **Save**.
 
 ### Step 1.3 — Create a shared folder to hold the backups
