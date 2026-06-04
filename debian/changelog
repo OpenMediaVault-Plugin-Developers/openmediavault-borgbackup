@@ -1,3 +1,9 @@
+openmediavault-borgbackup (8.1.11) stable; urgency=low
+
+  * Show archive extract and export output in a task dialog with live progress
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 04 Jun 2026 00:00:00 +0000
+
 openmediavault-borgbackup (8.1.10) stable; urgency=low
 
   * Add BORG_EXTRA_CREATE_ARGS environment variable to let users add
