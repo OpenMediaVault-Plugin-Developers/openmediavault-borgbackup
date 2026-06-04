@@ -1,3 +1,11 @@
+openmediavault-borgbackup (8.2.0) stable; urgency=low
+
+  * Add a Serve tab: host borg repositories for remote clients over SSH with
+    per-client forced-command, append-only, restrict-to-path and storage quota.
+    Public keys can be pasted or generated (with downloadable private key).
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 04 Jun 2026 15:21:49 +0000
+
 openmediavault-borgbackup (8.1.11) stable; urgency=low
 
   * Show archive extract and export output in a task dialog with live progress
