@@ -564,5 +564,61 @@
         }
       }
     }
+  },
+  {
+    "type": "rpc",
+    "id": "rpc.borgbackup.setserve",
+    "params": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "username": {
+          "type": "string",
+          "required": true
+        },
+        "sharedfolderref": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "publickey": {
+          "type": "string",
+          "required": false
+        },
+        "privatekey": {
+          "type": "string",
+          "required": false
+        },
+        "appendonly": {
+          "type": "boolean",
+          "required": true
+        },
+        "storquota": {
+          "type": "string",
+          "required": true
+        }
+      }
+    }
+  },
+  {
+    "type": "rpc",
+    "id": "rpc.borgbackup.generatekey",
+    "params": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "type": "string",
+          "required": false
+        }
+      }
+    }
   }
 ]

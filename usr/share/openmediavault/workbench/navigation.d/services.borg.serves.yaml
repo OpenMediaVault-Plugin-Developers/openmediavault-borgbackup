@@ -1,0 +1,8 @@
+version: "1.0"
+type: navigation-item
+data:
+  path: "services.borgbackup.serves"
+  text: _("Serve")
+  position: 40
+  icon: mdi:server-network
+  url: "/services/borgbackup/serves"

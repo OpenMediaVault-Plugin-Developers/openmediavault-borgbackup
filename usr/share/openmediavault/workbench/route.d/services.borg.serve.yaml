@@ -1,0 +1,6 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/borgbackup/serves"
+  title: _("Serve")
+  component: omv-services-borgbackup-serves-datatable-page

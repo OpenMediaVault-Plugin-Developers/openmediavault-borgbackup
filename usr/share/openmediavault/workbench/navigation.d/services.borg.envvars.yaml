@@ -3,6 +3,6 @@ type: navigation-item
 data:
   path: "services.borgbackup.envvars"
   text: _("Environment Variables")
-  position: 30
+  position: 50
   icon: mdi:cog-outline
   url: "/services/borgbackup/envvars"

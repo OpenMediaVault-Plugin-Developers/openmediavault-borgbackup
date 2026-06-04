@@ -1,0 +1,69 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-borgbackup-serve-form-page
+  type: formPage
+  config:
+    request:
+      service: BorgBackup
+      get:
+        method: getServe
+        params:
+          uuid: "{{ _routeParams.uuid }}"
+      post:
+        method: setServe
+    fields:
+      - type: confObjUuid
+      - type: textInput
+        name: name
+        label: _("Name")
+        validators:
+          required: true
+          patternType: 'shareName'
+      - type: select
+        name: username
+        label: _("Login user")
+        placeholder: _("Select a user ...")
+        hint: _("Clients connect over SSH as this existing user. Their borg serve access is written to this user's ~/.ssh/authorized_keys. Do not also add the client key to this user's profile under User Management.")
+        valueField: "name"
+        textField: "name"
+        store:
+          proxy:
+            service: UserMgmt
+            get:
+              method: enumerateAllUsers
+          sorters:
+            - dir: asc
+              prop: name
+        validators:
+          required: true
+      - type: sharedFolderSelect
+        name: sharedfolderref
+        label: _("Target shared folder")
+        hint: _("The client is restricted to this folder (borg serve --restrict-to-path). Its repositories must live here.")
+        validators:
+          required: true
+      - type: checkbox
+        name: appendonly
+        label: _("Append-only")
+        value: true
+        hint: _("The client can add archives but cannot delete or prune existing ones (ransomware protection). Prune/compact this repo yourself from the Compact tab.")
+      - type: textInput
+        name: storquota
+        label: _("Storage quota")
+        value: ""
+        hint: _("5G, 1.5T as examples. Leave blank for no quota.")
+      - type: textarea
+        name: publickey
+        label: _("Client public key")
+        value: ""
+        hint: _("Paste the client's OpenSSH public key. Leave blank to generate an ed25519 key pair automatically - you can then download the private key from the Serve list.")
+    buttons:
+      - template: submit
+        execute:
+          type: url
+          url: "/services/borgbackup/serves"
+      - template: cancel
+        execute:
+          type: url
+          url: "/services/borgbackup/serves"

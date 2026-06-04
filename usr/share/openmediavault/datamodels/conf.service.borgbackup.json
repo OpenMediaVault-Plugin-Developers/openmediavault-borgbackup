@@ -295,6 +295,60 @@
         }
       }
     },
+    "serves": {
+      "type": "object",
+      "properties": {
+        "serve": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "format": "uuidv4"
+              },
+              "name": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "sharedfolderref": {
+                "type": "string",
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "format": "uuidv4"
+                  },
+                  {
+                    "type": "string",
+                    "maxLength": 0
+                  }
+                ],
+                "default": ""
+              },
+              "publickey": {
+                "type": "string",
+                "format": "sshpubkey-openssh",
+                "default": ""
+              },
+              "privatekey": {
+                "type": "string",
+                "default": ""
+              },
+              "appendonly": {
+                "type": "boolean",
+                "default": true
+              },
+              "storquota": {
+                "type": "string",
+                "default": ""
+              }
+            }
+          }
+        }
+      }
+    },
     "compacts": {
       "type": "object",
       "properties": {

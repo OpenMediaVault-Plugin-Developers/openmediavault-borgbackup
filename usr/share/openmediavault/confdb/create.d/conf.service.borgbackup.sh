@@ -40,4 +40,8 @@ if ! omv_config_exists "${SERVICE_XPATH}/compacts"; then
     omv_config_add_node "${SERVICE_XPATH}" "compacts" ""
 fi
 
+if ! omv_config_exists "${SERVICE_XPATH}/serves"; then
+    omv_config_add_node "${SERVICE_XPATH}" "serves" ""
+fi
+
 exit 0

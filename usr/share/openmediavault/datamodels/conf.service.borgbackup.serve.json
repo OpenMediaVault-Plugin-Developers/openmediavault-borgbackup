@@ -1,0 +1,53 @@
+{
+  "type": "config",
+  "id": "conf.service.borgbackup.serve",
+  "title": "BorgBackup serve client",
+  "queryinfo": {
+    "xpath": "//services/borgbackup/serves/serve",
+    "iterable": true,
+    "idproperty": "uuid"
+  },
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "format": "uuidv4"
+    },
+    "name": {
+      "type": "string"
+    },
+    "username": {
+      "type": "string"
+    },
+    "sharedfolderref": {
+      "type": "string",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uuidv4"
+        },
+        {
+          "type": "string",
+          "maxLength": 0
+        }
+      ],
+      "default": ""
+    },
+    "publickey": {
+      "type": "string",
+      "format": "sshpubkey-openssh",
+      "default": ""
+    },
+    "privatekey": {
+      "type": "string",
+      "default": ""
+    },
+    "appendonly": {
+      "type": "boolean",
+      "default": true
+    },
+    "storquota": {
+      "type": "string",
+      "default": ""
+    }
+  }
+}

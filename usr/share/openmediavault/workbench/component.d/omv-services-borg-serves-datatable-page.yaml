@@ -1,0 +1,75 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-borgbackup-serves-datatable-page
+  type: datatablePage
+  config:
+    autoReload: false
+    hasSearchField: true
+    stateId: 7e3a1d54-4b9c-4d8e-9a2f-6c1b0e2f5a31
+    sorters:
+      - dir: asc
+        prop: name
+    store:
+      proxy:
+        service: BorgBackup
+        get:
+          method: getServeList
+    columns:
+      - name: _("Name")
+        prop: name
+        flexGrow: 1
+        sortable: true
+      - name: _("Login user")
+        prop: username
+        flexGrow: 1
+        sortable: true
+      - name: _("Target shared folder")
+        prop: sharedfoldername
+        flexGrow: 1
+        sortable: true
+      - name: _("Append-only")
+        prop: appendonly
+        flexGrow: 1
+        sortable: true
+        cellTemplateName: checkIcon
+      - name: _("Storage quota")
+        prop: storquota
+        flexGrow: 1
+        sortable: true
+      - name: _("Private key stored")
+        prop: haskey
+        flexGrow: 1
+        sortable: true
+        cellTemplateName: checkIcon
+        hidden: true
+    actions:
+      - template: create
+        execute:
+          type: url
+          url: "/services/borgbackup/serves/create"
+      - template: edit
+        execute:
+          type: url
+          url: "/services/borgbackup/serves/edit/{{ _selected[0].uuid }}"
+      - type: iconButton
+        icon: mdi:download
+        tooltip: _("Download private key")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            - operator: truthy
+              arg0:
+                prop: haskey
+        execute:
+          type: url
+          url: '/download?service=Borgbackup&method=downloadServeKey&params={"uuid":"{{ _selected[0].uuid }}"}'
+      - template: delete
+        execute:
+          type: request
+          request:
+            service: BorgBackup
+            method: deleteServe
+            params:
+              uuid: "{{ _selected[0].uuid }}"

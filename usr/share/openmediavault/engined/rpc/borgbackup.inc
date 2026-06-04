@@ -66,6 +66,13 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('setCompact');
         $this->registerMethod('deleteCompact');
         $this->registerMethod('runCompact');
+
+        $this->registerMethod('getServeList');
+        $this->registerMethod('getServe');
+        $this->registerMethod('setServe');
+        $this->registerMethod('deleteServe');
+        $this->registerMethod('generateServeKey');
+        $this->registerMethod('downloadServeKey');
     }
 
     public function enumerateRepoCandidates($params, $context)
@@ -1429,5 +1436,202 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 return $output;
             }
         );
+    }
+
+    public function getServeList($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.common.getlist');
+        // Get the configuration objects.
+        $db = \OMV\Config\Database::getInstance();
+        $objects = $db->get('conf.service.borgbackup.serve');
+        $objectsAssoc = [];
+        foreach ($objects as $objectk => &$objectv) {
+            // Add display-only 'sharedfoldername'.
+            $objectv->add('sharedfoldername', 'string', gettext("n/a"));
+            try {
+                $sfObject = $db->get('conf.system.sharedfolder',
+                    $objectv->get('sharedfolderref'));
+                $objectv->set('sharedfoldername', $sfObject->get('name'));
+            } catch (\Exception $e) {
+            }
+            // Flag whether a private key is stored (downloadable) without
+            // ever exposing the key material itself.
+            $objectv->add('haskey', 'boolean',
+                strlen($objectv->get('privatekey')) > 0);
+            $assoc = $objectv->getAssoc();
+            unset($assoc['privatekey']);
+            $objectsAssoc[] = $assoc;
+        }
+        // Filter the result.
+        return $this->applyFilter($objectsAssoc, $params['start'], $params['limit'],
+            $params['sortfield'], $params['sortdir']);
+    }
+
+    public function getServe($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.common.objectuuid');
+        // Get the configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        $object = $db->getAssoc('conf.service.borgbackup.serve', $params['uuid']);
+        // Never send the stored private key back to the WebGUI.
+        unset($object['privatekey']);
+        return $object;
+    }
+
+    public function setServe($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.borgbackup.setserve');
+        // Remove spaces from name.
+        $params['name'] = str_replace(' ', '_', $params['name']);
+        $params['storquota'] = trim($params['storquota']);
+        // The login user must exist on the system, because the deploy writes
+        // borg serve forced-command lines into that user's
+        // ~/.ssh/authorized_keys file.
+        if (posix_getpwnam($params['username']) === false) {
+            throw new \OMV\Exception(
+                sprintf(gettext("The user '%s' does not exist."),
+                    $params['username'])
+            );
+        }
+        // No public key supplied means "generate one for me": create an
+        // ed25519 key pair server-side and keep the private key for download.
+        // (On edit the key is always resent, so an empty value only ever
+        // happens when creating a client with auto-generation.)
+        if (strlen(trim($params['publickey'] ?? '')) < 1) {
+            $keys = $this->generateKeyPair($params['name']);
+            $params['publickey'] = $keys['publickey'];
+            $params['privatekey'] = $keys['privatekey'];
+        }
+        $db = \OMV\Config\Database::getInstance();
+        // Prepare the configuration object.
+        $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.serve');
+        $object->setAssoc($params);
+        $isNew = $object->isNew();
+        // The private key is never sent back to the GUI, so an edit submits an
+        // empty value. Preserve any previously generated key in that case.
+        if (!$isNew && strlen($params['privatekey'] ?? '') < 1) {
+            try {
+                $existing = $db->get('conf.service.borgbackup.serve',
+                    $object->get('uuid'));
+                $object->set('privatekey', $existing->get('privatekey'));
+            } catch (\Exception $e) {
+            }
+        }
+        // A public key must map to exactly one forced command, otherwise sshd
+        // would match an ambiguous entry. Names are kept unique for clarity.
+        $db->assertIsUnique($object, 'name');
+        $db->assertIsUnique($object, 'publickey');
+        // Set the configuration object.
+        $db->set($object);
+        // Return the configuration object without the private key.
+        $result = $object->getAssoc();
+        unset($result['privatekey']);
+        return $result;
+    }
+
+    public function deleteServe($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.common.objectuuid');
+        // Get the configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        $object = $db->get('conf.service.borgbackup.serve', $params['uuid']);
+        // Delete the configuration object.
+        $db->delete($object);
+        // Return the deleted configuration object.
+        $assoc = $object->getAssoc();
+        unset($assoc['privatekey']);
+        return $assoc;
+    }
+
+    public function generateServeKey($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.borgbackup.generatekey');
+        return $this->generateKeyPair($params['comment'] ?? '');
+    }
+
+    private function generateKeyPair($comment): array
+    {
+        // Sanitise the optional key comment.
+        $comment = preg_replace('/[^A-Za-z0-9_.@-]/', '_', trim($comment));
+        if ($comment === '') {
+            $comment = 'borg-serve';
+        }
+        // Generate an ed25519 keypair in a private temporary directory.
+        $dir = sprintf('%s/omv-borg-serve-%s', sys_get_temp_dir(),
+            bin2hex(random_bytes(6)));
+        if (!mkdir($dir, 0700)) {
+            throw new \OMV\Exception(gettext(
+                "Failed to create temporary directory."
+            ));
+        }
+        $keyPath = $dir . '/id_ed25519';
+        $cmdArgs = [];
+        $cmdArgs[] = 'ssh-keygen';
+        $cmdArgs[] = '-t ed25519';
+        $cmdArgs[] = '-N ""';
+        $cmdArgs[] = sprintf('-C %s', escapeshellarg($comment));
+        $cmdArgs[] = sprintf('-f %s', escapeshellarg($keyPath));
+        $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->setRedirect2to1();
+        $cmd->setQuiet(TRUE);
+        try {
+            if (0 !== $this->exec($cmd->getCommandLine(), $output)) {
+                throw new \OMV\ExecException($cmd, $output);
+            }
+            $privatekey = file_get_contents($keyPath);
+            $publickey = trim(file_get_contents($keyPath . '.pub'));
+        } finally {
+            @unlink($keyPath);
+            @unlink($keyPath . '.pub');
+            @rmdir($dir);
+        }
+        return [
+            'publickey' => $publickey,
+            'privatekey' => $privatekey,
+        ];
+    }
+
+    public function downloadServeKey($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.common.objectuuid');
+        // Get the configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        $serve = $db->get('conf.service.borgbackup.serve', $params['uuid']);
+        $privatekey = $serve->get('privatekey');
+        if (strlen($privatekey) < 1) {
+            throw new \OMV\Exception(gettext(
+                "No private key is stored for this client. The public key was ".
+                "pasted in, so the private key never left the client machine."
+            ));
+        }
+        // Write the key to a temp file owned by the WebGUI backend so it can be
+        // streamed to the browser and unlinked afterwards.
+        $tmpFilePath = tempnam(sys_get_temp_dir(), 'borgservekey');
+        file_put_contents($tmpFilePath, $privatekey);
+        chmod($tmpFilePath, 0600);
+        chown($tmpFilePath, \OMV\Environment::get('OMV_WEBGUI_FILE_OWNERGROUP_NAME'));
+        return [
+            'filename' => sprintf('id_ed25519_%s', $serve->get('name')),
+            'filepath' => $tmpFilePath,
+            'unlink' => TRUE
+        ];
     }
 }

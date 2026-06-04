@@ -500,3 +500,84 @@ purge_stale_borg_compact_scripts:
 {%- endfor %}
     - rmdirs: False
     - rmlinks: True
+
+
+# ---------------------------------------------------------------------------
+# Serve clients - "borg serve" forced-command lines in each login user's
+# personal ~/.ssh/authorized_keys file. We deliberately do NOT use OMV's
+# managed authorized_keys (/var/lib/openmediavault/ssh/authorized_keys/%u):
+# that file is rewritten without a forced command and wiped on every SSH
+# apply, which would hand connecting clients an unrestricted shell. sshd also
+# reads each user's ~/.ssh/authorized_keys, which OMV never touches, so we own
+# a clearly marked block there instead - leaving any other keys the admin
+# added intact.
+# ---------------------------------------------------------------------------
+
+{% set serveMarkerStart = '# >>> openmediavault-borgbackup serve >>>' %}
+{% set serveMarkerEnd = '# <<< openmediavault-borgbackup serve <<<' %}
+
+# Distinct login users that currently have serve clients. Driven by the serve
+# entries themselves (not the OMV user list) so any real system user works.
+{% set ns_serve = namespace(users=[]) %}
+{% for serve in config.serves.serve %}
+{% if serve.username not in ns_serve.users %}
+{% do ns_serve.users.append(serve.username) %}
+{% endif %}
+{% endfor %}
+
+{% for username in ns_serve.users %}
+{% set uinfo = salt['user.info'](username) %}
+{% if uinfo and uinfo.home %}
+{% set serveEntries = config.serves.serve | selectattr('username', 'equalto', username) | list %}
+
+borg_serve_ssh_dir_{{ username }}:
+  file.directory:
+    - name: "{{ uinfo.home }}/.ssh"
+    - user: {{ uinfo.uid }}
+    - group: {{ uinfo.gid }}
+    - mode: '0700'
+    - makedirs: True
+
+borg_serve_authorized_keys_file_{{ username }}:
+  file.managed:
+    - name: "{{ uinfo.home }}/.ssh/authorized_keys"
+    - user: {{ uinfo.uid }}
+    - group: {{ uinfo.gid }}
+    - mode: '0600'
+    - replace: False
+    - contents: ''
+    - require:
+      - file: borg_serve_ssh_dir_{{ username }}
+
+borg_serve_authorized_keys_{{ username }}:
+  file.blockreplace:
+    - name: "{{ uinfo.home }}/.ssh/authorized_keys"
+    - marker_start: "{{ serveMarkerStart }}"
+    - marker_end: "{{ serveMarkerEnd }}"
+    - append_if_not_found: True
+    - backup: False
+    - content: |
+        {%- for serve in serveEntries %}
+        command="borg serve{% if serve.sharedfolderref | length > 0 %} --restrict-to-path '{{ salt['omv_conf.get_sharedfolder_path'](serve.sharedfolderref) }}'{% endif %}{% if serve.appendonly | to_bool %} --append-only{% endif %}{% if serve.storquota | length > 0 %} --storage-quota {{ serve.storquota }}{% endif %}",restrict {{ serve.publickey }}
+        {%- endfor %}
+    - require:
+      - file: borg_serve_authorized_keys_file_{{ username }}
+
+{% endif %}
+{% endfor %}
+
+# Strip our managed block from any user that no longer has serve clients. The
+# write loop above only touches users that still have clients, so deletion
+# (and the "no clients at all" case) is handled here for every other user.
+{% for username in salt['user.list_users']() %}
+{% set uhome = salt['user.info'](username).get('home', '') %}
+{% if username not in ns_serve.users and uhome.startswith('/') %}
+borg_serve_authorized_keys_cleanup_{{ username }}:
+  file.replace:
+    - name: "{{ uhome }}/.ssh/authorized_keys"
+    - pattern: '(?ms)^{{ serveMarkerStart | regex_escape }}.*?{{ serveMarkerEnd | regex_escape }}\n?'
+    - repl: ''
+    - backup: False
+    - ignore_if_missing: True
+{% endif %}
+{% endfor %}

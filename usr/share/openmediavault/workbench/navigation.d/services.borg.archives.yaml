@@ -3,6 +3,6 @@ type: navigation-item
 data:
   path: "services.borgbackup.archives"
   text: _("Archives")
-  position: 20
+  position: 30
   icon: mdi:archive-outline
   url: "/services/borgbackup/archives"

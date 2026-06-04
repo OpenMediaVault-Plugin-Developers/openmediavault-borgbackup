@@ -1,0 +1,8 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/borgbackup/serves/edit/:uuid"
+  title: _("Edit")
+  editing: true
+  notificationTitle: _("Updated serve client.")
+  component: omv-services-borgbackup-serve-form-page
