@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-04 00:34+0000\n"
+"POT-Creation-Date: 2026-06-04 13:54+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: songming <by@songming.me>, 2026\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
@@ -29,6 +29,9 @@ msgstr "例如 5G，1.5T。留空则表示不设置配额。"
 
 msgid "All"
 msgstr "所有"
+
+msgid "Append-only"
+msgstr ""
 
 msgid "Archive"
 msgstr "归档"
@@ -107,6 +110,15 @@ msgid ""
 "error only."
 msgstr "已检查 = 发送错误或成功到邮件。<br/>未检查 = 仅发送错误到邮件"
 
+msgid "Client public key"
+msgstr ""
+
+msgid ""
+"Clients connect over SSH as this existing user. Their borg serve access is "
+"written to this user's ~/.ssh/authorized_keys. Do not also add the client "
+"key to this user's profile under User Management."
+msgstr ""
+
 msgid "Compact"
 msgstr "紧密"
 
@@ -146,6 +158,9 @@ msgstr "已创建环境变量。"
 msgid "Created repo."
 msgstr "已创建源。"
 
+msgid "Created serve client."
+msgstr ""
+
 msgid "Current quota"
 msgstr "当前配额"
 
@@ -166,6 +181,9 @@ msgstr "目录未找到"
 
 msgid "Docs"
 msgstr "文档"
+
+msgid "Download private key"
+msgstr ""
 
 msgid "Download repo keyfile"
 msgstr "下载源关键文件"
@@ -221,6 +239,9 @@ msgid "Extract archive to tar file"
 msgstr "解压缩归档到 tar 文件"
 
 msgid "Extracting archive ..."
+msgstr ""
+
+msgid "Failed to create temporary directory."
 msgstr ""
 
 msgid "Failed to find "
@@ -286,6 +307,9 @@ msgstr "列表"
 msgid "Local"
 msgstr "本地"
 
+msgid "Login user"
+msgstr ""
+
 msgid "Maintenance"
 msgstr "维护"
 
@@ -348,6 +372,9 @@ msgstr "名称/前缀"
 msgid "New quota"
 msgstr "新配额"
 
+msgid "No private key is stored for this client. The public key was "
+msgstr ""
+
 msgid "None"
 msgstr "无"
 
@@ -378,11 +405,20 @@ msgstr "输出文件和目录详细列表。"
 msgid "Passphrase"
 msgstr "密码"
 
+msgid ""
+"Paste the client's OpenSSH public key. Leave blank to generate an ed25519 "
+"key pair automatically - you can then download the private key from the "
+"Serve list."
+msgstr ""
+
 msgid "Post-script"
 msgstr "后置脚本"
 
 msgid "Pre-script"
 msgstr "前置脚本"
+
+msgid "Private key stored"
+msgstr ""
 
 msgid "Put a new line or comma between each directory"
 msgstr "每个目录间使用换行或逗号分隔"
@@ -512,8 +548,14 @@ msgstr "日程"
 msgid "Select a repo ..."
 msgstr "选择源 ..."
 
+msgid "Select a user ..."
+msgstr ""
+
 msgid "Select an archive ..."
 msgstr "选择归档 ..."
+
+msgid "Serve"
+msgstr ""
 
 msgid "Set minimum threshold for saved space in percent"
 msgstr "用已用空间的百分比来设置最小阈值"
@@ -549,6 +591,23 @@ msgstr "星期天"
 msgid "Sunday"
 msgstr "星期天"
 
+msgid "Target shared folder"
+msgstr ""
+
+msgid ""
+"The client can add archives but cannot delete or prune existing ones "
+"(ransomware protection). Prune/compact this repo yourself from the Compact "
+"tab."
+msgstr ""
+
+msgid ""
+"The client is restricted to this folder (borg serve --restrict-to-path). Its"
+" repositories must live here."
+msgstr ""
+
+msgid "The user '%s' does not exist."
+msgstr ""
+
 msgid "Threshold"
 msgstr "阈值"
 
@@ -575,6 +634,9 @@ msgstr "卸载源中 ..."
 
 msgid "Updated compact schedule."
 msgstr "更新压缩日程表。"
+
+msgid "Updated serve client."
+msgstr ""
 
 msgid "Uses value as prefix for archive name."
 msgstr "使用该值作为归档前缀名称。"

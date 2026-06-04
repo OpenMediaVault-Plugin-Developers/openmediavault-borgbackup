@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-04 00:34+0000\n"
+"POT-Creation-Date: 2026-06-04 13:54+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2026\n"
 "Language-Team: English (United Kingdom) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/en_GB/)\n"
@@ -29,6 +29,9 @@ msgstr "5G, 1.5T as examples. Leave blank for no quota."
 
 msgid "All"
 msgstr "All"
+
+msgid "Append-only"
+msgstr ""
 
 msgid "Archive"
 msgstr "Archive"
@@ -115,6 +118,15 @@ msgstr ""
 "Checked = send email on error or success.<br/>Unchecked = send email on "
 "error only."
 
+msgid "Client public key"
+msgstr ""
+
+msgid ""
+"Clients connect over SSH as this existing user. Their borg serve access is "
+"written to this user's ~/.ssh/authorized_keys. Do not also add the client "
+"key to this user's profile under User Management."
+msgstr ""
+
 msgid "Compact"
 msgstr "Compact"
 
@@ -154,6 +166,9 @@ msgstr "Created environment variable."
 msgid "Created repo."
 msgstr "Created repo."
 
+msgid "Created serve client."
+msgstr ""
+
 msgid "Current quota"
 msgstr "Current quota"
 
@@ -174,6 +189,9 @@ msgstr "Directory not found"
 
 msgid "Docs"
 msgstr "Docs"
+
+msgid "Download private key"
+msgstr ""
 
 msgid "Download repo keyfile"
 msgstr "Download repo keyfile"
@@ -231,6 +249,9 @@ msgid "Extract archive to tar file"
 msgstr "Extract archive to tar file"
 
 msgid "Extracting archive ..."
+msgstr ""
+
+msgid "Failed to create temporary directory."
 msgstr ""
 
 msgid "Failed to find "
@@ -299,6 +320,9 @@ msgstr "List"
 msgid "Local"
 msgstr "Local"
 
+msgid "Login user"
+msgstr ""
+
 msgid "Maintenance"
 msgstr "Maintenance"
 
@@ -363,6 +387,9 @@ msgstr "Name/Prefix"
 msgid "New quota"
 msgstr "New quota"
 
+msgid "No private key is stored for this client. The public key was "
+msgstr ""
+
 msgid "None"
 msgstr "None"
 
@@ -393,11 +420,20 @@ msgstr "Output verbose list of files and directories."
 msgid "Passphrase"
 msgstr "Passphrase"
 
+msgid ""
+"Paste the client's OpenSSH public key. Leave blank to generate an ed25519 "
+"key pair automatically - you can then download the private key from the "
+"Serve list."
+msgstr ""
+
 msgid "Post-script"
 msgstr "Post-script"
 
 msgid "Pre-script"
 msgstr "Pre-script"
+
+msgid "Private key stored"
+msgstr ""
 
 msgid "Put a new line or comma between each directory"
 msgstr "Put a new line or comma between each directory"
@@ -529,8 +565,14 @@ msgstr "Schedule"
 msgid "Select a repo ..."
 msgstr "Select a repo ..."
 
+msgid "Select a user ..."
+msgstr ""
+
 msgid "Select an archive ..."
 msgstr "Select an archive ..."
+
+msgid "Serve"
+msgstr ""
 
 msgid "Set minimum threshold for saved space in percent"
 msgstr "Set minimum threshold for saved space in percent"
@@ -567,6 +609,23 @@ msgstr "Sun"
 msgid "Sunday"
 msgstr "Sunday"
 
+msgid "Target shared folder"
+msgstr ""
+
+msgid ""
+"The client can add archives but cannot delete or prune existing ones "
+"(ransomware protection). Prune/compact this repo yourself from the Compact "
+"tab."
+msgstr ""
+
+msgid ""
+"The client is restricted to this folder (borg serve --restrict-to-path). Its"
+" repositories must live here."
+msgstr ""
+
+msgid "The user '%s' does not exist."
+msgstr ""
+
 msgid "Threshold"
 msgstr "Threshold"
 
@@ -593,6 +652,9 @@ msgstr "Unmounting repo ..."
 
 msgid "Updated compact schedule."
 msgstr "Updated compact schedule."
+
+msgid "Updated serve client."
+msgstr ""
 
 msgid "Uses value as prefix for archive name."
 msgstr "Uses value as prefix for archive name."

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-04 00:34+0000\n"
+"POT-Creation-Date: 2026-06-04 13:54+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2026\n"
 "Language-Team: Dutch (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/nl/)\n"
@@ -29,6 +29,9 @@ msgstr "5G, 1.5T als voorbeelden. Leeg laten voor geen quota."
 
 msgid "All"
 msgstr "Alles"
+
+msgid "Append-only"
+msgstr ""
 
 msgid "Archive"
 msgstr "Archief"
@@ -115,6 +118,15 @@ msgstr ""
 "Aangevinkt = e-mail sturen bij fout of succes.Niet aangevinkt = alleen "
 "e-mail sturen bij fout."
 
+msgid "Client public key"
+msgstr ""
+
+msgid ""
+"Clients connect over SSH as this existing user. Their borg serve access is "
+"written to this user's ~/.ssh/authorized_keys. Do not also add the client "
+"key to this user's profile under User Management."
+msgstr ""
+
 msgid "Compact"
 msgstr "Compact"
 
@@ -154,6 +166,9 @@ msgstr "Omgevingsvariabele aangemaakt."
 msgid "Created repo."
 msgstr "Repo aangemaakt."
 
+msgid "Created serve client."
+msgstr ""
+
 msgid "Current quota"
 msgstr "Huidige quota"
 
@@ -174,6 +189,9 @@ msgstr "Map niet gevonden"
 
 msgid "Docs"
 msgstr "Docs"
+
+msgid "Download private key"
+msgstr ""
 
 msgid "Download repo keyfile"
 msgstr "Repo-sleutelbestand downloaden"
@@ -219,7 +237,7 @@ msgstr ""
 "overeenkomt met de archiefnaam en een extensie .tar.gz."
 
 msgid "Exporting archive ..."
-msgstr ""
+msgstr "Archief exporteren…"
 
 msgid "Extract"
 msgstr "Uitpakken"
@@ -231,6 +249,9 @@ msgid "Extract archive to tar file"
 msgstr "Archief uitpakken naar tar-bestand"
 
 msgid "Extracting archive ..."
+msgstr "Archief uitpakken…"
+
+msgid "Failed to create temporary directory."
 msgstr ""
 
 msgid "Failed to find "
@@ -300,6 +321,9 @@ msgstr "Lijst"
 msgid "Local"
 msgstr "Lokaal"
 
+msgid "Login user"
+msgstr ""
+
 msgid "Maintenance"
 msgstr "Onderhoud"
 
@@ -364,6 +388,9 @@ msgstr "Naam/voorvoegsel"
 msgid "New quota"
 msgstr "Nieuwe quota"
 
+msgid "No private key is stored for this client. The public key was "
+msgstr ""
+
 msgid "None"
 msgstr "Geen"
 
@@ -394,11 +421,20 @@ msgstr "Uitgebreide lijst met bestanden en mappen uitvoeren."
 msgid "Passphrase"
 msgstr "Wachtwoordzin"
 
+msgid ""
+"Paste the client's OpenSSH public key. Leave blank to generate an ed25519 "
+"key pair automatically - you can then download the private key from the "
+"Serve list."
+msgstr ""
+
 msgid "Post-script"
 msgstr "Post-script"
 
 msgid "Pre-script"
 msgstr "Pre-script"
+
+msgid "Private key stored"
+msgstr ""
 
 msgid "Put a new line or comma between each directory"
 msgstr "Plaats een nieuwe regel of komma tussen elke map"
@@ -532,8 +568,14 @@ msgstr "Planning"
 msgid "Select a repo ..."
 msgstr "Selecteer een repo…"
 
+msgid "Select a user ..."
+msgstr ""
+
 msgid "Select an archive ..."
 msgstr "Selecteer een archief…"
+
+msgid "Serve"
+msgstr ""
 
 msgid "Set minimum threshold for saved space in percent"
 msgstr "Minimumdrempel voor opgeslagen ruimte in procenten instellen"
@@ -571,6 +613,23 @@ msgstr "Zo"
 msgid "Sunday"
 msgstr "Zondag"
 
+msgid "Target shared folder"
+msgstr ""
+
+msgid ""
+"The client can add archives but cannot delete or prune existing ones "
+"(ransomware protection). Prune/compact this repo yourself from the Compact "
+"tab."
+msgstr ""
+
+msgid ""
+"The client is restricted to this folder (borg serve --restrict-to-path). Its"
+" repositories must live here."
+msgstr ""
+
+msgid "The user '%s' does not exist."
+msgstr ""
+
 msgid "Threshold"
 msgstr "Drempel"
 
@@ -597,6 +656,9 @@ msgstr "Repo loskoppelen…"
 
 msgid "Updated compact schedule."
 msgstr "Compacte planning bijgewerkt."
+
+msgid "Updated serve client."
+msgstr ""
 
 msgid "Uses value as prefix for archive name."
 msgstr "Gebruikt waarde als voorvoegsel voor archiefnaam."
@@ -638,7 +700,7 @@ msgid "daily minute"
 msgstr "dagelijks minuut"
 
 msgid "extract logs ..."
-msgstr "logboeken extraheren…"
+msgstr "logboeken uitpakken…"
 
 msgid "hourly"
 msgstr "elk uur"

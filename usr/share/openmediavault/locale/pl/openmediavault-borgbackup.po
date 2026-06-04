@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-04 00:34+0000\n"
+"POT-Creation-Date: 2026-06-04 13:54+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Rysiek Jurczy, 2023\n"
 "Language-Team: Polish (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/pl/)\n"
@@ -29,6 +29,9 @@ msgstr ""
 
 msgid "All"
 msgstr "Wszystko"
+
+msgid "Append-only"
+msgstr ""
 
 msgid "Archive"
 msgstr "Archiwum"
@@ -109,6 +112,15 @@ msgstr ""
 "Zaznaczone = wyślij e-mail w przypadku błędu lub "
 "powodzenia.<br/>Niezaznaczone = wysyłaj e-mail tylko w przypadku błędu."
 
+msgid "Client public key"
+msgstr ""
+
+msgid ""
+"Clients connect over SSH as this existing user. Their borg serve access is "
+"written to this user's ~/.ssh/authorized_keys. Do not also add the client "
+"key to this user's profile under User Management."
+msgstr ""
+
 msgid "Compact"
 msgstr ""
 
@@ -148,6 +160,9 @@ msgstr "Utworzono zmienną środowiskową."
 msgid "Created repo."
 msgstr "Utworzono repozytorium."
 
+msgid "Created serve client."
+msgstr ""
+
 msgid "Current quota"
 msgstr ""
 
@@ -167,6 +182,9 @@ msgid "Directory not found"
 msgstr ""
 
 msgid "Docs"
+msgstr ""
+
+msgid "Download private key"
 msgstr ""
 
 msgid "Download repo keyfile"
@@ -225,6 +243,9 @@ msgid "Extract archive to tar file"
 msgstr ""
 
 msgid "Extracting archive ..."
+msgstr ""
+
+msgid "Failed to create temporary directory."
 msgstr ""
 
 msgid "Failed to find "
@@ -292,6 +313,9 @@ msgstr "Lista"
 msgid "Local"
 msgstr "Lokalny"
 
+msgid "Login user"
+msgstr ""
+
 msgid "Maintenance"
 msgstr ""
 
@@ -356,6 +380,9 @@ msgstr "Nazwa/przedrostek"
 msgid "New quota"
 msgstr ""
 
+msgid "No private key is stored for this client. The public key was "
+msgstr ""
+
 msgid "None"
 msgstr "Żaden"
 
@@ -386,11 +413,20 @@ msgstr "Szczegółowa lista plików i katalogów"
 msgid "Passphrase"
 msgstr "Hasło"
 
+msgid ""
+"Paste the client's OpenSSH public key. Leave blank to generate an ed25519 "
+"key pair automatically - you can then download the private key from the "
+"Serve list."
+msgstr ""
+
 msgid "Post-script"
 msgstr "Post-script"
 
 msgid "Pre-script"
 msgstr "Pre-script"
+
+msgid "Private key stored"
+msgstr ""
 
 msgid "Put a new line or comma between each directory"
 msgstr ""
@@ -524,8 +560,14 @@ msgstr ""
 msgid "Select a repo ..."
 msgstr "Wybierz repozytorium ..."
 
+msgid "Select a user ..."
+msgstr ""
+
 msgid "Select an archive ..."
 msgstr "Wybierz archiwum ..."
+
+msgid "Serve"
+msgstr ""
 
 msgid "Set minimum threshold for saved space in percent"
 msgstr ""
@@ -563,6 +605,23 @@ msgstr ""
 msgid "Sunday"
 msgstr ""
 
+msgid "Target shared folder"
+msgstr ""
+
+msgid ""
+"The client can add archives but cannot delete or prune existing ones "
+"(ransomware protection). Prune/compact this repo yourself from the Compact "
+"tab."
+msgstr ""
+
+msgid ""
+"The client is restricted to this folder (borg serve --restrict-to-path). Its"
+" repositories must live here."
+msgstr ""
+
+msgid "The user '%s' does not exist."
+msgstr ""
+
 msgid "Threshold"
 msgstr ""
 
@@ -588,6 +647,9 @@ msgid "Unmounting repo ..."
 msgstr ""
 
 msgid "Updated compact schedule."
+msgstr ""
+
+msgid "Updated serve client."
 msgstr ""
 
 msgid "Uses value as prefix for archive name."

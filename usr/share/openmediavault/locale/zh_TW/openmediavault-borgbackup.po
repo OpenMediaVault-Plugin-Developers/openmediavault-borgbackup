@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-04 00:34+0000\n"
+"POT-Creation-Date: 2026-06-04 13:54+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: kochin <kochinc@outlook.com>, 2026\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_TW/)\n"
@@ -29,6 +29,9 @@ msgstr "例如 5G、1.5T。留空白表示不設配額。"
 
 msgid "All"
 msgstr "全部"
+
+msgid "Append-only"
+msgstr ""
 
 msgid "Archive"
 msgstr "歸檔"
@@ -107,6 +110,15 @@ msgid ""
 "error only."
 msgstr "勾選 = 有錯誤或成功時都送郵件。<br/>不勾選 = 僅在有錯誤時送郵件。"
 
+msgid "Client public key"
+msgstr ""
+
+msgid ""
+"Clients connect over SSH as this existing user. Their borg serve access is "
+"written to this user's ~/.ssh/authorized_keys. Do not also add the client "
+"key to this user's profile under User Management."
+msgstr ""
+
 msgid "Compact"
 msgstr "簡縮"
 
@@ -146,6 +158,9 @@ msgstr "已建立環境變數。"
 msgid "Created repo."
 msgstr "已建立儲存庫。"
 
+msgid "Created serve client."
+msgstr ""
+
 msgid "Current quota"
 msgstr "目前配額"
 
@@ -166,6 +181,9 @@ msgstr "找不到檔案目錄"
 
 msgid "Docs"
 msgstr "說明文件"
+
+msgid "Download private key"
+msgstr ""
 
 msgid "Download repo keyfile"
 msgstr "下載儲存庫金鑰檔案"
@@ -209,7 +227,7 @@ msgid ""
 msgstr "輸出檔案將會建立在這個目錄裡，檔名會與歸檔名稱相符但有 .tar.gz 延伸檔名。"
 
 msgid "Exporting archive ..."
-msgstr ""
+msgstr "匯出歸檔中 ..."
 
 msgid "Extract"
 msgstr "擷取"
@@ -221,6 +239,9 @@ msgid "Extract archive to tar file"
 msgstr "擷取歸檔到 tar 檔案"
 
 msgid "Extracting archive ..."
+msgstr "擷取歸檔中 ..."
+
+msgid "Failed to create temporary directory."
 msgstr ""
 
 msgid "Failed to find "
@@ -286,6 +307,9 @@ msgstr "列表"
 msgid "Local"
 msgstr "本地"
 
+msgid "Login user"
+msgstr ""
+
 msgid "Maintenance"
 msgstr "維護"
 
@@ -348,6 +372,9 @@ msgstr "名稱/前綴詞"
 msgid "New quota"
 msgstr "新設配額"
 
+msgid "No private key is stored for this client. The public key was "
+msgstr ""
+
 msgid "None"
 msgstr "無"
 
@@ -378,11 +405,20 @@ msgstr "輸出檔案與目錄的詳盡列表。"
 msgid "Passphrase"
 msgstr "密語"
 
+msgid ""
+"Paste the client's OpenSSH public key. Leave blank to generate an ed25519 "
+"key pair automatically - you can then download the private key from the "
+"Serve list."
+msgstr ""
+
 msgid "Post-script"
 msgstr "後置腳本程式"
 
 msgid "Pre-script"
 msgstr "前置腳本程式"
+
+msgid "Private key stored"
+msgstr ""
 
 msgid "Put a new line or comma between each directory"
 msgstr "在每個檔案目錄之間加入換行或逗號"
@@ -512,8 +548,14 @@ msgstr "時程"
 msgid "Select a repo ..."
 msgstr "選擇一個儲存庫 ..."
 
+msgid "Select a user ..."
+msgstr ""
+
 msgid "Select an archive ..."
 msgstr "選擇一個歸檔 ..."
+
+msgid "Serve"
+msgstr ""
 
 msgid "Set minimum threshold for saved space in percent"
 msgstr "用已儲存空間的百分比來設定最低門檻"
@@ -549,6 +591,23 @@ msgstr "日"
 msgid "Sunday"
 msgstr "週日"
 
+msgid "Target shared folder"
+msgstr ""
+
+msgid ""
+"The client can add archives but cannot delete or prune existing ones "
+"(ransomware protection). Prune/compact this repo yourself from the Compact "
+"tab."
+msgstr ""
+
+msgid ""
+"The client is restricted to this folder (borg serve --restrict-to-path). Its"
+" repositories must live here."
+msgstr ""
+
+msgid "The user '%s' does not exist."
+msgstr ""
+
 msgid "Threshold"
 msgstr "門檻"
 
@@ -575,6 +634,9 @@ msgstr "卸載儲存庫中 ..."
 
 msgid "Updated compact schedule."
 msgstr "已更新簡縮時程。"
+
+msgid "Updated serve client."
+msgstr ""
 
 msgid "Uses value as prefix for archive name."
 msgstr "將值當作歸檔名稱的前綴詞。"
