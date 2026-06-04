@@ -234,6 +234,170 @@ else
 fi
 
 # ---------------------------------------------------------------------------
+# CRUD — Serve (pure DB; no real ssh deploy is triggered by the RPC)
+# ---------------------------------------------------------------------------
+section "CRUD — Serve"
+
+# Generate a keypair via the RPC and reuse the public key for the client.
+SV_KEY=$(assert_rpc "generateServeKey" "BorgBackup" "generateServeKey" \
+    '{"comment":"bg-rpc-test"}' "ssh-ed25519") || true
+SV_PUBKEY=$(echo "$SV_KEY" | python3 -c \
+    "import sys,json; print(json.load(sys.stdin).get('publickey',''))" 2>/dev/null || echo "")
+SV_PRIVKEY=$(echo "$SV_KEY" | python3 -c \
+    "import sys,json; print(json.load(sys.stdin).get('privatekey',''))" 2>/dev/null || echo "")
+SV_SFREF=$(python3 -c "import uuid; print(uuid.uuid4())")
+
+if [ -n "$SV_PUBKEY" ]; then
+    _pass "generateServeKey — public key returned"
+    SV_RESULT=$(assert_rpc "setServe (create, user=root)" "BorgBackup" "setServe" \
+        "$(python3 -c "
+import json; print(json.dumps({
+    'uuid': '$OMV_NEW_UUID',
+    'name': 'bg_rpc_serve',
+    'username': 'root',
+    'sharedfolderref': '$SV_SFREF',
+    'publickey': '''$SV_PUBKEY''',
+    'privatekey': '''$SV_PRIVKEY''',
+    'appendonly': True,
+    'storquota': '',
+}))") ") || true
+    SV_UUID=$(echo "$SV_RESULT" | python3 -c \
+        "import sys,json; print(json.load(sys.stdin).get('uuid',''))" 2>/dev/null || echo "")
+    if [ -n "$SV_UUID" ] && [ "$SV_UUID" != "$OMV_NEW_UUID" ]; then
+        _pass "setServe — UUID assigned ($SV_UUID)"
+        # getServe must not leak the stored private key.
+        if rpc "BorgBackup" "getServe" "{\"uuid\":\"$SV_UUID\"}" \
+            | grep -q '"privatekey"'; then
+            _fail "getServe — private key leaked in response"
+        else
+            _pass "getServe — private key not exposed"
+        fi
+        assert_rpc "getServeList includes test client" "BorgBackup" "getServeList" \
+            "$LIST_PARAMS" "bg_rpc_serve" >/dev/null
+        # A generated key is downloadable.
+        assert_rpc "downloadServeKey" "BorgBackup" "downloadServeKey" \
+            "{\"uuid\":\"$SV_UUID\"}" "filepath" >/dev/null
+        assert_rpc "deleteServe" "BorgBackup" "deleteServe" \
+            "{\"uuid\":\"$SV_UUID\"}" >/dev/null
+        assert_rpc_fails "getServe after delete" "BorgBackup" "getServe" \
+            "{\"uuid\":\"$SV_UUID\"}"
+    else
+        _fail "setServe — no UUID returned"
+    fi
+
+    # The login user must exist on the system.
+    assert_rpc_fails "setServe — nonexistent user rejected" "BorgBackup" "setServe" \
+        "$(python3 -c "
+import json; print(json.dumps({
+    'uuid': '$OMV_NEW_UUID',
+    'name': 'bg_rpc_serve_baduser',
+    'username': 'bg_rpc_no_such_user',
+    'sharedfolderref': '$SV_SFREF',
+    'publickey': '''$SV_PUBKEY''',
+    'privatekey': '',
+    'appendonly': True,
+    'storquota': '',
+}))")"
+else
+    _fail "generateServeKey — no public key returned"
+fi
+
+# Auto-generate path: an empty public key makes setServe create a key pair.
+SV_GEN=$(assert_rpc "setServe (auto-generate key)" "BorgBackup" "setServe" \
+    "$(python3 -c "
+import json; print(json.dumps({
+    'uuid': '$OMV_NEW_UUID',
+    'name': 'bg_rpc_serve_gen',
+    'username': 'root',
+    'sharedfolderref': '$SV_SFREF',
+    'publickey': '',
+    'privatekey': '',
+    'appendonly': True,
+    'storquota': '',
+}))") " "ssh-ed25519") || true
+SV_GEN_UUID=$(echo "$SV_GEN" | python3 -c \
+    "import sys,json; print(json.load(sys.stdin).get('uuid',''))" 2>/dev/null || echo "")
+if [ -n "$SV_GEN_UUID" ] && [ "$SV_GEN_UUID" != "$OMV_NEW_UUID" ]; then
+    _pass "setServe — auto-generated public key returned"
+    # A stored private key must now be downloadable.
+    assert_rpc "downloadServeKey (generated)" "BorgBackup" "downloadServeKey" \
+        "{\"uuid\":\"$SV_GEN_UUID\"}" "filepath" >/dev/null
+    rpc "BorgBackup" "deleteServe" "{\"uuid\":\"$SV_GEN_UUID\"}" &>/dev/null || true
+else
+    _fail "setServe (auto-generate) — no UUID returned"
+fi
+
+# ---------------------------------------------------------------------------
+# Integration — salt deploy (renders + applies the borgbackup state, including
+# the serve authorized_keys section that now lives in default.sls)
+# ---------------------------------------------------------------------------
+section "Integration — salt deploy (serve authorized_keys)"
+
+if ! command -v omv-salt &>/dev/null; then
+    info "omv-salt not available — skipping salt deploy test"
+else
+    SALT_LOG=$(mktemp)
+    # Find a real shared folder to act as the restrict-to-path target. Without
+    # one the serve forced-command line cannot be rendered, so we fall back to
+    # a plain deploy-success check.
+    SV_REAL_SF=$(rpc "ShareMgmt" "enumerateSharedFolders" 2>/dev/null | python3 -c "
+import sys, json
+try:
+    d = json.load(sys.stdin)
+    print(d[0]['uuid'] if d else '')
+except Exception:
+    print('')" 2>/dev/null || echo "")
+
+    if [ -n "$SV_REAL_SF" ]; then
+        info "Using shared folder $SV_REAL_SF as the serve target"
+        SV_DEP=$(rpc "BorgBackup" "setServe" "$(python3 -c "
+import json; print(json.dumps({
+    'uuid': '$OMV_NEW_UUID',
+    'name': 'bg_rpc_serve_deploy',
+    'username': 'root',
+    'sharedfolderref': '$SV_REAL_SF',
+    'publickey': '',
+    'privatekey': '',
+    'appendonly': True,
+    'storquota': '',
+}))")" 2>/dev/null || echo "")
+        SV_DEP_UUID=$(echo "$SV_DEP" | python3 -c \
+            "import sys,json; print(json.load(sys.stdin).get('uuid',''))" 2>/dev/null || echo "")
+
+        info "Running 'omv-salt deploy run borgbackup' (write authorized_keys) ..."
+        if omv-salt deploy run borgbackup &>"$SALT_LOG"; then
+            _pass "omv-salt deploy run borgbackup — applied (with serve client)"
+        else
+            _fail "omv-salt deploy run borgbackup — failed" "$(tail -5 "$SALT_LOG")"
+        fi
+        # The forced-command line must now be in root's authorized_keys.
+        if grep -q 'openmediavault-borgbackup serve' /root/.ssh/authorized_keys 2>/dev/null \
+           && grep -q "borg serve --restrict-to-path" /root/.ssh/authorized_keys 2>/dev/null; then
+            _pass "authorized_keys — forced-command line written for root"
+        else
+            _fail "authorized_keys — forced-command line not found for root"
+        fi
+
+        # Delete the client and redeploy; the marked block must be stripped.
+        rpc "BorgBackup" "deleteServe" "{\"uuid\":\"$SV_DEP_UUID\"}" &>/dev/null || true
+        omv-salt deploy run borgbackup &>"$SALT_LOG" || true
+        if grep -q 'openmediavault-borgbackup serve' /root/.ssh/authorized_keys 2>/dev/null; then
+            _fail "authorized_keys — serve block not removed after client deletion"
+        else
+            _pass "authorized_keys — serve block removed after client deletion"
+        fi
+    else
+        info "No shared folder available — running deploy without a serve client"
+        if omv-salt deploy run borgbackup &>"$SALT_LOG"; then
+            _pass "omv-salt deploy run borgbackup — applied successfully"
+        else
+            _fail "omv-salt deploy run borgbackup — failed" "$(tail -5 "$SALT_LOG")"
+        fi
+    fi
+    rm -f "$SALT_LOG"
+fi
+
+# ---------------------------------------------------------------------------
 # Validation — negative tests (no real repo needed)
 # ---------------------------------------------------------------------------
 section "Validation — negative tests"
