@@ -349,10 +349,18 @@ data:
               submit:
                 text: _("Export")
                 execute:
-                  type: request
-                  request:
-                    service: BorgBackup
-                    method: exportArchive
+                  type: taskDialog
+                  taskDialog:
+                    config:
+                      title: _("Exporting archive ...")
+                      startOnInit: true
+                      request:
+                        service: BorgBackup
+                        method: exportArchive
+                        params:
+                          uuid: "{{ uuid }}"
+                          archive: "{{ archive }}"
+                          sharedfolderref: "{{ sharedfolderref }}"
       - type: menu
         icon: mdi:folder-move-outline
         tooltip: _("Extract")

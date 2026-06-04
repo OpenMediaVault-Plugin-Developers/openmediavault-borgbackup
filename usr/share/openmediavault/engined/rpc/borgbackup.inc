@@ -1083,30 +1083,45 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $db = \OMV\Config\Database::getInstance();
         // Get repo configuration object
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
-        $cmdArgs = [];
-        $cmdArgs[] = $this->getProgram;
-        $cmdArgs[] = 'export-tar';
-        if ($repo->get('type') == 'local') {
-            $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
-                'uuid' => $repo->get('sharedfolderref')
-            ], $context);
-        } else {
-            $path = $repo->get('uri');
-        }
-        $sfpath = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
-            'uuid' => $params['sharedfolderref']
-        ], $context);
-        $cmdArgs[] = sprintf('"%s::%s"', $path, $params['archive']);
-        $filename = str_replace(' ', '_', $params['archive']);
-        $cmdArgs[] = sprintf('"%s/%s.tar.gz"', $sfpath, $filename);
-        $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
-        $cmd->setEnv("BORG_EXIT_CODES", "modern");
-        $cmd->setEnvFromFile($this->envFile . $repo->get('uuid'));
-        $cmd->setQuiet(TRUE);
-        $cmd->setBackground(TRUE);
-        $cmdLine = $cmd->getCommandLine();
-        $this->exec($cmdLine, $output);
+        // Create the background process so the output can be streamed to the
+        // task dialog while it runs.
+        return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
+            use ($context, $params, $repo) {
+                $logFile = sprintf("/tmp/omv-borg-export-%s.log", $params['uuid']);
+                $cmdArgs = [];
+                $cmdArgs[] = $this->getProgram;
+                $cmdArgs[] = 'export-tar';
+                $cmdArgs[] = '--progress';
+                if ($repo->get('type') == 'local') {
+                    $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                        'uuid' => $repo->get('sharedfolderref')
+                    ], $context);
+                } else {
+                    $path = $repo->get('uri');
+                }
+                $sfpath = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                    'uuid' => $params['sharedfolderref']
+                ], $context);
+                $cmdArgs[] = sprintf('"%s::%s"', $path, $params['archive']);
+                $filename = str_replace(' ', '_', $params['archive']);
+                $cmdArgs[] = sprintf('"%s/%s.tar.gz"', $sfpath, $filename);
+                $cmd = new \OMV\System\Process($cmdArgs);
+                $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
+                $cmd->setEnv("BORG_EXIT_CODES", "modern");
+                $cmd->setEnvFromFile($this->envFile . $repo->get('uuid'));
+                $cmd->setRedirect2to1();
+                $cmdLine = $cmd->getCommandLine();
+                $exitStatus = $this->exec($cmdLine, $output, $bgOutputFilename);
+                // Persist the captured output so the existing log viewers keep
+                // working. This is done outside the pipeline so the real borg
+                // exit code is preserved.
+                file_put_contents($logFile, implode(PHP_EOL, (array) $output));
+                if (0 !== $exitStatus) {
+                    throw new \OMV\ExecException($cmdLine, $output);
+                }
+                return $output;
+            }
+        );
     }
 
     public function extractArchive($params, $context)
