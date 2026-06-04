@@ -401,10 +401,19 @@ data:
                   submit:
                     text: _("Extract")
                     execute:
-                      type: request
-                      request:
-                        service: BorgBackup
-                        method: extractArchive
+                      type: taskDialog
+                      taskDialog:
+                        config:
+                          title: _("Extracting archive ...")
+                          startOnInit: true
+                          request:
+                            service: BorgBackup
+                            method: extractArchive
+                            params:
+                              uuid: "{{ uuid }}"
+                              archive: "{{ archive }}"
+                              original: "{{ original }}"
+                              sharedfolderref: "{{ sharedfolderref }}"
           - text: _("logs")
             icon: mdi:file-document-outline
             execute:
@@ -420,21 +429,6 @@ data:
                       uuid: "{{ _selected[0].uuid }}"
                       command: "extract"
                       follow: false
-          - text: _("logs - follow")
-            icon: mdi:file-document-refresh-outline
-            execute:
-              type: taskDialog
-              taskDialog:
-                config:
-                  title: _("extract logs - follow ...")
-                  startOnInit: true
-                  request:
-                    service: BorgBackup
-                    method: getLog
-                    params:
-                      uuid: "{{ _selected[0].uuid }}"
-                      command: "extract"
-                      follow: true
       - type: iconButton
         tooltip: _("List")
         icon: mdi:format-list-bulleted-square

@@ -1118,38 +1118,51 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $db = \OMV\Config\Database::getInstance();
         // Get repo configuration object
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
-        $logFile = sprintf("/tmp/omv-borg-extract-%s.log", $params['uuid']);
-        $cmdArgs = [];
-        if (($params['original'] == false) && (is_uuid($params['sharedfolderref']))) {
-            $sfpath = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
-                'uuid' => $params['sharedfolderref']
-            ], $context);
-        } else {
-            $sfpath = '/';
-        }
-        $cmdArgs[] = sprintf('cd %s &&', escapeshellarg($sfpath));
-        $cmdArgs[] = $this->getProgram;
-        $cmdArgs[] = 'extract';
-        $cmdArgs[] = '--progress';
-        if ($repo->get('type') == 'local') {
-            $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
-                'uuid' => $repo->get('sharedfolderref')
-            ], $context);
-        } else {
-            $path = $repo->get('uri');
-        }
-        $cmdArgs[] = sprintf('"%s::%s"', $path, $params['archive']);
-        $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
-        $cmd->setEnv("BORG_EXIT_CODES", "modern");
-        $cmd->setEnvFromFile($this->envFile . $repo->get('uuid'));
-        $cmd->setRedirect2to1();
-        $cmd->setRedirect1toFile($logFile);
-        $cmd->setBackground(TRUE);
-        $cmdLine = $cmd->getCommandLine();
-        if (0 !== $this->exec($cmdLine, $output)) {
-            throw new \OMV\ExecException($cmd, $output);
-        }
+        // Create the background process so the output can be streamed to the
+        // task dialog while it runs.
+        return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
+            use ($context, $params, $repo) {
+                $logFile = sprintf("/tmp/omv-borg-extract-%s.log", $params['uuid']);
+                // The checkbox value arrives as a string via the task dialog
+                // template, so convert it to a real boolean.
+                $original = filter_var($params['original'], FILTER_VALIDATE_BOOLEAN);
+                $cmdArgs = [];
+                if (($original == false) && (is_uuid($params['sharedfolderref']))) {
+                    $sfpath = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                        'uuid' => $params['sharedfolderref']
+                    ], $context);
+                } else {
+                    $sfpath = '/';
+                }
+                $cmdArgs[] = sprintf('cd %s &&', escapeshellarg($sfpath));
+                $cmdArgs[] = $this->getProgram;
+                $cmdArgs[] = 'extract';
+                $cmdArgs[] = '--progress';
+                if ($repo->get('type') == 'local') {
+                    $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
+                        'uuid' => $repo->get('sharedfolderref')
+                    ], $context);
+                } else {
+                    $path = $repo->get('uri');
+                }
+                $cmdArgs[] = sprintf('"%s::%s"', $path, $params['archive']);
+                $cmd = new \OMV\System\Process($cmdArgs);
+                $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
+                $cmd->setEnv("BORG_EXIT_CODES", "modern");
+                $cmd->setEnvFromFile($this->envFile . $repo->get('uuid'));
+                $cmd->setRedirect2to1();
+                $cmdLine = $cmd->getCommandLine();
+                $exitStatus = $this->exec($cmdLine, $output, $bgOutputFilename);
+                // Persist the captured output so the existing log viewers keep
+                // working. This is done outside the pipeline so the real borg
+                // exit code is preserved.
+                file_put_contents($logFile, implode(PHP_EOL, (array) $output));
+                if (0 !== $exitStatus) {
+                    throw new \OMV\ExecException($cmdLine, $output);
+                }
+                return $output;
+            }
+        );
     }
 
     public function getLog($params, $context)

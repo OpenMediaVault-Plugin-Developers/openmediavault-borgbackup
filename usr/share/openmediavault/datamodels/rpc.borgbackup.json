@@ -510,7 +510,7 @@
           "required": true
         },
         "original": {
-          "type": "boolean",
+          "type": "string",
           "required": true
         },
         "sharedfolderref": {
