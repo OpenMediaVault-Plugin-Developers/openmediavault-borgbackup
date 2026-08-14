@@ -735,6 +735,13 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.archive');
         // Map periods in order of most frequent → least frequent
         $periods = ['hourly', 'daily', 'weekly', 'monthly', 'yearly'];
+        // A period with a retain count of 0 can't be enabled, regardless of
+        // what was submitted (e.g. a stale default like dailyenable=true).
+        foreach ($periods as $period) {
+            if ((int)($params[$period] ?? 0) === 0) {
+                $params["{$period}enable"] = false;
+            }
+        }
         // Determine if any enable flag is already true
         $anyEnabled = false;
         foreach ($periods as $period) {
