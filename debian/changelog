@@ -1,3 +1,9 @@
+openmediavault-borgbackup (8.2.1) stable; urgency=low
+
+  * Archives: set enable to disabled for a period if retain count is 0
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 16 Aug 2026 13:06:03 +0000
+
 openmediavault-borgbackup (8.2.0) stable; urgency=low
 
   * Add a Serve tab: host borg repositories for remote clients over SSH with
