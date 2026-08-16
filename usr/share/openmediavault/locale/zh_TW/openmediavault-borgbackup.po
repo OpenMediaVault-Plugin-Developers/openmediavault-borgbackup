@@ -31,7 +31,7 @@ msgid "All"
 msgstr "全部"
 
 msgid "Append-only"
-msgstr ""
+msgstr "僅可附加"
 
 msgid "Archive"
 msgstr "歸檔"
@@ -111,13 +111,15 @@ msgid ""
 msgstr "勾選 = 有錯誤或成功時都送郵件。<br/>不勾選 = 僅在有錯誤時送郵件。"
 
 msgid "Client public key"
-msgstr ""
+msgstr "客户公用金鑰"
 
 msgid ""
 "Clients connect over SSH as this existing user. Their borg serve access is "
 "written to this user's ~/.ssh/authorized_keys. Do not also add the client "
 "key to this user's profile under User Management."
 msgstr ""
+"客户以這位現存用户身份經由 SSH 來連接。他們的 borg 服務存取是寫到此用户的 ~/.ssh/authorized_keys "
+"內。不要將客户金鑰也加到用户管理下這用户的個人資料中。"
 
 msgid "Compact"
 msgstr "簡縮"
@@ -159,7 +161,7 @@ msgid "Created repo."
 msgstr "已建立儲存庫。"
 
 msgid "Created serve client."
-msgstr ""
+msgstr "已建立服務客户。"
 
 msgid "Current quota"
 msgstr "目前配額"
@@ -183,7 +185,7 @@ msgid "Docs"
 msgstr "說明文件"
 
 msgid "Download private key"
-msgstr ""
+msgstr "下載私有金鑰"
 
 msgid "Download repo keyfile"
 msgstr "下載儲存庫金鑰檔案"
@@ -242,7 +244,7 @@ msgid "Extracting archive ..."
 msgstr "擷取歸檔中 ..."
 
 msgid "Failed to create temporary directory."
-msgstr ""
+msgstr "建立暫時目錄失敗。"
 
 msgid "Failed to find "
 msgstr "無法找到"
@@ -308,7 +310,7 @@ msgid "Local"
 msgstr "本地"
 
 msgid "Login user"
-msgstr ""
+msgstr "登入用户"
 
 msgid "Maintenance"
 msgstr "維護"
@@ -373,7 +375,7 @@ msgid "New quota"
 msgstr "新設配額"
 
 msgid "No private key is stored for this client. The public key was "
-msgstr ""
+msgstr "未儲存此客户的私有金鑰。公共金鑰為"
 
 msgid "None"
 msgstr "無"
@@ -409,7 +411,7 @@ msgid ""
 "Paste the client's OpenSSH public key. Leave blank to generate an ed25519 "
 "key pair automatically - you can then download the private key from the "
 "Serve list."
-msgstr ""
+msgstr "貼入該客户之 OpenSSH 公共金鑰。留空白則自動產生一對 ed25519 金鑰 - 您可以從服務列表下載私有金鑰。"
 
 msgid "Post-script"
 msgstr "後置腳本程式"
@@ -418,7 +420,7 @@ msgid "Pre-script"
 msgstr "前置腳本程式"
 
 msgid "Private key stored"
-msgstr ""
+msgstr "私有金鑰已儲存"
 
 msgid "Put a new line or comma between each directory"
 msgstr "在每個檔案目錄之間加入換行或逗號"
@@ -549,13 +551,13 @@ msgid "Select a repo ..."
 msgstr "選擇一個儲存庫 ..."
 
 msgid "Select a user ..."
-msgstr ""
+msgstr "選擇一位用户 ..."
 
 msgid "Select an archive ..."
 msgstr "選擇一個歸檔 ..."
 
 msgid "Serve"
-msgstr ""
+msgstr "服務"
 
 msgid "Set minimum threshold for saved space in percent"
 msgstr "用已儲存空間的百分比來設定最低門檻"
@@ -592,21 +594,21 @@ msgid "Sunday"
 msgstr "週日"
 
 msgid "Target shared folder"
-msgstr ""
+msgstr "目標共享檔案夾"
 
 msgid ""
 "The client can add archives but cannot delete or prune existing ones "
 "(ransomware protection). Prune/compact this repo yourself from the Compact "
 "tab."
-msgstr ""
+msgstr "客户能夠新增歸檔，但不能删除或修剪現存歸檔 (勒索軟體防護)。要修剪/簡縮此儲存庫，您須自行從 縮簡 分頁來執行。"
 
 msgid ""
 "The client is restricted to this folder (borg serve --restrict-to-path). Its"
 " repositories must live here."
-msgstr ""
+msgstr "該客户被限制到這個檔案來 (borg serve --restrict-to-path)。它的儲存庫必須存在這裏。"
 
 msgid "The user '%s' does not exist."
-msgstr ""
+msgstr "用户 '%s' 不存在。"
 
 msgid "Threshold"
 msgstr "門檻"
@@ -636,7 +638,7 @@ msgid "Updated compact schedule."
 msgstr "已更新簡縮時程。"
 
 msgid "Updated serve client."
-msgstr ""
+msgstr "已更新服務客户。"
 
 msgid "Uses value as prefix for archive name."
 msgstr "將值當作歸檔名稱的前綴詞。"

@@ -31,7 +31,7 @@ msgid "All"
 msgstr "Alles"
 
 msgid "Append-only"
-msgstr ""
+msgstr "Alleen toevoegen"
 
 msgid "Archive"
 msgstr "Archief"
@@ -119,13 +119,17 @@ msgstr ""
 "e-mail sturen bij fout."
 
 msgid "Client public key"
-msgstr ""
+msgstr "Publieke sleuten van de client"
 
 msgid ""
 "Clients connect over SSH as this existing user. Their borg serve access is "
 "written to this user's ~/.ssh/authorized_keys. Do not also add the client "
 "key to this user's profile under User Management."
 msgstr ""
+"Clients maken verbinding via SSH als deze bestaande gebruiker. Hun "
+"borgservice-toegang wordt naar de ~/.ssh/authorized_keys van deze gebruiker "
+"geschreven. Voeg de clientsleutel niet ook toe aan het profiel van deze "
+"gebruiker onder Gebruikersbeheer."
 
 msgid "Compact"
 msgstr "Compact"
@@ -158,7 +162,7 @@ msgid "Created archive."
 msgstr "Archief aangemaakt."
 
 msgid "Created compact schedule."
-msgstr "Compacte planning aangemaakt."
+msgstr "Compact-planning aangemaakt."
 
 msgid "Created environment variable."
 msgstr "Omgevingsvariabele aangemaakt."
@@ -167,7 +171,7 @@ msgid "Created repo."
 msgstr "Repo aangemaakt."
 
 msgid "Created serve client."
-msgstr ""
+msgstr "Serve client aangemaakt."
 
 msgid "Current quota"
 msgstr "Huidige quota"
@@ -191,7 +195,7 @@ msgid "Docs"
 msgstr "Docs"
 
 msgid "Download private key"
-msgstr ""
+msgstr "Privésleutel downloaden"
 
 msgid "Download repo keyfile"
 msgstr "Repo-sleutelbestand downloaden"
@@ -252,7 +256,7 @@ msgid "Extracting archive ..."
 msgstr "Archief uitpakken…"
 
 msgid "Failed to create temporary directory."
-msgstr ""
+msgstr "Aanmaken van tijdelijke map is mislukt."
 
 msgid "Failed to find "
 msgstr "Niet gevonden"
@@ -322,7 +326,7 @@ msgid "Local"
 msgstr "Lokaal"
 
 msgid "Login user"
-msgstr ""
+msgstr "Gebruiker inloggen"
 
 msgid "Maintenance"
 msgstr "Onderhoud"
@@ -376,7 +380,7 @@ msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
 "user@hostname&#58;path"
 msgstr ""
-"Moet ssh-sleutels setup hebben. Het pad op afstand moet de vorm &#58;  "
+"Moet ssh-sleutels setup hebben. Het externe pad moet de vorm &#58;  "
 "user@hostname&#58;path hebben"
 
 msgid "Name"
@@ -390,6 +394,7 @@ msgstr "Nieuwe quota"
 
 msgid "No private key is stored for this client. The public key was "
 msgstr ""
+"Voor deze client wordt geen privésleutel opgeslagen. De publieke sleutel was"
 
 msgid "None"
 msgstr "Geen"
@@ -426,6 +431,9 @@ msgid ""
 "key pair automatically - you can then download the private key from the "
 "Serve list."
 msgstr ""
+"Plak de openbare OpenSSH-sleutel van de client. Laat leeg om automatisch een"
+" ed25519-sleutelpaar te genereren - u kunt vervolgens de privésleutel "
+"downloaden uit de lijst Serveren."
 
 msgid "Post-script"
 msgstr "Post-script"
@@ -434,7 +442,7 @@ msgid "Pre-script"
 msgstr "Pre-script"
 
 msgid "Private key stored"
-msgstr ""
+msgstr "Privésleutel opgeslagen"
 
 msgid "Put a new line or comma between each directory"
 msgstr "Plaats een nieuwe regel of komma tussen elke map"
@@ -446,13 +454,13 @@ msgid "Rate limit"
 msgstr "Snelheidslimiet"
 
 msgid "Remote"
-msgstr "Op afstand"
+msgstr "Extern"
 
 msgid "Remote Path"
-msgstr "Pad op afstand"
+msgstr "Extern pad"
 
 msgid "Remote path"
-msgstr "Pad op afstand"
+msgstr "Extern pad"
 
 msgid "Remove"
 msgstr "Verwijderen"
@@ -569,13 +577,13 @@ msgid "Select a repo ..."
 msgstr "Selecteer een repo…"
 
 msgid "Select a user ..."
-msgstr ""
+msgstr "Kies een gebruiker…"
 
 msgid "Select an archive ..."
 msgstr "Selecteer een archief…"
 
 msgid "Serve"
-msgstr ""
+msgstr "Serveren"
 
 msgid "Set minimum threshold for saved space in percent"
 msgstr "Minimumdrempel voor opgeslagen ruimte in procenten instellen"
@@ -614,21 +622,26 @@ msgid "Sunday"
 msgstr "Zondag"
 
 msgid "Target shared folder"
-msgstr ""
+msgstr "Doel gedeelde map"
 
 msgid ""
 "The client can add archives but cannot delete or prune existing ones "
 "(ransomware protection). Prune/compact this repo yourself from the Compact "
 "tab."
 msgstr ""
+"De client kan archieven toevoegen, maar kan bestaande niet verwijderen of "
+"snoeien (ransomwarebescherming). Snoei/compacteer deze repo zelf vanaf het "
+"tabblad Compact."
 
 msgid ""
 "The client is restricted to this folder (borg serve --restrict-to-path). Its"
 " repositories must live here."
 msgstr ""
+"De client is beperkt tot deze map (borgservice --restrict-to-path). De "
+"opslagplaatsen horen hier."
 
 msgid "The user '%s' does not exist."
-msgstr ""
+msgstr "De gebruiker ‘%s’ bestaat niet."
 
 msgid "Threshold"
 msgstr "Drempel"
@@ -655,10 +668,10 @@ msgid "Unmounting repo ..."
 msgstr "Repo loskoppelen…"
 
 msgid "Updated compact schedule."
-msgstr "Compacte planning bijgewerkt."
+msgstr "Compact-planning bijgewerkt."
 
 msgid "Updated serve client."
-msgstr ""
+msgstr "Serve client bijgewerkt."
 
 msgid "Uses value as prefix for archive name."
 msgstr "Gebruikt waarde als voorvoegsel voor archiefnaam."

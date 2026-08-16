@@ -31,7 +31,7 @@ msgid "All"
 msgstr "All"
 
 msgid "Append-only"
-msgstr ""
+msgstr "Append-only"
 
 msgid "Archive"
 msgstr "Archive"
@@ -119,13 +119,16 @@ msgstr ""
 "error only."
 
 msgid "Client public key"
-msgstr ""
+msgstr "Client public key"
 
 msgid ""
 "Clients connect over SSH as this existing user. Their borg serve access is "
 "written to this user's ~/.ssh/authorized_keys. Do not also add the client "
 "key to this user's profile under User Management."
 msgstr ""
+"Clients connect over SSH as this existing user. Their borg serve access is "
+"written to this user's ~/.ssh/authorized_keys. Do not also add the client "
+"key to this user's profile under User Management."
 
 msgid "Compact"
 msgstr "Compact"
@@ -167,7 +170,7 @@ msgid "Created repo."
 msgstr "Created repo."
 
 msgid "Created serve client."
-msgstr ""
+msgstr "Created serve client."
 
 msgid "Current quota"
 msgstr "Current quota"
@@ -191,7 +194,7 @@ msgid "Docs"
 msgstr "Docs"
 
 msgid "Download private key"
-msgstr ""
+msgstr "Download private key"
 
 msgid "Download repo keyfile"
 msgstr "Download repo keyfile"
@@ -237,7 +240,7 @@ msgstr ""
 "archive name with an extension of .tar.gz."
 
 msgid "Exporting archive ..."
-msgstr ""
+msgstr "Exporting archive ..."
 
 msgid "Extract"
 msgstr "Extract"
@@ -249,10 +252,10 @@ msgid "Extract archive to tar file"
 msgstr "Extract archive to tar file"
 
 msgid "Extracting archive ..."
-msgstr ""
+msgstr "Extracting archive ..."
 
 msgid "Failed to create temporary directory."
-msgstr ""
+msgstr "Failed to create temporary directory."
 
 msgid "Failed to find "
 msgstr "Failed to find "
@@ -321,7 +324,7 @@ msgid "Local"
 msgstr "Local"
 
 msgid "Login user"
-msgstr ""
+msgstr "Login user"
 
 msgid "Maintenance"
 msgstr "Maintenance"
@@ -388,7 +391,7 @@ msgid "New quota"
 msgstr "New quota"
 
 msgid "No private key is stored for this client. The public key was "
-msgstr ""
+msgstr "No private key is stored for this client. The public key was "
 
 msgid "None"
 msgstr "None"
@@ -425,6 +428,9 @@ msgid ""
 "key pair automatically - you can then download the private key from the "
 "Serve list."
 msgstr ""
+"Paste the client's OpenSSH public key. Leave blank to generate an ed25519 "
+"key pair automatically - you can then download the private key from the "
+"Serve list."
 
 msgid "Post-script"
 msgstr "Post-script"
@@ -433,7 +439,7 @@ msgid "Pre-script"
 msgstr "Pre-script"
 
 msgid "Private key stored"
-msgstr ""
+msgstr "Private key stored"
 
 msgid "Put a new line or comma between each directory"
 msgstr "Put a new line or comma between each directory"
@@ -566,13 +572,13 @@ msgid "Select a repo ..."
 msgstr "Select a repo ..."
 
 msgid "Select a user ..."
-msgstr ""
+msgstr "Select a user ..."
 
 msgid "Select an archive ..."
 msgstr "Select an archive ..."
 
 msgid "Serve"
-msgstr ""
+msgstr "Serve"
 
 msgid "Set minimum threshold for saved space in percent"
 msgstr "Set minimum threshold for saved space in percent"
@@ -610,21 +616,26 @@ msgid "Sunday"
 msgstr "Sunday"
 
 msgid "Target shared folder"
-msgstr ""
+msgstr "Target shared folder"
 
 msgid ""
 "The client can add archives but cannot delete or prune existing ones "
 "(ransomware protection). Prune/compact this repo yourself from the Compact "
 "tab."
 msgstr ""
+"The client can add archives but cannot delete or prune existing ones "
+"(ransomware protection). Prune/compact this repo yourself from the Compact "
+"tab."
 
 msgid ""
 "The client is restricted to this folder (borg serve --restrict-to-path). Its"
 " repositories must live here."
 msgstr ""
+"The client is restricted to this folder (borg serve --restrict-to-path). Its"
+" repositories must live here."
 
 msgid "The user '%s' does not exist."
-msgstr ""
+msgstr "The user '%s' does not exist."
 
 msgid "Threshold"
 msgstr "Threshold"
@@ -654,7 +665,7 @@ msgid "Updated compact schedule."
 msgstr "Updated compact schedule."
 
 msgid "Updated serve client."
-msgstr ""
+msgstr "Updated serve client."
 
 msgid "Uses value as prefix for archive name."
 msgstr "Uses value as prefix for archive name."

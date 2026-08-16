@@ -31,7 +31,7 @@ msgid "All"
 msgstr "所有"
 
 msgid "Append-only"
-msgstr ""
+msgstr "仅追加"
 
 msgid "Archive"
 msgstr "归档"
@@ -111,13 +111,15 @@ msgid ""
 msgstr "已检查 = 发送错误或成功到邮件。<br/>未检查 = 仅发送错误到邮件"
 
 msgid "Client public key"
-msgstr ""
+msgstr "客户端公钥"
 
 msgid ""
 "Clients connect over SSH as this existing user. Their borg serve access is "
 "written to this user's ~/.ssh/authorized_keys. Do not also add the client "
 "key to this user's profile under User Management."
 msgstr ""
+"客户端以该现有用户的身份通过 SSH 进行连接。其 borg serve 访问权限配置在该用户的 `~/.ssh/authorized_keys` "
+"文件中。请勿同时在“用户管理”中将客户端密钥添加到该用户的资料中。"
 
 msgid "Compact"
 msgstr "紧密"
@@ -159,7 +161,7 @@ msgid "Created repo."
 msgstr "已创建源。"
 
 msgid "Created serve client."
-msgstr ""
+msgstr "已创建服务客户端。"
 
 msgid "Current quota"
 msgstr "当前配额"
@@ -183,7 +185,7 @@ msgid "Docs"
 msgstr "文档"
 
 msgid "Download private key"
-msgstr ""
+msgstr "下载私钥"
 
 msgid "Download repo keyfile"
 msgstr "下载源关键文件"
@@ -227,7 +229,7 @@ msgid ""
 msgstr "将在该目录创建命名的导出文件，文件扩展名为 tar.gz。"
 
 msgid "Exporting archive ..."
-msgstr ""
+msgstr "导出归档中 …"
 
 msgid "Extract"
 msgstr "提取"
@@ -239,10 +241,10 @@ msgid "Extract archive to tar file"
 msgstr "解压缩归档到 tar 文件"
 
 msgid "Extracting archive ..."
-msgstr ""
+msgstr "解压归档文件中 …"
 
 msgid "Failed to create temporary directory."
-msgstr ""
+msgstr "无法创建临时目录。"
 
 msgid "Failed to find "
 msgstr "无法找到"
@@ -308,7 +310,7 @@ msgid "Local"
 msgstr "本地"
 
 msgid "Login user"
-msgstr ""
+msgstr "登录用户"
 
 msgid "Maintenance"
 msgstr "维护"
@@ -373,7 +375,7 @@ msgid "New quota"
 msgstr "新配额"
 
 msgid "No private key is stored for this client. The public key was "
-msgstr ""
+msgstr "该客户端未存储私钥。公钥为"
 
 msgid "None"
 msgstr "无"
@@ -409,7 +411,7 @@ msgid ""
 "Paste the client's OpenSSH public key. Leave blank to generate an ed25519 "
 "key pair automatically - you can then download the private key from the "
 "Serve list."
-msgstr ""
+msgstr "粘贴客户端的 OpenSSH 公钥。留空则会自动生成 ed25519 密钥对——随后您可以从服务列表中下载私钥。"
 
 msgid "Post-script"
 msgstr "后置脚本"
@@ -418,7 +420,7 @@ msgid "Pre-script"
 msgstr "前置脚本"
 
 msgid "Private key stored"
-msgstr ""
+msgstr "私钥已存储"
 
 msgid "Put a new line or comma between each directory"
 msgstr "每个目录间使用换行或逗号分隔"
@@ -549,13 +551,13 @@ msgid "Select a repo ..."
 msgstr "选择源 ..."
 
 msgid "Select a user ..."
-msgstr ""
+msgstr "选择一个用户 ..."
 
 msgid "Select an archive ..."
 msgstr "选择归档 ..."
 
 msgid "Serve"
-msgstr ""
+msgstr "服务"
 
 msgid "Set minimum threshold for saved space in percent"
 msgstr "用已用空间的百分比来设置最小阈值"
@@ -592,21 +594,22 @@ msgid "Sunday"
 msgstr "星期天"
 
 msgid "Target shared folder"
-msgstr ""
+msgstr "目标共享文件夹"
 
 msgid ""
 "The client can add archives but cannot delete or prune existing ones "
 "(ransomware protection). Prune/compact this repo yourself from the Compact "
 "tab."
 msgstr ""
+"客户端可以添加归档，但无法删除或精简现有归档（旨在防范勒索软件）。请在“精简/压缩”（Compact）选项卡中自行对该存储库进行精简或压缩操作。"
 
 msgid ""
 "The client is restricted to this folder (borg serve --restrict-to-path). Its"
 " repositories must live here."
-msgstr ""
+msgstr "客户端被限制在此文件夹内（使用 `borg serve --restrict-to-path`）。其存储库必须位于此处。"
 
 msgid "The user '%s' does not exist."
-msgstr ""
+msgstr "用户‘%s’不存在。"
 
 msgid "Threshold"
 msgstr "阈值"
@@ -636,7 +639,7 @@ msgid "Updated compact schedule."
 msgstr "更新压缩日程表。"
 
 msgid "Updated serve client."
-msgstr ""
+msgstr "已更新服务客户端。"
 
 msgid "Uses value as prefix for archive name."
 msgstr "使用该值作为归档前缀名称。"

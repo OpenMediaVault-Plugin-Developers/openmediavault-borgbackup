@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Karl Jonatan Nyberg, 2023
+# Jonatan Nyberg, 2026
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-04 13:54+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
-"Last-Translator: Karl Jonatan Nyberg, 2023\n"
+"Last-Translator: Jonatan Nyberg, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,22 +25,22 @@ msgid "0 is the fastest compression and 9 is the best compression"
 msgstr "0 är den snabbaste kompressionen och 9 är den bästa kompressionen"
 
 msgid "5G, 1.5T as examples. Leave blank for no quota."
-msgstr ""
+msgstr "Exempel: 5G eller 1,5T. Lämna tomt för obegränsad kvot."
 
 msgid "All"
 msgstr "Alla"
 
 msgid "Append-only"
-msgstr ""
+msgstr "Endast tillägg"
 
 msgid "Archive"
 msgstr "Arkiv"
 
 msgid "Archive info ..."
-msgstr "Arkivinformation ..."
+msgstr "Arkivinformation…"
 
 msgid "Archive log"
-msgstr ""
+msgstr "Arkivlogg"
 
 msgid "Archives"
 msgstr "Arkiv"
@@ -52,81 +52,91 @@ msgid ""
 "Are you sure you want to delete the repo from the plugin and the repo files?"
 " This will delete all repo files!"
 msgstr ""
+"Vill du verkligen ta bort förrådet från tillägget och även förrådsfilerna? "
+"Alla filer i förrådet tas bort!"
 
 msgid ""
 "Are you sure you want to remove repo from the plugin? This will not delete "
 "any files!"
 msgstr ""
+"Vill du verkligen ta bort förrådet från tillägget? Inga filer tas bort!"
 
 msgid "Backup Options"
-msgstr ""
+msgstr "Alternativ för säkerhetskopiering"
 
 msgid "Base Dir"
-msgstr ""
+msgstr "Basmapp"
 
 msgid ""
 "Base directory to make archive use relative paths. Leave blank to use "
 "absolute paths in archive."
 msgstr ""
+"Basmapp som gör att arkivet använder relativa sökvägar. Lämna tomt för att "
+"använda absoluta sökvägar i arkivet."
 
 msgid "BorgBackup"
 msgstr "BorgBackup"
 
 msgid "Change"
-msgstr ""
+msgstr "Ändra"
 
 msgid "Change location"
-msgstr ""
+msgstr "Ändra plats"
 
 msgid "Change passphrase"
-msgstr ""
+msgstr "Ändra lösenfras"
 
 msgid "Change quota"
-msgstr ""
+msgstr "Ändra kvot"
 
 msgid "Changing quota ..."
-msgstr ""
+msgstr "Ändrar kvot…"
 
 msgid "Changing repo location ..."
-msgstr ""
+msgstr "Ändrar förrådets plats…"
 
 msgid "Check"
 msgstr "Kontrollera"
 
 msgid "Check all ..."
-msgstr ""
+msgstr "Kontrollerar allt…"
 
 msgid "Check archives only ..."
-msgstr ""
+msgstr "Kontrollerar endast arkiv…"
 
 msgid "Check repo ..."
-msgstr ""
+msgstr "Kontrollerar förråd…"
 
 msgid "Check repos only ..."
-msgstr ""
+msgstr "Kontrollerar endast förråd…"
 
 msgid ""
 "Checked = send email on error or success.<br/>Unchecked = send email on "
 "error only."
 msgstr ""
+"Markerat = skicka e-post vid fel eller lyckat resultat.<br/>Avmarkerat = "
+"skicka e-post endast vid fel."
 
 msgid "Client public key"
-msgstr ""
+msgstr "Klientens offentliga nyckel"
 
 msgid ""
 "Clients connect over SSH as this existing user. Their borg serve access is "
 "written to this user's ~/.ssh/authorized_keys. Do not also add the client "
 "key to this user's profile under User Management."
 msgstr ""
+"Klienter ansluter via SSH som den här befintliga användaren. Deras åtkomst "
+"till borg serve skrivs till användarens ~/.ssh/authorized_keys. Lägg inte "
+"även till klientnyckeln i användarens profil under Användarhantering."
 
 msgid "Compact"
-msgstr ""
+msgstr "Kompaktera"
 
 msgid "Compact repo ..."
-msgstr ""
+msgstr "Kompakterar förråd…"
 
 msgid "Compact threshold"
-msgstr ""
+msgstr "Tröskel för kompaktering"
 
 msgid "Compression"
 msgstr "Kompression"
@@ -135,61 +145,61 @@ msgid "Compression Type"
 msgstr "Kompressionstyp"
 
 msgid "Compression ratio"
-msgstr "Kompressionskvot"
+msgstr "Kompressionsförhållande"
 
 msgid "Create"
 msgstr "Skapa"
 
 msgid "Create archive for ..."
-msgstr "Skapa arkiv för ..."
+msgstr "Skapa arkiv för…"
 
 msgid "Create archive for ... (Dry Run)"
-msgstr ""
+msgstr "Skapa arkiv för… (simulering)"
 
 msgid "Created archive."
-msgstr "Skapat arkiv."
+msgstr "Arkivet har skapats."
 
 msgid "Created compact schedule."
-msgstr ""
+msgstr "Schemat för kompaktering har skapats."
 
 msgid "Created environment variable."
-msgstr "Skapat miljövariabel."
+msgstr "Miljövariabeln har skapats."
 
 msgid "Created repo."
-msgstr "Skapade förråd."
+msgstr "Förrådet har skapats."
 
 msgid "Created serve client."
-msgstr ""
+msgstr "Serve-klienten har skapats."
 
 msgid "Current quota"
-msgstr ""
+msgstr "Aktuell kvot"
 
 msgid "Daily"
-msgstr ""
+msgstr "Daglig"
 
 msgid "Day of the month that monthly compact runs (1-31)."
-msgstr ""
+msgstr "Dag i månaden då den månatliga kompakteringen körs (1–31)."
 
 msgid "Day of the week that weekly compact runs."
-msgstr ""
+msgstr "Veckodag då den veckovisa kompakteringen körs."
 
 msgid "Delete + Files"
-msgstr ""
+msgstr "Ta bort inklusive filer"
 
 msgid "Directory not found"
-msgstr ""
+msgstr "Mappen hittades inte"
 
 msgid "Docs"
-msgstr ""
+msgstr "Dokumentation"
 
 msgid "Download private key"
-msgstr ""
+msgstr "Hämta privat nyckel"
 
 msgid "Download repo keyfile"
-msgstr ""
+msgstr "Hämta förrådets nyckelfil"
 
 msgid "Dry Run"
-msgstr ""
+msgstr "Simulering"
 
 msgid "Edit"
 msgstr "Redigera"
@@ -216,7 +226,7 @@ msgid "Environment Variables"
 msgstr "Miljövariabler"
 
 msgid "Excludes"
-msgstr "Utesluter"
+msgstr "Uteslutningar"
 
 msgid "Export"
 msgstr "Exportera"
@@ -225,72 +235,74 @@ msgid ""
 "Export file will be created in this directory with a filename matching the "
 "archive name with an extension of .tar.gz."
 msgstr ""
-"Exportfil skapas i den här mappen med ett filnamn som matchar arkivnamnet "
-"med ett tillägg av .tar.gz."
+"Exportfilen skapas i den här mappen med ett filnamn som motsvarar "
+"arkivnamnet och filändelsen .tar.gz."
 
 msgid "Exporting archive ..."
-msgstr ""
+msgstr "Exporterar arkiv…"
 
 msgid "Extract"
 msgstr "Packa upp"
 
 msgid "Extract archive to directory"
-msgstr ""
+msgstr "Packa upp arkiv till mapp"
 
 msgid "Extract archive to tar file"
-msgstr ""
+msgstr "Extrahera arkiv till tar-fil"
 
 msgid "Extracting archive ..."
-msgstr ""
+msgstr "Packar upp arkiv…"
 
 msgid "Failed to create temporary directory."
-msgstr ""
+msgstr "Det gick inte att skapa den tillfälliga mappen."
 
 msgid "Failed to find "
-msgstr ""
+msgstr "Det gick inte att hitta "
 
 msgid "Failed to get keyfile!"
-msgstr ""
+msgstr "Det gick inte att hämta nyckelfilen!"
 
 msgid "Failed to remove "
-msgstr ""
+msgstr "Det gick inte att ta bort "
 
 msgid "Fri"
-msgstr ""
+msgstr "Fre"
 
 msgid "Friday"
-msgstr ""
+msgstr "Fredag"
 
 msgid "General"
-msgstr ""
+msgstr "Allmänt"
 
 msgid ""
 "Gives a merged, versioned view of the files in the archives. EXPERIMENTAL"
 msgstr ""
+"Visar en sammanfogad och versionshanterad vy över filerna i arkiven. "
+"EXPERIMENTELLT"
 
 msgid "Hooks / Advanced"
-msgstr ""
+msgstr "Krokar/avancerat"
 
 msgid "Hour of the day that daily backups run."
-msgstr ""
+msgstr "Timme på dygnet då dagliga säkerhetskopieringar körs."
 
 msgid "Hour of the day that daily compact runs."
-msgstr ""
+msgstr "Timme på dygnet då daglig kompaktering körs."
 
 msgid "Hour of the day that monthly backups run."
-msgstr ""
+msgstr "Timme på dygnet då månatliga säkerhetskopieringar körs."
 
 msgid "Hour of the day that monthly compact runs."
-msgstr ""
+msgstr "Timme på dygnet då månatlig kompaktering körs."
 
 msgid "Hour of the day that weekly backups run."
-msgstr ""
+msgstr "Timme på dygnet då veckovisa säkerhetskopieringar körs."
 
 msgid "Hour of the day that weekly compact runs."
-msgstr ""
+msgstr "Timme på dygnet då veckovis kompaktering körs."
 
 msgid "Hour of the day that yearly backups run."
-msgstr ""
+msgstr "Timme på dygnet då årliga säkerhetskopieringar körs."
 
 msgid ""
 "If this is enabled, borg won't span filesystem partitions within a backup "
@@ -300,10 +312,10 @@ msgstr ""
 "filsystempartitioner inom en säkerhetskopia."
 
 msgid "Includes"
-msgstr "Inkluderar"
+msgstr "Inkluderingar"
 
 msgid "Info"
-msgstr "Info"
+msgstr "Information"
 
 msgid "List"
 msgstr "Lista"
@@ -312,55 +324,55 @@ msgid "Local"
 msgstr "Lokal"
 
 msgid "Login user"
-msgstr ""
+msgstr "Inloggningsanvändare"
 
 msgid "Maintenance"
-msgstr ""
+msgstr "Underhåll"
 
 msgid "Minute after the hour that daily backups run."
-msgstr ""
+msgstr "Minut efter hel timme då dagliga säkerhetskopieringar körs."
 
 msgid "Minute after the hour that daily compact runs."
-msgstr ""
+msgstr "Minut efter hel timme då daglig kompaktering körs."
 
 msgid "Minute after the hour that hourly backups run."
-msgstr ""
+msgstr "Minut efter hel timme då säkerhetskopieringar varje timme körs."
 
 msgid "Minute after the hour that monthly backups run."
-msgstr ""
+msgstr "Minut efter hel timme då månatliga säkerhetskopieringar körs."
 
 msgid "Minute after the hour that monthly compact runs."
-msgstr ""
+msgstr "Minut efter hel timme då månatlig kompaktering körs."
 
 msgid "Minute after the hour that weekly backups run."
-msgstr ""
+msgstr "Minut efter hel timme då veckovisa säkerhetskopieringar körs."
 
 msgid "Minute after the hour that weekly compact runs."
-msgstr ""
+msgstr "Minut efter hel timme då veckovis kompaktering körs."
 
 msgid "Minute after the hour that yearly backups run."
-msgstr ""
+msgstr "Minut efter hel timme då årliga säkerhetskopieringar körs."
 
 msgid "Mon"
-msgstr ""
+msgstr "Mån"
 
 msgid "Monday"
-msgstr ""
+msgstr "Måndag"
 
 msgid "Monthly"
-msgstr ""
+msgstr "Månatlig"
 
 msgid "Mount"
 msgstr "Montera"
 
 msgid "Mount repo"
-msgstr ""
+msgstr "Montera förråd"
 
 msgid "Mounted"
 msgstr "Monterad"
 
 msgid "Mounting repo ..."
-msgstr ""
+msgstr "Monterar förråd…"
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
@@ -376,28 +388,29 @@ msgid "Name/Prefix"
 msgstr "Namn/prefix"
 
 msgid "New quota"
-msgstr ""
+msgstr "Ny kvot"
 
 msgid "No private key is stored for this client. The public key was "
 msgstr ""
+"Ingen privat nyckel lagras för den här klienten. Den offentliga nyckeln var "
 
 msgid "None"
 msgstr "Ingen"
 
 msgid "Number of daily backups to keep."
-msgstr ""
+msgstr "Antal dagliga säkerhetskopior som ska behållas."
 
 msgid "Number of hourly backups to keep."
-msgstr ""
+msgstr "Antal säkerhetskopior per timme som ska behållas."
 
 msgid "Number of monthly backups to keep."
-msgstr ""
+msgstr "Antal månatliga säkerhetskopior som ska behållas."
 
 msgid "Number of weekly backups to keep."
-msgstr ""
+msgstr "Antal veckovisa säkerhetskopior som ska behållas."
 
 msgid "Number of yearly backups to keep."
-msgstr ""
+msgstr "Antal årliga säkerhetskopior som ska behållas."
 
 msgid "One filesystem only"
 msgstr "Endast ett filsystem"
@@ -409,28 +422,31 @@ msgid "Output verbose list of files and directories."
 msgstr "Mata ut en detaljerad lista över filer och mappar."
 
 msgid "Passphrase"
-msgstr "Lösenord"
+msgstr "Lösenfras"
 
 msgid ""
 "Paste the client's OpenSSH public key. Leave blank to generate an ed25519 "
 "key pair automatically - you can then download the private key from the "
 "Serve list."
 msgstr ""
+"Klistra in klientens offentliga OpenSSH-nyckel. Lämna tomt för att "
+"automatiskt skapa ett ed25519-nyckelpar; den privata nyckeln kan sedan "
+"hämtas från Serve-listan."
 
 msgid "Post-script"
-msgstr ""
+msgstr "Efterföljande skript"
 
 msgid "Pre-script"
-msgstr ""
+msgstr "Föregående skript"
 
 msgid "Private key stored"
-msgstr ""
+msgstr "Privat nyckel lagrad"
 
 msgid "Put a new line or comma between each directory"
-msgstr ""
+msgstr "Avgränsa mapparna med en ny rad eller ett kommatecken"
 
 msgid "Quota has been changed."
-msgstr ""
+msgstr "Kvoten har ändrats."
 
 msgid "Rate limit"
 msgstr "Hastighetsgräns"
@@ -445,26 +461,26 @@ msgid "Remote path"
 msgstr "Fjärrsökväg"
 
 msgid "Remove"
-msgstr ""
+msgstr "Ta bort"
 
 msgid "Repo"
 msgstr "Förråd"
 
 msgid "Repo has been mounted."
-msgstr ""
+msgstr "Förrådet har monterats."
 
 msgid "Repo has been unmounted."
-msgstr ""
+msgstr "Förrådet har avmonterats."
 
 msgid "Repo info ..."
-msgstr ""
+msgstr "Förrådsinformation…"
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr ""
 "Förrådet används. Ta bort arkiv som är associerade med detta förråd först!"
 
 msgid "Repo location has been changed."
-msgstr ""
+msgstr "Förrådets plats har ändrats."
 
 msgid ""
 "Repo will be mounted as a subfolder in the shared folder with the same name "
@@ -480,49 +496,49 @@ msgid "Repos only"
 msgstr "Endast förråd"
 
 msgid "Retain daily"
-msgstr ""
+msgstr "Behåll dagliga"
 
 msgid "Retain hourly"
-msgstr ""
+msgstr "Behåll per timme"
 
 msgid "Retain monthly"
-msgstr ""
+msgstr "Behåll månatliga"
 
 msgid "Retain weekly"
-msgstr ""
+msgstr "Behåll veckovisa"
 
 msgid "Retain yearly"
-msgstr ""
+msgstr "Behåll årliga"
 
 msgid "Retention and Schedule"
-msgstr ""
+msgstr "Lagringstid och schema"
 
 msgid "Run"
 msgstr "Kör"
 
 msgid "Run compact after backup and prune"
-msgstr ""
+msgstr "Kör kompaktering efter säkerhetskopiering och gallring"
 
 msgid "Run compact daily."
-msgstr ""
+msgstr "Kör kompaktering dagligen."
 
 msgid "Run compact for ..."
-msgstr ""
+msgstr "Kör kompaktering för…"
 
 msgid "Run compact monthly."
-msgstr ""
+msgstr "Kör kompaktering varje månad."
 
 msgid "Run compact weekly."
-msgstr ""
+msgstr "Kör kompaktering varje vecka."
 
 msgid "Run daily cron job."
-msgstr ""
+msgstr "Kör dagligt cron-jobb."
 
 msgid "Run hourly cron job."
-msgstr ""
+msgstr "Kör cron-jobb varje timme."
 
 msgid "Run monthly cron job."
-msgstr ""
+msgstr "Kör månatligt cron-jobb."
 
 msgid "Run script from this path after backup."
 msgstr "Kör skript från denna sökväg efter säkerhetskopiering."
@@ -531,46 +547,46 @@ msgid "Run script from this path before backup."
 msgstr "Kör skript från denna sökväg före säkerhetskopiering."
 
 msgid "Run times"
-msgstr ""
+msgstr "Körtider"
 
 msgid "Run weekly cron job."
-msgstr ""
+msgstr "Kör veckovis cron-jobb."
 
 msgid "Run with progress"
-msgstr ""
+msgstr "Kör med förloppsvisning"
 
 msgid "Run yearly cron job."
-msgstr ""
+msgstr "Kör årligt cron-jobb."
 
 msgid "Runtime / Output"
-msgstr ""
+msgstr "Körtid/utdata"
 
 msgid "Sat"
-msgstr ""
+msgstr "Lör"
 
 msgid "Saturday"
-msgstr ""
+msgstr "Lördag"
 
 msgid "Schedule"
-msgstr ""
+msgstr "Schema"
 
 msgid "Select a repo ..."
-msgstr "Välj ett förråd ..."
+msgstr "Välj ett förråd…"
 
 msgid "Select a user ..."
-msgstr ""
+msgstr "Välj en användare…"
 
 msgid "Select an archive ..."
-msgstr "Välj ett arkiv ..."
+msgstr "Välj ett arkiv…"
 
 msgid "Serve"
-msgstr ""
+msgstr "Serve"
 
 msgid "Set minimum threshold for saved space in percent"
-msgstr ""
+msgstr "Ange minsta tröskel för sparat utrymme i procent"
 
 msgid "Set minimum threshold for saved space in percent."
-msgstr ""
+msgstr "Ange minsta tröskel för sparat utrymme i procent."
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
@@ -585,54 +601,59 @@ msgid "Shared folder"
 msgstr "Delad mapp"
 
 msgid "SharedFolderRef"
-msgstr ""
+msgstr "Referens till delad mapp"
 
 msgid "Skip init"
-msgstr "Hoppa över init"
+msgstr "Hoppa över initiering"
 
 msgid "Skip initialization to import existing repo."
 msgstr "Hoppa över initialisering för att importera befintligt förråd."
 
 msgid "Storage quota"
-msgstr ""
+msgstr "Lagringskvot"
 
 msgid "Sun"
-msgstr ""
+msgstr "Sön"
 
 msgid "Sunday"
-msgstr ""
+msgstr "Söndag"
 
 msgid "Target shared folder"
-msgstr ""
+msgstr "Delad målmapp"
 
 msgid ""
 "The client can add archives but cannot delete or prune existing ones "
 "(ransomware protection). Prune/compact this repo yourself from the Compact "
 "tab."
 msgstr ""
+"Klienten kan lägga till arkiv men inte ta bort eller gallra befintliga "
+"arkiv, vilket skyddar mot utpressningsprogram. Gallra och kompaktera "
+"förrådet manuellt från fliken Kompaktera."
 
 msgid ""
 "The client is restricted to this folder (borg serve --restrict-to-path). Its"
 " repositories must live here."
 msgstr ""
+"Klienten begränsas till den här mappen (borg serve --restrict-to-path). "
+"Klientens förråd måste finnas här."
 
 msgid "The user '%s' does not exist."
-msgstr ""
+msgstr "Användaren ”%s” finns inte."
 
 msgid "Threshold"
-msgstr ""
+msgstr "Tröskelvärde"
 
 msgid "Thu"
-msgstr ""
+msgstr "Tor"
 
 msgid "Thursday"
-msgstr ""
+msgstr "Torsdag"
 
 msgid "Tue"
-msgstr ""
+msgstr "Tis"
 
 msgid "Tuesday"
-msgstr ""
+msgstr "Tisdag"
 
 msgid "Type"
 msgstr "Typ"
@@ -641,16 +662,16 @@ msgid "Unmount"
 msgstr "Avmontera"
 
 msgid "Unmounting repo ..."
-msgstr ""
+msgstr "Avmonterar förråd…"
 
 msgid "Updated compact schedule."
-msgstr ""
+msgstr "Schemat för kompaktering har uppdaterats."
 
 msgid "Updated serve client."
-msgstr ""
+msgstr "Serve-klienten har uppdaterats."
 
 msgid "Uses value as prefix for archive name."
-msgstr "Använder värde som prefix för arkivnamn."
+msgstr "Använder värdet som prefix för arkivnamnet."
 
 msgid "Value"
 msgstr "Värde"
@@ -659,94 +680,94 @@ msgid "Verify"
 msgstr "Verifiera"
 
 msgid "Versions"
-msgstr ""
+msgstr "Versioner"
 
 msgid "View Log"
-msgstr ""
+msgstr "Visa logg"
 
 msgid "Wed"
-msgstr ""
+msgstr "Ons"
 
 msgid "Wednesday"
-msgstr ""
+msgstr "Onsdag"
 
 msgid "Weekly"
-msgstr ""
+msgstr "Veckovis"
 
 msgid "You must move the repo files before changing the location."
-msgstr ""
+msgstr "Du måste flytta förrådsfilerna innan du ändrar platsen."
 
 msgid "borgbackup"
-msgstr ""
+msgstr "borgbackup"
 
 msgid "daily"
-msgstr ""
+msgstr "dagligen"
 
 msgid "daily hour"
-msgstr ""
+msgstr "daglig timme"
 
 msgid "daily minute"
-msgstr ""
+msgstr "daglig minut"
 
 msgid "extract logs ..."
-msgstr ""
+msgstr "extraherar loggar…"
 
 msgid "hourly"
-msgstr ""
+msgstr "varje timme"
 
 msgid "hourly minute"
-msgstr ""
+msgstr "minut för körning varje timme"
 
 msgid "logs"
-msgstr ""
+msgstr "loggar"
 
 msgid "lz4 - super fast / low compression"
-msgstr "lz4 - supersnabb / låg komprimering"
+msgstr "lz4 – mycket snabb/låg komprimering"
 
 msgid "lzma - even slower / even higher compression"
-msgstr "lzma - ännu långsammare / ännu högre komprimering"
+msgstr "lzma – ännu långsammare/ännu högre komprimering"
 
 msgid "monthly"
-msgstr ""
+msgstr "månatligen"
 
 msgid "monthly day"
-msgstr ""
+msgstr "månatlig dag"
 
 msgid "monthly hour"
-msgstr ""
+msgstr "månatlig timme"
 
 msgid "monthly minute"
-msgstr ""
+msgstr "månatlig minut"
 
 msgid "n/a"
-msgstr "n/a"
+msgstr "Ej tillgängligt"
 
 msgid "omv-extras wiki"
-msgstr ""
+msgstr "omv-extras-wiki"
 
 msgid "weekly"
-msgstr ""
+msgstr "veckovis"
 
 msgid "weekly day"
-msgstr ""
+msgstr "veckodag"
 
 msgid "weekly hour"
-msgstr ""
+msgstr "veckovis timme"
 
 msgid "weekly minute"
-msgstr ""
+msgstr "veckovis minut"
 
 msgid "yearly"
-msgstr ""
+msgstr "årligen"
 
 msgid "yearly hour"
-msgstr ""
+msgstr "årlig timme"
 
 msgid "yearly minute"
-msgstr ""
+msgstr "årlig minut"
 
 msgid "zlib - less fast / higher compression"
-msgstr "zlib - mindre snabb / högre komprimering"
+msgstr "zlib – långsammare/högre komprimering"
 
 msgid "zstd - super fast / medium compression"
-msgstr "zstd - supersnabb / medelhög komprimering"
+msgstr "zstd – mycket snabb/medelhög komprimering"
