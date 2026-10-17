@@ -1,3 +1,17 @@
+openmediavault-borgbackup (8.2.2) stable; urgency=low
+
+  * Mask the repo passphrase in command output and error messages
+  * Scheduled scripts: report borg's exit code instead of tee's (pipefail)
+  * Only delete/prune/list archives belonging to the selected archive config
+  * Extract: refuse to extract to / when no shared folder is selected
+  * Quote passphrase, repo path and env var values safely in generated scripts
+  * Serve: drop the stored private key when the public key is changed
+  * Remove compact schedules and env vars when their repo is removed
+  * Fix mount detection/unmount matching repos with similar names or spaces
+  * Validate getLog params, env var names and escape remaining shell args
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 17 Oct 2026 00:12:20 +0000
+
 openmediavault-borgbackup (8.2.1) stable; urgency=low
 
   * Archives: set enable to disabled for a period if retain count is 0
