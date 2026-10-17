@@ -4,13 +4,18 @@
 # Usage: sudo ./tests/test-rpc.sh
 #
 # Tests CRUD operations for repos, archives, env vars, and compact schedules,
-# then registers a real local borg repository (initialised under /tmp) and
-# exercises read/command RPCs against it.
+# then registers real borg repositories (initialised under /tmp) and
+# exercises read/command RPCs against them: backups, archive info/delete,
+# passphrase masking and changes, keyfile download, export/extract, mount,
+# quotas and the generated scheduled scripts.
 # No remote server or network access required.
 #
-# WARNING: Creates a temporary borg repository under /tmp. The cleanup trap
-# removes it on exit. All repo DB entries are deleted with deleteFiles=false
-# so no shared folder data is touched.
+# WARNING: Creates temporary borg repositories under /tmp. If at least one
+# shared folder exists, two temporary shared folders (bgrpctest_*) are
+# created on the same filesystem for export/extract/mount/quota tests; they
+# and their contents are deleted again on exit. Existing shared folder data
+# is never touched. Writes the borg serve block to root's authorized_keys
+# and removes it again.
 
 set -uo pipefail
 
@@ -24,22 +29,22 @@ CYAN='\033[0;36m'
 BOLD='\033[1m'
 NC='\033[0m'
 
-PASS=0
-FAIL=0
-declare -a FAILED_TESTS=()
+# Results and cleanup commands are kept in files rather than variables, so
+# assertions and registrations made inside $(...) subshells are not lost.
+RESULTS_FILE=$(mktemp)
+CLEANUP_FILE=$(mktemp)
 
 section() { echo -e "\n${CYAN}${BOLD}=== $* ===${NC}" >&2; }
 info()    { echo -e "  ${YELLOW}»${NC} $*" >&2; }
 
 _pass() {
     echo -e "  ${GREEN}PASS${NC}  $1" >&2
-    ((PASS++)) || true
+    printf 'PASS %s\n' "${1//$'\n'/ }" >>"$RESULTS_FILE"
 }
 _fail() {
     echo -e "  ${RED}FAIL${NC}  $1" >&2
     [ -n "${2:-}" ] && echo -e "         ${RED}→${NC} $2" >&2
-    ((FAIL++)) || true
-    FAILED_TESTS+=("$1")
+    printf 'FAIL %s\n' "${1//$'\n'/ }" >>"$RESULTS_FILE"
 }
 
 # ---------------------------------------------------------------------------
@@ -79,6 +84,194 @@ assert_rpc_fails() {
     return 0
 }
 
+# Read one key from a JSON object on stdin.
+jget() {
+    python3 -c "import sys,json; print(json.load(sys.stdin).get('$1',''))" \
+        2>/dev/null || echo ""
+}
+
+# Print a JSON document built from a Python expression. Extra arguments are
+# available as a[0], a[1], ... so values never need shell/Python quoting.
+pyjson() {
+    local expr=$1
+    shift
+    python3 -c "import json, sys; a = sys.argv[1:]; print(json.dumps($expr))" "$@"
+}
+
+# Poll a background job started by an execBgProc RPC (its JSON-encoded
+# status filename is passed in) until it finishes. Sets BG_OUTPUT to the
+# job's full output and BG_ERROR to the error, if any. Returns non-zero if
+# the job failed or timed out.
+BG_OUTPUT=""
+BG_ERROR=""
+wait_bg() {
+    local filename timeout=${2:-300} pos=0 start=$SECONDS resp meta
+    local running pending outfile
+    BG_OUTPUT=""
+    BG_ERROR=""
+    filename=$(echo "$1" | python3 -c "import sys,json; print(json.load(sys.stdin))" \
+        2>/dev/null) || { BG_ERROR="not a background job: ${1:0:200}"; return 1; }
+    outfile=$(mktemp)
+    while :; do
+        resp=$(omv-rpc -u admin "Exec" "getOutput" \
+            "{\"filename\":\"$filename\",\"pos\":$pos}" 2>&1) || {
+            BG_OUTPUT=$(cat "$outfile")
+            BG_ERROR=$resp
+            rm -f "$outfile"
+            return 1
+        }
+        meta=$(echo "$resp" | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+with open(sys.argv[1], 'a') as f:
+    f.write(d.get('output') or '')
+print(d['pos'], int(bool(d['running'])), int(bool(d.get('pendingOutput'))))
+" "$outfile" 2>/dev/null) || {
+            BG_ERROR="unexpected getOutput response: ${resp:0:200}"
+            rm -f "$outfile"
+            return 1
+        }
+        read -r pos running pending <<<"$meta"
+        [ "$running" = "0" ] && [ "$pending" = "0" ] && break
+        if (( SECONDS - start > timeout )); then
+            BG_ERROR="timed out after ${timeout}s"
+            break
+        fi
+        sleep 1
+    done
+    BG_OUTPUT=$(cat "$outfile")
+    rm -f "$outfile"
+    [ -z "$BG_ERROR" ]
+}
+
+# Run a background-job RPC to completion and assert it succeeded (and that
+# its output matches an optional grep pattern).
+assert_bg() {
+    local desc=$1 svc=$2 method=$3 params=${4:-'{}'} pattern=${5:-}
+    local out ec=0
+    out=$(omv-rpc -u admin "$svc" "$method" "$params" 2>&1) || ec=$?
+    if [ $ec -ne 0 ]; then
+        _fail "$desc" "dispatch failed: $(echo "$out" | tail -3)"
+        return 1
+    fi
+    if ! wait_bg "$out"; then
+        _fail "$desc" "$(echo "$BG_ERROR" | tail -3)"
+        return 1
+    fi
+    if [ -n "$pattern" ] && ! grep -q -- "$pattern" <<<"$BG_OUTPUT"; then
+        _fail "$desc" "Pattern '$pattern' not found in: $(tail -c 300 <<<"$BG_OUTPUT")"
+        return 1
+    fi
+    _pass "$desc"
+    return 0
+}
+
+# Assert a background-job RPC is rejected up front or fails while running.
+assert_bg_fails() {
+    local desc=$1 svc=$2 method=$3 params=${4:-'{}'}
+    local out ec=0
+    out=$(omv-rpc -u admin "$svc" "$method" "$params" 2>&1) || ec=$?
+    if [ $ec -ne 0 ] || echo "$out" | grep -qi "exception"; then
+        _pass "$desc"
+        return 0
+    fi
+    if wait_bg "$out"; then
+        _fail "$desc" "Expected failure but job succeeded: $(tail -c 200 <<<"$BG_OUTPUT")"
+        return 1
+    fi
+    _pass "$desc"
+    return 0
+}
+
+# Register a command to run on exit. Commands run in reverse order of
+# registration, so register a resource before anything that depends on it.
+on_cleanup() {
+    printf '%q ' "$@" >>"$CLEANUP_FILE"
+    echo >>"$CLEANUP_FILE"
+}
+
+# Create a BorgBackup config object, register its deletion for cleanup and
+# print its UUID. Returns non-zero (and records a failure) if it fails.
+create_obj() {
+    local desc=$1 method=$2 delete_method=$3 params=$4 out uuid del_params
+    out=$(assert_rpc "$desc" "BorgBackup" "$method" "$params") || return 1
+    uuid=$(jget uuid <<<"$out")
+    if [ -z "$uuid" ] || [ "$uuid" = "$OMV_NEW_UUID" ]; then
+        _fail "$desc — no UUID returned"
+        return 1
+    fi
+    del_params="{\"uuid\":\"$uuid\"}"
+    if [ "$delete_method" = "deleteRepo" ]; then
+        del_params="{\"uuid\":\"$uuid\",\"deleteFiles\":false}"
+    fi
+    on_cleanup rpc BorgBackup "$delete_method" "$del_params"
+    echo "$uuid"
+}
+
+# setArchive params for a new archive config.
+# Usage: archive_params NAME REPO_UUID INCLUDE [EMAIL(true|false)]
+archive_params() {
+    pyjson "{
+    'enable': True, 'uuid': a[0], 'name': a[1], 'reporef': a[2],
+    'compressiontype': 'lz4', 'compressionratio': 9,
+    'onefs': False, 'include': a[3], 'exclude': '',
+    'hourly': 0,  'hourlyenable': False, 'hourlymin': 5,
+    'daily': 7,   'dailyenable': True,   'dailyhour': 3, 'dailymin': 30,
+    'weekly': 0,  'weeklyenable': False, 'weeklyhour': 3, 'weeklymin': 0,
+    'monthly': 0, 'monthlyenable': False, 'monthlyhour': 2, 'monthlymin': 30,
+    'yearly': 0,  'yearlyenable': False, 'yearlyhour': 2, 'yearlymin': 0,
+    'compact': False, 'cthreshold': 10, 'ratelimit': 0,
+    'list': True, 'email': a[4] == 'true',
+    'prescript': '', 'postscript': '', 'basedir': '',
+}" "$OMV_NEW_UUID" "$1" "$2" "$3" "${4:-false}"
+}
+
+# setRepo params. Usage: repo_params NAME TYPE SFREF URI PASSPHRASE
+#   ENCRYPTION(true|false) SKIPINIT(true|false) [STORQUOTA]
+repo_params() {
+    pyjson "{
+    'uuid': a[0], 'name': a[1], 'type': a[2], 'sharedfolderref': a[3],
+    'uri': a[4], 'passphrase': a[5], 'encryption': a[6] == 'true',
+    'skipinit': a[7] == 'true', 'storquota': a[8],
+}" "$OMV_NEW_UUID" "$1" "$2" "$3" "$4" "$5" "$6" "$7" "${8:-}"
+}
+
+# setCompact params for an enabled schedule with no periods enabled.
+compact_params() {
+    pyjson "{
+    'uuid': a[0], 'enable': True, 'reporef': a[1], 'cthreshold': 10,
+    'email': False,
+    'dailyenable':   False, 'dailyhour': 4,   'dailymin': 0,
+    'weeklyenable':  False, 'weeklyhour': 4,  'weeklymin': 0, 'weeklyday': 1,
+    'monthlyenable': False, 'monthlyhour': 4, 'monthlymin': 0, 'monthlyday': 1,
+}" "$OMV_NEW_UUID" "$1"
+}
+
+# Archive names in a borg repo, one per line.
+borg_list() {
+    BORG_PASSPHRASE=${2:-} BORG_RELOCATED_REPO_ACCESS_IS_OK=yes \
+    BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK=yes \
+        borg list --short "$1" </dev/null 2>/dev/null
+}
+
+# Remove local borg cache/security state for a repo directory.
+forget_borg_repo() {
+    local id
+    id=$(borg config "$1" id 2>/dev/null </dev/null) || return 0
+    [ -n "$id" ] || return 0
+    rm -rf "/root/.cache/borg/$id" "/root/.config/borg/security/$id" \
+        "$HOME/.cache/borg/$id" "$HOME/.config/borg/security/$id"
+}
+
+# Unmount a borg FUSE mount left behind by a failed test and remove its dir.
+unmount_dir() {
+    if mountpoint -q "$1" 2>/dev/null; then
+        borg umount "$1" 2>/dev/null || fusermount -u "$1" 2>/dev/null \
+            || fusermount3 -u "$1" 2>/dev/null || umount -l "$1"
+    fi
+    rmdir "$1" 2>/dev/null || true
+}
+
 # ---------------------------------------------------------------------------
 # State
 # ---------------------------------------------------------------------------
@@ -98,6 +291,14 @@ BAD_UUID="00000000-0000-0000-0000-000000000000"
 # ---------------------------------------------------------------------------
 cleanup() {
     section "Cleanup"
+
+    # Undo everything registered with on_cleanup, newest first.
+    local cmd
+    while IFS= read -r cmd; do
+        [ -n "$cmd" ] && { eval "$cmd" &>/dev/null || true; }
+    done < <(tac "$CLEANUP_FILE")
+    rm -f "$CLEANUP_FILE"
+    rm -f /var/log/borgbackup/bgrpc*.log /var/log/borgbackup/compact-bgrpc*.log
 
     # Delete archive from DB (runs borg delete --glob-archives, safe no-op if
     # the repo dir is still present but has no matching archives).
@@ -122,6 +323,7 @@ cleanup() {
     # Remove temp borg repo directory
     if [ -n "$REPO_DIR" ] && [ -d "$REPO_DIR" ]; then
         info "Removing temp borg repo: $REPO_DIR"
+        forget_borg_repo "$REPO_DIR"
         rm -rf "$REPO_DIR" 2>/dev/null || true
     fi
 
@@ -133,6 +335,7 @@ cleanup() {
     # banner) once the deploy completes.
     info "Deploying pending config changes asynchronously (clears web UI banner)"
     nohup omv-salt deploy run --quiet --append-dirty >/dev/null 2>&1 &
+    rm -f "$RESULTS_FILE"
 }
 trap cleanup EXIT
 
@@ -146,7 +349,11 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-for cmd in omv-rpc borg python3; do
+# Direct borg calls must see the same keys, cache and security dirs as
+# omv-engined and cron, which run as root with HOME=/root.
+export HOME=/root
+
+for cmd in omv-rpc borg python3 tar; do
     if command -v "$cmd" &>/dev/null; then
         _pass "command available: $cmd"
     else
@@ -232,6 +439,14 @@ if [ -n "$EV2_UUID" ] && [ "$EV2_UUID" != "$OMV_NEW_UUID" ]; then
 else
     _fail "setEnvVar (spaces) — no UUID returned"
 fi
+
+# Names are written unquoted into a file that bash sources, so anything that
+# is not a valid shell identifier must be rejected.
+for bad_name in '1BAD' 'A-B' 'A;id' 'A$(id)' 'A=B'; do
+    assert_rpc_fails "setEnvVar — invalid name rejected ($bad_name)" "BorgBackup" "setEnvVar" \
+        "$(pyjson "{'uuid': a[0], 'envname': a[1], 'envvalue': 'v', 'reporef': ''}" \
+            "$OMV_NEW_UUID" "$bad_name")"
+done
 
 # ---------------------------------------------------------------------------
 # CRUD — Serve (pure DB; no real ssh deploy is triggered by the RPC)
@@ -322,6 +537,32 @@ if [ -n "$SV_GEN_UUID" ] && [ "$SV_GEN_UUID" != "$OMV_NEW_UUID" ]; then
     # A stored private key must now be downloadable.
     assert_rpc "downloadServeKey (generated)" "BorgBackup" "downloadServeKey" \
         "{\"uuid\":\"$SV_GEN_UUID\"}" "filepath" >/dev/null
+
+    # Editing the client (the GUI never resends the private key) must keep
+    # the generated private key while the public key is unchanged ...
+    SV_GEN_PUBKEY=$(rpc "BorgBackup" "getServe" "{\"uuid\":\"$SV_GEN_UUID\"}" \
+        2>/dev/null | jget publickey)
+    sv_edit_params() {
+        pyjson "{
+    'uuid': a[0], 'name': 'bg_rpc_serve_gen', 'username': 'root',
+    'sharedfolderref': a[1], 'publickey': a[2], 'privatekey': '',
+    'appendonly': True, 'storquota': '',
+}" "$SV_GEN_UUID" "$SV_SFREF" "$1"
+    }
+    assert_rpc "setServe (edit, same public key)" "BorgBackup" "setServe" \
+        "$(sv_edit_params "$SV_GEN_PUBKEY")" >/dev/null
+    assert_rpc "downloadServeKey — kept after edit with same public key" \
+        "BorgBackup" "downloadServeKey" "{\"uuid\":\"$SV_GEN_UUID\"}" "filepath" >/dev/null
+
+    # ... but drop it once a different public key is pasted in, because it
+    # no longer matches anything in authorized_keys.
+    SV_OTHER_PUBKEY=$(rpc "BorgBackup" "generateServeKey" '{"comment":"bg-rpc-other"}' \
+        2>/dev/null | jget publickey)
+    assert_rpc "setServe (edit, new public key)" "BorgBackup" "setServe" \
+        "$(sv_edit_params "$SV_OTHER_PUBKEY")" >/dev/null
+    assert_rpc_fails "downloadServeKey — stale private key dropped after key change" \
+        "BorgBackup" "downloadServeKey" "{\"uuid\":\"$SV_GEN_UUID\"}"
+
     rpc "BorgBackup" "deleteServe" "{\"uuid\":\"$SV_GEN_UUID\"}" &>/dev/null || true
 else
     _fail "setServe (auto-generate) — no UUID returned"
@@ -418,6 +659,24 @@ assert_rpc_fails "getCompact — unknown UUID" "BorgBackup" "getCompact" \
     "{\"uuid\":\"$BAD_UUID\"}"
 assert_rpc_fails "deleteCompact — unknown UUID" "BorgBackup" "deleteCompact" \
     "{\"uuid\":\"$BAD_UUID\"}"
+
+# getLog builds a shell command from its params, so they must be validated.
+GETLOG_MARKER="/tmp/bgrpctest-getlog-injected"
+rm -f "$GETLOG_MARKER"
+assert_bg_fails "getLog — shell metacharacters in command rejected" "BorgBackup" "getLog" \
+    "$(pyjson "{'uuid': a[0], 'command': 'x; touch ' + a[1] + ';', 'follow': False}" \
+        "$BAD_UUID" "$GETLOG_MARKER")"
+assert_bg_fails "getLog — non-UUID uuid rejected" "BorgBackup" "getLog" \
+    "$(pyjson "{'uuid': 'x; touch ' + a[0] + ';', 'command': 'extract', 'follow': False}" \
+        "$GETLOG_MARKER")"
+if [ -e "$GETLOG_MARKER" ]; then
+    _fail "getLog — injected command was executed"
+    rm -f "$GETLOG_MARKER"
+else
+    _pass "getLog — no injected command executed"
+fi
+assert_bg "getLog — valid params, no log yet" "BorgBackup" "getLog" \
+    "{\"uuid\":\"$BAD_UUID\",\"command\":\"extract\",\"follow\":false}"
 
 # ---------------------------------------------------------------------------
 # Integration — initialise a local borg repo and register it via RPC
@@ -534,7 +793,7 @@ else
         _fail "getArchiveLog — empty or errored response"
     fi
 
-    # deleteArchive — runs 'borg delete --glob-archives "bgrpctest*" REPO'.
+    # deleteArchive — runs 'borg delete --glob-archives "bgrpctest-<date>*" REPO'.
     # The fresh repo has no matching archives so borg exits 0 (safe no-op).
     SAVED_ARCHIVE_UUID="$ARCHIVE_UUID"
     assert_rpc "deleteArchive" "BorgBackup" "deleteArchive" \
@@ -630,19 +889,511 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# Integration — repoCommand (background, non-destructive)
+# Integration — createArchive and archive name matching
+# ---------------------------------------------------------------------------
+section "Integration — createArchive and archive name matching"
+
+SRC_BASE=$(mktemp -d)
+on_cleanup rm -rf "$SRC_BASE"
+SRC_DIR="$SRC_BASE/src"
+mkdir -p "$SRC_DIR/sub"
+echo "bgrpctest-content" >"$SRC_DIR/file1.txt"
+echo "bgrpctest-sub" >"$SRC_DIR/sub/file2.txt"
+
+# Three configs whose names share a prefix. Operations on one config must
+# never touch the archives of the others.
+ARCH_A=$(create_obj "setArchive (bgrpcarch)" setArchive deleteArchive \
+    "$(archive_params bgrpcarch "$REPO_UUID" "$SRC_DIR")") || true
+ARCH_X=$(create_obj "setArchive (bgrpcarchx)" setArchive deleteArchive \
+    "$(archive_params bgrpcarchx "$REPO_UUID" "$SRC_DIR")") || true
+ARCH_OLD=$(create_obj "setArchive (bgrpcarch-old)" setArchive deleteArchive \
+    "$(archive_params bgrpcarch-old "$REPO_UUID" "$SRC_DIR")") || true
+
+if [ -n "$ARCH_A" ] && [ -n "$ARCH_X" ] && [ -n "$ARCH_OLD" ]; then
+    assert_bg "createArchive (dry run)" "BorgBackup" "createArchive" \
+        "{\"uuid\":\"$ARCH_A\",\"dryrun\":true,\"progress\":false}"
+    if [ -z "$(borg_list "$REPO_DIR")" ]; then
+        _pass "createArchive (dry run) — no archive created"
+    else
+        _fail "createArchive (dry run) — an archive was created"
+    fi
+
+    for pair in "bgrpcarch:$ARCH_A" "bgrpcarchx:$ARCH_X" "bgrpcarch-old:$ARCH_OLD"; do
+        assert_bg "createArchive (${pair%%:*})" "BorgBackup" "createArchive" \
+            "{\"uuid\":\"${pair#*:}\",\"dryrun\":false,\"progress\":false}" "This archive:"
+    done
+
+    ARCH_NAMES=$(borg_list "$REPO_DIR")
+    for n in bgrpcarch bgrpcarchx bgrpcarch-old; do
+        if grep -qE "^${n}-[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{2}-[0-9]{2}-[0-9]{2}$" <<<"$ARCH_NAMES"; then
+            _pass "createArchive — archive named $n-<timestamp> exists"
+        else
+            _fail "createArchive — no $n-<timestamp> archive" "$ARCH_NAMES"
+        fi
+    done
+
+    ENUM_COUNT=$(rpc "BorgBackup" "enumerateArchives" "{\"uuid\":\"$REPO_UUID\"}" 2>/dev/null \
+        | python3 -c "import sys,json; print(len(json.load(sys.stdin)))" 2>/dev/null || echo "error")
+    if [ "$ENUM_COUNT" = "3" ]; then
+        _pass "enumerateArchives — 3 archives listed"
+    else
+        _fail "enumerateArchives — expected 3 archives, got $ENUM_COUNT"
+    fi
+
+    if assert_bg "archiveCommand info (bgrpcarch)" "BorgBackup" "archiveCommand" \
+        "{\"uuid\":\"$ARCH_A\",\"command\":\"info\"}" "Archive name: bgrpcarch-[0-9]"; then
+        if grep -qE "Archive name: (bgrpcarchx|bgrpcarch-old)-" <<<"$BG_OUTPUT"; then
+            _fail "archiveCommand info — includes archives of other configs"
+        else
+            _pass "archiveCommand info — only this config's archives"
+        fi
+    fi
+
+    assert_rpc "getArchiveLog — contains the run's stats" "BorgBackup" "getArchiveLog" \
+        '{"name":"bgrpcarch"}' "This archive:" >/dev/null
+
+    assert_rpc "deleteArchive (bgrpcarch)" "BorgBackup" "deleteArchive" \
+        "{\"uuid\":\"$ARCH_A\"}" >/dev/null
+    ARCH_NAMES=$(borg_list "$REPO_DIR")
+    if grep -qE "^bgrpcarch-[0-9]" <<<"$ARCH_NAMES"; then
+        _fail "deleteArchive — bgrpcarch archive still present"
+    else
+        _pass "deleteArchive — bgrpcarch archives removed"
+    fi
+    if grep -q "^bgrpcarchx-" <<<"$ARCH_NAMES" && grep -q "^bgrpcarch-old-" <<<"$ARCH_NAMES"; then
+        _pass "deleteArchive — archives of bgrpcarchx and bgrpcarch-old kept"
+    else
+        _fail "deleteArchive — deleted archives of other configs" "$ARCH_NAMES"
+    fi
+else
+    _fail "createArchive — could not create the archive configs"
+fi
+
+# ---------------------------------------------------------------------------
+# Integration — repoCommand (run to completion, non-destructive)
 # ---------------------------------------------------------------------------
 section "Integration — repoCommand"
 
-assert_rpc "repoCommand info — background job dispatched" "BorgBackup" "repoCommand" \
-    "{\"uuid\":\"$REPO_UUID\",\"command\":\"info\"}" >/dev/null
+assert_bg "repoCommand info" "BorgBackup" "repoCommand" \
+    "{\"uuid\":\"$REPO_UUID\",\"command\":\"info\"}" "Repository ID"
+assert_bg "repoCommand list" "BorgBackup" "repoCommand" \
+    "{\"uuid\":\"$REPO_UUID\",\"command\":\"list\"}" "bgrpcarchx-"
+for check in repo archives all verify compact; do
+    assert_bg "repoCommand $check" "BorgBackup" "repoCommand" \
+        "{\"uuid\":\"$REPO_UUID\",\"command\":\"$check\"}"
+done
 
-assert_rpc "repoCommand list — background job dispatched" "BorgBackup" "repoCommand" \
-    "{\"uuid\":\"$REPO_UUID\",\"command\":\"list\"}" >/dev/null
+# ---------------------------------------------------------------------------
+# Integration — encrypted repo: passphrase masking, keyfile, passphrase change
+# ---------------------------------------------------------------------------
+section "Integration — encrypted repo"
 
-assert_rpc "repoCommand repo (check --repository-only) — dispatched" \
-    "BorgBackup" "repoCommand" \
-    "{\"uuid\":\"$REPO_UUID\",\"command\":\"repo\"}" >/dev/null
+# Passphrases with quotes, backslashes and $() must survive every layer and
+# must never show up in task output or logs. The bgrpcSecret markers contain
+# no shell metacharacters, so they are found even inside a quoted command.
+PASS1="bgrpcSecret1'q\\t\$(id)"
+PASS2="bgrpcSecret2 q\\x41'\$HOME"
+ENC_BASE=$(mktemp -d)
+on_cleanup rm -rf "$ENC_BASE"
+ENC_DIR="$ENC_BASE/enc repo"   # space in the path on purpose
+on_cleanup forget_borg_repo "$ENC_DIR"
+ENC_UUID=$(create_obj "setRepo (init, keyfile encryption, path with space)" \
+    setRepo deleteRepo "$(repo_params bgrpcenc remote '' "$ENC_DIR" "$PASS1" true false)") || true
+
+if [ -n "$ENC_UUID" ]; then
+    ENC_KEYFILE=$(BORG_PASSPHRASE="$PASS1" borg info --json "$ENC_DIR" </dev/null 2>/dev/null \
+        | python3 -c "import sys,json; print(json.load(sys.stdin)['encryption'].get('keyfile',''))" \
+        2>/dev/null || echo "")
+    [ -n "$ENC_KEYFILE" ] && on_cleanup rm -f "$ENC_KEYFILE"
+
+    ENC_ARCH=$(create_obj "setArchive (bgrpcenc)" setArchive deleteArchive \
+        "$(archive_params bgrpcenc "$ENC_UUID" "$SRC_DIR")") || true
+    if [ -n "$ENC_ARCH" ]; then
+        assert_bg "createArchive (special-char passphrase)" "BorgBackup" "createArchive" \
+            "{\"uuid\":\"$ENC_ARCH\",\"dryrun\":false,\"progress\":false}" "This archive:"
+        if grep -q "^Command: .*BORG_PASSPHRASE=" <<<"$BG_OUTPUT" \
+           && ! grep -qF "bgrpcSecret1" <<<"$BG_OUTPUT"; then
+            _pass "createArchive — passphrase masked in task output"
+        else
+            _fail "createArchive — passphrase shown in task output (or no Command line)"
+        fi
+        if grep -qF "bgrpcSecret1" /var/log/borgbackup/bgrpcenc.log 2>/dev/null; then
+            _fail "createArchive — passphrase written to /var/log/borgbackup/bgrpcenc.log"
+        else
+            _pass "createArchive — passphrase not in archive log"
+        fi
+
+        assert_bg "archiveCommand info (encrypted repo)" "BorgBackup" "archiveCommand" \
+            "{\"uuid\":\"$ENC_ARCH\",\"command\":\"info\"}" "Archive name: bgrpcenc-"
+        if grep -qF "bgrpcSecret1" <<<"$BG_OUTPUT"; then
+            _fail "archiveCommand — passphrase shown in task output"
+        else
+            _pass "archiveCommand — passphrase masked in task output"
+        fi
+    fi
+
+    ENC_COMPACT=$(create_obj "setCompact (encrypted repo)" setCompact deleteCompact \
+        "$(compact_params "$ENC_UUID")") || true
+    if [ -n "$ENC_COMPACT" ]; then
+        assert_bg "runCompact (encrypted repo)" "BorgBackup" "runCompact" \
+            "{\"uuid\":\"$ENC_COMPACT\"}"
+        if grep -qF "bgrpcSecret1" <<<"$BG_OUTPUT"; then
+            _fail "runCompact — passphrase shown in task output"
+        else
+            _pass "runCompact — passphrase masked in task output"
+        fi
+    fi
+
+    KEY_OUT=$(assert_rpc "downloadKey" "BorgBackup" "downloadKey" \
+        "{\"uuid\":\"$ENC_UUID\"}" "filepath") || true
+    KEY_TMP=$(jget filepath <<<"$KEY_OUT")
+    if [ -n "$KEY_TMP" ] && grep -q "^BORG_KEY " "$KEY_TMP" 2>/dev/null; then
+        _pass "downloadKey — file contains the borg key"
+    else
+        _fail "downloadKey — no borg key in returned file ($KEY_TMP)"
+    fi
+    [ -n "$KEY_TMP" ] && rm -f "$KEY_TMP"
+
+    assert_rpc "changePassphrase (path with space, special chars)" "BorgBackup" \
+        "changePassphrase" "$(pyjson "{'uuid': a[0], 'passphrase': a[1]}" "$ENC_UUID" "$PASS2")" \
+        >/dev/null
+    if BORG_PASSPHRASE="$PASS2" borg info "$ENC_DIR" </dev/null &>/dev/null; then
+        _pass "changePassphrase — borg accepts the new passphrase"
+    else
+        _fail "changePassphrase — borg rejects the new passphrase"
+    fi
+    if BORG_PASSPHRASE="$PASS1" borg info "$ENC_DIR" </dev/null &>/dev/null; then
+        _fail "changePassphrase — old passphrase still accepted"
+    else
+        _pass "changePassphrase — old passphrase rejected"
+    fi
+    STORED_PASS=$(rpc "BorgBackup" "getRepo" "{\"uuid\":\"$ENC_UUID\"}" 2>/dev/null \
+        | jget passphrase)
+    if [ "$STORED_PASS" = "$PASS2" ]; then
+        _pass "changePassphrase — new passphrase stored"
+    else
+        _fail "changePassphrase — stored passphrase not updated"
+    fi
+fi
+
+# ---------------------------------------------------------------------------
+# Integration — shared folder operations: export, extract, mount, quota
+# ---------------------------------------------------------------------------
+section "Integration — shared folder operations"
+
+SF_MNTENT=$(rpc "ShareMgmt" "enumerateSharedFolders" 2>/dev/null | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+print(d[0]['mntentref'] if d else '')" 2>/dev/null || echo "")
+SF_RAND=$(python3 -c "import secrets; print(secrets.token_hex(3))")
+
+# Create a temporary shared folder on the same filesystem as an existing one
+# and print its UUID. It is deleted (with its content) on exit.
+new_sharedfolder() {
+    local name=$1 out uuid
+    out=$(assert_rpc "ShareMgmt set ($name)" "ShareMgmt" "set" \
+        "$(pyjson "{
+    'uuid': a[0], 'name': a[1], 'reldirpath': a[1] + '/',
+    'comment': 'openmediavault-borgbackup test', 'mntentref': a[2], 'mode': '755',
+}" "$OMV_NEW_UUID" "$name" "$SF_MNTENT")") || return 1
+    uuid=$(jget uuid <<<"$out")
+    if [ -z "$uuid" ] || [ "$uuid" = "$OMV_NEW_UUID" ]; then
+        _fail "ShareMgmt set ($name) — no UUID returned"
+        return 1
+    fi
+    on_cleanup rpc ShareMgmt delete "{\"uuid\":\"$uuid\",\"recursive\":true}"
+    echo "$uuid"
+}
+
+sf_path() {
+    rpc "ShareMgmt" "getPath" "{\"uuid\":\"$1\"}" 2>/dev/null \
+        | python3 -c "import sys,json; print(json.load(sys.stdin).rstrip('/'))" 2>/dev/null
+}
+
+if [ -z "$SF_MNTENT" ]; then
+    info "No shared folder exists — skipping export/extract/mount/quota tests"
+else
+    SF_DATA=$(new_sharedfolder "bgrpctest_data_$SF_RAND") || true
+    SF_DATA_PATH=$( [ -n "$SF_DATA" ] && sf_path "$SF_DATA" )
+fi
+
+if [ -n "${SF_DATA_PATH:-}" ] && [ -d "$SF_DATA_PATH" ]; then
+    on_cleanup rm -f "/tmp/omv-borg-export-$REPO_UUID.log" "/tmp/omv-borg-extract-$REPO_UUID.log"
+    EXPORT_ARCHIVE=$(borg_list "$REPO_DIR" | grep -m1 '^bgrpcarchx-')
+
+    # --- export -------------------------------------------------------------
+    assert_bg "exportArchive" "BorgBackup" "exportArchive" \
+        "$(pyjson "{'uuid': a[0], 'archive': a[1], 'sharedfolderref': a[2]}" \
+            "$REPO_UUID" "$EXPORT_ARCHIVE" "$SF_DATA")"
+    if tar tzf "$SF_DATA_PATH/$EXPORT_ARCHIVE.tar.gz" 2>/dev/null | grep -q "src/file1.txt$"; then
+        _pass "exportArchive — tar.gz contains the backed-up files"
+    else
+        _fail "exportArchive — $SF_DATA_PATH/$EXPORT_ARCHIVE.tar.gz missing or incomplete"
+    fi
+    assert_bg "getLog (export)" "BorgBackup" "getLog" \
+        "{\"uuid\":\"$REPO_UUID\",\"command\":\"export\",\"follow\":false}"
+
+    # --- extract ------------------------------------------------------------
+    extract_params() {
+        pyjson "{'uuid': a[0], 'archive': a[1], 'original': a[2], 'sharedfolderref': a[3]}" \
+            "$REPO_UUID" "$EXPORT_ARCHIVE" "$1" "$2"
+    }
+    assert_bg "extractArchive (to shared folder)" "BorgBackup" "extractArchive" \
+        "$(extract_params false "$SF_DATA")"
+    if [ "$(cat "$SF_DATA_PATH/${SRC_DIR#/}/file1.txt" 2>/dev/null)" = "bgrpctest-content" ]; then
+        _pass "extractArchive — files extracted into the shared folder"
+    else
+        _fail "extractArchive — $SF_DATA_PATH/${SRC_DIR#/}/file1.txt missing"
+    fi
+
+    # Without a shared folder and without "original location" it must refuse
+    # rather than extract into /. Remove a source file first so an extraction
+    # into / (which restores the original paths) would be detectable.
+    rm -f "$SRC_DIR/file1.txt"
+    assert_bg_fails "extractArchive — no shared folder and not original location rejected" \
+        "BorgBackup" "extractArchive" "$(extract_params false "")"
+    if [ -e "$SRC_DIR/file1.txt" ]; then
+        _fail "extractArchive — files were extracted into /"
+    else
+        _pass "extractArchive — nothing extracted into /"
+    fi
+
+    assert_bg "extractArchive (original location)" "BorgBackup" "extractArchive" \
+        "$(extract_params true "")"
+    if [ "$(cat "$SRC_DIR/file1.txt" 2>/dev/null)" = "bgrpctest-content" ]; then
+        _pass "extractArchive — original file restored"
+    else
+        _fail "extractArchive — $SRC_DIR/file1.txt not restored"
+    fi
+    assert_bg "getLog (extract)" "BorgBackup" "getLog" \
+        "{\"uuid\":\"$REPO_UUID\",\"command\":\"extract\",\"follow\":false}"
+
+    # --- mount / unmount ----------------------------------------------------
+    # xbgrpctest ends with the main repo's name bgrpctest; mount status and
+    # unmount must not confuse the two.
+    XR_DIR=$(mktemp -d)
+    on_cleanup rm -rf "$XR_DIR"
+    on_cleanup forget_borg_repo "$XR_DIR"
+    XR_UUID=$(create_obj "setRepo (xbgrpctest)" setRepo deleteRepo \
+        "$(repo_params xbgrpctest remote '' "$XR_DIR" '' false false)") || true
+    XR_MNT="$SF_DATA_PATH/xbgrpctest"
+    on_cleanup unmount_dir "$XR_MNT"
+
+    repo_mounted() {
+        rpc "BorgBackup" "getRepoList" "$LIST_PARAMS" 2>/dev/null | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+rows = d.get('data', []) if isinstance(d, dict) else d
+print(next((str(r.get('mounted')).lower() for r in rows if r.get('name') == sys.argv[1]),
+           'missing'))" "$1" 2>/dev/null || echo "error"
+    }
+
+    MOUNT_OUT=""
+    MOUNT_EC=0
+    if [ -n "$XR_UUID" ]; then
+        MOUNT_OUT=$(rpc "BorgBackup" "mountRepo" \
+            "{\"uuid\":\"$XR_UUID\",\"sharedfolderref\":\"$SF_DATA\",\"versions\":false}" 2>&1) \
+            || MOUNT_EC=$?
+    fi
+    if [ -z "$XR_UUID" ]; then
+        _fail "mountRepo — could not register xbgrpctest"
+    elif [ $MOUNT_EC -ne 0 ] && grep -qi "fuse" <<<"$MOUNT_OUT"; then
+        info "borg mount not available (no FUSE support) — skipping mount tests"
+    elif [ $MOUNT_EC -ne 0 ]; then
+        _fail "mountRepo (xbgrpctest)" "$(echo "$MOUNT_OUT" | tail -3)"
+    else
+        _pass "mountRepo (xbgrpctest)"
+        if mountpoint -q "$XR_MNT"; then
+            _pass "mountRepo — mounted at $XR_MNT"
+        else
+            _fail "mountRepo — nothing mounted at $XR_MNT"
+        fi
+        [ "$(repo_mounted xbgrpctest)" = "true" ] \
+            && _pass "getRepoList — xbgrpctest shown as mounted" \
+            || _fail "getRepoList — xbgrpctest not shown as mounted"
+        [ "$(repo_mounted bgrpctest)" = "false" ] \
+            && _pass "getRepoList — bgrpctest not shown as mounted" \
+            || _fail "getRepoList — bgrpctest shown as mounted (matched xbgrpctest)"
+
+        assert_rpc_fails "unmountRepo (bgrpctest) — not mounted, rejected" "BorgBackup" \
+            "unmountRepo" "{\"uuid\":\"$REPO_UUID\"}"
+        if mountpoint -q "$XR_MNT"; then
+            _pass "unmountRepo (bgrpctest) — xbgrpctest left mounted"
+        else
+            _fail "unmountRepo (bgrpctest) — unmounted xbgrpctest instead"
+        fi
+
+        assert_rpc "unmountRepo (xbgrpctest)" "BorgBackup" "unmountRepo" \
+            "{\"uuid\":\"$XR_UUID\"}" >/dev/null
+        if ! mountpoint -q "$XR_MNT" && [ ! -d "$XR_MNT" ]; then
+            _pass "unmountRepo — unmounted and mount directory removed"
+        else
+            _fail "unmountRepo — $XR_MNT still mounted or present"
+        fi
+    fi
+
+    # --- local repo: quota, deleteRepo with files ---------------------------
+    SF_REPO=$(new_sharedfolder "bgrpctest_repo_$SF_RAND") || true
+    SF_REPO_PATH=$( [ -n "$SF_REPO" ] && sf_path "$SF_REPO" )
+    if [ -n "$SF_REPO_PATH" ] && [ -d "$SF_REPO_PATH" ]; then
+        on_cleanup forget_borg_repo "$SF_REPO_PATH"
+        LR_UUID=$(create_obj "setRepo (local, storage quota 1G)" setRepo deleteRepo \
+            "$(repo_params bgrpclocal local "$SF_REPO" '' '' false false 1G)") || true
+    fi
+    if [ -n "${LR_UUID:-}" ]; then
+        assert_rpc "changeQuota (1G → 2G)" "BorgBackup" "changeQuota" \
+            "$(pyjson "{'uuid': a[0], 'newquota': '2G'}" "$LR_UUID")" >/dev/null
+        LR_QUOTA=$(borg config "$SF_REPO_PATH" storage_quota </dev/null 2>/dev/null || echo "")
+        case "$LR_QUOTA" in
+            2000000000|2G) _pass "changeQuota — repo config updated ($LR_QUOTA)" ;;
+            *) _fail "changeQuota — repo storage_quota is '$LR_QUOTA'" ;;
+        esac
+        assert_rpc "changeQuota — new quota stored" "BorgBackup" "getRepo" \
+            "{\"uuid\":\"$LR_UUID\"}" '"storquota":"2G"' >/dev/null
+
+        # Removing a repo must also remove the compact schedules and env vars
+        # that reference it, so they are not left scheduled/orphaned.
+        LR_COMPACT=$(create_obj "setCompact (local repo)" setCompact deleteCompact \
+            "$(compact_params "$LR_UUID")") || true
+        LR_ENV=$(create_obj "setEnvVar (local repo)" setEnvVar deleteEnvVar \
+            "$(pyjson "{'uuid': a[0], 'envname': 'BG_RPC_LOCAL', 'envvalue': 'x', 'reporef': a[1]}" \
+                "$OMV_NEW_UUID" "$LR_UUID")") || true
+
+        assert_rpc "deleteRepo (local, deleteFiles=true)" "BorgBackup" "deleteRepo" \
+            "{\"uuid\":\"$LR_UUID\",\"deleteFiles\":true}" >/dev/null
+        if [ -d "$SF_REPO_PATH" ] && [ ! -e "$SF_REPO_PATH/config" ]; then
+            _pass "deleteRepo — repo files removed, shared folder directory kept"
+        else
+            _fail "deleteRepo — repo files still present or directory missing"
+        fi
+        [ -n "$LR_COMPACT" ] && assert_rpc_fails "deleteRepo — compact schedule removed" \
+            "BorgBackup" "getCompact" "{\"uuid\":\"$LR_COMPACT\"}"
+        [ -n "$LR_ENV" ] && assert_rpc_fails "deleteRepo — env var removed" \
+            "BorgBackup" "getEnvVar" "{\"uuid\":\"$LR_ENV\"}"
+    fi
+elif [ -n "$SF_MNTENT" ]; then
+    _fail "Could not create a temporary shared folder"
+fi
+
+# ---------------------------------------------------------------------------
+# Integration — salt deploy: generated scheduled backup scripts
+# ---------------------------------------------------------------------------
+section "Integration — salt deploy (scheduled scripts)"
+
+if ! command -v omv-salt &>/dev/null; then
+    info "omv-salt not available — skipping scheduled script tests"
+elif [ -z "${ENC_UUID:-}" ]; then
+    _fail "Scheduled script tests — encrypted repo missing"
+else
+    # bgrpcsalt runs from cron with email on (output piped through tee) on
+    # the encrypted repo (special-char passphrase, path with a space).
+    SALT_ARCH=$(create_obj "setArchive (bgrpcsalt, email on)" setArchive deleteArchive \
+        "$(archive_params bgrpcsalt "$ENC_UUID" "$SRC_DIR" true)") || true
+    # Two same-day archives of bgrpcsalt-old: with a plain 'bgrpcsalt-*' prune
+    # glob, bgrpcsalt's keep-daily rule would prune one of them.
+    SALT_OLD=$(create_obj "setArchive (bgrpcsalt-old)" setArchive deleteArchive \
+        "$(archive_params bgrpcsalt-old "$ENC_UUID" "$SRC_DIR")") || true
+    if [ -n "$SALT_OLD" ]; then
+        for run in 1 2; do
+            assert_bg "createArchive (bgrpcsalt-old #$run)" "BorgBackup" "createArchive" \
+                "{\"uuid\":\"$SALT_OLD\",\"dryrun\":false,\"progress\":false}" "This archive:"
+            sleep 1   # archive names have one-second resolution
+        done
+    fi
+
+    # Env var values with quotes, $() and backslashes must reach borg as-is.
+    QUOTE_VALUE="it's \"q\" \$(id) \`id\` \\t"
+    create_obj "setEnvVar (value with quotes and \$())" setEnvVar deleteEnvVar \
+        "$(pyjson "{'uuid': a[0], 'envname': 'BG_RPC_QUOTE', 'envvalue': a[1], 'reporef': a[2]}" \
+            "$OMV_NEW_UUID" "$QUOTE_VALUE" "$ENC_UUID")" >/dev/null || true
+    # Extra create args from an env var must be honoured by GUI runs too.
+    create_obj "setEnvVar (BORG_EXTRA_CREATE_ARGS)" setEnvVar deleteEnvVar \
+        "$(pyjson "{'uuid': a[0], 'envname': 'BORG_EXTRA_CREATE_ARGS',
+                    'envvalue': '--exclude-if-present .bgrpcskip', 'reporef': a[1]}" \
+            "$OMV_NEW_UUID" "$REPO_UUID")" >/dev/null || true
+
+    SALT_LOG=$(mktemp)
+    if omv-salt deploy run borgbackup &>"$SALT_LOG"; then
+        _pass "omv-salt deploy run borgbackup — applied (archives, env vars)"
+    else
+        _fail "omv-salt deploy run borgbackup — failed" "$(tail -5 "$SALT_LOG")"
+    fi
+    rm -f "$SALT_LOG"
+
+    SALT_SCRIPT="/var/lib/openmediavault/borgbackup/borgbackup-$SALT_ARCH"
+    if grep -q "root  $SALT_SCRIPT$" /etc/cron.d/openmediavault-borgbackup 2>/dev/null; then
+        _pass "cron — bgrpcsalt scheduled"
+    else
+        _fail "cron — bgrpcsalt not scheduled"
+    fi
+
+    if [ -x "$SALT_SCRIPT" ]; then
+        SALT_RC=0
+        bash "$SALT_SCRIPT" &>/dev/null </dev/null || SALT_RC=$?
+        if [ $SALT_RC -eq 0 ]; then
+            _pass "scheduled script — succeeds with special-char passphrase and path with space"
+        else
+            _fail "scheduled script — exit $SALT_RC" \
+                "$(tail -3 /var/log/borgbackup/bgrpcsalt.log 2>/dev/null)"
+        fi
+        SALT_NAMES=$(borg_list "$ENC_DIR" "$PASS2")
+        if [ "$(grep -cE '^bgrpcsalt-[0-9]' <<<"$SALT_NAMES")" = "1" ]; then
+            _pass "scheduled script — bgrpcsalt archive created"
+        else
+            _fail "scheduled script — bgrpcsalt archive missing" "$SALT_NAMES"
+        fi
+        if [ "$(grep -c '^bgrpcsalt-old-' <<<"$SALT_NAMES")" = "2" ]; then
+            _pass "scheduled script — prune left bgrpcsalt-old archives alone"
+        else
+            _fail "scheduled script — prune touched bgrpcsalt-old archives" "$SALT_NAMES"
+        fi
+
+        # With the repo gone the script must fail, even though its output is
+        # piped through tee.
+        mv "$ENC_DIR" "$ENC_DIR.moved"
+        SALT_RC=0
+        bash "$SALT_SCRIPT" &>/dev/null </dev/null || SALT_RC=$?
+        mv "$ENC_DIR.moved" "$ENC_DIR"
+        if [ $SALT_RC -ne 0 ]; then
+            _pass "scheduled script — failing backup exits non-zero ($SALT_RC)"
+        else
+            _fail "scheduled script — failing backup exited 0"
+        fi
+        if tail -5 /var/log/borgbackup/bgrpcsalt.log 2>/dev/null \
+            | grep -q "Borg finished with errors"; then
+            _pass "scheduled script — failure logged as an error"
+        else
+            _fail "scheduled script — failure not logged as an error"
+        fi
+    else
+        _fail "scheduled script — $SALT_SCRIPT not generated"
+    fi
+
+    ENV_FILE="/etc/borgbackup/borg-envvar-$ENC_UUID"
+    ENV_GOT=$(bash -c 'set -a; . "$1"; printf "%s" "$BG_RPC_QUOTE"' _ "$ENV_FILE" 2>/dev/null)
+    if [ "$ENV_GOT" = "$QUOTE_VALUE" ]; then
+        _pass "env var file — value with quotes and \$() read back unchanged"
+    else
+        _fail "env var file — value changed" "expected [$QUOTE_VALUE] got [$ENV_GOT]"
+    fi
+
+    if [ -n "${ARCH_X:-}" ]; then
+        mkdir -p "$SRC_DIR/skipme"
+        touch "$SRC_DIR/skipme/.bgrpcskip"
+        echo "secret" >"$SRC_DIR/skipme/secret.txt"
+        assert_bg "createArchive with BORG_EXTRA_CREATE_ARGS" "BorgBackup" "createArchive" \
+            "{\"uuid\":\"$ARCH_X\",\"dryrun\":false,\"progress\":false}" "This archive:"
+        LATEST_X=$(borg_list "$REPO_DIR" | grep '^bgrpcarchx-' | sort | tail -1)
+        X_FILES=$(BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK=yes \
+            borg list --short "$REPO_DIR::$LATEST_X" </dev/null 2>/dev/null)
+        if grep -q "sub/file2.txt$" <<<"$X_FILES" && ! grep -q "skipme/secret.txt$" <<<"$X_FILES"; then
+            _pass "createArchive — BORG_EXTRA_CREATE_ARGS applied (--exclude-if-present)"
+        else
+            _fail "createArchive — BORG_EXTRA_CREATE_ARGS not applied"
+        fi
+        rm -rf "$SRC_DIR/skipme"
+    fi
+fi
 
 # ---------------------------------------------------------------------------
 # Integration — setRepo duplicate-name rejection
@@ -674,12 +1425,48 @@ rm -rf "$REPO2_DIR" 2>/dev/null || true
 section "Integration — deleteRepo"
 
 SAVED_REPO_UUID="$REPO_UUID"
+
+# An enabled compact schedule and an env var for the repo: both must go away
+# with the repo, and no compact script or cron line may be left behind.
+MAIN_COMPACT=$(create_obj "setCompact (daily, main repo)" setCompact deleteCompact \
+    "$(compact_params "$REPO_UUID" | python3 -c "
+import sys, json
+p = json.load(sys.stdin)
+p['dailyenable'] = True
+print(json.dumps(p))")") || true
+MAIN_ENV=$(create_obj "setEnvVar (main repo)" setEnvVar deleteEnvVar \
+    "$(pyjson "{'uuid': a[0], 'envname': 'BG_RPC_MAIN', 'envvalue': 'x', 'reporef': a[1]}" \
+        "$OMV_NEW_UUID" "$REPO_UUID")") || true
+
 assert_rpc "deleteRepo (deleteFiles=false)" "BorgBackup" "deleteRepo" \
     "{\"uuid\":\"$REPO_UUID\",\"deleteFiles\":false}" >/dev/null
 REPO_UUID=""
 
 assert_rpc_fails "getRepo after delete" "BorgBackup" "getRepo" \
     "{\"uuid\":\"$SAVED_REPO_UUID\"}"
+[ -n "$MAIN_COMPACT" ] && assert_rpc_fails "deleteRepo — compact schedule removed" \
+    "BorgBackup" "getCompact" "{\"uuid\":\"$MAIN_COMPACT\"}"
+[ -n "$MAIN_ENV" ] && assert_rpc_fails "deleteRepo — env var removed" \
+    "BorgBackup" "getEnvVar" "{\"uuid\":\"$MAIN_ENV\"}"
+for a in "${ARCH_X:-}" "${ARCH_OLD:-}"; do
+    [ -n "$a" ] && assert_rpc_fails "deleteRepo — archive config $a removed" \
+        "BorgBackup" "getArchive" "{\"uuid\":\"$a\"}"
+done
+
+if command -v omv-salt &>/dev/null && [ -n "$MAIN_COMPACT" ]; then
+    omv-salt deploy run borgbackup &>/dev/null || true
+    if [ -e "/var/lib/openmediavault/borgbackup/borgcompact-$MAIN_COMPACT" ] \
+       || grep -q "borgcompact-$MAIN_COMPACT" /etc/cron.d/openmediavault-borgbackup 2>/dev/null; then
+        _fail "deleteRepo — compact script or cron line left behind after deploy"
+    else
+        _pass "deleteRepo — no compact script or cron line left after deploy"
+    fi
+    if [ -e "/etc/borgbackup/borg-envvar-$SAVED_REPO_UUID" ]; then
+        _fail "deleteRepo — env var file left behind after deploy"
+    else
+        _pass "deleteRepo — env var file removed after deploy"
+    fi
+fi
 
 # Verify repo no longer appears in candidate list
 CANDIDATES=$(rpc "BorgBackup" "enumerateRepoCandidates" '{"creation":false}' \
@@ -699,15 +1486,18 @@ fi
 # Summary
 # ---------------------------------------------------------------------------
 section "Summary"
+PASS=$(grep -c '^PASS ' "$RESULTS_FILE")
+FAIL=$(grep -c '^FAIL ' "$RESULTS_FILE")
 TOTAL=$((PASS + FAIL))
 echo >&2
 echo -e "  Results: ${GREEN}${PASS} passed${NC}, ${RED}${FAIL} failed${NC} (${TOTAL} total)" >&2
-if [ ${#FAILED_TESTS[@]} -gt 0 ]; then
+if [ "$FAIL" -gt 0 ]; then
     echo -e "\n  ${RED}Failed tests:${NC}" >&2
-    for t in "${FAILED_TESTS[@]}"; do
+    while IFS= read -r t; do
         echo -e "    ${RED}✗${NC} $t" >&2
-    done
+    done < <(sed -n 's/^FAIL //p' "$RESULTS_FILE")
 fi
 echo >&2
+rm -f "$RESULTS_FILE"
 
-[ $FAIL -eq 0 ] && exit 0 || exit 1
+[ "$FAIL" -eq 0 ] && exit 0 || exit 1
