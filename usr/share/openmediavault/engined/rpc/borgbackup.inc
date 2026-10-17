@@ -115,9 +115,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $objectv->set('uri', gettext("n/a"));
             }
             // Add the new property 'mounted'.
-            $cmd = sprintf('grep -E "^borgfs.*%s.*fuse" /proc/mounts', $objectv->get('name'));
-            exec($cmd, $output, $return);
-            $objectv->add('mounted', 'boolean', ! $return);
+            $objectv->add('mounted', 'boolean',
+                $this->findRepoMount($objectv->get('name')) !== '');
             $archiveCount = 0;
             foreach ($archives as $archivek => $archivev) {
                 if ($archivev->get('reporef') == $objectv->get('uuid')) {
@@ -380,24 +379,14 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $db = \OMV\Config\Database::getInstance();
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
         $repoName = $repo->get('name');
-        $len = strlen($repoName);
         // get repo directory
-        $mounts = file_get_contents('/proc/mounts');
-        $lines = explode(PHP_EOL, $mounts);
-        $repoDir = '';
-        foreach ($lines as $line) {
-            $item = explode(' ', $line);
-            if ($item[0] === 'borgfs' && $item[2] == 'fuse' && substr($item[1], -$len) === $repoName) {
-                $repoDir = $item[1];
-                break;
-            }
-        }
+        $repoDir = $this->findRepoMount($repoName);
         // unmount repo
         if ($repoDir !== '') {
             $cmdArgs = [];
             $cmdArgs[] = $this->getProgram;
             $cmdArgs[] = 'umount';
-            $cmdArgs[] = $repoDir;
+            $cmdArgs[] = escapeshellarg($repoDir);
             $cmd = new \OMV\System\Process($cmdArgs);
             $cmd->setEnv('BORG_PASSPHRASE', escapeshellarg($repo->get('passphrase')), TRUE);
             $cmd->setEnv("BORG_EXIT_CODES", "modern");
@@ -411,8 +400,29 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 throw new \OMV\ExecException(gettext("Failed to remove ") . $repoDir);
             }
         } else {
-            throw new \OMV\ExecException(gettext("Failed to find ") . $repoDir);
+            throw new \OMV\ExecException(gettext("Failed to find ") . $repoName);
         }
+    }
+
+    private function findRepoMount($repoName): string
+    {
+        // Repos are mounted at <shared folder>/<repo name>. Repo names are
+        // unique, so match the mountpoint's last path component exactly.
+        $lines = @file('/proc/mounts', FILE_IGNORE_NEW_LINES);
+        foreach ((array)$lines as $line) {
+            $item = explode(' ', $line);
+            if (count($item) < 3 || $item[0] !== 'borgfs' ||
+                strpos($item[2], 'fuse') !== 0) {
+                continue;
+            }
+            // /proc/mounts escapes spaces etc. as octal, e.g. \040.
+            $mntDir = preg_replace_callback('/\\\\([0-7]{3})/',
+                function($m) { return chr(octdec($m[1])); }, $item[1]);
+            if (basename($mntDir) === $repoName) {
+                return $mntDir;
+            }
+        }
+        return '';
     }
 
     public function changePassphrase($params, $context)
@@ -437,12 +447,13 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         } else {
             $path = $repo->get('uri');
         }
-        $cmdArgs[] = $path;
+        $cmdArgs[] = escapeshellarg($path);
         $cmd = new \OMV\System\Process($cmdArgs);
         $cmd->setEnv("BORG_PASSPHRASE", escapeshellarg($repo->get('passphrase')), TRUE);
         $cmd->setEnv("BORG_NEW_PASSPHRASE", escapeshellarg($params['passphrase']), TRUE);
         $cmd->setEnv("BORG_EXIT_CODES", "modern");
         $cmd->setEnvFromFile($this->envFile . $params['uuid']);
+        $cmd->setRedirect2to1();
         $cmdLine = $cmd->getCommandLine();
         if (0 !== $this->exec($cmdLine, $output)) {
             throw new \OMV\ExecException($cmd, $output);
@@ -570,10 +581,20 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 throw new \OMV\ExecException($cmd, $output);
             }
         }
+        // Remove compact schedules and env vars that reference this repo,
+        // otherwise they are left orphaned and still scheduled.
+        foreach (['conf.service.borgbackup.compact',
+            'conf.service.borgbackup.envvar'] as $id) {
+            foreach ($db->get($id) as $ref) {
+                if ($ref->get('reporef') == $uuid) {
+                    $db->delete($ref);
+                }
+            }
+        }
         // Delete the configuration object.
         $db->delete($repo);
         // recreate the directory that was deleted
-        if ($repo->get('type') == 'local') {
+        if ($deleteFiles && $repo->get('type') == 'local') {
             mkdir($path, $perms);
             chown($path, $owner);
             chgrp($path, $group);
@@ -778,6 +799,23 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         return $object->getAssoc();
     }
 
+    private function archiveGlob($name): string
+    {
+        // Archives are named <name>-<date>..., so anchor on the date to
+        // avoid matching archives of other configs sharing the prefix
+        // (e.g. 'home' vs 'homeassistant' or 'home-old').
+        return $name . '-[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]*';
+    }
+
+    private function printableCmd(\OMV\System\Process $cmd): string
+    {
+        // Command line with secrets (e.g. BORG_PASSPHRASE) masked, for
+        // output that is shown in the GUI or written to log files.
+        $copy = clone $cmd;
+        $copy->obfuscateEnvs();
+        return $copy->getCommandLine();
+    }
+
     private function cleanArray($csvList): string
     {
         $list = str_replace(',', PHP_EOL, $csvList);
@@ -860,10 +898,14 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $envFilePath = $this->envFile . $archive->get('reporef');
                 if (file_exists($envFilePath)) {
                     $envContents = file_get_contents($envFilePath);
-                    if (preg_match('/^BORG_EXTRA_CREATE_ARGS="([^"]*)"/m', $envContents, $matches)) {
-                        foreach (preg_split('/\s+/', trim($matches[1])) as $arg) {
+                    if (preg_match("/^BORG_EXTRA_CREATE_ARGS='(.*)'\\s*$/m", $envContents, $matches)) {
+                        // Value is single-quoted with ' written as '\''.
+                        $extra = str_replace("'\\''", "'", $matches[1]);
+                        // Split on whitespace like the unquoted expansion
+                        // in the scheduled script does.
+                        foreach (preg_split('/\s+/', trim($extra)) as $arg) {
                             if ($arg !== '') {
-                                $cmdArgs[] = $arg;
+                                $cmdArgs[] = escapeshellarg($arg);
                             }
                         }
                     }
@@ -894,7 +936,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                         'set -o pipefail; %s | { head -c 134217728; cat >/dev/null; }',
                         $cmdLine
                     )));
-                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmd));
+                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $this->printableCmd($cmd)));
                 $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
                 if (0 !== $this->exec($cmdLine, $output, $bgOutputFilename)) {
                     throw new \OMV\ExecException($cmd, $output);
@@ -968,7 +1010,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmdArgs = [];
         $cmdArgs[] = $this->getProgram;
         $cmdArgs[] = 'delete';
-        $cmdArgs[] = sprintf('--glob-archives "%s*"', $archive->get('name'));
+        $cmdArgs[] = sprintf('--glob-archives %s',
+            escapeshellarg($this->archiveGlob($archive->get('name'))));
         if ($repo->get('type') == 'local') {
             $path = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
                 'uuid' => $repo->get('sharedfolderref')
@@ -1028,7 +1071,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 }
                 if ($params['command'] == 'info') {
                     $cmdArgs[] = sprintf('"%s"', $path);
-                    $cmdArgs[] = sprintf('--glob-archives "%s*"', $archive->get('name'));
+                    $cmdArgs[] = sprintf('--glob-archives %s',
+                        escapeshellarg($this->archiveGlob($archive->get('name'))));
                 } else {
                     $cmdArgs[] = sprintf('"%s::%s"', $path, $archive->get('name'));
                 }
@@ -1038,7 +1082,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $cmd->setEnvFromFile($this->envFile . $archive->get('reporef'));
                 $cmd->setRedirect2to1();
                 $cmdLine = $cmd->getCommandLine();
-                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmd));
+                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $this->printableCmd($cmd)));
                 $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
                 if (0 !== ($exitStatus = $this->exec($cmd, $output, $bgOutputFilename))) {
                     throw new \OMV\ExecException($cmd, $output);
@@ -1131,7 +1175,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 // exit code is preserved.
                 file_put_contents($logFile, implode(PHP_EOL, (array) $output));
                 if (0 !== $exitStatus) {
-                    throw new \OMV\ExecException($cmdLine, $output);
+                    throw new \OMV\ExecException($cmd, $output);
                 }
                 return $output;
             }
@@ -1147,16 +1191,22 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $db = \OMV\Config\Database::getInstance();
         // Get repo configuration object
         $repo = $db->get('conf.service.borgbackup.repo', $params['uuid']);
+        // The checkbox value arrives as a string via the task dialog
+        // template, so convert it to a real boolean.
+        $original = filter_var($params['original'], FILTER_VALIDATE_BOOLEAN);
+        // Never fall back to extracting into / unless explicitly requested.
+        if (!$original && !is_uuid($params['sharedfolderref'])) {
+            throw new \OMV\Exception(gettext(
+                "Select a shared folder or choose the original location."
+            ));
+        }
         // Create the background process so the output can be streamed to the
         // task dialog while it runs.
         return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
-            use ($context, $params, $repo) {
+            use ($context, $params, $repo, $original) {
                 $logFile = sprintf("/tmp/omv-borg-extract-%s.log", $params['uuid']);
-                // The checkbox value arrives as a string via the task dialog
-                // template, so convert it to a real boolean.
-                $original = filter_var($params['original'], FILTER_VALIDATE_BOOLEAN);
                 $cmdArgs = [];
-                if (($original == false) && (is_uuid($params['sharedfolderref']))) {
+                if (!$original) {
                     $sfpath = \OMV\Rpc\Rpc::call('ShareMgmt', 'getPath', [
                         'uuid' => $params['sharedfolderref']
                     ], $context);
@@ -1187,7 +1237,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 // exit code is preserved.
                 file_put_contents($logFile, implode(PHP_EOL, (array) $output));
                 if (0 !== $exitStatus) {
-                    throw new \OMV\ExecException($cmdLine, $output);
+                    throw new \OMV\ExecException($cmd, $output);
                 }
                 return $output;
             }
@@ -1198,6 +1248,8 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
     {
         // Validate the RPC caller context.
         $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, 'rpc.borgbackup.getlog');
         return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
             use ($params) {
                 $logFile = sprintf("/tmp/omv-borg-%s-%s.log", $params['command'], $params['uuid']);
@@ -1207,7 +1259,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 if ($params['follow']) {
                     $cmdArgs[] = '-f';
                 }
-                $cmdArgs[] = $logFile;
+                $cmdArgs[] = escapeshellarg($logFile);
                 $cmd = new \OMV\System\Process($cmdArgs);
                 $cmd->setQuiet(true);
                 $cmdLine = $cmd->getCommandLine();
@@ -1283,6 +1335,12 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $object = new \OMV\Config\ConfigObject('conf.service.borgbackup.envvar');
         // Remove spaces from name
         $params['envname'] = str_replace(' ', '_', $params['envname']);
+        // The name is written unquoted into a file sourced by bash.
+        if (1 !== preg_match('/^[A-Za-z_][A-Za-z0-9_]*$/', $params['envname'])) {
+            throw new \OMV\Exception(sprintf(
+                gettext("Invalid environment variable name '%s'."),
+                $params['envname']));
+        }
         // Set the configuration object.
         $object->setAssoc($params);
         $db = \OMV\Config\Database::getInstance();
@@ -1435,7 +1493,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
                 $cmd->setEnv("BORG_EXIT_CODES", "modern");
                 $cmd->setEnvFromFile($this->envFile . $compact->get('reporef'));
                 $cmd->setRedirect2to1();
-                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $cmd));
+                $this->writeBgProcOutput($bgOutputFilename, sprintf('Command: %s', $this->printableCmd($cmd)));
                 $this->writeBgProcOutput($bgOutputFilename, PHP_EOL.PHP_EOL);
                 if (0 !== ($exitStatus = $this->exec($cmd, $output, $bgOutputFilename))) {
                     throw new \OMV\ExecException($cmd, $output);
@@ -1524,12 +1582,16 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $object->setAssoc($params);
         $isNew = $object->isNew();
         // The private key is never sent back to the GUI, so an edit submits an
-        // empty value. Preserve any previously generated key in that case.
+        // empty value. Preserve any previously generated key in that case,
+        // but only while the public key is unchanged - otherwise the stored
+        // private key no longer matches and must not be offered for download.
         if (!$isNew && strlen($params['privatekey'] ?? '') < 1) {
             try {
                 $existing = $db->get('conf.service.borgbackup.serve',
                     $object->get('uuid'));
-                $object->set('privatekey', $existing->get('privatekey'));
+                if (trim($existing->get('publickey')) === trim($params['publickey'])) {
+                    $object->set('privatekey', $existing->get('privatekey'));
+                }
             } catch (\Exception $e) {
             }
         }

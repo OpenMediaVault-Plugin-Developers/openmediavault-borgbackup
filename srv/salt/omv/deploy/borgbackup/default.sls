@@ -22,6 +22,7 @@
 {% set scriptsDir = '/var/lib/openmediavault/borgbackup' %}
 {% set scriptPrefix = 'borgbackup-' %}
 {% set compactPrefix = 'borgcompact-' %}
+{% set repoUuids = config.repos.repo | map(attribute='uuid') | list %}
 
 configure_borg_log_dir:
   file.directory:
@@ -93,9 +94,9 @@ configure_borg_crond:
     - group: root
     - mode: '0644'
 
-{% set ns = namespace(type='',sharedfolderref='',uri='',passphrase='') %}
-
 {% for archive in config.archives.archive | selectattr('enable') %}
+
+{% set ns = namespace(type='',sharedfolderref='',uri='',passphrase='') %}
 
 {% for repo in config.repos.repo | selectattr("uuid", "equalto", archive.reporef) %}
 {% set ns.type = repo.type %}
@@ -131,6 +132,9 @@ configure_borg_{{ archive.uuid }}_cron_file:
         {{ pillar['headers']['auto_generated'] }}
         {{ pillar['headers']['warning'] }}
 
+        # Report borg's exit code, not tee's, when output is piped to the log.
+        set -o pipefail
+
         extra="{{ extraEnv }}"
         if [ -f "${extra}" ]; then
           set -a
@@ -139,10 +143,10 @@ configure_borg_{{ archive.uuid }}_cron_file:
         fi
 
         # Setting this, so the repo does not need to be given on the commandline:
-        export BORG_REPO='{{ rpath }}'
+        export BORG_REPO='{{ rpath | replace("'", "'\\''") }}'
 
         # Setting this, so you won't be asked for your repository passphrase:
-        export BORG_PASSPHRASE=$'{{ ns.passphrase | replace("'", "\\'") }}'
+        export BORG_PASSPHRASE='{{ ns.passphrase | replace("'", "'\\''") }}'
 
         # Wait up to 1 hour for repository/cache lock
         export BORG_LOCK_WAIT="${BORG_LOCK_WAIT:-3600}"
@@ -240,7 +244,7 @@ configure_borg_{{ archive.uuid }}_cron_file:
 
         borg prune \
           --list \
-          --glob-archives '{{ archive.name }}-*' \
+          --glob-archives '{{ archive.name }}-[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]*' \
           --show-rc \
         {%- if archive.hourly > 0 %}
           --keep-hourly {{ archive.hourly }} \
@@ -381,9 +385,9 @@ purge_stale_borg_scripts:
     - rmlinks: True
 
 
-{% set ns2 = namespace(type='',sharedfolderref='',uri='',passphrase='',name='') %}
+{% for compact in config.compacts.compactsched | selectattr('enable') | selectattr('reporef', 'in', repoUuids) %}
 
-{% for compact in config.compacts.compactsched | selectattr('enable') %}
+{% set ns2 = namespace(type='',sharedfolderref='',uri='',passphrase='',name='') %}
 
 {% for repo in config.repos.repo | selectattr("uuid", "equalto", compact.reporef) %}
 {% set ns2.type = repo.type %}
@@ -420,6 +424,9 @@ configure_borg_{{ compact.uuid }}_compact_file:
         {{ pillar['headers']['auto_generated'] }}
         {{ pillar['headers']['warning'] }}
 
+        # Report borg's exit code, not tee's, when output is piped to the log.
+        set -o pipefail
+
         extra="{{ cExtraEnv }}"
         if [ -f "${extra}" ]; then
           set -a
@@ -428,10 +435,10 @@ configure_borg_{{ compact.uuid }}_compact_file:
         fi
 
         # Setting this, so the repo does not need to be given on the commandline:
-        export BORG_REPO='{{ crpath }}'
+        export BORG_REPO='{{ crpath | replace("'", "'\\''") }}'
 
         # Setting this, so you won't be asked for your repository passphrase:
-        export BORG_PASSPHRASE=$'{{ ns2.passphrase | replace("'", "\\'") }}'
+        export BORG_PASSPHRASE='{{ ns2.passphrase | replace("'", "'\\''") }}'
 
         # Wait up to 1 hour for repository/cache lock
         export BORG_LOCK_WAIT="${BORG_LOCK_WAIT:-3600}"
@@ -485,7 +492,7 @@ configure_borg_{{ compact.uuid }}_compact_file:
 
 
 {% set keep_compact = [] %}
-{% for compact in config.compacts.compactsched | selectattr('enable') %}
+{% for compact in config.compacts.compactsched | selectattr('enable') | selectattr('reporef', 'in', repoUuids) %}
 {% do keep_compact.append(compactPrefix ~ compact.uuid) %}
 {% endfor %}
 

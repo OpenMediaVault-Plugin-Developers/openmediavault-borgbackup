@@ -23,7 +23,8 @@
 {%- endif %}
 {%- endfor %}
 {%- set compactBase = base ~ compactPrefix %}
-{%- for compact in config.compacts.compactsched | selectattr('enable') %}
+{%- set repoUuids = config.repos.repo | map(attribute='uuid') | list %}
+{%- for compact in config.compacts.compactsched | selectattr('enable') | selectattr('reporef', 'in', repoUuids) %}
 {%- set compactPath = compactBase ~ compact.uuid %}
 
 # compact: {{ compact.uuid }}

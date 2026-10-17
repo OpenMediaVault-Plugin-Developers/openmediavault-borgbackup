@@ -545,6 +545,32 @@
   },
   {
     "type": "rpc",
+    "id": "rpc.borgbackup.getlog",
+    "params": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        },
+        "command": {
+          "type": "string",
+          "enum": [
+            "export",
+            "extract"
+          ],
+          "required": true
+        },
+        "follow": {
+          "type": "boolean",
+          "required": true
+        }
+      }
+    }
+  },
+  {
+    "type": "rpc",
     "id": "rpc.borgbackup.createarchive",
     "params": {
       "type": "object",
