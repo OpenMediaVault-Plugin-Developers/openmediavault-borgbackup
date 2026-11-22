@@ -8,7 +8,8 @@
 # exercises read/command RPCs against them: backups, archive info/delete,
 # passphrase masking and changes, keyfile download, export/extract, mount,
 # quotas and the generated scheduled scripts.
-# No remote server or network access required.
+# No remote server or network access required (remote repos are tested via
+# a fake BORG_RSH that runs borg serve locally).
 #
 # WARNING: Creates temporary borg repositories under /tmp. If at least one
 # shared folder exists, two temporary shared folders (bgrpctest_*) are
@@ -678,6 +679,21 @@ fi
 assert_bg "getLog — valid params, no log yet" "BorgBackup" "getLog" \
     "{\"uuid\":\"$BAD_UUID\",\"command\":\"extract\",\"follow\":false}"
 
+# Remote paths borg would treat as relative local paths (issue #64): engined
+# runs from /, so 'user@host' without a colon used to create /user@host.
+for bad_uri in 'bgrpctest@fakehost' 'bgrpctest@fakehost/repo' 'relative/dir' '   '; do
+    assert_rpc_fails "setRepo — remote path without host: rejected ('$bad_uri')" \
+        "BorgBackup" "setRepo" \
+        "$(repo_params bgrpcbaduri remote '' "$bad_uri" '' false false)"
+done
+# Without --make-parent-dirs borg only creates the single-component one.
+if [ -e /bgrpctest@fakehost ]; then
+    _fail "setRepo — rejected remote path still created /bgrpctest@fakehost locally"
+    grep -qs borg /bgrpctest@fakehost/README && rm -rf /bgrpctest@fakehost
+else
+    _pass "setRepo — no local directory created for 'bgrpctest@fakehost'"
+fi
+
 # ---------------------------------------------------------------------------
 # Integration — initialise a local borg repo and register it via RPC
 # ---------------------------------------------------------------------------
@@ -982,6 +998,112 @@ for check in repo archives all verify compact; do
     assert_bg "repoCommand $check" "BorgBackup" "repoCommand" \
         "{\"uuid\":\"$REPO_UUID\",\"command\":\"$check\"}"
 done
+
+# ---------------------------------------------------------------------------
+# Integration — remote (ssh) repo without a second server
+#
+# BORG_RSH is set (via the plugin's own env var mechanism) to a fake ssh that
+# logs how it was called, drops the ssh options and [user@]host, and runs the
+# 'borg serve ...' command locally. borg still parses the URI as remote and
+# talks to the repo through RemoteRepository, exactly as with a real host.
+# ---------------------------------------------------------------------------
+section "Integration — remote repo (fake ssh via BORG_RSH)"
+
+if ! command -v omv-salt &>/dev/null; then
+    info "omv-salt not available — skipping remote repo tests"
+else
+    RSH_DIR=$(mktemp -d)
+    on_cleanup rm -rf "$RSH_DIR"
+    RSH_LOG="$RSH_DIR/calls.log"
+    cat >"$RSH_DIR/fake-ssh" <<EOF
+#!/bin/sh
+printf '%s\n' "\$*" >>"$RSH_LOG"
+while [ \$# -gt 0 ]; do
+    case \$1 in
+        -p) shift 2 ;;
+        *)  shift; break ;;   # [user@]host
+    esac
+done
+exec "\$@"
+EOF
+    chmod 0755 "$RSH_DIR/fake-ssh"
+
+    RR_DIR="$RSH_DIR/remote repo"   # space: path must survive both hops
+    on_cleanup forget_borg_repo "$RR_DIR"
+
+    create_obj "setEnvVar (BORG_RSH, reporef=creation)" setEnvVar deleteEnvVar \
+        "$(pyjson "{'uuid': a[0], 'envname': 'BORG_RSH', 'envvalue': a[1], 'reporef': 'creation'}" \
+            "$OMV_NEW_UUID" "$RSH_DIR/fake-ssh")" >/dev/null || true
+
+    SALT_LOG=$(mktemp)
+    on_cleanup rm -f "$SALT_LOG"
+    if omv-salt deploy run borgbackup &>"$SALT_LOG"; then
+        _pass "omv-salt deploy — BORG_RSH written to creation env file"
+    else
+        _fail "omv-salt deploy (creation env) — failed" "$(tail -5 "$SALT_LOG")"
+    fi
+
+    # scp-style URI, borg init over the fake ssh
+    RR_UUID=$(create_obj "setRepo (remote, scp-style user@host:path, init)" setRepo deleteRepo \
+        "$(repo_params bgrpcremote remote '' "bgrpctest@fakehost:$RR_DIR" '' false false)") || true
+
+    if [ -n "$RR_UUID" ]; then
+        if grep -q "^bgrpctest@fakehost borg serve" "$RSH_LOG" 2>/dev/null; then
+            _pass "setRepo — borg connected via ssh as bgrpctest@fakehost"
+        else
+            _fail "setRepo — fake ssh not called as expected" \
+                "$(cat "$RSH_LOG" 2>/dev/null || echo 'no calls logged')"
+        fi
+        if [ -f "$RR_DIR/config" ]; then
+            _pass "setRepo — repo created at the remote path"
+        else
+            _fail "setRepo — no repo at the remote path $RR_DIR"
+        fi
+        if [ -e "/bgrpctest@fakehost:$RR_DIR" ] || [ -e /bgrpctest@fakehost ]; then
+            _fail "setRepo — remote repo was also created locally under /"
+        else
+            _pass "setRepo — nothing created locally under /"
+        fi
+
+        # Per-repo env so the non-creation RPCs also use the fake ssh.
+        create_obj "setEnvVar (BORG_RSH, remote repo)" setEnvVar deleteEnvVar \
+            "$(pyjson "{'uuid': a[0], 'envname': 'BORG_RSH', 'envvalue': a[1], 'reporef': a[2]}" \
+                "$OMV_NEW_UUID" "$RSH_DIR/fake-ssh" "$RR_UUID")" >/dev/null || true
+        if omv-salt deploy run borgbackup &>"$SALT_LOG"; then
+            _pass "omv-salt deploy — BORG_RSH written to remote repo env file"
+        else
+            _fail "omv-salt deploy (repo env) — failed" "$(tail -5 "$SALT_LOG")"
+        fi
+
+        RR_ARCH=$(create_obj "setArchive (remote repo)" setArchive deleteArchive \
+            "$(archive_params bgrpcremote "$RR_UUID" "$SRC_DIR")") || true
+        [ -n "$RR_ARCH" ] && assert_bg "createArchive (remote repo)" "BorgBackup" \
+            "createArchive" "{\"uuid\":\"$RR_ARCH\",\"dryrun\":false,\"progress\":false}" \
+            "This archive:"
+        assert_bg "repoCommand list (remote repo)" "BorgBackup" "repoCommand" \
+            "{\"uuid\":\"$RR_UUID\",\"command\":\"list\"}" "bgrpcremote-"
+
+        # changeRepoPath to the ssh:// form with a port: same repo, new URI.
+        : >"$RSH_LOG"
+        assert_rpc "changeRepoPath (remote, ssh://user@host:port/path)" "BorgBackup" \
+            "changeRepoPath" "$(pyjson "{'uuid': a[0], 'name': 'bgrpcremote',
+                'type': 'remote', 'sharedfolderref': '', 'uri': a[1]}" \
+                "$RR_UUID" "ssh://bgrpctest@fakehost:2222$RR_DIR")" >/dev/null
+        if grep -q "^-p 2222 bgrpctest@fakehost borg serve" "$RSH_LOG" 2>/dev/null; then
+            _pass "changeRepoPath — borg connected via ssh with port 2222"
+        else
+            _fail "changeRepoPath — fake ssh not called with port" \
+                "$(cat "$RSH_LOG" 2>/dev/null || echo 'no calls logged')"
+        fi
+
+        assert_rpc_fails "changeRepoPath — remote path without colon rejected" "BorgBackup" \
+            "changeRepoPath" "$(pyjson "{'uuid': a[0], 'name': 'bgrpcremote',
+                'type': 'remote', 'sharedfolderref': '', 'uri': 'bgrpctest@fakehost'}" \
+                "$RR_UUID")"
+        assert_rpc "changeRepoPath — rejected path not stored" "BorgBackup" "getRepo" \
+            "{\"uuid\":\"$RR_UUID\"}" "bgrpctest@fakehost:2222" >/dev/null
+    fi
+fi
 
 # ---------------------------------------------------------------------------
 # Integration — encrypted repo: passphrase masking, keyfile, passphrase change
