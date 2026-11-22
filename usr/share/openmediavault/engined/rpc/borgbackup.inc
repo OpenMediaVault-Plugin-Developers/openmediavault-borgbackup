@@ -156,6 +156,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         // Clear uri if type is local
         if ($params['type'] == 'local') {
             $params['uri'] = '';
+        } else {
+            $params['uri'] = trim($params['uri']);
+            $this->assertValidRemoteUri($params['uri']);
         }
         $object->setAssoc($params);
         // Check if new repo
@@ -233,6 +236,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         if ($params['type'] == 'local') {
             $params['uri'] = '';
             $local = true;
+        } else {
+            $params['uri'] = trim($params['uri']);
+            $this->assertValidRemoteUri($params['uri']);
         }
         // get password and encryption params
         $other = $db->get('conf.service.borgbackup.repo', $params['uuid']);
@@ -402,6 +408,28 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         } else {
             throw new \OMV\ExecException(gettext("Failed to find ") . $repoName);
         }
+    }
+
+    /**
+     * Borg treats anything that is not a URL, an scp-style [user@]host:path
+     * or an absolute path as a path relative to the cwd. engined runs from /,
+     * so e.g. "user@host" (missing colon) silently creates /user@host locally.
+     */
+    private function assertValidRemoteUri($uri): void
+    {
+        $uri = trim($uri);
+        if ($uri === '') {
+            throw new \OMV\Exception(gettext("Remote path is required."));
+        }
+        if (str_starts_with($uri, '/') ||
+            preg_match('#^[a-z][a-z0-9+.-]*://#i', $uri) ||
+            preg_match('#^(?:[^@:/]+@)?[^:/]+:#', $uri)) {
+            return;
+        }
+        throw new \OMV\Exception(sprintf(gettext(
+            "Invalid remote path '%s'. Use ssh://user@host:port/path or " .
+            "user@host:path (note the colon). Without it, borg creates a " .
+            "local directory instead."), $uri));
     }
 
     private function findRepoMount($repoName): string

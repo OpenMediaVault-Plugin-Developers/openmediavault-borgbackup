@@ -105,7 +105,7 @@ data:
                 name: uri
                 label: _("Remote path")
                 value: "{{ _selected[0].uri }}"
-                hint: _("Must have ssh keys setup.  Remote path should be in the form&#58;  user@hostname&#58;path")
+                hint: _("Must have ssh keys setup.  Remote path should be in the form&#58;  user@hostname&#58;path  or  ssh&#58;//user@hostname&#58;port/path")
                 modifiers:
                   - type: hidden
                     constraint:
