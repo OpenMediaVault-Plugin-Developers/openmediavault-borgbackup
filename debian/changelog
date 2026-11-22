@@ -1,3 +1,10 @@
+openmediavault-borgbackup (8.2.3) stable; urgency=low
+
+  * Reject remote repo paths borg would create locally (missing host colon)
+  * Show ssh:// form in remote path hint
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 22 Nov 2026 23:45:48 +0000
+
 openmediavault-borgbackup (8.2.2) stable; urgency=low
 
   * Mask the repo passphrase in command output and error messages
