@@ -423,10 +423,27 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         if ($uri === '') {
             throw new \OMV\Exception(gettext("Remote path is required."));
         }
+        // Mirrors borg's own location regexes (borg/helpers/parseformat.py)
+        // so typos fail here with a useful message, not a borg usage dump.
+        $user = '(?:[^@:/]+@)?';
+        $host = '(?:[^:/\[\]]+|\[[0-9a-f:.]+\])';
         if (str_starts_with($uri, '/') ||
-            preg_match('#^[a-z][a-z0-9+.-]*://#i', $uri) ||
-            preg_match('#^(?:[^@:/]+@)?[^:/]+:#', $uri)) {
+            preg_match('#^file://[^/]*/#i', $uri) ||
+            preg_match("#^ssh://{$user}{$host}(?::\d+)?/#i", $uri) ||
+            preg_match("#^{$user}{$host}:(?!:|//|ssh://)#i", $uri)) {
             return;
+        }
+        if (preg_match('#(?:^|@)https?://#i', $uri)) {
+            throw new \OMV\Exception(sprintf(gettext(
+                "Invalid remote path '%s'. Remove 'http://' or 'https://'. " .
+                "Borg connects over ssh: use ssh://user@host:port/path or " .
+                "user@host:path."), $uri));
+        }
+        if (preg_match('#^[a-z][a-z0-9+.-]*://#i', $uri)) {
+            throw new \OMV\Exception(sprintf(gettext(
+                "Invalid remote path '%s'. Use ssh://user@host:port/path " .
+                "(the port is optional and the path must start with '/', " .
+                "e.g. ssh://user@host:23/./repo) or user@host:path."), $uri));
         }
         throw new \OMV\Exception(sprintf(gettext(
             "Invalid remote path '%s'. Use ssh://user@host:port/path or " .
