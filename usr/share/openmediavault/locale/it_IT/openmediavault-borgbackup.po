@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-04 13:54+0000\n"
+"POT-Creation-Date: 2026-11-22 23:57+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: Giovanni Scafora <scafora.giovanni@gmail.com>, 2026\n"
 "Language-Team: Italian (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/it/)\n"
@@ -31,16 +31,16 @@ msgid "All"
 msgstr "Tutto"
 
 msgid "Append-only"
-msgstr ""
+msgstr "Solo aggiunta"
 
 msgid "Archive"
 msgstr "Archivio"
 
 msgid "Archive info ..."
-msgstr "Informazioni sull'archivio ..."
+msgstr "Informazioni sull'archivio..."
 
 msgid "Archive log"
-msgstr ""
+msgstr "Log dell'archivio"
 
 msgid "Archives"
 msgstr "Archivi"
@@ -94,22 +94,22 @@ msgid "Changing quota ..."
 msgstr "Modifica della quota in corso..."
 
 msgid "Changing repo location ..."
-msgstr "Sto modificando la posizione del repo ..."
+msgstr "Sto modificando la posizione del repo..."
 
 msgid "Check"
 msgstr "Controlla"
 
 msgid "Check all ..."
-msgstr "Controlla tutto ..."
+msgstr "Controlla tutto..."
 
 msgid "Check archives only ..."
-msgstr "Controlla solo gli archivi ..."
+msgstr "Controlla solo gli archivi..."
 
 msgid "Check repo ..."
-msgstr "Controlla il repo ..."
+msgstr "Controlla il repo..."
 
 msgid "Check repos only ..."
-msgstr "Controlla solo i repo ..."
+msgstr "Controlla solo i repo..."
 
 msgid ""
 "Checked = send email on error or success.<br/>Unchecked = send email on "
@@ -119,19 +119,23 @@ msgstr ""
 "selezionato = invia l'email solo in caso di errore."
 
 msgid "Client public key"
-msgstr ""
+msgstr "Chiave pubblica del client"
 
 msgid ""
 "Clients connect over SSH as this existing user. Their borg serve access is "
 "written to this user's ~/.ssh/authorized_keys. Do not also add the client "
 "key to this user's profile under User Management."
 msgstr ""
+"I client si connettono tramite SSH come questo utente esistente. Il loro "
+"accesso borg serve viene scritto nel file ~/.ssh/authorized_keys "
+"dell'utente. Non aggiungere la chiave del client anche al profilo di questo "
+"utente in Gestione utenti."
 
 msgid "Compact"
 msgstr "Compatta"
 
 msgid "Compact repo ..."
-msgstr "Compatta il repo ..."
+msgstr "Compatta il repo..."
 
 msgid "Compact threshold"
 msgstr "Soglia di compattazione"
@@ -149,16 +153,16 @@ msgid "Create"
 msgstr "Crea"
 
 msgid "Create archive for ..."
-msgstr "Crea archivio per ..."
+msgstr "Crea archivio per..."
 
 msgid "Create archive for ... (Dry Run)"
-msgstr "Crea archivio per ... (Dry Run)"
+msgstr "Crea archivio per... (Dry Run)"
 
 msgid "Created archive."
 msgstr "L'archivio è stato creato."
 
 msgid "Created compact schedule."
-msgstr ""
+msgstr "Pianificazione della compattazione creata."
 
 msgid "Created environment variable."
 msgstr "La variabile d'ambiente è stata creata."
@@ -167,19 +171,21 @@ msgid "Created repo."
 msgstr "Il repo è stato creato."
 
 msgid "Created serve client."
-msgstr ""
+msgstr "Client di servizio creato."
 
 msgid "Current quota"
 msgstr "Quota attuale"
 
 msgid "Daily"
-msgstr ""
+msgstr "Giornaliero"
 
 msgid "Day of the month that monthly compact runs (1-31)."
 msgstr ""
+"Giorno del mese in cui viene eseguita la compattazione mensile (1-31)."
 
 msgid "Day of the week that weekly compact runs."
 msgstr ""
+"Giorno della settimana in cui viene eseguita la compattazione settimanale."
 
 msgid "Delete + Files"
 msgstr "Elimina + file"
@@ -191,7 +197,7 @@ msgid "Docs"
 msgstr "Documenti"
 
 msgid "Download private key"
-msgstr ""
+msgstr "Scarica la chiave privata"
 
 msgid "Download repo keyfile"
 msgstr "Scarica il keyfile del repo"
@@ -237,7 +243,7 @@ msgstr ""
 "corrispondente al nome dell'archivio e con un'estensione .tar.gz."
 
 msgid "Exporting archive ..."
-msgstr ""
+msgstr "Esportazione dell'archivio in corso..."
 
 msgid "Extract"
 msgstr "Estrai"
@@ -249,10 +255,10 @@ msgid "Extract archive to tar file"
 msgstr "Estrai l'archivio in un file tar"
 
 msgid "Extracting archive ..."
-msgstr ""
+msgstr "Estrazione dell'archivio in corso..."
 
 msgid "Failed to create temporary directory."
-msgstr ""
+msgstr "Creazione della cartella temporanea fallita."
 
 msgid "Failed to find "
 msgstr "Impossibile trovare"
@@ -264,10 +270,10 @@ msgid "Failed to remove "
 msgstr "Impossibile rimuovere"
 
 msgid "Fri"
-msgstr ""
+msgstr "Ven"
 
 msgid "Friday"
-msgstr ""
+msgstr "Venerdì"
 
 msgid "General"
 msgstr "Generale"
@@ -285,19 +291,19 @@ msgid "Hour of the day that daily backups run."
 msgstr "Ora del giorno in cui vengono eseguiti i backup giornalieri."
 
 msgid "Hour of the day that daily compact runs."
-msgstr ""
+msgstr "Ora del giorno in cui viene eseguita la compattazione giornaliera."
 
 msgid "Hour of the day that monthly backups run."
 msgstr "Ora del giorno in cui vengono eseguiti i backup mensili."
 
 msgid "Hour of the day that monthly compact runs."
-msgstr ""
+msgstr "Ora del giorno in cui viene eseguita la compattazione mensile."
 
 msgid "Hour of the day that weekly backups run."
 msgstr "Ora del giorno in cui vengono eseguiti i backup settimanali."
 
 msgid "Hour of the day that weekly compact runs."
-msgstr ""
+msgstr "Ora del giorno in cui viene eseguita la compattazione settimanale."
 
 msgid "Hour of the day that yearly backups run."
 msgstr "Ora del giorno in cui vengono eseguiti i backup annuali."
@@ -315,6 +321,12 @@ msgstr "Includi"
 msgid "Info"
 msgstr "Informazioni"
 
+msgid "Invalid environment variable name '%s'."
+msgstr ""
+
+msgid "Invalid remote path '%s'. Use ssh://user@host:port/path or "
+msgstr ""
+
 msgid "List"
 msgstr "Elenco"
 
@@ -322,7 +334,7 @@ msgid "Local"
 msgstr "Locale"
 
 msgid "Login user"
-msgstr ""
+msgstr "Utente di accesso"
 
 msgid "Maintenance"
 msgstr "Manutenzione"
@@ -331,7 +343,7 @@ msgid "Minute after the hour that daily backups run."
 msgstr "Minuto dell’ora in cui vengono eseguiti i backup giornalieri."
 
 msgid "Minute after the hour that daily compact runs."
-msgstr ""
+msgstr "Minuto dell’ora in cui viene eseguita la compattazione giornaliera."
 
 msgid "Minute after the hour that hourly backups run."
 msgstr "Minuto dell’ora in cui vengono eseguiti i backup orari."
@@ -340,25 +352,25 @@ msgid "Minute after the hour that monthly backups run."
 msgstr "Minuto dell’ora in cui vengono eseguiti i backup mensili."
 
 msgid "Minute after the hour that monthly compact runs."
-msgstr ""
+msgstr "Minuto dell’ora in cui viene eseguita la compattazione mensile."
 
 msgid "Minute after the hour that weekly backups run."
 msgstr "Minuto dell’ora in cui vengono eseguiti i backup settimanali."
 
 msgid "Minute after the hour that weekly compact runs."
-msgstr ""
+msgstr "Minuto dell’ora in cui viene eseguita la compattazione settimanale."
 
 msgid "Minute after the hour that yearly backups run."
 msgstr "Minuto dell’ora in cui vengono eseguiti i backup annuali."
 
 msgid "Mon"
-msgstr ""
+msgstr "Lun"
 
 msgid "Monday"
-msgstr ""
+msgstr "Lunedì"
 
 msgid "Monthly"
-msgstr ""
+msgstr "Mensile"
 
 msgid "Mount"
 msgstr "Monta"
@@ -370,14 +382,12 @@ msgid "Mounted"
 msgstr "Montato"
 
 msgid "Mounting repo ..."
-msgstr "Sto montando il repo ..."
+msgstr "Sto montando il repo..."
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
-"user@hostname&#58;path"
+"user@hostname&#58;path  or  ssh&#58;//user@hostname&#58;port/path"
 msgstr ""
-"Devono essere configurate le chiavi ssh. Il percorso remoto deve essere nel "
-"formato&#58;  user@hostname&#58;percorso"
 
 msgid "Name"
 msgstr "Nome"
@@ -390,6 +400,8 @@ msgstr "Nuova quota"
 
 msgid "No private key is stored for this client. The public key was "
 msgstr ""
+"Nessuna chiave privata è memorizzata per questo client. La chiave pubblica "
+"era "
 
 msgid "None"
 msgstr "Nessuno"
@@ -426,6 +438,9 @@ msgid ""
 "key pair automatically - you can then download the private key from the "
 "Serve list."
 msgstr ""
+"Incolla la chiave pubblica OpenSSH del client. Lascia vuoto per generare "
+"automaticamente una coppia di chiavi ed25519; potrai quindi scaricare la "
+"chiave privata dall'elenco Servizio."
 
 msgid "Post-script"
 msgstr "Post-script"
@@ -434,7 +449,7 @@ msgid "Pre-script"
 msgstr "Pre-script"
 
 msgid "Private key stored"
-msgstr ""
+msgstr "Chiave privata memorizzata"
 
 msgid "Put a new line or comma between each directory"
 msgstr "Inserisci una nuova riga o una virgola tra ogni cartella"
@@ -454,6 +469,9 @@ msgstr "Percorso remoto"
 msgid "Remote path"
 msgstr "Percorso remoto"
 
+msgid "Remote path is required."
+msgstr ""
+
 msgid "Remove"
 msgstr "Rimuovi"
 
@@ -467,7 +485,7 @@ msgid "Repo has been unmounted."
 msgstr "Il repo è stato smontato."
 
 msgid "Repo info ..."
-msgstr "Informazioni sul repo ..."
+msgstr "Informazioni sul repo..."
 
 msgid "Repo is in use. Delete archives associated with this repo first!"
 msgstr "Il repo è in uso. Elimina prima gli archivi associati a questo repo!"
@@ -513,16 +531,16 @@ msgid "Run compact after backup and prune"
 msgstr "Esegui la compattazione dopo il backup e la pulizia"
 
 msgid "Run compact daily."
-msgstr ""
+msgstr "Esegui la compattazione giornalmente."
 
 msgid "Run compact for ..."
-msgstr ""
+msgstr "Esegui la compattazione per..."
 
 msgid "Run compact monthly."
-msgstr ""
+msgstr "Esegui la compattazione mensilmente."
 
 msgid "Run compact weekly."
-msgstr ""
+msgstr "Esegui la compattazione settimanalmente."
 
 msgid "Run daily cron job."
 msgstr "Esegui il job giornaliero di cron."
@@ -555,31 +573,34 @@ msgid "Runtime / Output"
 msgstr "Durata / Output"
 
 msgid "Sat"
-msgstr ""
+msgstr "Sab"
 
 msgid "Saturday"
-msgstr ""
+msgstr "Sabato"
 
 msgid "Schedule"
-msgstr ""
+msgstr "Pianificazione"
 
 msgid "Select a repo ..."
-msgstr "Seleziona un repo ..."
+msgstr "Seleziona un repo..."
+
+msgid "Select a shared folder or choose the original location."
+msgstr ""
 
 msgid "Select a user ..."
-msgstr ""
+msgstr "Seleziona un utente..."
 
 msgid "Select an archive ..."
-msgstr "Seleziona un archivio ..."
+msgstr "Seleziona un archivio..."
 
 msgid "Serve"
-msgstr ""
+msgstr "Servizio"
 
 msgid "Set minimum threshold for saved space in percent"
 msgstr "Imposta la soglia minima di spazio risparmiato in percentuale"
 
 msgid "Set minimum threshold for saved space in percent."
-msgstr ""
+msgstr "Imposta la soglia minima di spazio risparmiato in percentuale."
 
 msgid ""
 "Set remote network upload rate limit in kiByte/s (default&#58; 0=unlimited)."
@@ -606,42 +627,47 @@ msgid "Storage quota"
 msgstr "Quota di archiviazione"
 
 msgid "Sun"
-msgstr ""
+msgstr "Dom"
 
 msgid "Sunday"
-msgstr ""
+msgstr "Domenica"
 
 msgid "Target shared folder"
-msgstr ""
+msgstr "Cartella condivisa di destinazione"
 
 msgid ""
 "The client can add archives but cannot delete or prune existing ones "
 "(ransomware protection). Prune/compact this repo yourself from the Compact "
 "tab."
 msgstr ""
+"Il client può aggiungere archivi ma non può eliminare o ripulire quelli "
+"esistenti (protezione ransomware). Esegui tu stesso la pulizia/compattazione"
+" di questo repo dalla scheda Compatta."
 
 msgid ""
 "The client is restricted to this folder (borg serve --restrict-to-path). Its"
 " repositories must live here."
 msgstr ""
+"Il client è limitato a questa cartella (borg serve --restrict-to-path). I "
+"suoi repository devono risiedere qui."
 
 msgid "The user '%s' does not exist."
-msgstr ""
+msgstr "L'utente '%s' non esiste."
 
 msgid "Threshold"
-msgstr ""
+msgstr "Soglia"
 
 msgid "Thu"
-msgstr ""
+msgstr "Gio"
 
 msgid "Thursday"
-msgstr ""
+msgstr "Giovedì"
 
 msgid "Tue"
-msgstr ""
+msgstr "Mar"
 
 msgid "Tuesday"
-msgstr ""
+msgstr "Martedì"
 
 msgid "Type"
 msgstr "Tipo"
@@ -650,13 +676,13 @@ msgid "Unmount"
 msgstr "Smonta"
 
 msgid "Unmounting repo ..."
-msgstr "Sto smontando il repo ..."
+msgstr "Sto smontando il repo..."
 
 msgid "Updated compact schedule."
-msgstr ""
+msgstr "Pianificazione della compattazione aggiornata."
 
 msgid "Updated serve client."
-msgstr ""
+msgstr "Client di servizio aggiornato."
 
 msgid "Uses value as prefix for archive name."
 msgstr "Utilizza il valore come prefisso per il nome dell'archivio."
@@ -671,16 +697,16 @@ msgid "Versions"
 msgstr "Versioni"
 
 msgid "View Log"
-msgstr ""
+msgstr "Visualizza log"
 
 msgid "Wed"
-msgstr ""
+msgstr "Mer"
 
 msgid "Wednesday"
-msgstr ""
+msgstr "Mercoledì"
 
 msgid "Weekly"
-msgstr ""
+msgstr "Settimanale"
 
 msgid "You must move the repo files before changing the location."
 msgstr ""
@@ -720,7 +746,7 @@ msgid "monthly"
 msgstr "mensile"
 
 msgid "monthly day"
-msgstr ""
+msgstr "giorno mensile"
 
 msgid "monthly hour"
 msgstr "ora mensile"
@@ -738,7 +764,7 @@ msgid "weekly"
 msgstr "settimanale"
 
 msgid "weekly day"
-msgstr ""
+msgstr "giorno settimanale"
 
 msgid "weekly hour"
 msgstr "ora settimanale"

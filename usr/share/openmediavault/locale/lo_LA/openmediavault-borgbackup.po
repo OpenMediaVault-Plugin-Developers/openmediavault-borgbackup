@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-04 13:54+0000\n"
+"POT-Creation-Date: 2026-11-22 23:57+0000\n"
 "PO-Revision-Date: 2020-05-19 01:27+0000\n"
 "Last-Translator: BoneNI, 2026\n"
 "Language-Team: Lao (Laos) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/lo_LA/)\n"
@@ -312,6 +312,12 @@ msgstr "ສິ່ງທີ່ລວມເອົາ"
 msgid "Info"
 msgstr "ຂໍ້ມູນ"
 
+msgid "Invalid environment variable name '%s'."
+msgstr ""
+
+msgid "Invalid remote path '%s'. Use ssh://user@host:port/path or "
+msgstr ""
+
 msgid "List"
 msgstr "ລາຍການ"
 
@@ -371,10 +377,8 @@ msgstr "ກຳລັງເຊື່ອມຕໍ່ຄັງເກັບ ..."
 
 msgid ""
 "Must have ssh keys setup.  Remote path should be in the form&#58;  "
-"user@hostname&#58;path"
+"user@hostname&#58;path  or  ssh&#58;//user@hostname&#58;port/path"
 msgstr ""
-"ຕ້ອງມີການຕັ້ງຄ່າ SSH keys. ເສັ້ນທາງປາຍທາງຄວນຢູ່ໃນຮູບແບບ&#58; "
-"user@hostname&#58;path"
 
 msgid "Name"
 msgstr "ຊື່"
@@ -450,6 +454,9 @@ msgstr "ເສັ້ນທາງປາຍທາງ"
 
 msgid "Remote path"
 msgstr "ເສັ້ນທາງປາຍທາງ"
+
+msgid "Remote path is required."
+msgstr ""
 
 msgid "Remove"
 msgstr "ເອົາອອກ"
@@ -563,6 +570,9 @@ msgstr "ຕາຕະລາງເວລາ"
 
 msgid "Select a repo ..."
 msgstr "ເລືອກຄັງເກັບ ..."
+
+msgid "Select a shared folder or choose the original location."
+msgstr ""
 
 msgid "Select a user ..."
 msgstr ""

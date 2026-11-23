@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-borgbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-04 13:54+0000\n"
+"POT-Creation-Date: 2026-11-22 23:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -281,6 +281,12 @@ msgstr ""
 msgid "Info"
 msgstr ""
 
+msgid "Invalid environment variable name '%s'."
+msgstr ""
+
+msgid "Invalid remote path '%s'. Use ssh://user@host:port/path or "
+msgstr ""
+
 msgid "List"
 msgstr ""
 
@@ -338,7 +344,7 @@ msgstr ""
 msgid "Mounting repo ..."
 msgstr ""
 
-msgid "Must have ssh keys setup.  Remote path should be in the form&#58;  user@hostname&#58;path"
+msgid "Must have ssh keys setup.  Remote path should be in the form&#58;  user@hostname&#58;path  or  ssh&#58;//user@hostname&#58;port/path"
 msgstr ""
 
 msgid "Name"
@@ -411,6 +417,9 @@ msgid "Remote Path"
 msgstr ""
 
 msgid "Remote path"
+msgstr ""
+
+msgid "Remote path is required."
 msgstr ""
 
 msgid "Remove"
@@ -519,6 +528,9 @@ msgid "Schedule"
 msgstr ""
 
 msgid "Select a repo ..."
+msgstr ""
+
+msgid "Select a shared folder or choose the original location."
 msgstr ""
 
 msgid "Select a user ..."
