@@ -8,7 +8,7 @@ Standards-Version: 4.7.2
 
 Package: openmediavault-borgbackup
 Architecture: all
-Depends: openmediavault (>= 8),
+Depends: openmediavault (>= 8.7.2),
          python3-llfuse,
          borgbackup
 Description: borgbackup plugin for OpenMediaVault.
