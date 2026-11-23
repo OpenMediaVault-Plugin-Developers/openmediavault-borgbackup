@@ -73,6 +73,43 @@ assert_rpc() {
     return 0
 }
 
+# Assert whether an administrator may call an RPC method via the given
+# entrypoint (`rpc` or `download`). omv-rpc calls are internal and skip this
+# check, so ask the RPC service directly. Included files may print stray
+# whitespace, so the result is printed on its own line and trimmed.
+# Usage: assert_entrypoint <desc> <service> <method> <entrypoint> <allowed|denied>
+assert_entrypoint() {
+    local desc=$1 svc=$2 method=$3 ep=$4 want=$5 got
+    got=$(php -d error_reporting=E_ERROR -d display_errors=stderr -r '
+        require_once "openmediavault/autoloader.inc";
+        require_once "openmediavault/functions.inc";
+        $base = \OMV\Environment::get("OMV_ENGINED_DIR");
+        foreach (["inc", "rpc"] as $sub) {
+            foreach (listdir(build_path(DIRECTORY_SEPARATOR, $base, $sub),
+                    "inc") as $path) {
+                require_once $path;
+            }
+        }
+        $mngr = &\OMV\Rpc\ServiceManager::getInstance();
+        $mngr->initializeServices();
+        $service = $mngr->getService($argv[1]);
+        if ((false === $service) || !$service->hasMethod($argv[2])) {
+            echo PHP_EOL . "missing";
+            exit(0);
+        }
+        $context = \OMV\Rpc\Rpc::createContext("admin",
+            OMV_ROLE_ADMINISTRATOR, ["entrypoint" => $argv[3]]);
+        echo PHP_EOL . ($service->isMethodAllowed($argv[2], $context) ?
+            "allowed" : "denied");
+    ' -- "$svc" "$method" "$ep" 2>/dev/null | tail -1 | tr -d '[:space:]')
+    if [ "$got" = "$want" ]; then
+        _pass "$desc"
+        return 0
+    fi
+    _fail "$desc" "expected '$want', got '${got:-no output}'"
+    return 1
+}
+
 assert_rpc_fails() {
     local desc=$1 svc=$2 method=$3 params=${4:-'{}'}
     local out ec=0
@@ -370,6 +407,17 @@ _pass "omv-rpc functional"
 
 BORG_VER=$(borg --version 2>/dev/null || echo "unknown")
 info "borg version: $BORG_VER"
+
+# ---------------------------------------------------------------------------
+section "Download entrypoint"
+# ---------------------------------------------------------------------------
+# openmediavault >= 8.7.2 only allows methods with an explicit
+# `download` allowlist to be called via /download.
+
+assert_entrypoint "downloadKey allowed via download" BorgBackup downloadKey download allowed
+assert_entrypoint "downloadKey denied via rpc"       BorgBackup downloadKey rpc      denied
+assert_entrypoint "downloadServeKey allowed via download" BorgBackup downloadServeKey download allowed
+assert_entrypoint "downloadServeKey denied via rpc"       BorgBackup downloadServeKey rpc      denied
 
 # ---------------------------------------------------------------------------
 # Informational RPCs (empty-state smoke test)
@@ -1020,7 +1068,7 @@ else
 printf '%s\n' "\$*" >>"$RSH_LOG"
 while [ \$# -gt 0 ]; do
     case \$1 in
-        -p) shift 2 ;;
+        -p|-i|-o) shift 2 ;;
         *)  shift; break ;;   # [user@]host
     esac
 done
@@ -1102,6 +1150,149 @@ EOF
                 "$RR_UUID")"
         assert_rpc "changeRepoPath — rejected path not stored" "BorgBackup" "getRepo" \
             "{\"uuid\":\"$RR_UUID\"}" "bgrpctest@fakehost:2222" >/dev/null
+    fi
+fi
+
+# ---------------------------------------------------------------------------
+# Integration — remote repo on a non-standard ssh port
+#
+# Reuses the fake ssh from the previous section. borg passes the port from an
+# ssh://host:port/path URI as '-p <port>' after any options in BORG_RSH.
+# ---------------------------------------------------------------------------
+section "Integration — remote repo on a non-standard ssh port"
+
+if [ -z "${RSH_DIR:-}" ]; then
+    info "fake ssh not set up — skipping non-standard port tests"
+else
+    RP_DIR="$RSH_DIR/port repo"   # space: path must survive both hops
+    RP_URI="ssh://bgrpctest@fakehost:2222$RP_DIR"
+    on_cleanup forget_borg_repo "$RP_DIR"
+
+    : >"$RSH_LOG"
+    RP_UUID=$(create_obj "setRepo (remote, ssh://user@host:2222/path, init)" setRepo deleteRepo \
+        "$(repo_params bgrpcport remote '' "$RP_URI" '' false false)") || true
+
+    if [ -n "$RP_UUID" ]; then
+        if grep -q "^-p 2222 bgrpctest@fakehost borg serve" "$RSH_LOG" 2>/dev/null; then
+            _pass "setRepo — borg init connected via ssh on port 2222"
+        else
+            _fail "setRepo — fake ssh not called with port 2222" \
+                "$(cat "$RSH_LOG" 2>/dev/null || echo 'no calls logged')"
+        fi
+        if [ -f "$RP_DIR/config" ]; then
+            _pass "setRepo — repo created at the remote path (port URI)"
+        else
+            _fail "setRepo — no repo at the remote path $RP_DIR"
+        fi
+        assert_rpc "getRepo — ssh:// URI with port stored unchanged" "BorgBackup" "getRepo" \
+            "{\"uuid\":\"$RP_UUID\"}" "bgrpctest@fakehost:2222" >/dev/null
+
+        # Per-repo BORG_RSH with extra ssh options: the port must still be
+        # passed, after the options.
+        RP_RSH="$RSH_DIR/fake-ssh -o StrictHostKeyChecking=no -i /dev/null"
+        RP_RSH_ARGS="-o StrictHostKeyChecking=no -i /dev/null"
+        create_obj "setEnvVar (BORG_RSH with ssh options, port repo)" setEnvVar deleteEnvVar \
+            "$(pyjson "{'uuid': a[0], 'envname': 'BORG_RSH', 'envvalue': a[1], 'reporef': a[2]}" \
+                "$OMV_NEW_UUID" "$RP_RSH" "$RP_UUID")" >/dev/null || true
+        RP_ARCH=$(create_obj "setArchive (port repo)" setArchive deleteArchive \
+            "$(archive_params bgrpcport "$RP_UUID" "$SRC_DIR")") || true
+        if omv-salt deploy run borgbackup &>"$SALT_LOG"; then
+            _pass "omv-salt deploy — port repo env file and script written"
+        else
+            _fail "omv-salt deploy (port repo) — failed" "$(tail -5 "$SALT_LOG")"
+        fi
+
+        : >"$RSH_LOG"
+        [ -n "$RP_ARCH" ] && assert_bg "createArchive (port repo)" "BorgBackup" \
+            "createArchive" "{\"uuid\":\"$RP_ARCH\",\"dryrun\":false,\"progress\":false}" \
+            "This archive:"
+        assert_bg "repoCommand list (port repo)" "BorgBackup" "repoCommand" \
+            "{\"uuid\":\"$RP_UUID\",\"command\":\"list\"}" "bgrpcport-"
+        if grep -q "^$RP_RSH_ARGS -p 2222 bgrpctest@fakehost borg serve" "$RSH_LOG" 2>/dev/null; then
+            _pass "createArchive — BORG_RSH options kept and port 2222 passed"
+        else
+            _fail "createArchive — fake ssh not called with options and port" \
+                "$(cat "$RSH_LOG" 2>/dev/null || echo 'no calls logged')"
+        fi
+        if grep -qv -- "-p 2222 " "$RSH_LOG" 2>/dev/null; then
+            _fail "port repo — some borg calls did not use port 2222" "$(cat "$RSH_LOG")"
+        else
+            _pass "port repo — every borg call used port 2222"
+        fi
+
+        # The scheduled script exports the URI as BORG_REPO and sources the
+        # per-repo env file for BORG_RSH.
+        RP_SCRIPT="/var/lib/openmediavault/borgbackup/borgbackup-$RP_ARCH"
+        if [ -n "$RP_ARCH" ] && [ -x "$RP_SCRIPT" ]; then
+            if grep -qF "export BORG_REPO='$RP_URI'" "$RP_SCRIPT"; then
+                _pass "scheduled script — BORG_REPO is the ssh:// URI with port"
+            else
+                _fail "scheduled script — BORG_REPO not set to $RP_URI" \
+                    "$(grep 'BORG_REPO=' "$RP_SCRIPT")"
+            fi
+            sleep 1   # archive names have one-second resolution
+            : >"$RSH_LOG"
+            RP_RC=0
+            bash "$RP_SCRIPT" &>/dev/null </dev/null || RP_RC=$?
+            if [ $RP_RC -eq 0 ]; then
+                _pass "scheduled script — succeeds on the port repo"
+            else
+                _fail "scheduled script (port repo) — exit $RP_RC" \
+                    "$(tail -3 /var/log/borgbackup/bgrpcport.log 2>/dev/null)"
+            fi
+            if grep -q "^$RP_RSH_ARGS -p 2222 bgrpctest@fakehost borg serve" "$RSH_LOG" 2>/dev/null; then
+                _pass "scheduled script — borg connected via ssh on port 2222"
+            else
+                _fail "scheduled script — fake ssh not called with port 2222" \
+                    "$(cat "$RSH_LOG" 2>/dev/null || echo 'no calls logged')"
+            fi
+            RP_COUNT=$(borg_list "$RP_DIR" | grep -c '^bgrpcport-')
+            if [ "$RP_COUNT" = "2" ]; then
+                _pass "port repo — GUI and scheduled archives both present"
+            else
+                _fail "port repo — expected 2 bgrpcport archives, got $RP_COUNT"
+            fi
+        else
+            _fail "scheduled script (port repo) — $RP_SCRIPT missing"
+        fi
+
+        # changeRepoPath: ssh:// without a user, different port.
+        : >"$RSH_LOG"
+        assert_rpc "changeRepoPath (remote, ssh://host:2223/path, no user)" "BorgBackup" \
+            "changeRepoPath" "$(pyjson "{'uuid': a[0], 'name': 'bgrpcport',
+                'type': 'remote', 'sharedfolderref': '', 'uri': a[1]}" \
+                "$RP_UUID" "ssh://fakehost:2223$RP_DIR")" >/dev/null
+        if grep -q "^$RP_RSH_ARGS -p 2223 fakehost borg serve" "$RSH_LOG" 2>/dev/null; then
+            _pass "changeRepoPath — borg connected via ssh on port 2223 without a user"
+        else
+            _fail "changeRepoPath — fake ssh not called with port 2223 and no user" \
+                "$(cat "$RSH_LOG" 2>/dev/null || echo 'no calls logged')"
+        fi
+
+        # changeRepoPath: bracketed IPv6 literal with a port.
+        : >"$RSH_LOG"
+        assert_rpc "changeRepoPath (remote, ssh://user@[::1]:2225/path)" "BorgBackup" \
+            "changeRepoPath" "$(pyjson "{'uuid': a[0], 'name': 'bgrpcport',
+                'type': 'remote', 'sharedfolderref': '', 'uri': a[1]}" \
+                "$RP_UUID" "ssh://bgrpctest@[::1]:2225$RP_DIR")" >/dev/null
+        if grep -q "^$RP_RSH_ARGS -p 2225 bgrpctest@::1 borg serve" "$RSH_LOG" 2>/dev/null; then
+            _pass "changeRepoPath — borg connected to IPv6 host on port 2225"
+        else
+            _fail "changeRepoPath — fake ssh not called with IPv6 host and port 2225" \
+                "$(cat "$RSH_LOG" 2>/dev/null || echo 'no calls logged')"
+        fi
+        assert_rpc "getRepo — IPv6 URI with port stored" "BorgBackup" "getRepo" \
+            "{\"uuid\":\"$RP_UUID\"}" 'bgrpctest@\[::1\]:2225' >/dev/null
+    fi
+
+    # Non-numeric port: borg rejects the location, so nothing is stored.
+    assert_rpc_fails "setRepo — non-numeric ssh port rejected" "BorgBackup" "setRepo" \
+        "$(repo_params bgrpcbadport remote '' \
+            "ssh://bgrpctest@fakehost:abc$RSH_DIR/bad port repo" '' false false)"
+    if rpc BorgBackup getRepoList "$LIST_PARAMS" 2>/dev/null | grep -q bgrpcbadport; then
+        _fail "setRepo — repo with non-numeric port was stored"
+    else
+        _pass "setRepo — repo with non-numeric port not stored"
     fi
 fi
 
