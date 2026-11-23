@@ -1,3 +1,11 @@
+openmediavault-borgbackup (8.2.4) stable; urgency=low
+
+  * Allow download methods to be called via the download entrypoint
+  * Repo env vars now override creation env vars when editing a repo
+    or changing its path
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Mon, 23 Nov 2026 12:18:59 +0000
+
 openmediavault-borgbackup (8.2.3) stable; urgency=low
 
   * Reject remote repo paths borg would create locally (missing host colon)
