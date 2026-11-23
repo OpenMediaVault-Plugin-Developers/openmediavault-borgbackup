@@ -37,7 +37,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('setRepo');
         $this->registerMethod('changeRepoPath');
         $this->registerMethod('changeQuota');
-        $this->registerMethod('downloadKey');
+        $this->registerMethod('downloadKey', null, ['allowlist' => ['download']]);
         $this->registerMethod('deleteRepo');
         $this->registerMethod('repoCommand');
         $this->registerMethod('mountRepo');
@@ -72,7 +72,7 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod('setServe');
         $this->registerMethod('deleteServe');
         $this->registerMethod('generateServeKey');
-        $this->registerMethod('downloadServeKey');
+        $this->registerMethod('downloadServeKey', null, ['allowlist' => ['download']]);
     }
 
     public function enumerateRepoCandidates($params, $context)
@@ -206,10 +206,11 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         if ($params['skipinit'] == true) {
             $cmd->setEnv("BORG_RELOCATED_REPO_ACCESS_IS_OK", "yes");
         }
+        // Repo env vars override the creation ones.
+        $cmd->setEnvFromFile($this->envFile . 'creation');
         if (!$isNew) {
             $cmd->setEnvFromFile($this->envFile . $params['uuid']);
         }
-        $cmd->setEnvFromFile($this->envFile . 'creation');
         $cmd->setRedirect2to1();
         $cmdLine = $cmd->getCommandLine();
         if (0 !== $this->exec($cmdLine, $output)) {
@@ -273,8 +274,9 @@ class OMVRpcServiceBorgBackup extends \OMV\Rpc\ServiceAbstract
         $cmd->setEnv("BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK", "yes");
         $cmd->setEnv("BORG_RELOCATED_REPO_ACCESS_IS_OK", "yes");
         $cmd->setEnv("BORG_EXIT_CODES", "modern");
-        $cmd->setEnvFromFile($this->envFile . $params['uuid']);
+        // Repo env vars override the creation ones.
         $cmd->setEnvFromFile($this->envFile . 'creation');
+        $cmd->setEnvFromFile($this->envFile . $params['uuid']);
         $cmd->setRedirect2to1();
         $cmdLine = $cmd->getCommandLine();
         if (0 !== $this->exec($cmdLine, $output)) {
