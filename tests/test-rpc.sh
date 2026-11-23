@@ -729,8 +729,12 @@ assert_bg "getLog — valid params, no log yet" "BorgBackup" "getLog" \
 
 # Remote paths borg would treat as relative local paths (issue #64): engined
 # runs from /, so 'user@host' without a colon used to create /user@host.
-for bad_uri in 'bgrpctest@fakehost' 'bgrpctest@fakehost/repo' 'relative/dir' '   '; do
-    assert_rpc_fails "setRepo — remote path without host: rejected ('$bad_uri')" \
+# Also URL forms borg rejects or silently treats as local relative paths.
+for bad_uri in 'bgrpctest@fakehost' 'bgrpctest@fakehost/repo' 'relative/dir' '   ' \
+        'ssh://bgrpctest@http://fakehost:23/./repo' 'ssh://bgrpctest@fakehost:23' \
+        'http://fakehost/repo' 'bgrpctest@http://fakehost:repo' \
+        'sftp://bgrpctest@fakehost/repo'; do
+    assert_rpc_fails "setRepo — invalid remote path rejected ('$bad_uri')" \
         "BorgBackup" "setRepo" \
         "$(repo_params bgrpcbaduri remote '' "$bad_uri" '' false false)"
 done
